@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        //var arr =  [6,7,8,2,2,2,3,2,4,2,5,2,8,2,8,2,9,2,10];
+        //console.log(lengthOfLIS(arr));
+        //console.log(lengthOfLISBetter(arr));
+        forTestCompare();
+
+        function getRandomArr(len,max){
+            var arr = [];
+            for(var i=0;i<len;i++){
+                arr.push(Math.round(Math.random()*max));
+            }
+            return arr;
+        }
+
+        function forTestCompare(){
+            var succ=[];
+            var fail=[];
+            for(var i=0;i<100;i++){
+                arr = getRandomArr(100,50);
+                if(lengthOfLISBetter(arr) === lengthOfLIS(arr)){
+                    succ.push(arr);
+                }
+                else{
+                    fail.push(arr);
+                }
+            }
+
+            console.log(succ);
+            console.log(fail);
+            
+        }
+
+
+        // 算法复杂度 O(n^2)
+        function lengthOfLIS(nums) {
+            // 保存数组每个元素的上升子序列的长度
+            var dp = []
+            // 整个数组中，最长的上升子序列的长度
+            var max = 0;
+            // 遍历数组每个元素，求出每个元素的上升子序列的长度
+            for(var i=0;i<nums.length;i++){
+                // 默认上升子序列的长度为 1，即本身
+                dp[i] = 1;
+                // 该元素跟前一个元素比较
+                // 如果较大，那该元素的上升子序列的长度，比前一个元素多加 1
+                // 以此递推，一直算到当前元素，即可获得当前元素的最长上升子序列的长度
+                for(var j=0;j<i;j++){
+                    if(nums[j]<nums[i]){
+                        dp[i] = Math.max(dp[i],dp[j]+1);
+                    }
+                }
+                // 获取最大的上升子序列的长度
+                max = Math.max(dp[i],max);
+            }
+            return max;
+        };
+        
+
+        // 算法复杂度 O(logn)
+        function lengthOfLISBetter(arr){
+            // 保存最长上升子序列的末尾数，不一定是最长上升子序列
+            var dp=[];
+            var len = arr.length;
+            // 用于二分查找，把最长上升子序列的末尾数替换到序列中
+            var dp_start=0;
+            var dp_end=0;
+            var dp_mid=0;
+            // 默认第一个参数为最长上升子序列的末尾数
+            dp[0]=arr[0];
+            for(var i=1;i<len;i++){
+                dp_end=dp.length-1;
+
+                // 如果数值大于最长上升子序列的末尾数，则直接追加
+                //console.log('arr :',i,arr[i]);
+                if(arr[i]>dp[dp_end]){
+                    dp.push(arr[i]);
+                    //console.log('dp add:',dp);
+                // 如果数值小于或等于末尾数，则替换满足 dp[j-1]<arr[i]<=dp[j] 条件的 dp[j]
+                }else{
+                    // 从 dp 数组开头查找
+                    dp_start=0;
+                    while(dp_end>dp_start){
+                        //console.log('start:',dp_start,dp_end);
+                        // 二分法查找
+                        dp_mid=Math.floor((dp_end+dp_start)/2);
+                        
+                        //console.log('mid:',dp_mid,dp[dp_mid]);
+
+                        // 出现相同的数值，直接跳过查找
+                        if(arr[i]==dp[dp_mid]){
+                            dp_end=dp_mid;
+                            break;
+                        }
+                        if(arr[i]>dp[dp_mid]){
+                            dp_start=dp_mid+1;
+                        }else{
+                            dp_end=dp_mid;
+                        }
+
+                        //console.log('end:',dp_start,dp_end);
+                    }
+                    
+                    // 替换
+                    dp[dp_end]=arr[i];
+                    //console.log('dp replace:',dp);
+                }
+
+                
+            }
+            // console.log(dp);
+            // 获得最长上升子序列的长度
+            return dp.length;
+
+        }
+
+
+
+    </script>
+</body>
+</html>

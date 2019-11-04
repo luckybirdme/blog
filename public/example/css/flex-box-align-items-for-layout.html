@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        /* 清除浏览器默认样式 */
+        body{
+            padding: 0 ;
+            margin: 0 ;
+        }
+        /* flex 弹性布局 */
+        .flex-box {
+            /* 浏览器兼容性 */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+        }
+        .flex-value{
+            margin-top: 30px; 
+        }
+        .box{
+            background-color: red;
+            width: 80px;
+            margin: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div >
+        <div >
+            <div class="flex-value">
+                align-items: stretch;
+            </div>
+            <div class="flex-box" style="align-items: stretch;">
+                <span class="box" style="height: 50px;">box 1</span>
+                <span class="box" style="height: 70px;">box 2</span>
+                <span class="box" style="height: 90px;">box 3</span>
+                <span class="box" style="height: 140px;" >box 4</span>
+                <span class="box" style="height: 150px;" >box 5</span>
+                <span class="box" style="height: 200px;" >box 6</span>
+            </div>
+            <div class="flex-value">
+                align-items: center;
+            </div>
+            <div class="flex-box" style="align-items: center;">
+                <span class="box" style="height: 50px;">box 1</span>
+                <span class="box" style="height: 70px;">box 2</span>
+                <span class="box" style="height: 90px;">box 3</span>
+                <span class="box" style="height: 140px;" >box 4</span>
+                <span class="box" style="height: 150px;" >box 5</span>
+                <span class="box" style="height: 200px;" >box 6</span>
+            </div>
+            <div class="flex-value">
+                align-items: flex-start;
+            </div>
+            <div class="flex-box" style="align-items: flex-start;">
+                <span class="box" style="height: 50px;">box 1</span>
+                <span class="box" style="height: 70px;">box 2</span>
+                <span class="box" style="height: 90px;">box 3</span>
+                <span class="box" style="height: 140px;" >box 4</span>
+                <span class="box" style="height: 150px;" >box 5</span>
+                <span class="box" style="height: 200px;" >box 6</span>
+            </div>
+            <div class="flex-value">
+                align-items: flex-end;
+            </div>
+            <div class="flex-box" style="align-items: flex-end;">
+                <span class="box" style="height: 50px;">box 1</span>
+                <span class="box" style="height: 70px;">box 2</span>
+                <span class="box" style="height: 90px;">box 3</span>
+                <span class="box" style="height: 140px;" >box 4</span>
+                <span class="box" style="height: 150px;" >box 5</span>
+                <span class="box" style="height: 200px;" >box 6</span>
+            </div>
+            <div class="flex-value">
+                align-items: baseline;
+            </div>
+            <div class="flex-box" style="align-items: baseline;">
+                <span class="box" style="height: 50px;line-height: 80px;">box 1</span>
+                <span class="box" style="height: 70px;line-height: 100px;">box 2</span>
+                <span class="box" style="height: 90px;line-height: 140px;">box 3</span>
+                <span class="box" style="height: 140px;line-height: 30px;" >box 4</span>
+                <span class="box" style="height: 150px;line-height: 150px;" >box 5</span>
+                <span class="box" style="height: 200px;line-height: 190px;" >box 6</span>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

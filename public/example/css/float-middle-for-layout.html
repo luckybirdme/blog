@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<hmtl>
+<style type="text/css">
+	/* 清除浏览器默认样式 */
+	body{
+		padding: 0 auto;
+		margin: 0 auto;
+	}
+	/* 行内元素居中 */
+	.line-middle{
+		text-align: center;
+	}
+	/* 确定宽度块内元素居中 */
+	.block-middle{
+		width: 100px;
+		position: absolute;
+		left: 50%;
+		margin-left: -50px; /* 修复固定宽度的偏差值 */
+	}
+</style>
+<body >
+	<div class="line-middle">
+		<span>line-middle</span>
+	</div>
+	<div class="block-middle">
+		<div class="block-middle">
+			block-middle block-middle block-middle block-middle block-middle block-middle
+		</div>
+	</div>
+</body>
+</html>

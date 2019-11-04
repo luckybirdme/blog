@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+
+
+    	// 非严格模式下，默认 this 指向 window
+    	// 比如普通函数调用
+
+    	var defaultVar='defaultVar';
+    	function testFunc(){
+    		console.log(this);
+    		console.log(this.defaultVar)
+    	}
+
+    	// 函数调用相当于 window.testFunc()，window 下有全局变量 defaultVar
+    	testFunc();
+    	
+	
+		var testObj={
+			myName:'mike',
+			getName:function(){
+				return this.myName
+			}
+		};
+
+		// 输出 mike，因为 this 绑定了 testObj，拥有 myName 属性
+		console.log(testObj.getName());
+		var getName = testObj.getName;
+		// 输出 undefined，因为函数调用相当于 window.getName()，this 绑定了 window，而 window 没有 myName 属性
+		console.log(getName());
+
+
+
+    	// 构造函数的情况
+
+    	// 严格模式，默认 this 不是指向 window，而是 undefined
+    	var stictVar = 'stictVar';
+    	function testStrict(){
+    		'use strict';
+    		// 输出 undefined
+    		console.log(this);
+    		// 这里会报错
+    		// console.log(this.stictVar);
+    	}
+    	testStrict();
+
+    	// 箭头函数，默认 this 指向外层对象
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS 求最长上升子序列的长度 | LuckyBird</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="已知有数列 A ， A=A1,A2….An ，求 A 的任意子序列 B （ B=Ak1,Ak2….Akp ），使 B 满足 k1&amp;lt;k2&amp;lt;….&amp;lt;kp 且 Ak1&amp;lt;Ak2&amp;lt;….&amp;lt;Akp 。现求 p 的最大值，即最长上升子序列的长度。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 求最长上升子序列的长度">
+<meta property="og:url" content="https://luckybirdme.github.io/2019/10/26/length-of-lis/index.html">
+<meta property="og:site_name" content="LuckyBird">
+<meta property="og:description" content="已知有数列 A ， A=A1,A2….An ，求 A 的任意子序列 B （ B=Ak1,Ak2….Akp ），使 B 满足 k1&amp;lt;k2&amp;lt;….&amp;lt;kp 且 Ak1&amp;lt;Ak2&amp;lt;….&amp;lt;Akp 。现求 p 的最大值，即最长上升子序列的长度。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-26T03:49:25.116Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 求最长上升子序列的长度">
+<meta name="twitter:description" content="已知有数列 A ， A=A1,A2….An ，求 A 的任意子序列 B （ B=Ak1,Ak2….Akp ），使 B 满足 k1&amp;lt;k2&amp;lt;….&amp;lt;kp 且 Ak1&amp;lt;Ak2&amp;lt;….&amp;lt;Akp 。现求 p 的最大值，即最长上升子序列的长度。">
+  
+    <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuckyBird</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/luckybirdme">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <!--
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        -->
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://luckybirdme.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-length-of-lis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/26/length-of-lis/" class="article-date">
+  <time datetime="2019-10-26T00:34:44.000Z" itemprop="datePublished">2019-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS 求最长上升子序列的长度
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>已知有数列 A ， A=A1,A2….An ，求 A 的任意子序列 B （ B=Ak1,Ak2….Akp ），使 B 满足 k1&lt;k2&lt;….&lt;kp 且 Ak1&lt;Ak2&lt;….&lt;Akp 。现求 p 的最大值，即最长上升子序列的长度。</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h5 id="1-最长上升子序列"><a href="#1-最长上升子序列" class="headerlink" title="1. 最长上升子序列"></a>1. 最长上升子序列</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">已知有数列 A ， A=A1,A2....An ，求 A 的任意子序列 B （ B=Ak1,Ak2....Akp ），使 B 满足 k1&lt;k2&lt;....&lt;kp 且 Ak1&lt;Ak2&lt;....&lt;Akp 。现求 p 的最大值，即最长上升子序列的长度</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-具体数组例子"><a href="#2-具体数组例子" class="headerlink" title="2. 具体数组例子"></a>2. 具体数组例子</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [10,9,2,5,3,7,101,18]</span><br><span class="line">输出: 4 </span><br><span class="line">解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。</span><br></pre></td></tr></table></figure>
+
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="一-时间复杂度-O-n-2"><a href="#一-时间复杂度-O-n-2" class="headerlink" title="一. 时间复杂度 O(n^2)"></a>一. 时间复杂度 O(n^2)</h3><h5 id="1-解决思路"><a href="#1-解决思路" class="headerlink" title="1. 解决思路"></a>1. 解决思路</h5><ul>
+<li>先求出数组每个元素当前位置的最长上升子序列的长度。</li>
+<li>所有元素的最长上升子序列逐一对比，获得最大值，即为数组的最长上升子序列的长度。</li>
+</ul>
+<h5 id="2-分析过程"><a href="#2-分析过程" class="headerlink" title="2. 分析过程"></a>2. 分析过程</h5><p>以数组 A [10,9,2,5,3,7,101,18] 为例，dp 存放每个位置的最长上升子序列的长度：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A[0]=10，下标 0 位置的最长上升子序列为 [10]，长度 为 dp[0]=1；</span><br><span class="line">A[1]=9，下标 1 位置的最长上升子序列为 [9]，长度 为 dp[1]=1；</span><br><span class="line">A[2]=2，下标 2 位置的最长上升子序列为 [2]，长度 为 dp[2]=1；</span><br><span class="line">A[3]=5，下标 3 位置的最长上升子序列为 [2,5]，长度 为 dp[3]=2；</span><br><span class="line">A[4]=3，下标 4 位置的最长上升子序列为 [2,5] 或者 [2,3]，长度为 dp[4]=2；</span><br><span class="line">A[5]=7，下标 5 位置的最长上升子序列为 [2,5,7] 或者 [2,3,7]，长度为 dp[5]=3；</span><br><span class="line">A[6]=101，下标 6 位置的最长上升子序列为 [2,5,7,101] 或者 [2,3,7,101]，长度为 dp[6]=4；</span><br><span class="line">A[7]=18，下标 7 位置的最长上升子序列为 [2,5,7,101] 或者 [2,5,7,18] 或者 [2,3,7,101] 或者 [2,3,7,18]，长度为 dp[7]=4；</span><br></pre></td></tr></table></figure>
+
+<p>那么数组 A 最长上升子序列的长度就为 4。<br>从以上分析可看出，数组 A 的 i 位置的最长子序列为 dp[i]， 当 A[i+1] &gt; A [i] 时，那么 dp[i+1]=dp[i] + 1；<br>由此可采取递推的方式，先求出 dp[0]，然后判断 A[1] &gt; A[0]，继而求出 dp[1]，再算 dp[2]，一直递推到数组结尾，即可获得数组每个元素当前位置的最长子序列的长度。</p>
+<h5 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3. 代码实现"></a>3. 代码实现</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 算法复杂度 O(n^2)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lengthOfLIS</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 保存数组每个元素当前位置的最长上升子序列的长度</span></span><br><span class="line">    <span class="keyword">var</span> dp = []</span><br><span class="line">    <span class="comment">// 整个数组中，最长的上升子序列的长度</span></span><br><span class="line">    <span class="keyword">var</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 遍历数组每个元素，求出每个元素的最长上升子序列的长度</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">        <span class="comment">// 默认每个元素的最长上升子序列的长度为 1，即本身</span></span><br><span class="line">        dp[i] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 该元素跟之前的元素比较</span></span><br><span class="line">        <span class="comment">// 如果较大，那该元素的最长上升子序列的长度，比之前元素的最长上升子序列的长度加 1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;i;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j]&lt;nums[i])&#123;</span><br><span class="line">                dp[i] = <span class="built_in">Math</span>.max(dp[i],dp[j]+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 获取数组最大的上升子序列的长度</span></span><br><span class="line">        max = <span class="built_in">Math</span>.max(dp[i],max);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二-时间复杂度-O-nlogn"><a href="#二-时间复杂度-O-nlogn" class="headerlink" title="二. 时间复杂度  O(nlogn)"></a>二. 时间复杂度  O(nlogn)</h3><h5 id="1-解决思路-1"><a href="#1-解决思路-1" class="headerlink" title="1. 解决思路"></a>1. 解决思路</h5><ul>
+<li>从上面的解决方法可知，求数组最长上升子序列的长度，关键记住最长上升子序列的最小末尾数和当前的序列长度。</li>
+<li>用数组 dp 保存最长上升子序列的最小末尾数，如果后续数值 val &gt; dp[dp.length-1] ，则直接追加到数组。</li>
+<li>如果有更小的数值 val，查找数组满足 dp[i-1]&lt; val &lt;= dp[i]，并替换 dp[i]=val，以便保存后续有从 val 开始递增的数值。</li>
+<li>此时数组 dp 的长度就是最长上升子序列的长度，但是数组元素排列不一定就是最长上升子序列。</li>
+</ul>
+<h5 id="2-分析过程-1"><a href="#2-分析过程-1" class="headerlink" title="2. 分析过程"></a>2. 分析过程</h5><p>以数组 A [10,9,2,5,3,7,101,18] 为例，dp 存放上升子序列，不一定是最长上升子序列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A[0]=10，默认 dp[0]=10，即dp=[10]；</span><br><span class="line">A[1]=9，dp 保存上升子序列的最小末尾数，所以进行替换 dp[0]=A[1]，变成 dp=[9]；</span><br><span class="line">A[2]=2，继续替换，dp[0]=A[2]，变成 dp=[2]；</span><br><span class="line">A[3]=5，根据 val &gt; dp[dp.length-1]，此时满足 A[3] &gt; dp[0]，所以追加到 dp，变成 dp=[2,5]；</span><br><span class="line">A[4]=3，根据 dp[i-1]&lt; val &lt;= dp[i]，此时满足 dp[0]&lt; A[4]&lt;= dp[1]，所以进行替换，dp[1]=A[4]=3，变成 dp=[2,3] ；</span><br><span class="line">A[5]=7，根据 val &gt; dp[dp.length-1]，此时满足 A[5] &gt; dp[1]，所以追加到 dp，变成 dp=[2,3,7]；</span><br><span class="line">A[6]=101，根据 val &gt; dp[dp.length-1]，此时满足 A[6] &gt; dp[0]，所以追加到 dp，变成 dp=[2,3,7,101]；</span><br><span class="line">A[7]=18，根据 dp[i-1]&lt; val &lt;= dp[i]，此时满足 dp[2]&lt; A[7]&lt;= dp[3]，所以进行替换，dp[3]=A[7]=18，变成 dp=[2,3,7,18] ；</span><br></pre></td></tr></table></figure>
+
+<p>那么数组 A 最长上升子序列的长度就为 dp.length = 4。<br>再次强调，dp 保存是最长上升序列的最小末尾数，但不一定是最长上升序列。<br>如果次数数组 A 变成 [10,9,2,5,3,7,101,18,4]，那么 dp 将会是 [2,3,4,18]，但是最长上升子序列是依然是 [2,5,7,101] 或者 [2,5,7,18] 或者 [2,3,7,101] 或者 [2,3,7,18]，并没有包括数值 4。<br>在查找数组满足提交 dp[i-1]&lt; val &lt;= dp[i] 时，可通过二分法查找，所以算法时间复杂度是 logn，整体复杂度变成 O(nlogn)。</p>
+<h5 id="3-代码实现-1"><a href="#3-代码实现-1" class="headerlink" title="3. 代码实现"></a>3. 代码实现</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 算法复杂度 O(logn)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lengthOfLISBetter</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 保存最长上升子序列的末尾数，不一定是最长上升子序列</span></span><br><span class="line">    <span class="keyword">var</span> dp=[];</span><br><span class="line">    <span class="keyword">var</span> len = arr.length;</span><br><span class="line">    <span class="comment">// 用于二分查找，把最长上升子序列的末尾数替换到序列中</span></span><br><span class="line">    <span class="keyword">var</span> dp_start=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> dp_end=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> dp_mid=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 默认第一个参数为最长上升子序列的末尾数</span></span><br><span class="line">    dp[<span class="number">0</span>]=arr[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">        dp_end=dp.length<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果数值大于最长上升子序列的末尾数，则直接追加</span></span><br><span class="line">        <span class="comment">//console.log('arr :',i,arr[i]);</span></span><br><span class="line">        <span class="keyword">if</span>(arr[i]&gt;dp[dp_end])&#123;</span><br><span class="line">            dp.push(arr[i]);</span><br><span class="line">            <span class="comment">//console.log('dp add:',dp);</span></span><br><span class="line">        <span class="comment">// 如果数值小于或等于末尾数，则替换满足 dp[j-1]&lt;arr[i]&lt;=dp[j] 条件的 dp[j]</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 从 dp 数组开头查找</span></span><br><span class="line">            dp_start=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(dp_end&gt;dp_start)&#123;</span><br><span class="line">                <span class="comment">//console.log('start:',dp_start,dp_end);</span></span><br><span class="line">                <span class="comment">// 二分法查找</span></span><br><span class="line">                dp_mid=<span class="built_in">Math</span>.floor((dp_end+dp_start)/<span class="number">2</span>);</span><br><span class="line">                </span><br><span class="line">                <span class="comment">//console.log('mid:',dp_mid,dp[dp_mid]);</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// 出现相同的数值，直接跳过查找</span></span><br><span class="line">                <span class="keyword">if</span>(arr[i]==dp[dp_mid])&#123;</span><br><span class="line">                    dp_end=dp_mid;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&gt;dp[dp_mid])&#123;</span><br><span class="line">                    dp_start=dp_mid+<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    dp_end=dp_mid;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//console.log('end:',dp_start,dp_end);</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 替换</span></span><br><span class="line">            dp[dp_end]=arr[i];</span><br><span class="line">            <span class="comment">//console.log('dp replace:',dp);</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// console.log(dp);</span></span><br><span class="line">    <span class="comment">// 获得最长上升子序列的长度</span></span><br><span class="line">    <span class="keyword">return</span> dp.length;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a><a href="https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/length-of-LIS.html" target="_blank" rel="noopener">源代码</a></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://luckybirdme.github.io/2019/10/26/length-of-lis/" data-id="ck2l0y7dt000nok28gsxa6obk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/26/hump-underline/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS 驼峰和下横线转换
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/24/full-permute/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS 输出全排列</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/debounce-and-throttle/">JS 节流和防抖函数</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/hump-underline/">JS 驼峰和下横线转换</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/24/full-permute/">JS 输出全排列</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 LuckyBird<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/luckybirdme" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

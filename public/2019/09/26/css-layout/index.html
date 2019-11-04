@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>CSS 简单布局 | LuckyBird</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CSS 布局元素包括漂浮 float，定位 position等；float 主要用于左右两边的漂浮，position 可用于整个文档的绝对定位，相对定位，固定漂浮位置等。">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 简单布局">
+<meta property="og:url" content="https://luckybirdme.github.io/2019/09/26/css-layout/index.html">
+<meta property="og:site_name" content="LuckyBird">
+<meta property="og:description" content="CSS 布局元素包括漂浮 float，定位 position等；float 主要用于左右两边的漂浮，position 可用于整个文档的绝对定位，相对定位，固定漂浮位置等。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-07T22:46:27.782Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS 简单布局">
+<meta name="twitter:description" content="CSS 布局元素包括漂浮 float，定位 position等；float 主要用于左右两边的漂浮，position 可用于整个文档的绝对定位，相对定位，固定漂浮位置等。">
+  
+    <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuckyBird</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/luckybirdme">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <!--
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        -->
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://luckybirdme.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-css-layout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/26/css-layout/" class="article-date">
+  <time datetime="2019-09-26T00:32:30.000Z" itemprop="datePublished">2019-09-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS 简单布局
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>CSS 布局元素包括漂浮 float，定位 position等；<br>float 主要用于左右两边的漂浮，position 可用于整个文档的绝对定位，相对定位，固定漂浮位置等。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="一，基础知识"><a href="#一，基础知识" class="headerlink" title="一，基础知识"></a>一，基础知识</h3><h5 id="1-float-让元素漂浮在文档的左边或者右边，默认值不漂浮"><a href="#1-float-让元素漂浮在文档的左边或者右边，默认值不漂浮" class="headerlink" title="1. float : 让元素漂浮在文档的左边或者右边，默认值不漂浮"></a>1. float : 让元素漂浮在文档的左边或者右边，默认值不漂浮</h5><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>left</td>
+<td>元素向左浮动。</td>
+</tr>
+<tr>
+<td>right</td>
+<td>元素向右浮动。</td>
+</tr>
+<tr>
+<td>none</td>
+<td>默认值。元素不浮动，并会显示在其在文本中出现的位置。</td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>规定应该从父元素继承 float 属性的值。</td>
+</tr>
+</tbody></table>
+<h5 id="2-position-让元素定位于文档的某个位置，属性值更丰富"><a href="#2-position-让元素定位于文档的某个位置，属性值更丰富" class="headerlink" title="2. position : 让元素定位于文档的某个位置，属性值更丰富"></a>2. position : 让元素定位于文档的某个位置，属性值更丰富</h5><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static</td>
+<td>元素框正常生成。块级元素生成一个矩形框，作为文档流的一部分，行内元素则会创建一个或多个行框，置于其父元素中。</td>
+</tr>
+<tr>
+<td>relative</td>
+<td>元素框相对于第一个父节点偏移某个距离。元素仍保持其未定位前的形状，它原本所占的空间仍保留。</td>
+</tr>
+<tr>
+<td>absolute</td>
+<td>元素框从文档流完全删除，并相对于包含 position:relative/absolut 属性的第一个父节点来定位，不一定是直接的父节点。元素原先在正常文档流中所占的空间会关闭，就好像元素原来不存在一样。元素定位后生成一个块级框，而不论原来它在正常流中生成何种类型的框。</td>
+</tr>
+<tr>
+<td>fixed</td>
+<td>元素框的表现类似于将 position 设置为 absolute，不过其包含块是视窗本身。</td>
+</tr>
+</tbody></table>
+<h3 id="二，具体使用"><a href="#二，具体使用" class="headerlink" title="二，具体使用"></a>二，具体使用</h3><h5 id="1-实现左中右布局，要求左右固定宽度，中间自适应宽度"><a href="#1-实现左中右布局，要求左右固定宽度，中间自适应宽度" class="headerlink" title="1. 实现左中右布局，要求左右固定宽度，中间自适应宽度"></a>1. 实现左中右布局，要求左右固定宽度，中间自适应宽度</h5><ul>
+<li>float : <a href="/example/css/float-for-layout.html">示例</a></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hmtl</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">		<span class="comment">/* 清除浏览器默认样式 */</span></span></span><br><span class="line">		body&#123;</span><br><span class="line">			padding: 0 auto;</span><br><span class="line">			margin: 0 auto;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 左边固定 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.left</span>&#123;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">float</span><span class="selector-pseudo">:left</span>;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">width</span><span class="selector-pseudo">:100px</span>;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">height</span><span class="selector-pseudo">:200px</span>;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">background-color</span><span class="selector-pseudo">:green</span>;</span></span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 右边固定 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.right</span>&#123;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">float</span><span class="selector-pseudo">:right</span>;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">width</span><span class="selector-pseudo">:100px</span>;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">height</span><span class="selector-pseudo">:200px</span>;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">background-color</span><span class="selector-pseudo">:blue</span>;</span></span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 中间自适应 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.middle</span>&#123;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">width</span><span class="selector-pseudo">:auto</span>;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">height</span><span class="selector-pseudo">:auto</span>;</span></span><br><span class="line">			background-color: red;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"middle"</span>&gt;</span>middle middle middle<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>position : <a href="/example/css/position-for-layout.html">示例</a></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hmtl</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">		<span class="comment">/* 清除浏览器默认样式 */</span></span></span><br><span class="line">		body&#123;</span><br><span class="line">			padding: 0 auto;</span><br><span class="line">			margin: 0 auto;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 左边固定 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.left</span>&#123;</span></span><br><span class="line">			position: absolute;</span><br><span class="line">			left: 0;</span><br><span class="line"><span class="css">			<span class="selector-tag">top</span><span class="selector-pseudo">:0</span>;</span></span><br><span class="line">			width: 100px;</span><br><span class="line">			height: 200px;</span><br><span class="line">			background-color: green</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 右边固定 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.right</span>&#123;</span></span><br><span class="line">			position: absolute;</span><br><span class="line">			right: 0;</span><br><span class="line"><span class="css">			<span class="selector-tag">top</span><span class="selector-pseudo">:0</span>;</span></span><br><span class="line">			width: 100px;</span><br><span class="line">			height: 200px;</span><br><span class="line">			background-color: blue</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 中间自适应 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.middle</span>&#123;</span></span><br><span class="line">			margin: 0 100px;</span><br><span class="line">			width: auto;</span><br><span class="line">			height: auto;</span><br><span class="line">			background-color: red</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"middle"</span>&gt;</span>middle middle middle<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-实现顶部菜单固定，右下角有返回顶部按钮"><a href="#2-实现顶部菜单固定，右下角有返回顶部按钮" class="headerlink" title="2. 实现顶部菜单固定，右下角有返回顶部按钮"></a>2. 实现顶部菜单固定，右下角有返回顶部按钮</h5><ul>
+<li>postion : 利用fixed <a href="/example/css/position-fixed-for-layout.html">示例</a></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hmtl</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">		<span class="comment">/* 清除浏览器默认样式 */</span></span></span><br><span class="line">		body&#123;</span><br><span class="line">			padding: 0 auto;</span><br><span class="line">			margin: 0 auto;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 顶部固定 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.top</span>&#123;</span></span><br><span class="line">			position: fixed;</span><br><span class="line"><span class="css">			<span class="selector-tag">top</span><span class="selector-pseudo">:0</span>;</span></span><br><span class="line">			width: 100%;</span><br><span class="line">			height: 50px;</span><br><span class="line">			background-color: green</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 右下角固定 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.back</span>&#123;</span></span><br><span class="line">			position: fixed;</span><br><span class="line">			bottom: 40px;</span><br><span class="line">			right: 40px;</span><br><span class="line">			width: 10px;</span><br><span class="line">			height: 10px;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 中间自适应 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.middle</span>&#123;</span></span><br><span class="line">			margin-top: 50px;</span><br><span class="line">			background-color: red;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top"</span>&gt;</span>top<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"back"</span>&gt;</span>back<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"middle"</span>&gt;</span>middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle middle<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-实现水平居中"><a href="#3-实现水平居中" class="headerlink" title="3. 实现水平居中"></a>3. 实现水平居中</h5><ul>
+<li>包括行内和块级元素 <a href="/example/css/float-middle-for-layout.html">示例</a></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hmtl</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">		<span class="comment">/* 清除浏览器默认样式 */</span></span></span><br><span class="line">		body&#123;</span><br><span class="line">			padding: 0 auto;</span><br><span class="line">			margin: 0 auto;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 行内元素居中 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.line-middle</span>&#123;</span></span><br><span class="line">			text-align: center;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="comment">/* 确定宽度块内元素居中 */</span></span></span><br><span class="line"><span class="css">		<span class="selector-class">.block-middle</span>&#123;</span></span><br><span class="line">			width: 100px;</span><br><span class="line">			position: absolute;</span><br><span class="line">			left: 50%;</span><br><span class="line"><span class="css">			<span class="selector-tag">margin-left</span>: <span class="selector-tag">-50px</span>; <span class="comment">/* 修复固定宽度的偏差值 */</span></span></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"line-middle"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span>&gt;</span>line-middle<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"block-middle"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"block-middle"</span>&gt;</span></span><br><span class="line">			block-middle block-middle block-middle block-middle block-middle block-middle</span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-实现水平和垂直居中"><a href="#3-实现水平和垂直居中" class="headerlink" title="3. 实现水平和垂直居中"></a>3. 实现水平和垂直居中</h5><ul>
+<li>两个方向都居中 <a href="/example/css/float-middle-for-layout.html">示例</a></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="comment">/* 设置垂直满屏显示，方便居中 */</span></span></span><br><span class="line">        html,body&#123;</span><br><span class="line">            height: 100%;</span><br><span class="line">            width: 100%;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="comment">/* 清除浏览器默认样式 */</span></span></span><br><span class="line">        body&#123;</span><br><span class="line">            padding: 0 auto;</span><br><span class="line">            margin: 0 auto;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="comment">/* 水平和垂直居中 */</span></span></span><br><span class="line"><span class="css">        <span class="selector-class">.content</span> &#123;</span></span><br><span class="line">            width: 300px;</span><br><span class="line">            height: 300px;</span><br><span class="line">            background: red;</span><br><span class="line"><span class="css">            <span class="selector-tag">margin</span>: 0 <span class="selector-tag">auto</span>; <span class="comment">/*水平居中*/</span></span></span><br><span class="line">            position: relative;</span><br><span class="line"><span class="css">            <span class="selector-tag">top</span>: 50%; <span class="comment">/*垂直居中*/</span></span></span><br><span class="line"><span class="css">            <span class="comment">/*修复垂直居中的偏移*/</span></span></span><br><span class="line">            margin-top: -150px; </span><br><span class="line"><span class="css">            <span class="comment">/* transform: translateY(-50%);/* css3 */</span></span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://luckybirdme.github.io/2019/09/26/css-layout/" data-id="ck2l0y7cz000cok285k6lglfn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/09/26/css-flex/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CSS 弹性盒子
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/26/var-scope-closure/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS 作用域和闭包</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/debounce-and-throttle/">JS 节流和防抖函数</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/hump-underline/">JS 驼峰和下横线转换</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/24/full-permute/">JS 输出全排列</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 LuckyBird<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/luckybirdme" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

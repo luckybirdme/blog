@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        function MyPromise(callback){
+            var _this = this;
+
+            _this.PromiseStatus = 'pending';
+            _this.PromiseValue = undefined;
+            
+            callback(function(msg){
+                if(_this.PromiseStatus == 'pending'){
+                    _this.PromiseStatus = 'resolved';
+                    _this.PromiseValue = msg;    
+                }
+            },function(msg){
+                if(_this.PromiseStatus == 'pending'){
+                    _this.PromiseStatus = 'rejected';
+                    _this.PromiseValue = msg;  
+                }
+            });   
+        }
+
+        MyPromise.resolve = function(rtn){
+            if(rtn instanceof MyPromise){
+                return rtn;
+            }else{
+                return new MyPromise(function(resolve,reject){
+                    resolve(rtn);
+                });
+            }
+            
+        };
+        MyPromise.reject = function(msg){
+            return new MyPromise(function(resolve,reject){
+                reject(msg);
+            });
+        };
+
+        MyPromise.prototype.then = function(resolve,reject){
+            var rtn = undefined;
+            try{
+                if(this.PromiseStatus == 'resolved'){
+                    if(resolve){
+                        rtn = resolve(this.PromiseValue);    
+                    }else{
+                        return MyPromise.resolve(this.PromiseValue);
+                    }
+                }else if(this.PromiseStatus == 'rejected'){
+                    if(reject){
+                        rtn = reject(this.PromiseValue);    
+                    }else{
+                        return MyPromise.reject(this.PromiseValue);
+                    }
+                }else {
+                    console.log('PromiseStatus : pending');
+                    return this;
+                }
+
+            }catch(e){
+                return MyPromise.reject("Error: "+e.message);
+            }
+
+            if(rtn instanceof MyPromise){
+                return rtn;
+            }else{
+                return MyPromise.resolve(rtn);
+            }
+        };
+
+        MyPromise.prototype.catch = function(reject){
+            this.then(null, reject);
+        };
+
+
+        var mp = new MyPromise(function(resolve,reject){
+            if(1){
+                resolve('1');
+            }else{
+                reject('0');
+            }
+        });
+
+
+        mp.then(function(msg){
+            console.log('mp : then resolve ' + msg);
+        },function(msg){
+            console.log('mp : then rejected' + msg);
+        })
+        .then(function(msg){
+            throw new Error('mp : throw error for reject')
+        })
+        .then(function(msg){
+            console.log('mp : then resolve ' + msg);
+        },function(msg){
+            console.log('mp : then rejected ' + msg);
+        })
+        .then(function(msg){
+            throw new Error('mp : throw error for catch');
+        })
+        .catch(function(msg){
+            console.log('mp : catch error ' + msg);   
+        });
+
+
+    </script>
+</body>
+</html>

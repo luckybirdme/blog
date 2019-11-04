@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            
+            // 图片地址
+            var imgUrl=[
+                '../img/0.jpg',
+                // error url
+                //'../img/error.jpg',
+                '../img/1.jpg',
+                '../img/2.jpg',
+                '../img/3.jpg'
+                ];
+
+            // 加载图片
+            var loadImg = function(name,url,callback){
+                var img = new Image();
+                img.src = url;
+                img.onload = function() {
+                    console.log(name + ' success');
+                    callback();
+                }
+                img.onerror = function() {
+                    console.log(name + ' error');
+                }
+            }
+            // 按照顺序加载图片
+            // 多层回调
+            
+/*            loadImg('img0',imgUrl[0],function(){
+                loadImg('img1',imgUrl[1],function(){
+                    loadImg('img2',imgUrl[2],function(){
+                        loadImg('img3',imgUrl[3],function(){
+                            console.log('load all img');
+                        })
+                    })
+                })
+            })
+            */
+            
+            // 通过 promise 实现
+            var imgPm = function(name,url){
+                var img = new Image();
+                img.src = url;
+                return new Promise(function(resolve,reject){
+                    console.log(name + ' new promise start');
+                    img.onload = function() {
+                        console.log(name + ' resolve log start');
+                        resolve(name + ' success');
+                        console.log(name + ' resolve log end');
+                    }
+                    img.onerror = function() {
+                        console.log(name + ' reject log start');
+                        reject(name +' error');
+                        console.log(name + ' reject log end');
+                    }
+                    console.log(name + ' new promise end');
+                });
+                
+            };
+
+            // 通过 then 链式回调     
+          imgPm('img0',imgUrl[0])
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img1',imgUrl[1]);
+            })
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img2',imgUrl[2]);
+            })
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img3',imgUrl[3]);
+            }).then(function(msg){
+                console.log(msg);
+                console.log('all done');
+            });
+            
+            
+            // then 第二个参数是异常时 reject 回调函数
+            // 即使中间出现 reject，后面的 then 还是会一直执行下去，而且默认是 resolve
+            // 每个 then 都配置 reject 回调函数，链式调用失败时，方便进行回滚
+            
+/*            imgPm('img0',imgUrl[0])
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img1',imgUrl[1]);;
+            },function(msg){
+                console.log(msg);
+            })
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img2',imgUrl[2]);
+            },function(msg){
+                console.log(msg);
+            })
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img3',imgUrl[3]);
+            },function(msg){
+                console.log(msg)
+            })
+            .then(function(msg){
+                console.log(msg);
+            },function(msg){
+                console.log(msg);
+            });
+            */
+            
+
+            // 如果 then 没有第二个参数，那么 reject 会进入 catch
+            // then 都没有 reject 回调函数，catch 可以统一管理所有 reject 情况
+            
+/*            imgPm('img0',imgUrl[0])
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img1',imgUrl[1]);
+            })
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img2',imgUrl[2]);
+            })
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img3',imgUrl[3]);
+            })
+            .then(function(msg){
+                console.log(msg);
+            }).catch(function(e){
+                console.log('catch', e);
+            });
+            */
+
+
+            // then 都没有 reject 回调函数，catch 还可以捕捉 resolve 回调函数过程中的未知错误
+            // reject 函数后面再没有 reject 函数了，那么如果此 reject 函数发生未知错误，catch 也能捕捉到
+/*            imgPm('img0',imgUrl[0])
+            .then(function(msg){
+                console.log(msg)
+                throw new Error('img0 resolve throw new Error');
+                return imgPm('img1',imgUrl[1]);
+            })
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img2',imgUrl[2]);
+            })
+            .then(function(msg){
+                console.log(msg)
+                return imgPm('img3',imgUrl[3]);
+            })
+            .then(function(msg){
+                console.log(msg);
+            }).catch(function(e){
+                console.log('catch', e);
+            });
+*/
+
+            // promise 支持并发执行，所有执行任务执行完毕而且成功，才执行 resolve
+            // 只要有一个任务失败，则立即执行 reject，但是其他并行任务依然会继续执行
+            // resolve 和 reject 都只执行一次
+/*            loadImgAll=[
+                imgPm('img0',imgUrl[0]),
+                imgPm('img1',imgUrl[1]),
+                imgPm('img2',imgUrl[2]),
+                imgPm('img3',imgUrl[3])
+            ];
+            Promise.all(loadImgAll).then(function(msg) {
+                console.log("all done " + msg)
+            }).catch(function(e) {
+                console.log("one error " + e)
+            });*/
+
+            // promise 也支持赛跑方式执行，只要一个任务执行完毕，不管是成功或者失败，都会立即执行 resovle 或者 reject，而且也只执行一次
+/*            loadImgAll=[
+                imgPm('img0',imgUrl[0]),
+                imgPm('img1',imgUrl[1]),
+                imgPm('img2',imgUrl[2]),
+                imgPm('img3',imgUrl[3])
+            ];
+            Promise.race(loadImgAll).then(function(msg) {
+                console.log("one done " + msg)
+            }).catch(function(e) {
+                console.log("one error " + e)
+            });*/
+
+            
+        </script>
+    </head>
+<body>
+</body>
+</html>

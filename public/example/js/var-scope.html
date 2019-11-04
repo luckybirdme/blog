@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+    	// window 下的全局作用域变量
+		var color = "blue";
+		function changeColor(){
+			// changeColor 函数作用域的变量
+			var anotherColor = "red";
+			function swapColors(){
+				// swapColors 函数作用域的变量
+				var tempColor = 'green';
+
+				// 这里可以访问 color、anotherColor 和 tempColor
+				console.log('swapColors access color',color);
+				console.log('swapColors access anotherColor',anotherColor);
+				console.log('swapColors access tempColor',tempColor);
+				
+			}
+			
+			swapColors();
+
+			// 这里可以访问 color 和 anotherColor，但不能访问 tempColor
+			console.log('changeColor access color',color);
+			console.log('changeColor access anotherColor',anotherColor);
+			console.log('changeColor not access tempColor',typeof tempColor);
+
+			
+		}
+
+		changeColor();
+
+
+		// 这里只能访问 color
+		console.log('window access color',color);
+		console.log('window not access anotherColor',typeof anotherColor);
+		console.log('window not access tempColor',typeof tempColor);
+
+
+		// var 变量定义没有块级作用域
+		for(var i=0;i<3;i++){
+			console.log('inner',i);
+		}
+		// 依然输出 3
+		console.log('outer',i);
+
+
+		// let 和 const 有块级作用域
+		// var 变量定义没有块级作用域
+		for(let j=0;j<3;j++){
+			console.log('inner',j);
+		}
+		// 输出 undefined
+		console.log('outer',typeof j);
+
+		// const 是常量变量，一经定义和赋值，不能再修改
+		if(true){
+			const a = 'a';
+			console.log('inner',a);
+		}
+		console.log('outer',typeof a);
+
+		function test(){
+    		not_use_var='not_use_var';
+		}
+		test();
+
+		console.log(not_use_var);
+
+		console.log(use_var_before_defined);
+		var use_var_before_defined = 'use_var_before_defined';
+		console.log(use_var_before_defined);
+
+		console.log(use_let_before_defined)
+		let use_let_before_defined = 'use_let_before_defined';
+		console.log(use_let_before_defined);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS 作用域和闭包 | LuckyBird</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。函数在每次创建时生成闭包，闭包也是一个函数，这个闭包函数允许其他外部函数访问当前作用域中的变量。  一，作用域1. 定义作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。 2. 作用可见，作用域最大的用处就是隔离变量，不同作用域下同">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 作用域和闭包">
+<meta property="og:url" content="https://luckybirdme.github.io/2019/09/26/var-scope-closure/index.html">
+<meta property="og:site_name" content="LuckyBird">
+<meta property="og:description" content="作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。函数在每次创建时生成闭包，闭包也是一个函数，这个闭包函数允许其他外部函数访问当前作用域中的变量。  一，作用域1. 定义作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。 2. 作用可见，作用域最大的用处就是隔离变量，不同作用域下同">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://luckybirdme.github.io/example/img/scope.png">
+<meta property="og:updated_time" content="2019-11-03T13:51:55.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 作用域和闭包">
+<meta name="twitter:description" content="作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。函数在每次创建时生成闭包，闭包也是一个函数，这个闭包函数允许其他外部函数访问当前作用域中的变量。  一，作用域1. 定义作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。 2. 作用可见，作用域最大的用处就是隔离变量，不同作用域下同">
+<meta name="twitter:image" content="https://luckybirdme.github.io/example/img/scope.png">
+  
+    <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuckyBird</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/luckybirdme">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <!--
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        -->
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://luckybirdme.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-var-scope-closure" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/26/var-scope-closure/" class="article-date">
+  <time datetime="2019-09-26T00:09:03.000Z" itemprop="datePublished">2019-09-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS 作用域和闭包
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。<br>函数在每次创建时生成闭包，闭包也是一个函数，这个闭包函数允许其他外部函数访问当前作用域中的变量。</p>
+</blockquote>
+<h2 id="一，作用域"><a href="#一，作用域" class="headerlink" title="一，作用域"></a>一，作用域</h2><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。</p>
+<h3 id="2-作用"><a href="#2-作用" class="headerlink" title="2. 作用"></a>2. 作用</h3><p>可见，作用域最大的用处就是隔离变量，不同作用域下同名变量不会有冲突。</p>
+<h2 id="二-变量作用域"><a href="#二-变量作用域" class="headerlink" title="二. 变量作用域"></a>二. 变量作用域</h2><h3 id="1-变量作用域主要分为"><a href="#1-变量作用域主要分为" class="headerlink" title="1. 变量作用域主要分为"></a>1. 变量作用域主要分为</h3><ul>
+<li>全局作用域，在 window 下定义的变量，可被所有作用域访问。</li>
+<li>局部作用域，在函数对象内部定义的变量，只可在函数内部访问，除非使用闭包。</li>
+<li>块级作用域，这是 ES6 新增的特性，只在 if，for，while 等语句块里的作用域，通过 let const 变量使用。</li>
+</ul>
+<h5 id="下面看具体代码"><a href="#下面看具体代码" class="headerlink" title="下面看具体代码"></a>下面看具体代码</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// window 下的全局作用域变量</span></span><br><span class="line"><span class="keyword">var</span> color = <span class="string">"blue"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeColor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// changeColor 函数作用域的变量</span></span><br><span class="line">    <span class="keyword">var</span> anotherColor = <span class="string">"red"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">swapColors</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// swapColors 函数作用域的变量</span></span><br><span class="line">        <span class="keyword">var</span> tempColor = <span class="string">'green'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这里可以访问 color、anotherColor 和 tempColor</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'swapColors access color'</span>,color);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'swapColors access anotherColor'</span>,anotherColor);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'swapColors access tempColor'</span>,tempColor);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    swapColors();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这里可以访问 color 和 anotherColor，但不能访问 tempColor</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'changeColor access color'</span>,color);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'changeColor access anotherColor'</span>,anotherColor);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'changeColor not access tempColor'</span>,<span class="keyword">typeof</span> tempColor);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">changeColor();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里只能访问 color</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'window access color'</span>,color);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'window not access anotherColor'</span>,<span class="keyword">typeof</span> anotherColor);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'window not access tempColor'</span>,<span class="keyword">typeof</span> tempColor);</span><br></pre></td></tr></table></figure>
+
+<h5 id="以上称为作用域链"><a href="#以上称为作用域链" class="headerlink" title="以上称为作用域链"></a>以上称为作用域链</h5><p><img src="/example/img/scope.png" alt></p>
+<h5 id="块级作用域示例代码"><a href="#块级作用域示例代码" class="headerlink" title="块级作用域示例代码"></a>块级作用域示例代码</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var 变量定义没有块级作用域</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'inner'</span>,i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 依然输出 2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'outer'</span>,i);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// let 和 const 有块级作用域</span></span><br><span class="line"><span class="comment">// var 变量定义没有块级作用域</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">3</span>;j++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'inner'</span>,j);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'outer'</span>,<span class="keyword">typeof</span> j);</span><br><span class="line"></span><br><span class="line"><span class="comment">// const 是常量变量，一经定义和赋值，不能再修改</span></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="string">'a'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'inner'</span>,a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'outer'</span>,<span class="keyword">typeof</span> a);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-使用变量的注意事项"><a href="#2-使用变量的注意事项" class="headerlink" title="2. 使用变量的注意事项"></a>2. 使用变量的注意事项</h3><h5 id="为了更规范编写-JS-代码，以下列举的注意事项都尽量避免。"><a href="#为了更规范编写-JS-代码，以下列举的注意事项都尽量避免。" class="headerlink" title="为了更规范编写 JS 代码，以下列举的注意事项都尽量避免。"></a>为了更规范编写 JS 代码，以下列举的注意事项都尽量避免。</h5><ul>
+<li>如果变量不使用 var let const 定义，默认是全局作用域变量，即使是在函数内部定义的。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 没有使用关键字定义，默认全局作用域变量</span></span><br><span class="line">    not_use_var=<span class="string">'not_use_var'</span>;</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line"><span class="built_in">console</span>.log(not_use_var);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>var 变量可在定义语句前就使用，因为 JS 代码编译时会将变量定义先放入内存，默认值为 undefined，这种情况也叫变量提升，但是对于 let const 不存在变量提升，必须先定义再使用，否则报错。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(use_var_before_defined);</span><br><span class="line"><span class="keyword">var</span> use_var_before_defined = <span class="string">'use_var_before_defined'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(use_var_before_defined);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Cannot access 'use_let_before_defined' before initialization</span></span><br><span class="line"><span class="built_in">console</span>.log(use_let_before_defined)</span><br><span class="line"><span class="keyword">let</span> use_let_before_defined = <span class="string">'use_let_before_defined'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(use_let_before_defined);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>var 变量可重复定义使用，但是 let const 不可以重复定义</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="string">'1'</span>;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">var</span> a=<span class="string">'2'</span>;</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="keyword">let</span> b=<span class="string">'1'</span>;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">let</span> b=<span class="string">'2'</span>;</span><br><span class="line"><span class="comment">//Uncaught SyntaxError: Identifier 'b' has already been declared</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>const 是常量变量，定义为基本类型变量后就不能修改，但是对于引用型变量，是可以修改的</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> c=<span class="number">1</span>;</span><br><span class="line">c=<span class="number">2</span></span><br><span class="line"><span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"><span class="keyword">const</span> d=&#123;&#125;;</span><br><span class="line">d[<span class="string">'a'</span>]=<span class="string">'a'</span>;</span><br><span class="line"><span class="comment">// &#123;a: "a"&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="测试变量作用域的源代码"><a href="#测试变量作用域的源代码" class="headerlink" title="测试变量作用域的源代码"></a><a href="https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/var-scope.html" target="_blank" rel="noopener">测试变量作用域的源代码</a></h3><h2 id="二-闭包"><a href="#二-闭包" class="headerlink" title="二. 闭包"></a>二. 闭包</h2><h3 id="1-定义-1"><a href="#1-定义-1" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>闭包是由函数以及创建该函数的作用域组合而成，这个闭包函数保存了当前作用域所能访问的局部变量，并常驻于内存中。</p>
+<h3 id="2-作用-1"><a href="#2-作用-1" class="headerlink" title="2. 作用"></a>2. 作用</h3><p>外部函数可通过闭包访问函数内部的局部变量，可以理解成，闭包是不同作用域之间的访问桥梁。</p>
+<h2 id="三，闭包的使用"><a href="#三，闭包的使用" class="headerlink" title="三，闭包的使用"></a>三，闭包的使用</h2><h3 id="1-闭包使用的具体案例"><a href="#1-闭包使用的具体案例" class="headerlink" title="1. 闭包使用的具体案例"></a>1. 闭包使用的具体案例</h3><ul>
+<li>返回闭包函数，以便访问函数内的变量</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过闭包访问函数内的局部变量</span></span><br><span class="line"><span class="keyword">var</span> person=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="keyword">var</span> myName=<span class="string">"jack"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> myName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(); <span class="comment">// 最后一个括号的意思是，函数立即执行，函数执行后返回的是一个闭包函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 无法直接访问函数的局部变量</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> myName);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行闭包函数</span></span><br><span class="line"><span class="comment">// 获取函数局部变量</span></span><br><span class="line"><span class="built_in">console</span>.log(person());</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将变量的值常驻内存中，以便下次访问</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过闭包缓存数据</span></span><br><span class="line"><span class="keyword">var</span> Cache=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cache=&#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 检查是否存在缓存</span></span><br><span class="line">        <span class="keyword">if</span>(name <span class="keyword">in</span> cache)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(name,<span class="string">'had cache'</span>,cache[name]);</span><br><span class="line">            <span class="keyword">return</span> cache[name];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> temp=<span class="keyword">new</span> <span class="built_in">Object</span>(name);</span><br><span class="line">        <span class="comment">// 将缓存保存到函数内的局部变量 cache 中</span></span><br><span class="line">        <span class="comment">// 因为闭包的特性，cache 会常驻内存中，以便下次访问</span></span><br><span class="line">        cache[name]=temp;</span><br><span class="line">        <span class="built_in">console</span>.log(name,<span class="string">'create cache'</span>,cache[name]);</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">Cache(<span class="string">'one'</span>);</span><br><span class="line">Cache(<span class="string">'two'</span>);</span><br><span class="line">Cache(<span class="string">'one'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>封装成模块化开发，避免污染全局变量</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Car=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">    _this.color=[];</span><br><span class="line">    _this.number=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        getColor:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> _this.color;</span><br><span class="line">        &#125;,</span><br><span class="line">        setColor:<span class="function"><span class="keyword">function</span>(<span class="params">color</span>)</span>&#123;</span><br><span class="line">            _this.color.push(color);</span><br><span class="line">        &#125;,</span><br><span class="line">        getNumber:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> _this.number;</span><br><span class="line">        &#125;,</span><br><span class="line">        addNumber:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            _this.number++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">Car.setColor(<span class="string">'red'</span>);</span><br><span class="line">Car.setColor(<span class="string">'green'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(Car.getColor());</span><br><span class="line"></span><br><span class="line">Car.addNumber();</span><br><span class="line">Car.addNumber();</span><br><span class="line"><span class="built_in">console</span>.log(Car.getNumber());</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其他应用场景</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绑定并排元素的场景</span></span><br><span class="line"><span class="keyword">var</span> oneLi=<span class="built_in">document</span>.querySelectorAll(<span class="string">"#one li"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i  = <span class="number">0</span>; i &lt; oneLi.length; i++) &#123;</span><br><span class="line">    oneLi[i].onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 将会全部输出 3，因为 i 只保存了最后一个值</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'number'</span>,i);</span><br><span class="line">    &#125;;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> twoLi=<span class="built_in">document</span>.querySelectorAll(<span class="string">"#two li"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> j  = <span class="number">0</span>; j &lt; twoLi.length; j++) &#123;</span><br><span class="line">    <span class="comment">// 使用闭包函数</span></span><br><span class="line">    twoLi[j].onclick=(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'number'</span>,j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(j); <span class="comment">// 立即执行，产生闭包函数，并返回闭包作为 onclick 触发时执行的函数，此时 j 变量已经常驻于内存中</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-闭包使用的注意事项"><a href="#2-闭包使用的注意事项" class="headerlink" title="2. 闭包使用的注意事项"></a>2. 闭包使用的注意事项</h3><ul>
+<li>如果闭包使用过多，会导致内存消耗过高，导致页面性能下降。</li>
+<li>函数执行完后，函数的局部变量没有释放，容易造成内存泄露。</li>
+</ul>
+<h5 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h5><p>闭包不再使用时，要及时释放，将获得闭包的变量赋值为 null，JavaScript 的垃圾回收机制会根据对象是否被引用来释放内存。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>[<span class="number">100000</span>]; <span class="comment">//这个数组占用了很大的内存空间</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(arr.length)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f = fn1();</span><br><span class="line">f()</span><br><span class="line"><span class="comment">//让闭包函数成为垃圾对象，回收闭包</span></span><br><span class="line">f = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="测试闭包的源代码"><a href="#测试闭包的源代码" class="headerlink" title="测试闭包的源代码"></a><a href="https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/scope-closure.html" target="_blank" rel="noopener">测试闭包的源代码</a></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://luckybirdme.github.io/2019/09/26/var-scope-closure/" data-id="ck2l0y7ee000xok28lvey4xoj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/09/26/css-layout/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CSS 简单布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/26/this-point/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS this 指向</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/debounce-and-throttle/">JS 节流和防抖函数</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/hump-underline/">JS 驼峰和下横线转换</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/24/full-permute/">JS 输出全排列</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 LuckyBird<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/luckybirdme" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
