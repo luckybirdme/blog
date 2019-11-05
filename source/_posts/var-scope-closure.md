@@ -1,6 +1,6 @@
 ---
 title: JS 作用域和闭包
-date: 2019-09-26 08:09:03
+date: 2019-09-27 08:09:03
 tags: JavaScript
 ---
 

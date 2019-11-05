@@ -20,24 +20,24 @@ tags: JavaScript
 
 // 简单的实现
 function myNew(){
-	// 创建一个对象
-	var obj = {};
-	// 获取输入的构造函数
-	var func = Array.prototype.shift.call(arguments);
-	// 获取输入的其他参数
-	var args = Array.prototype.slice.call(arguments);
-	// 将对象的原型链指向构造函数的原型对象，以获得构造函数的原型属性和方法
-	obj.__proto__ = func.prototype;
-	// 执行构造函数，并将作用域指定为当前 obj 对象，以便获得构造函数自身的属性和方法
-	var rtn = func.apply(obj,args);
-	// 如果构造函数返回值是自定义的对象，直接返回
-	if(typeof rtn === 'object'){
+    // 创建一个对象
+    var obj = {};
+    // 获取输入的构造函数
+    var func = Array.prototype.shift.call(arguments);
+    // 获取输入的其他参数
+    var args = Array.prototype.slice.call(arguments);
+    // 将对象的原型链指向构造函数的原型对象，以获得构造函数的原型属性和方法
+    obj.__proto__ = func.prototype;
+    // 执行构造函数，并将作用域指定为当前 obj 对象，以便获得构造函数自身的属性和方法
+    var rtn = func.apply(obj,args);
+    // 如果构造函数返回值是自定义的对象，直接返回
+    if(typeof rtn === 'object'){
         return rtn
     }
     // 构造函数没有返回，就用使用当前对象 obj
-	return obj;
+    return obj;
 }
-				
+                
 ```
 
 ##### 3. [完整的实例代码](/example/js/my-new-func.html)
@@ -52,9 +52,9 @@ function myNew(){
 ```javascript
 // 简单的实现
 function myObjectCreate(prototype){
-	// 空的构造函数
-	function F() {}
-	// 构造函数的原型对象指向传入的对象
+    // 空的构造函数
+    function F() {}
+    // 构造函数的原型对象指向传入的对象
     F.prototype = prototype;
     // 通过 new 方式，创建新的实例
     // 实例原型链指向传入的对象，以便获得传入对象的属性和方法
@@ -66,14 +66,14 @@ function myObjectCreate(prototype){
 ```javascript
 // 用于继承的父类
 function People(){
-	this.age = 20;
+    this.age = 20;
 }
 People.prototype.getAge = function() {
-	console.log(this.age);
+    console.log(this.age);
 }
 // 用于继承的子类
 function Student(school){
-	this.school = school
+    this.school = school
 }
 
 // 错误使用方式

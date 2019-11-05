@@ -5,15 +5,22 @@
   
 
   
-  <title>LuckyBird</title>
+  <title>JS 作用域和闭包 | LuckyBird</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LuckyBird">
-<meta property="og:url" content="https://luckybirdme.github.io/page/2/index.html">
+  <meta name="description" content="作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。函数在每次创建时生成闭包，闭包也是一个函数，这个闭包函数允许其他外部函数访问当前作用域中的变量。  一，作用域1. 定义作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。 2. 作用可见，作用域最大的用处就是隔离变量，不同作用域下同">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 作用域和闭包">
+<meta property="og:url" content="https://luckybirdme.github.io/2019/09/27/var-scope-closure/index.html">
 <meta property="og:site_name" content="LuckyBird">
+<meta property="og:description" content="作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。函数在每次创建时生成闭包，闭包也是一个函数，这个闭包函数允许其他外部函数访问当前作用域中的变量。  一，作用域1. 定义作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。 2. 作用可见，作用域最大的用处就是隔离变量，不同作用域下同">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://luckybirdme.github.io/example/img/scope.png">
+<meta property="og:updated_time" content="2019-11-04T23:30:01.175Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LuckyBird">
+<meta name="twitter:title" content="JS 作用域和闭包">
+<meta name="twitter:description" content="作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。函数在每次创建时生成闭包，闭包也是一个函数，这个闭包函数允许其他外部函数访问当前作用域中的变量。  一，作用域1. 定义作用域负责收集并维护当前范围内的所有声明的变量，确定当前执行的代码对这些变量的访问权限，这个范围就叫作用域。 2. 作用可见，作用域最大的用处就是隔离变量，不同作用域下同">
+<meta name="twitter:image" content="https://luckybirdme.github.io/example/img/scope.png">
   
     <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
   
@@ -64,97 +71,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-deep-clone-func" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/29/deep-clone-func/" class="article-date">
-  <time datetime="2019-09-28T22:52:34.000Z" itemprop="datePublished">2019-09-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/29/deep-clone-func/">JS 变量和克隆</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>JavaScript 变量包括基本类型和引用类型，基本类型的变量可直接访问和操作对应值，赋值就可以克隆一份值到另外一个内存地址中保存。<br>引用类型的变量则只是保存引用地址，赋值只是克隆引用地址，实际上还是共用变量，变量更改时，所有相同引用地址的变量也更改。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/29/deep-clone-func/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/29/deep-clone-func/" data-id="ck2m13ojo000d88289zepbvhy" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-prototype" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/27/prototype/" class="article-date">
-  <time datetime="2019-09-27T14:59:26.000Z" itemprop="datePublished">2019-09-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/27/prototype/">prototype</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>每个实例对象（ object ）都有一个私有属性（称之为 <strong>proto</strong> ）指向它的构造函数的原型对象（prototype ）。该原型对象也有一个自己的原型对象( <strong>proto</strong> ) ，层层向上直到一个对象的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/27/prototype/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/27/prototype/" data-id="ck2m13okl000s8828vvpy0w49" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-var-scope-closure" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-var-scope-closure" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/27/var-scope-closure/" class="article-date">
   <time datetime="2019-09-27T00:09:03.000Z" itemprop="datePublished">2019-09-27</time>
@@ -167,8 +84,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/27/var-scope-closure/">JS 作用域和闭包</a>
+    <h1 class="article-title" itemprop="name">
+      JS 作用域和闭包
     </h1>
   
 
@@ -252,286 +169,28 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-this-point" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/27/this-point/" class="article-date">
-  <time datetime="2019-09-26T23:51:54.000Z" itemprop="datePublished">2019-09-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2019/09/27/prototype/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          prototype
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/27/this-point/">JS this 指向</a>
-    </h1>
   
+    <a href="/2019/09/27/this-point/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS this 指向</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>JavaScript 的作用域是定义就决定，但是执行时上文下即 this 会变动。<br>运行时会在指定上下文运行，不同 this 指向，会获取到不同对象的属性。<br>默认情况下，谁调用对象，那么对象内的 this 就指向谁，除非绑定其他对象。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/27/this-point/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/27/this-point/" data-id="ck2m13oks000w8828z6yum6iu" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-call-apply-bind" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/26/call-apply-bind/" class="article-date">
-  <time datetime="2019-09-26T11:40:59.000Z" itemprop="datePublished">2019-09-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/26/call-apply-bind/">JS call apply bind 函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>JavaScript 的函数作用域是定义就决定，但是执行时上文下即 this 会变动；<br>函数运行时会在指定上下文运行，不同 this 指向，会获取到不同对象的属性；<br>为了更改函数运行时的上下文，可通过 call，apply，以及 bind 方式绑定。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/26/call-apply-bind/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/call-apply-bind/" data-id="ck2m13oie00018828o2905dyz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-new-object-create" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/26/new-object-create/" class="article-date">
-  <time datetime="2019-09-26T10:49:27.000Z" itemprop="datePublished">2019-09-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/26/new-object-create/">JS new 和 Object.create</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>new 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例<br>Object.create()是 ES5 新增的方法，创建一个新对象，指定新对象的<strong>proto</strong>，同时支持自定义新对象的属性</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/26/new-object-create/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/new-object-create/" data-id="ck2m13oko000u8828ws0eeupm" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-keyframes-animation" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/26/keyframes-animation/" class="article-date">
-  <time datetime="2019-09-26T07:57:23.000Z" itemprop="datePublished">2019-09-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/26/keyframes-animation/">CSS3 动画效果</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>CSS3 新增了动画效果，通过 keyframes 和 animation 来实现；<br>由于各大浏览器实现方式不一样，需要考虑兼容性，而且 IE 版本 10 以上才支持。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/26/keyframes-animation/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/keyframes-animation/" data-id="ck2m13oke000o8828uqjy5ohd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-css-flex" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/26/css-flex/" class="article-date">
-  <time datetime="2019-09-26T03:16:26.000Z" itemprop="datePublished">2019-09-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/26/css-flex/">CSS 弹性盒子</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>弹性盒子 flex box 是 CSS3 的新特性，是为了方便在不同屏幕大小展示布局，也为了更高效地对元素进行排列</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/26/css-flex/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/css-flex/" data-id="ck2m13ojb00098828dq8to5fp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-css-layout" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/26/css-layout/" class="article-date">
-  <time datetime="2019-09-26T00:32:30.000Z" itemprop="datePublished">2019-09-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/26/css-layout/">CSS 简单布局</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>CSS 布局元素包括漂浮 float，定位 position等；<br>float 主要用于左右两边的漂浮，position 可用于整个文档的绝对定位，相对定位，固定漂浮位置等。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/26/css-layout/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/css-layout/" data-id="ck2m13oje000a8828rfdtsmhr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
 
 </section>
         
