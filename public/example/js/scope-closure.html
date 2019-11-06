@@ -18,13 +18,13 @@
     <script type="text/javascript">
 
         // 通过闭包访问函数内的局部变量
-        var person=function(){
+        var person=(function(){
             //
             var myName="jack";
             return function(){
                 return myName;
             }
-        }(); // 最后一个括号的意思是，函数立即执行，函数执行后返回的是一个闭包函数
+        })(); // 最后一个括号的意思是，函数立即执行，函数执行后返回的是一个闭包函数
 
         // 无法直接访问函数的局部变量
         console.log(typeof myName);

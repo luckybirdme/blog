@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://luckybirdme.github.io/example/img/__proto__.png">
 <meta property="og:image" content="https://luckybirdme.github.io/example/img/prototype.png">
-<meta property="og:updated_time" content="2019-11-05T15:50:33.038Z">
+<meta property="og:updated_time" content="2019-11-05T22:42:00.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS 原型链">
 <meta name="twitter:description" content="每个实例对象（ object ）都有一个私有属性（称之为 proto ）指向它的构造函数的原型对象（prototype ）。该原型对象也有一个自己的原型对象( proto ) ，层层向上直到一个对象的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。">
@@ -100,7 +100,7 @@
 <a id="more"></a>
 
 
-<h2 id="一，原型链的查找方法"><a href="#一，原型链的查找方法" class="headerlink" title="一，原型链的查找方法"></a>一，原型链的查找方法</h2><h2 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.myName=<span class="string">'A'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 原型对象 prototype</span></span><br><span class="line">A.prototype.showName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>.myName);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line"><span class="comment">// 通过 new 将 A 中的上下文即 this 绑定到 a，从而获取 myName 属性</span></span><br><span class="line"><span class="built_in">console</span>.log(a.myName);</span><br><span class="line"><span class="comment">// 从原型链 __proto__，获取 A 的原型对象 prototype 的方法 showName</span></span><br><span class="line">a.showName();</span><br><span class="line"><span class="comment">// a 的原型链指向 A 的原型对象</span></span><br><span class="line"><span class="built_in">console</span>.log(a.__proto__===A.prototype);</span><br><span class="line"><span class="comment">// A 的原型对象也有原型链，指向 Object 的原型对象</span></span><br><span class="line"><span class="built_in">console</span>.log(A.prototype.__proto__===<span class="built_in">Object</span>.prototype);</span><br><span class="line"><span class="comment">// Object 的原型对象也有原型链，指向 null</span></span><br><span class="line"><span class="comment">// null 没有原型链 __proto__ 属性，它是 JS 最顶层的对象</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.__proto__===<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="一，原型链的查找方法"><a href="#一，原型链的查找方法" class="headerlink" title="一，原型链的查找方法"></a>一，原型链的查找方法</h2><h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.myName=<span class="string">'A'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 原型对象 prototype</span></span><br><span class="line">A.prototype.showName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>.myName);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line"><span class="comment">// 通过 new 将 A 中的上下文即 this 绑定到 a，a 从而获取 myName 属性</span></span><br><span class="line"><span class="built_in">console</span>.log(a.myName);</span><br><span class="line"><span class="comment">// 从原型链 __proto__，获取 A 的原型对象 prototype 的方法 showName</span></span><br><span class="line">a.showName();</span><br><span class="line"><span class="comment">// a 的原型链指向 A 的原型对象</span></span><br><span class="line"><span class="built_in">console</span>.log(a.__proto__===A.prototype);</span><br><span class="line"><span class="comment">// A 的原型对象也有原型链，指向 Object 的原型对象</span></span><br><span class="line"><span class="built_in">console</span>.log(A.prototype.__proto__===<span class="built_in">Object</span>.prototype);</span><br><span class="line"><span class="comment">// Object 的原型对象也有原型链，指向 null</span></span><br><span class="line"><span class="comment">// null 没有原型链 __proto__ 属性，它是 JS 最顶层的对象</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.__proto__===<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
 
 <p><img src="/example/img/__proto__.png" alt></p>
 <h2 id="二，原型链的特点"><a href="#二，原型链的特点" class="headerlink" title="二，原型链的特点"></a>二，原型链的特点</h2><h3 id="1-所有的函数都拥有-prototype-属性，用于指向原型对象。"><a href="#1-所有的函数都拥有-prototype-属性，用于指向原型对象。" class="headerlink" title="1. 所有的函数都拥有 prototype 属性，用于指向原型对象。"></a>1. 所有的函数都拥有 prototype 属性，用于指向原型对象。</h3><h3 id="2-实例的原型链-proto-指向构造函数的原型对象-prototype。"><a href="#2-实例的原型链-proto-指向构造函数的原型对象-prototype。" class="headerlink" title="2. 实例的原型链 proto 指向构造函数的原型对象 prototype。"></a>2. 实例的原型链 <strong>proto</strong> 指向构造函数的原型对象 prototype。</h3><h3 id="3-原型对象-prototype-也有原型链属性-proto，指向-Object-的原型对象-prototype。"><a href="#3-原型对象-prototype-也有原型链属性-proto，指向-Object-的原型对象-prototype。" class="headerlink" title="3. 原型对象 prototype 也有原型链属性 proto，指向 Object 的原型对象 prototype。"></a>3. 原型对象 prototype 也有原型链属性 <strong>proto</strong>，指向 Object 的原型对象 prototype。</h3><h3 id="4-Object-的原型对象-prototype-也有原型链属性-proto，指向最顶层的-null，null-没有原型链。"><a href="#4-Object-的原型对象-prototype-也有原型链属性-proto，指向最顶层的-null，null-没有原型链。" class="headerlink" title="4. Object 的原型对象 prototype 也有原型链属性 proto，指向最顶层的 null，null 没有原型链。"></a>4. Object 的原型对象 prototype 也有原型链属性 <strong>proto</strong>，指向最顶层的 null，null 没有原型链。</h3><h3 id="5-引用类型变量的构造函数-new-Array-new-Object-都是由函数-Function-创建，而-Function-自己创建自己，Function-的原型链指向自己的原型对象。"><a href="#5-引用类型变量的构造函数-new-Array-new-Object-都是由函数-Function-创建，而-Function-自己创建自己，Function-的原型链指向自己的原型对象。" class="headerlink" title="5. 引用类型变量的构造函数 (new Array() , new Object()) 都是由函数 Function 创建，而 Function 自己创建自己，Function 的原型链指向自己的原型对象。"></a>5. 引用类型变量的构造函数 (new Array() , new Object()) 都是由函数 Function 创建，而 Function 自己创建自己，Function 的原型链指向自己的原型对象。</h3><p><img src="/example/img/prototype.png" alt></p>
@@ -108,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/27/prototype/" data-id="ck2m15l3i000xkw284chj7mbv" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/27/prototype/" data-id="ck2nf5reh000vb0288t1k1tzi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -169,7 +169,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -180,6 +180,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/11/06/http/">http 协议简介</a>
+          </li>
         
           <li>
             <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
@@ -195,10 +199,6 @@
         
           <li>
             <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/24/full-permute/">JS 输出全排列</a>
           </li>
         
       </ul>

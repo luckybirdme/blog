@@ -77,7 +77,7 @@ console.log('window not access tempColor',typeof tempColor);
 for(var i=0;i<3;i++){
     console.log('inner',i);
 }
-// 依然输出 2
+// 依然输出 3
 console.log('outer',i);
 
 
@@ -173,13 +173,13 @@ d['a']='a';
 
 ```js
 // 通过闭包访问函数内的局部变量
-var person=function(){
+var person=(function(){
     //
     var myName="jack";
     return function(){
         return myName;
     }
-}(); // 最后一个括号的意思是，函数立即执行，函数执行后返回的是一个闭包函数
+})(); // 最后一个括号的意思是，函数立即执行，函数执行后返回的是一个闭包函数
 
 // 无法直接访问函数的局部变量
 console.log(typeof myName);

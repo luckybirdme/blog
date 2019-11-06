@@ -218,7 +218,7 @@ h4{
 
 ### 四，Bootstrap4 响应式原理
 - Bootstrap3 响应式是使用 float, position 样式实现。
-- Bootstrap4 是通过 CSS3 的新特性 flex box 来实现的，具体细节请参考文章 [CSS 弹性盒子](./2019/09/26/CSS-Flex)
+- Bootstrap4 是通过 CSS3 的新特性 flex box 来实现的。
 
 
 > 部分图片来源网络，侵删

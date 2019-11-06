@@ -86,7 +86,7 @@ var myFunc=new MyConstuctor();
 console.log(myFunc.funcName);
 ```
 
-##### new 底层实质也是通过类似 apply，call，bind 的函数更改了 this 指向，具体参考文章 [JS new 和 Object.create](./2019/09/26/new-object-create)
+##### new 底层实质也是通过类似 apply，call，bind 的函数更改了 this 指向
 
 
 ## 三，ES6新特性

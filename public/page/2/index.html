@@ -66,6 +66,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-my-promise-func" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/13/my-promise-func/" class="article-date">
+  <time datetime="2019-10-13T04:39:02.000Z" itemprop="datePublished">2019-10-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/13/my-promise-func/">JS Promise 使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>JavaScript 是单线程语言，为了加快执行效率，会采用异步回调的方式执行。<br>但是多层异步回调太深，不方便代码编写，也不利用阅读，也就是常说的回调地狱。<br>Promise 提供一种链式调用，避免回调地狱的问题。</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2019/10/13/my-promise-func/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://luckybirdme.github.io/2019/10/13/my-promise-func/" data-id="ck2nf5rfs0013b028rvnph47m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-deep-clone-func" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/29/deep-clone-func/" class="article-date">
@@ -99,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/29/deep-clone-func/" data-id="ck2m15l0z0008kw28r7iw6cz5" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/29/deep-clone-func/" data-id="ck2nf5rdn000fb028ygaverwo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -144,7 +189,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/27/prototype/" data-id="ck2m15l3i000xkw284chj7mbv" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/27/prototype/" data-id="ck2nf5reh000vb0288t1k1tzi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -191,7 +236,7 @@
 <h5 id="下面看具体代码"><a href="#下面看具体代码" class="headerlink" title="下面看具体代码"></a>下面看具体代码</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// window 下的全局作用域变量</span></span><br><span class="line"><span class="keyword">var</span> color = <span class="string">"blue"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeColor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// changeColor 函数作用域的变量</span></span><br><span class="line">    <span class="keyword">var</span> anotherColor = <span class="string">"red"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">swapColors</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// swapColors 函数作用域的变量</span></span><br><span class="line">        <span class="keyword">var</span> tempColor = <span class="string">'green'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这里可以访问 color、anotherColor 和 tempColor</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'swapColors access color'</span>,color);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'swapColors access anotherColor'</span>,anotherColor);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'swapColors access tempColor'</span>,tempColor);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    swapColors();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这里可以访问 color 和 anotherColor，但不能访问 tempColor</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'changeColor access color'</span>,color);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'changeColor access anotherColor'</span>,anotherColor);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'changeColor not access tempColor'</span>,<span class="keyword">typeof</span> tempColor);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">changeColor();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里只能访问 color</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'window access color'</span>,color);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'window not access anotherColor'</span>,<span class="keyword">typeof</span> anotherColor);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'window not access tempColor'</span>,<span class="keyword">typeof</span> tempColor);</span><br></pre></td></tr></table></figure>
 
 <h5 id="以上称为作用域链"><a href="#以上称为作用域链" class="headerlink" title="以上称为作用域链"></a>以上称为作用域链</h5><p><img src="/example/img/scope.png" alt></p>
-<h5 id="块级作用域示例代码"><a href="#块级作用域示例代码" class="headerlink" title="块级作用域示例代码"></a>块级作用域示例代码</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var 变量定义没有块级作用域</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'inner'</span>,i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 依然输出 2</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'outer'</span>,i);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// let 和 const 有块级作用域</span></span><br><span class="line"><span class="comment">// var 变量定义没有块级作用域</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">3</span>;j++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'inner'</span>,j);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'outer'</span>,<span class="keyword">typeof</span> j);</span><br><span class="line"></span><br><span class="line"><span class="comment">// const 是常量变量，一经定义和赋值，不能再修改</span></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="string">'a'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'inner'</span>,a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'outer'</span>,<span class="keyword">typeof</span> a);</span><br></pre></td></tr></table></figure>
+<h5 id="块级作用域示例代码"><a href="#块级作用域示例代码" class="headerlink" title="块级作用域示例代码"></a>块级作用域示例代码</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var 变量定义没有块级作用域</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'inner'</span>,i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 依然输出 3</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'outer'</span>,i);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// let 和 const 有块级作用域</span></span><br><span class="line"><span class="comment">// var 变量定义没有块级作用域</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">3</span>;j++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'inner'</span>,j);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'outer'</span>,<span class="keyword">typeof</span> j);</span><br><span class="line"></span><br><span class="line"><span class="comment">// const 是常量变量，一经定义和赋值，不能再修改</span></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="string">'a'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'inner'</span>,a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'outer'</span>,<span class="keyword">typeof</span> a);</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-使用变量的注意事项"><a href="#2-使用变量的注意事项" class="headerlink" title="2. 使用变量的注意事项"></a>2. 使用变量的注意事项</h3><h5 id="为了更规范编写-JS-代码，以下列举的注意事项都尽量避免。"><a href="#为了更规范编写-JS-代码，以下列举的注意事项都尽量避免。" class="headerlink" title="为了更规范编写 JS 代码，以下列举的注意事项都尽量避免。"></a>为了更规范编写 JS 代码，以下列举的注意事项都尽量避免。</h5><ul>
 <li>如果变量不使用 var let const 定义，默认是全局作用域变量，即使是在函数内部定义的。</li>
@@ -218,7 +263,7 @@
 <h2 id="三，闭包的使用"><a href="#三，闭包的使用" class="headerlink" title="三，闭包的使用"></a>三，闭包的使用</h2><h3 id="1-闭包使用的具体案例"><a href="#1-闭包使用的具体案例" class="headerlink" title="1. 闭包使用的具体案例"></a>1. 闭包使用的具体案例</h3><ul>
 <li>返回闭包函数，以便访问函数内的变量</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过闭包访问函数内的局部变量</span></span><br><span class="line"><span class="keyword">var</span> person=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="keyword">var</span> myName=<span class="string">"jack"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> myName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(); <span class="comment">// 最后一个括号的意思是，函数立即执行，函数执行后返回的是一个闭包函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 无法直接访问函数的局部变量</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> myName);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行闭包函数</span></span><br><span class="line"><span class="comment">// 获取函数局部变量</span></span><br><span class="line"><span class="built_in">console</span>.log(person());</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过闭包访问函数内的局部变量</span></span><br><span class="line"><span class="keyword">var</span> person=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="keyword">var</span> myName=<span class="string">"jack"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> myName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(); <span class="comment">// 最后一个括号的意思是，函数立即执行，函数执行后返回的是一个闭包函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 无法直接访问函数的局部变量</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> myName);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行闭包函数</span></span><br><span class="line"><span class="comment">// 获取函数局部变量</span></span><br><span class="line"><span class="built_in">console</span>.log(person());</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>将变量的值常驻内存中，以便下次访问</li>
@@ -246,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/27/var-scope-closure/" data-id="ck2m15l3q0011kw2879jv5h3e" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/27/var-scope-closure/" data-id="ck2nf5ret000zb028aqi7mn4q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -291,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/27/this-point/" data-id="ck2m15l3f000vkw28ds8n5z78" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/27/this-point/" data-id="ck2nf5reo000xb028pz7fv476" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -336,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/call-apply-bind/" data-id="ck2m15l0j0001kw28rxhrn5us" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/26/call-apply-bind/" data-id="ck2nf5rbz0001b028dz49m4ho" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -381,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/new-object-create/" data-id="ck2m15l3n000zkw28sz6buz1z" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/26/new-object-create/" data-id="ck2nf5red000tb028dag72zmn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -426,7 +471,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/keyframes-animation/" data-id="ck2m15l1f000fkw28wzs6i4wz" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/26/keyframes-animation/" data-id="ck2nf5re4000nb028zjff2xry" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -471,7 +516,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/css-flex/" data-id="ck2m15l0s0004kw28c6jgr2r7" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/26/css-flex/" data-id="ck2nf5rc90004b028ojz5z5ya" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -516,7 +561,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/26/css-layout/" data-id="ck2m15l1b000dkw28ge4ybq2r" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/26/css-layout/" data-id="ck2nf5rdf000cb02893inh5td" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -565,7 +610,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -576,6 +621,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/11/06/http/">http 协议简介</a>
+          </li>
         
           <li>
             <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
@@ -591,10 +640,6 @@
         
           <li>
             <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/24/full-permute/">JS 输出全排列</a>
           </li>
         
       </ul>

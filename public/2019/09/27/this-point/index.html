@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="LuckyBird">
 <meta property="og:description" content="JavaScript 的作用域是定义就决定，但是执行时上文下即 this 会变动。运行时会在指定上下文运行，不同 this 指向，会获取到不同对象的属性。默认情况下，谁调用对象，那么对象内的 this 就指向谁，除非绑定其他对象。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-05T00:38:06.410Z">
+<meta property="og:updated_time" content="2019-11-06T15:08:42.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS this 指向">
 <meta name="twitter:description" content="JavaScript 的作用域是定义就决定，但是执行时上文下即 this 会变动。运行时会在指定上下文运行，不同 this 指向，会获取到不同对象的属性。默认情况下，谁调用对象，那么对象内的 this 就指向谁，除非绑定其他对象。">
@@ -105,7 +105,7 @@
 
 <h3 id="2-通过-new-执行构造函数，会将构造函数内部的-this-指向一个新对象，并返回。"><a href="#2-通过-new-执行构造函数，会将构造函数内部的-this-指向一个新对象，并返回。" class="headerlink" title="2. 通过 new 执行构造函数，会将构造函数内部的 this 指向一个新对象，并返回。"></a>2. 通过 new 执行构造函数，会将构造函数内部的 this 指向一个新对象，并返回。</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数的情况</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyConstuctor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.funcName=<span class="string">'constuctor'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接调用构造函数，跟普通函数调用一样，this 指向 window</span></span><br><span class="line">MyConstuctor();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过 new 执行构造函数，会指向构造函数实例化的新对象</span></span><br><span class="line"><span class="keyword">var</span> myFunc=<span class="keyword">new</span> MyConstuctor();</span><br><span class="line"><span class="built_in">console</span>.log(myFunc.funcName);</span><br></pre></td></tr></table></figure>
 
-<h5 id="new-底层实质也是通过类似-apply，call，bind-的函数更改了-this-指向，具体参考文章-JS-new-和-Object-create"><a href="#new-底层实质也是通过类似-apply，call，bind-的函数更改了-this-指向，具体参考文章-JS-new-和-Object-create" class="headerlink" title="new 底层实质也是通过类似 apply，call，bind 的函数更改了 this 指向，具体参考文章 JS new 和 Object.create"></a>new 底层实质也是通过类似 apply，call，bind 的函数更改了 this 指向，具体参考文章 <a href="./2019/09/26/new-object-create">JS new 和 Object.create</a></h5><h2 id="三，ES6新特性"><a href="#三，ES6新特性" class="headerlink" title="三，ES6新特性"></a>三，ES6新特性</h2><h3 id="1-非严格模式下，默认-this-指向-window；但是严格模式下，this-默认是-undefined"><a href="#1-非严格模式下，默认-this-指向-window；但是严格模式下，this-默认是-undefined" class="headerlink" title="1. 非严格模式下，默认 this 指向 window；但是严格模式下，this 默认是 undefined"></a>1. 非严格模式下，默认 this 指向 window；但是严格模式下，this 默认是 undefined</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 严格模式，默认 this 不是指向 window，而是 undefined</span></span><br><span class="line"><span class="keyword">var</span> stictVar = <span class="string">'stictVar'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testStrict</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// 使用严格模式</span></span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="comment">// 输出 undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">// 这里会报错</span></span><br><span class="line">    <span class="comment">// console.log(this.stictVar);</span></span><br><span class="line">&#125;</span><br><span class="line">testStrict();</span><br></pre></td></tr></table></figure>
+<h5 id="new-底层实质也是通过类似-apply，call，bind-的函数更改了-this-指向"><a href="#new-底层实质也是通过类似-apply，call，bind-的函数更改了-this-指向" class="headerlink" title="new 底层实质也是通过类似 apply，call，bind 的函数更改了 this 指向"></a>new 底层实质也是通过类似 apply，call，bind 的函数更改了 this 指向</h5><h2 id="三，ES6新特性"><a href="#三，ES6新特性" class="headerlink" title="三，ES6新特性"></a>三，ES6新特性</h2><h3 id="1-非严格模式下，默认-this-指向-window；但是严格模式下，this-默认是-undefined"><a href="#1-非严格模式下，默认-this-指向-window；但是严格模式下，this-默认是-undefined" class="headerlink" title="1. 非严格模式下，默认 this 指向 window；但是严格模式下，this 默认是 undefined"></a>1. 非严格模式下，默认 this 指向 window；但是严格模式下，this 默认是 undefined</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 严格模式，默认 this 不是指向 window，而是 undefined</span></span><br><span class="line"><span class="keyword">var</span> stictVar = <span class="string">'stictVar'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testStrict</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// 使用严格模式</span></span><br><span class="line"><span class="meta">    'use strict'</span>;</span><br><span class="line">    <span class="comment">// 输出 undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">// 这里会报错</span></span><br><span class="line">    <span class="comment">// console.log(this.stictVar);</span></span><br><span class="line">&#125;</span><br><span class="line">testStrict();</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-箭头函数"><a href="#2-箭头函数" class="headerlink" title="2. 箭头函数"></a>2. 箭头函数</h3><ul>
 <li>没有 this 的，只能从外层函数寻找，所以在定义时就决定了 this 指向。</li>
@@ -118,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/27/this-point/" data-id="ck2m15l3f000vkw28ds8n5z78" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/27/this-point/" data-id="ck2nf5reo000xb028pz7fv476" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -179,7 +179,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -190,6 +190,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/11/06/http/">http 协议简介</a>
+          </li>
         
           <li>
             <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
@@ -205,10 +209,6 @@
         
           <li>
             <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/24/full-permute/">JS 输出全排列</a>
           </li>
         
       </ul>

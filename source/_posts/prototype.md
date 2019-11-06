@@ -11,7 +11,7 @@ tags: JavaScript
 
 ## 一，原型链的查找方法
 
-## 实例代码
+## 示例代码
 ```js
 
 function A(){
@@ -23,7 +23,7 @@ A.prototype.showName=function(){
 };
 
 var a = new A();
-// 通过 new 将 A 中的上下文即 this 绑定到 a，从而获取 myName 属性
+// 通过 new 将 A 中的上下文即 this 绑定到 a，a 从而获取 myName 属性
 console.log(a.myName);
 // 从原型链 __proto__，获取 A 的原型对象 prototype 的方法 showName
 a.showName();
