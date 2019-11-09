@@ -13,21 +13,21 @@ tags: JavaScript
 ##### HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol (通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是由浏览器 client 发起的，资源管理服务器 server 接收请求并进行处理，然后返回响应的内容给 client。
 
 
-![](/example/img/HTTP-layers.png)
+![](http://qiniucdn.luckybird.me/blog/img/2019/HTTP-layers.png)
 
 
 
 ##### HTTP 报文基本格式
-![](/example/img/http-protocol.png)
+![](http://qiniucdn.luckybird.me/blog/img/2019/http-protocol.png)
 
 
 
 ### 1. 请求报文
-![](/example/img/http-request.jpg)
+![](http://qiniucdn.luckybird.me/blog/img/2019/http-request.jpg)
 
 
 ### 2. 返回报文
-![](/example/img/http-response.png)
+![](http://qiniucdn.luckybird.me/blog/img/2019/http-response.png)
 
 
 ## 二，特点
@@ -46,15 +46,15 @@ HTTP 是无状态的，两个请求之间是没有关联。而使用 HTTP Cookie
 HTTP 底层采用可靠的 TCP 进行传输。HTTP/1.1 默认开启 Connection:keep-alive，一个 TCP 链接共享多个 HTTP 请求，避免重复握手。 Chrome 默认可并发建立 6 个 TCP 链接，处理高并发请求。
 
 - TCP 三次握手，传输内容，断开链接
-![](/example/img/tcp.jpg)
+![](http://qiniucdn.luckybird.me/blog/img/2019/http-tcp.jpg)
 
 
 - 第一次 HTTP 请求，初始化链接时，进行 TCP 三次握手
-![](/example/img/tcp-one.png)
+![](http://qiniucdn.luckybird.me/blog/img/2019/tcp-one.png)
 
 
 - 第二次 HTTP 请求，共享刚才的 TCP 链接，节省了初始化链接的时间
-![](/example/img/tcp-two.png)
+![](http://qiniucdn.luckybird.me/blog/img/2019/tcp-two.png)
 
 
 
@@ -67,72 +67,72 @@ Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 
 ### 1. 请求头部 Request Headers
 
-名称|解释
--|-
-Accept|指定客户端能够接收的内容类型。
-Accept-Charset|浏览器可以接受的字符编码集。
-Accept-Encoding|指定浏览器可以支持的web服务器返回内容压缩编码类型。
-Accept-Language|浏览器可接受的语言。
-Accept-Ranges|可以请求网页实体的一个或者多个子范围字段。
-AuthorizationHTTP|授权的授权证书。
-Cache-Control|指定请求和响应遵循的缓存机制。
-Connection|表示是否需要持久连接。（HTTP 1.1默认进行持久连接）
-CookieHTTP|请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。
-Content-Length|请求的内容长度。
-Content-Type|请求的与实体对应的MIME信息。
-Date|请求发送的日期和时间。
-Expect|请求的特定的服务器行为。
-From|发出请求的用户的Email。
-Host|指定请求的服务器的域名和端口号。
-If-Match|只有请求内容与实体相匹配才有效。
-If-Modified-Since|如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码。
-If-None-Match|如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变。
-If-Range|如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。
-If-Unmodified-Since|只在实体在指定时间之后未被修改才请求成功。
-Max-Forwards|限制信息通过代理和网关传送的时间。
-Pragma|用来包含实现特定的指令。
-Proxy-Authorization|连接到代理的授权证书。
-Range|只请求实体的一部分，指定范围。
-Referer|先前网页的地址，当前请求网页紧随其后,即来路。
-TE|客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息。
-Upgrade|向服务器指定某种传输协议以便服务器进行转换（如果支持。
-User-Agent|内容包含发出请求的用户信息。
-Via|通知中间网关或代理服务器地址，通信协议。
-Warning|关于消息实体的警告信息
+Header|解释|示例
+-|-|-
+Accept|指定客户端能够接收的内容类型|Accept: text/plain, text/html,application/json
+Accept-Charset|浏览器可以接受的字符编码集。|Accept-Charset: iso-8859-5
+Accept-Encoding|指定浏览器可以支持的web服务器返回内容压缩编码类型。|Accept-Encoding: compress, gzip
+Accept-Language|浏览器可接受的语言|Accept-Language: en,zh
+Accept-Ranges|可以请求网页实体的一个或者多个子范围字段|Accept-Ranges: bytes
+Authorization|HTTP授权的授权证书|Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+Cache-Control|指定请求和响应遵循的缓存机制|Cache-Control: no-cache
+Connection|表示是否需要持久连接。（HTTP 1.1默认进行持久连接）|Connection: close
+Cookie|HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。|Cookie: $Version=1; Skin=new;
+Content-Length|请求的内容长度|Content-Length: 348
+Content-Type|请求的与实体对应的MIME信息|Content-Type: application/x-www-form-urlencoded
+Date|请求发送的日期和时间|Date: Tue, 15 Nov 2010 08:12:31 GMT
+Expect|请求的特定的服务器行为|Expect: 100-continue
+From|发出请求的用户的Email|From: user@email.com
+Host|指定请求的服务器的域名和端口号|Host: www.zcmhi.com
+If-Match|只有请求内容与实体相匹配才有效|If-Match: “737060cd8c284d8af7ad3082f209582d”
+If-Modified-Since|如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码|If-Modified-Since: Sat, 29 Oct 2010 19:43:31 GMT
+If-None-Match|如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变|If-None-Match: “737060cd8c284d8af7ad3082f209582d”
+If-Range|如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag|If-Range: “737060cd8c284d8af7ad3082f209582d”
+If-Unmodified-Since|只在实体在指定时间之后未被修改才请求成功|If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT
+Max-Forwards|限制信息通过代理和网关传送的时间|Max-Forwards: 10
+Pragma|用来包含实现特定的指令|Pragma: no-cache
+Proxy-Authorization|连接到代理的授权证书|Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+Range|只请求实体的一部分，指定范围|Range: bytes=500-999
+Referer|先前网页的地址，当前请求网页紧随其后,即来路|Referer: http://www.zcmhi.com/archives...
+TE|客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息|TE: trailers,deflate;q=0.5
+Upgrade|向服务器指定某种传输协议以便服务器进行转换（如果支持）|Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11
+User-Agent|User-Agent的内容包含发出请求的用户信息|User-Agent: Mozilla/5.0 (Linux; X11)
+Via|通知中间网关或代理服务器地址，通信协议|Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)
+Warning|关于消息实体的警告信息|Warn: 199 Miscellaneous warning
 
 
 ### 2. 响应头部 Response Headers
 
-名称|解释
--|-
-Accept-Ranges|表明服务器是否支持指定范围请求及哪种类型的分段请求。
-Age|从原始服务器到代理缓存形成的估算时间（以秒计，非负）。
-Allow|对某网络资源的有效的请求行为，不允许则返回405。
-Cache-Control|告诉所有的缓存机制是否可以缓存及哪种类型。
-Content-Encodingweb|服务器支持的返回内容压缩编码类型。。
-Content-Language|响应体的语言。
-Content-Length|响应体的长度。
-Content-Location|请求资源可替代的备用的另一地址。
-Content-MD5|返回资源的MD5校验值。
-Content-Range|在整个返回体中本部分的字节位置。
-Content-Type|返回内容的MIME类型。
-Date|原始服务器消息发出的时间。
-ETag|请求变量的实体标签的当前值。
-Expires|响应过期的日期和时间。
-Last-Modified|请求资源的最后修改时间。
-Location|用来重定向接收方到非请求URL的位置来完成请求或标识新的资源。
-Pragma|包括实现特定的指令，它可应用到响应链上的任何接收方。
-Proxy-Authenticate|它指出认证方案和可应用到代理的该URL上的参数。
-refresh|应用于重定向或一个新的资源被创造，在5秒之后重定向（由网景提出，被大部分浏览器支持）
-Retry-After|如果实体暂时不可取，通知客户端在指定时间之后再次尝试。
-Serverweb|服务器软件名称。
-Set-Cookie|设置Http Cookie。
-Trailer|指出头域在分块传输编码的尾部存在。
-Transfer-Encoding|文件传输编码。
-Vary|告诉下游代理是使用缓存响应还是从原始服务器请求。
-Via|告知代理客户端响应是通过哪里发送的。
-Warning|警告实体可能存在的问题。
-WWW-Authenticate|表明客户端请求实体应该使用的授权方案。
+Header|解释|示例
+-|-|-
+Accept-Ranges|表明服务器是否支持指定范围请求及哪种类型的分段请求|Accept-Ranges: bytes
+Age|从原始服务器到代理缓存形成的估算时间（以秒计，非负）|Age: 12
+Allow|对某网络资源的有效的请求行为，不允许则返回405|Allow: GET, HEAD
+Cache-Control|告诉所有的缓存机制是否可以缓存及哪种类型|Cache-Control: no-cache
+Content-Encoding|web服务器支持的返回内容压缩编码类型。|Content-Encoding: gzip
+Content-Language|响应体的语言|Content-Language: en,zh
+Content-Length|响应体的长度|Content-Length: 348
+Content-Location|请求资源可替代的备用的另一地址|Content-Location: /index.htm
+Content-MD5|返回资源的MD5校验值|Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==
+Content-Range|在整个返回体中本部分的字节位置|Content-Range: bytes 21010-47021/47022
+Content-Type|返回内容的MIME类型|Content-Type: text/html; charset=utf-8
+Date|原始服务器消息发出的时间|Date: Tue, 15 Nov 2010 08:12:31 GMT
+ETag|请求变量的实体标签的当前值|ETag: “737060cd8c284d8af7ad3082f209582d”
+Expires|响应过期的日期和时间|Expires: Thu, 01 Dec 2010 16:00:00 GMT
+Last-Modified|请求资源的最后修改时间|Last-Modified: Tue, 15 Nov 2010 12:45:26 GMT
+Location|用来重定向接收方到非请求URL的位置来完成请求或标识新的资源|Location: http://www.zcmhi.com/archives...
+Pragma|包括实现特定的指令，它可应用到响应链上的任何接收方|Pragma: no-cache
+Proxy-Authenticate|它指出认证方案和可应用到代理的该URL上的参数|Proxy-Authenticate: Basic
+refresh|应用于重定向或一个新的资源被创造，在5秒之后重定向（由网景提出，被大部分浏览器支持）|Refresh: 5; url=http://www.zcmhi.com/archives...
+Retry-After|如果实体暂时不可取，通知客户端在指定时间之后再次尝试|Retry-After: 120
+Server|web服务器软件名称|Server: Apache/1.3.27 (Unix) (Red-Hat/Linux)
+Set-Cookie|设置Http Cookie|Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1
+Trailer|指出头域在分块传输编码的尾部存在|Trailer: Max-Forwards
+Transfer-Encoding|文件传输编码|Transfer-Encoding:chunked
+Vary|告诉下游代理是使用缓存响应还是从原始服务器请求|Vary: *
+Via|告知代理客户端响应是通过哪里发送的|Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)
+Warning|警告实体可能存在的问题|Warning: 199 Miscellaneous warning
+WWW-Authenticate|表明客户端请求实体应该使用的授权方案|WWW-Authenticate: Basic
 
 
 
@@ -190,6 +190,6 @@ WWW-Authenticate|表明客户端请求实体应该使用的授权方案。
 500|Internal Server Error|服务器内部错误，无法完成请求
 501|Not Implemented|服务器不支持请求的功能，无法完成请求
 502|Bad Gateway|作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应
-503|Service Unavailable 由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中
+503|Service Unavailable|由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中
 504|Gateway Time - out|充当网关或代理的服务器，未及时从远端服务器获取请求
 505|HTTP Version not supported|服务器不支持请求的HTTP协议的版本，无法完成处理

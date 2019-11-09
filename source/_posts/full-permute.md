@@ -16,11 +16,11 @@ tags: JavaScript
 ##### 1. DFS + 链接法
 - DFS，即深度遍历优先(Depth-First Search)，先从第一个元素开始，一直遍历到最末尾的元素为止，之后，再遍历兄弟节点的元素，如下图所示
 
-![](/example/img/full-permute-0.jpg)
+![](http://qiniucdn.luckybird.me/blog/img/2019/full-permute-0.jpg)
 
 - 链接法是指将一个个元素，链接到末尾，以达到排列的效果，对于不重复的数组的全排列效果图如下
 
-![](/example/img/full-permute-1.jpg)
+![](http://qiniucdn.luckybird.me/blog/img/2019/full-permute-1.jpg)
 
 ##### 2. 代码实现
 
@@ -51,6 +51,6 @@ function full_permute(arr){
 }
 
 ```
-### [源代码](https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/full-permute.html)
+### [源代码](https://github.com/luckybirdme/blog/blob/master/example/js/full-permute.html)
 
 

@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="LuckyBird">
 <meta property="og:description" content="JavaScript 的作用域是定义就决定，但是执行时上文下即 this 会变动。运行时会在指定上下文运行，不同 this 指向，会获取到不同对象的属性。默认情况下，谁调用对象，那么对象内的 this 就指向谁，除非绑定其他对象。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-06T15:08:42.445Z">
+<meta property="og:updated_time" content="2019-11-09T02:15:05.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS this 指向">
 <meta name="twitter:description" content="JavaScript 的作用域是定义就决定，但是执行时上文下即 this 会变动。运行时会在指定上下文运行，不同 this 指向，会获取到不同对象的属性。默认情况下，谁调用对象，那么对象内的 this 就指向谁，除非绑定其他对象。">
@@ -114,11 +114,11 @@
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 箭头函数，默认 this 指向外层对象</span></span><br><span class="line"><span class="keyword">var</span> testArrow=&#123;</span><br><span class="line">    myName:<span class="string">'arrow func'</span>,</span><br><span class="line">    showNameByDefault:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// setTimeout 回调函数是匿名函数，默认 this 指向 window</span></span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="comment">// 输出 undefined</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.myName);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    showNameByArrow:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// setTimeout 回调函数是箭头函数，默认 this 指向外层对象，即 testArrow</span></span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="comment">// 输出 arrow func</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.myName);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">testArrow.showNameByDefault();</span><br><span class="line">testArrow.showNameByArrow();</span><br></pre></td></tr></table></figure>
 
-<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a><a href="https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/this-point.html" target="_blank" rel="noopener">源代码</a></h3>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a><a href="https://github.com/luckybirdme/blog/blob/master/example/js/this-point.html" target="_blank" rel="noopener">源代码</a></h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/09/27/this-point/" data-id="ck2nf5reo000xb028pz7fv476" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/09/27/this-point/" data-id="ck2qydfb3000yhc28gqow5r6n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -192,6 +192,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/07/brower-render/">浏览器输入地址后发生了什么</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/06/http/">http 协议简介</a>
           </li>
         
@@ -201,14 +209,6 @@
         
           <li>
             <a href="/2019/10/26/debounce-and-throttle/">JS 节流和防抖函数</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/hump-underline/">JS 驼峰和下横线转换</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
           </li>
         
       </ul>
@@ -240,7 +240,7 @@
 </nav>
     
 
-<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">

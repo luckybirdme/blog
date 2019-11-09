@@ -54,7 +54,7 @@ function throttle(fn,interval=300) {
 
 
 ##### 3. 测试效果，按照固定频率地执行多次
-![](/example/img/throttle.png)
+![](http://qiniucdn.luckybird.me/blog/img/2019/throttle.png)
 
 
 
@@ -95,7 +95,7 @@ function debounce(fn, interval=300) {
 
 
 ##### 3. 测试效果，只会执行最后一次
-![](/example/img/debounce.png)
+![](http://qiniucdn.luckybird.me/blog/img/2019/debounce.png)
 
 
 
@@ -106,4 +106,4 @@ function debounce(fn, interval=300) {
 
 
 
-### [源代码](https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/debounce-and-throttle.html)
+### [源代码](https://github.com/luckybirdme/blog/blob/master/example/js/debounce-and-throttle.html)

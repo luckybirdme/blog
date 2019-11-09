@@ -15,16 +15,16 @@
 <meta property="og:site_name" content="LuckyBird">
 <meta property="og:description" content="常用的基本排序算法包括冒泡排序，选择排序，插入排序，归并排序，快速排序。算法底层原理一致，不同语言实现方式不一样，下来用 JavaScript 实现以上排序算分。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/bubbleSort.gif">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/selectSort.gif">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/insertSort.gif">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/mergeSort.gif">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/quickSort.gif">
-<meta property="og:updated_time" content="2019-10-21T23:15:04.301Z">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/bubbleSort.gif">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/selectSort.gif">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/insertSort.gif">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/mergeSort.gif">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/quickSort.gif">
+<meta property="og:updated_time" content="2019-11-09T02:19:41.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS 实现基本排序算法">
 <meta name="twitter:description" content="常用的基本排序算法包括冒泡排序，选择排序，插入排序，归并排序，快速排序。算法底层原理一致，不同语言实现方式不一样，下来用 JavaScript 实现以上排序算分。">
-<meta name="twitter:image" content="https://luckybirdme.github.io/example/img/bubbleSort.gif">
+<meta name="twitter:image" content="http://qiniucdn.luckybird.me/blog/img/2019/bubbleSort.gif">
   
     <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
   
@@ -161,7 +161,7 @@
 <li>再次重复步骤 1，直到倒数第三个数和倒数第二个数比较为止，经过第二轮的遍历比较，次大值就会出现倒数第二个位置。</li>
 <li>按照以上步骤，对于长度为 n 的数组，经过 n-1 轮遍历比较，就可以完成排序</li>
 </ol>
-<h5 id="动图："><a href="#动图：" class="headerlink" title="动图："></a>动图：</h5><p><img src="/example/img/bubbleSort.gif" alt></p>
+<h5 id="动图："><a href="#动图：" class="headerlink" title="动图："></a>动图：</h5><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/bubbleSort.gif" alt></p>
 <h5 id="实现："><a href="#实现：" class="headerlink" title="实现："></a>实现：</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 冒泡</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> len = arr.length;</span><br><span class="line">	<span class="keyword">var</span> tmp = <span class="literal">null</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;len<span class="number">-1</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;len<span class="number">-1</span>-i;j++)&#123;</span><br><span class="line">			<span class="comment">// 两个相邻的数组值进行比较</span></span><br><span class="line">			<span class="comment">// 把较大的数值一直往后冒泡</span></span><br><span class="line">			<span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">				tmp=arr[j+<span class="number">1</span>];</span><br><span class="line">				arr[j+<span class="number">1</span>]=arr[j];</span><br><span class="line">				arr[j]=tmp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="二，选择排序"><a href="#二，选择排序" class="headerlink" title="二，选择排序"></a>二，选择排序</h3><h5 id="原理：-1"><a href="#原理：-1" class="headerlink" title="原理："></a>原理：</h5><ol>
@@ -170,7 +170,7 @@
 <li>以此类推，从第二个数值开始，逐一往后比较，找到最小值跟第二个数值对调，次小值就会出现在第二个位置。</li>
 <li>按照以上步骤，对于长度为 n 的数组，经过 n-1 轮遍历比较，就可以完成排序</li>
 </ol>
-<h5 id="动图：-1"><a href="#动图：-1" class="headerlink" title="动图："></a>动图：</h5><p><img src="/example/img/selectSort.gif" alt></p>
+<h5 id="动图：-1"><a href="#动图：-1" class="headerlink" title="动图："></a>动图：</h5><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/selectSort.gif" alt></p>
 <h5 id="实现：-1"><a href="#实现：-1" class="headerlink" title="实现："></a>实现：</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 选择</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectSort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> len = arr.length;</span><br><span class="line">	<span class="keyword">var</span> tmp = <span class="literal">null</span>;</span><br><span class="line">	<span class="keyword">var</span> min = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;len<span class="number">-1</span>;i++)&#123;</span><br><span class="line">		min=i;</span><br><span class="line">		<span class="comment">// 寻找最小的数值的小标</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> j=i+<span class="number">1</span>;j&lt;len;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[min]&gt;arr[j])&#123;</span><br><span class="line">				min=j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 将最小数对调到前面</span></span><br><span class="line">		<span class="comment">// 保存最小的数值</span></span><br><span class="line">		tmp = arr[min];</span><br><span class="line">		<span class="comment">// 将最小数值的位置替换成前面的数</span></span><br><span class="line">		arr[min] = arr[i];</span><br><span class="line">		<span class="comment">// 将最小的数值赋给前面的位置。</span></span><br><span class="line">		arr[i] = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="三，插入排序"><a href="#三，插入排序" class="headerlink" title="三，插入排序"></a>三，插入排序</h3><h5 id="原理：-2"><a href="#原理：-2" class="headerlink" title="原理："></a>原理：</h5><ol>
@@ -179,14 +179,14 @@
 <li>以此类推，从第三个数值开始，跟左边所有数值逐一比较，在小于第三个数值的位置后面插入第三个数值。</li>
 <li>按照以上步骤，对于长度为 n 的数组，经过 n-1 轮遍历比较，就可以完成排序。</li>
 </ol>
-<h5 id="动图：-2"><a href="#动图：-2" class="headerlink" title="动图："></a>动图：</h5><p><img src="/example/img/insertSort.gif" alt></p>
+<h5 id="动图：-2"><a href="#动图：-2" class="headerlink" title="动图："></a>动图：</h5><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/insertSort.gif" alt></p>
 <h5 id="实现：-2"><a href="#实现：-2" class="headerlink" title="实现："></a>实现：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> len = arr.length;</span><br><span class="line">	<span class="keyword">var</span> tmp = <span class="literal">null</span>;</span><br><span class="line">	<span class="keyword">var</span> insert = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">		tmp=arr[i];</span><br><span class="line">		insert=i<span class="number">-1</span>;</span><br><span class="line">		<span class="comment">// 寻找合适的插入位置</span></span><br><span class="line">		<span class="comment">// 较大的数值依次完后移动</span></span><br><span class="line">		<span class="keyword">while</span>(insert&gt;=<span class="number">0</span> &amp;&amp; arr[insert]&gt;tmp)&#123;</span><br><span class="line">			arr[insert+<span class="number">1</span>]=arr[insert];</span><br><span class="line">			insert--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 插入到具体位置</span></span><br><span class="line">		arr[insert+<span class="number">1</span>]=tmp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="四，归并排序"><a href="#四，归并排序" class="headerlink" title="四，归并排序"></a>四，归并排序</h3><h5 id="原理：-3"><a href="#原理：-3" class="headerlink" title="原理："></a>原理：</h5><ol>
 <li>归并排序首先是按照二分法递归分割数组，直到数组变成单个元素，两个单元素的数组比较排序，之后再合并。</li>
 <li>每次合并后的数组元素都已排好顺序，递归以上操作，最后合并成一个排好顺序的数组。</li>
 </ol>
-<h5 id="动图：-3"><a href="#动图：-3" class="headerlink" title="动图："></a>动图：</h5><p><img src="/example/img/mergeSort.gif" alt></p>
+<h5 id="动图：-3"><a href="#动图：-3" class="headerlink" title="动图："></a>动图：</h5><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/mergeSort.gif" alt></p>
 <h5 id="实现：-3"><a href="#实现：-3" class="headerlink" title="实现："></a>实现：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 归并</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeSort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> merge=<span class="function"><span class="keyword">function</span>(<span class="params">left,right</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> result = [];</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 对比两个数组相同下标的数组大小</span></span><br><span class="line">		<span class="comment">// 按照大小排序，生成新的数组</span></span><br><span class="line">		<span class="keyword">while</span>(left.length &gt; <span class="number">0</span> &amp;&amp; right.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(left[<span class="number">0</span>]&lt;=right[<span class="number">0</span>])&#123;</span><br><span class="line">				result.push(left.shift());</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				result.push(right.shift());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 如果</span></span><br><span class="line">		<span class="keyword">while</span>(left.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">			result.push(left.shift());</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span>(right.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">			result.push(right.shift());</span><br><span class="line">		&#125;;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> slice=<span class="function"><span class="keyword">function</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> len = arr.length;</span><br><span class="line">		<span class="keyword">if</span>(len&lt;<span class="number">2</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> arr;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 分割数组</span></span><br><span class="line">		<span class="keyword">var</span> middle = <span class="built_in">Math</span>.floor(len/<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">var</span> left = arr.slice(<span class="number">0</span>,middle);</span><br><span class="line">		<span class="keyword">var</span> right = arr.slice(middle);</span><br><span class="line">		<span class="comment">// 递归分割</span></span><br><span class="line">		<span class="comment">// 递归合并</span></span><br><span class="line">		<span class="keyword">return</span> merge(slice(left),slice(right));</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> slice(arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="五，快速排序"><a href="#五，快速排序" class="headerlink" title="五，快速排序"></a>五，快速排序</h3><h5 id="原理：-4"><a href="#原理：-4" class="headerlink" title="原理："></a>原理：</h5><ol>
@@ -197,7 +197,7 @@
 <li>利用递归分割数组，再把左右两个数组和基准参数合并成一个数组，就是一个排好顺序的数组。</li>
 <li>因为按照基准参数分割了数组，数组再次分割比较的时候，更小的数值只会跟更小的比较，不需要跟更大数值比较，所以比较次数少于冒泡排序，这也是快速排序优势。</li>
 </ol>
-<h5 id="动图：-4"><a href="#动图：-4" class="headerlink" title="动图："></a>动图：</h5><p><img src="/example/img/quickSort.gif" alt></p>
+<h5 id="动图：-4"><a href="#动图：-4" class="headerlink" title="动图："></a>动图：</h5><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/quickSort.gif" alt></p>
 <h5 id="实现：-4"><a href="#实现：-4" class="headerlink" title="实现："></a>实现：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 快速</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> quick = <span class="function"><span class="keyword">function</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> len = arr.length;</span><br><span class="line">		<span class="keyword">if</span>(len&lt;<span class="number">2</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> arr;</span><br><span class="line">		&#125;;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 以第一个数值为基准值</span></span><br><span class="line">		<span class="keyword">var</span> base = arr.shift();</span><br><span class="line">		<span class="comment">// 减少长度 1，避免溢出</span></span><br><span class="line">		len = len - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">var</span> left=[];</span><br><span class="line">		<span class="keyword">var</span> right=[];</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 将数组分割</span></span><br><span class="line">		<span class="comment">// 大于基准值的放在右边数组</span></span><br><span class="line">		<span class="comment">// 小于基准值的放在左边数组</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[i]&gt;base)&#123;</span><br><span class="line">				right.push(arr[i])</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				left.push(arr[i])</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 递归分割</span></span><br><span class="line">		<span class="comment">// 递归合并</span></span><br><span class="line">		<span class="keyword">return</span> quick(left).concat(base,quick(right));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> quick(arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="六，数组自带排序方法"><a href="#六，数组自带排序方法" class="headerlink" title="六，数组自带排序方法"></a>六，数组自带排序方法</h3><h5 id="原理：-5"><a href="#原理：-5" class="headerlink" title="原理："></a>原理：</h5><ol>
@@ -206,11 +206,11 @@
 </ol>
 <h5 id="实现：-5"><a href="#实现：-5" class="headerlink" title="实现："></a>实现：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组自带</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arraySort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">	arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a - b;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a><a href="https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/my-sort-func.html" target="_blank" rel="noopener">源代码</a></h3>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a><a href="https://github.com/luckybirdme/blog/blob/master/example/js/my-sort-func.html" target="_blank" rel="noopener">源代码</a></h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/10/19/my-algorism-func/" data-id="ck2nf5rea000rb028e0qtqw3l" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/10/19/my-algorism-func/" data-id="ck2qydfcb001dhc28c1zx2cfk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -284,6 +284,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/07/brower-render/">浏览器输入地址后发生了什么</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/06/http/">http 协议简介</a>
           </li>
         
@@ -293,14 +301,6 @@
         
           <li>
             <a href="/2019/10/26/debounce-and-throttle/">JS 节流和防抖函数</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/hump-underline/">JS 驼峰和下横线转换</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
           </li>
         
       </ul>
@@ -332,7 +332,7 @@
 </nav>
     
 
-<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">

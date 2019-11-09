@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="LuckyBird">
 <meta property="og:description" content="JavaScript 是单线程语言，为了加快执行效率，会采用异步回调的方式执行。但是多层异步回调太深，不方便代码编写，也不利用阅读，也就是常说的回调地狱。Promise 提供一种链式调用，避免回调地狱的问题。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/promise.png">
-<meta property="og:updated_time" content="2019-10-18T00:41:36.866Z">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/promise.png">
+<meta property="og:updated_time" content="2019-11-09T02:19:40.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS Promise 使用">
 <meta name="twitter:description" content="JavaScript 是单线程语言，为了加快执行效率，会采用异步回调的方式执行。但是多层异步回调太深，不方便代码编写，也不利用阅读，也就是常说的回调地狱。Promise 提供一种链式调用，避免回调地狱的问题。">
-<meta name="twitter:image" content="https://luckybirdme.github.io/example/img/promise.png">
+<meta name="twitter:image" content="http://qiniucdn.luckybird.me/blog/img/2019/promise.png">
   
     <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
   
@@ -108,7 +108,7 @@
 <li>Promise 对象状态的改变可能存在两种情况，Pending 到 Resolved，或者 Pending 到 Rejected。</li>
 <li>Promise 对象的状态一旦确定，那么就无法改变，要么是Resolved，要么是 Rejected。</li>
 </ul>
-<p>Promise 链式调用图。<br><img src="/example/img/promise.png" alt></p>
+<p>Promise 链式调用图。<br><img src="http://qiniucdn.luckybird.me/blog/img/2019/promise.png" alt></p>
 <h5 id="2-构造函数-Promise"><a href="#2-构造函数-Promise" class="headerlink" title="2. 构造函数 Promise"></a>2. 构造函数 Promise</h5><p>Promise 简单异步调用</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isSuccess=<span class="literal">true</span>;</span><br><span class="line"><span class="comment">// 构造函数，创建 Promise 实例</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span><br><span class="line">	<span class="comment">// 异步调用</span></span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isSuccess)&#123;</span><br><span class="line">			<span class="comment">// 调用成功，从 Pending 变成 Resolved</span></span><br><span class="line">			resolve(<span class="string">'success'</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="comment">// 调用失败，从 Pending 变成 Rejected</span></span><br><span class="line">			reject(<span class="string">'failed'</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,<span class="number">10</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Resovled</span></span><br><span class="line">p.then(<span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(msg)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// Rejected</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
@@ -143,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/10/13/my-promise-func/" data-id="ck2nf5rfs0013b028rvnph47m" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/10/13/my-promise-func/" data-id="ck2qydfby001ahc28zsj7pm1r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -217,6 +217,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/07/brower-render/">浏览器输入地址后发生了什么</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/06/http/">http 协议简介</a>
           </li>
         
@@ -226,14 +234,6 @@
         
           <li>
             <a href="/2019/10/26/debounce-and-throttle/">JS 节流和防抖函数</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/hump-underline/">JS 驼峰和下横线转换</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
           </li>
         
       </ul>
@@ -265,7 +265,7 @@
 </nav>
     
 
-<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">

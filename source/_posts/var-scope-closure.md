@@ -63,17 +63,17 @@ console.log('window not access tempColor',typeof tempColor);
 ```
 
 
-##### 以上称为作用域链
+##### 以上的访问关系链也成为作用域链，如下图所示
 
 
-![](/example/img/scope.png)
+![](http://qiniucdn.luckybird.me/blog/img/2019/scope.png)
 
 
 
 ##### 块级作用域示例代码
 
 ```js
-// var 变量定义没有块级作用域
+// var 变量定义没有块级作用域，如果不在函数对象内，默认就是全局变量
 for(var i=0;i<3;i++){
     console.log('inner',i);
 }
@@ -82,7 +82,6 @@ console.log('outer',i);
 
 
 // let 和 const 有块级作用域
-// var 变量定义没有块级作用域
 for(let j=0;j<3;j++){
     console.log('inner',j);
 }
@@ -155,7 +154,7 @@ d['a']='a';
 // {a: "a"}
 ```
 
-### [测试变量作用域的源代码](https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/var-scope.html)
+### [测试变量作用域的源代码](https://github.com/luckybirdme/blog/blob/master/example/js/var-scope.html)
 
 
 ## 二. 闭包
@@ -285,20 +284,23 @@ for (var j  = 0; j < twoLi.length; j++) {
 ##### 解决方法
 闭包不再使用时，要及时释放，将获得闭包的变量赋值为 null，JavaScript 的垃圾回收机制会根据对象是否被引用来释放内存。
 ```js
-function fn1() {
-    var arr = new Array[100000]; //这个数组占用了很大的内存空间
+function func() {
+    //数组占用了很大的内存空间
+    var arr = new Array[100000]; 
+    // 闭包保存数组长度到内存里
     return function () {
-      console.log(arr.length)
+        console.log(arr.length);
+        return arr.length;
     }
 }
-var f = fn1();
+var f = func();
 f()
 //让闭包函数成为垃圾对象，回收闭包
 f = null 
 ```
 
 
-### [测试闭包的源代码](https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/scope-closure.html)
+### [测试闭包的源代码](https://github.com/luckybirdme/blog/blob/master/example/js/scope-closure.html)
 
 
 

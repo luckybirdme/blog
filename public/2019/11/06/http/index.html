@@ -15,18 +15,18 @@
 <meta property="og:site_name" content="LuckyBird">
 <meta property="og:description" content="HTTP (超文本传输协议) 是用来在 Web 上传输文件的基础协议 ，基于TCP/IP通信协议来传递数据。HTTPS 是 HTTP 协议的安全版本，HTTPS 在 HTTP 上加入套接字 SSL（TLS 为 SSL 最新版）层，对网页进行加密传输。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/HTTP-layers.png">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/http-protocol.png">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/http-request.jpg">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/http-response.png">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/tcp.jpg">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/tcp-one.png">
-<meta property="og:image" content="https://luckybirdme.github.io/example/img/tcp-two.png">
-<meta property="og:updated_time" content="2019-11-06T15:05:26.813Z">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/HTTP-layers.png">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/http-protocol.png">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/http-request.jpg">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/http-response.png">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/http-tcp.jpg">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/tcp-one.png">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/tcp-two.png">
+<meta property="og:updated_time" content="2019-11-09T02:19:42.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http 协议简介">
 <meta name="twitter:description" content="HTTP (超文本传输协议) 是用来在 Web 上传输文件的基础协议 ，基于TCP/IP通信协议来传递数据。HTTPS 是 HTTP 协议的安全版本，HTTPS 在 HTTP 上加入套接字 SSL（TLS 为 SSL 最新版）层，对网页进行加密传输。">
-<meta name="twitter:image" content="https://luckybirdme.github.io/example/img/HTTP-layers.png">
+<meta name="twitter:image" content="http://qiniucdn.luckybird.me/blog/img/2019/HTTP-layers.png">
   
     <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
   
@@ -104,271 +104,331 @@
 </blockquote>
 <a id="more"></a>
 
-<h2 id="一，简介"><a href="#一，简介" class="headerlink" title="一，简介"></a>一，简介</h2><h5 id="HTTP-是一种能够获取如-HTML-这样的网络资源的-protocol-通讯协议-。它是在-Web-上进行数据交换的基础，是一种-client-server-协议，也就是说，请求通常是由浏览器-client-发起的，资源管理服务器-server-接收请求并进行处理，然后返回响应的内容给-client。"><a href="#HTTP-是一种能够获取如-HTML-这样的网络资源的-protocol-通讯协议-。它是在-Web-上进行数据交换的基础，是一种-client-server-协议，也就是说，请求通常是由浏览器-client-发起的，资源管理服务器-server-接收请求并进行处理，然后返回响应的内容给-client。" class="headerlink" title="HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol (通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是由浏览器 client 发起的，资源管理服务器 server 接收请求并进行处理，然后返回响应的内容给 client。"></a>HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol (通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是由浏览器 client 发起的，资源管理服务器 server 接收请求并进行处理，然后返回响应的内容给 client。</h5><p><img src="/example/img/HTTP-layers.png" alt></p>
-<h5 id="HTTP-报文基本格式"><a href="#HTTP-报文基本格式" class="headerlink" title="HTTP 报文基本格式"></a>HTTP 报文基本格式</h5><p><img src="/example/img/http-protocol.png" alt></p>
-<h3 id="1-请求报文"><a href="#1-请求报文" class="headerlink" title="1. 请求报文"></a>1. 请求报文</h3><p><img src="/example/img/http-request.jpg" alt></p>
-<h3 id="2-返回报文"><a href="#2-返回报文" class="headerlink" title="2. 返回报文"></a>2. 返回报文</h3><p><img src="/example/img/http-response.png" alt></p>
+<h2 id="一，简介"><a href="#一，简介" class="headerlink" title="一，简介"></a>一，简介</h2><h5 id="HTTP-是一种能够获取如-HTML-这样的网络资源的-protocol-通讯协议-。它是在-Web-上进行数据交换的基础，是一种-client-server-协议，也就是说，请求通常是由浏览器-client-发起的，资源管理服务器-server-接收请求并进行处理，然后返回响应的内容给-client。"><a href="#HTTP-是一种能够获取如-HTML-这样的网络资源的-protocol-通讯协议-。它是在-Web-上进行数据交换的基础，是一种-client-server-协议，也就是说，请求通常是由浏览器-client-发起的，资源管理服务器-server-接收请求并进行处理，然后返回响应的内容给-client。" class="headerlink" title="HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol (通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是由浏览器 client 发起的，资源管理服务器 server 接收请求并进行处理，然后返回响应的内容给 client。"></a>HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol (通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是由浏览器 client 发起的，资源管理服务器 server 接收请求并进行处理，然后返回响应的内容给 client。</h5><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/HTTP-layers.png" alt></p>
+<h5 id="HTTP-报文基本格式"><a href="#HTTP-报文基本格式" class="headerlink" title="HTTP 报文基本格式"></a>HTTP 报文基本格式</h5><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/http-protocol.png" alt></p>
+<h3 id="1-请求报文"><a href="#1-请求报文" class="headerlink" title="1. 请求报文"></a>1. 请求报文</h3><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/http-request.jpg" alt></p>
+<h3 id="2-返回报文"><a href="#2-返回报文" class="headerlink" title="2. 返回报文"></a>2. 返回报文</h3><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/http-response.png" alt></p>
 <h2 id="二，特点"><a href="#二，特点" class="headerlink" title="二，特点"></a>二，特点</h2><h3 id="1-简单的"><a href="#1-简单的" class="headerlink" title="1. 简单的"></a>1. 简单的</h3><p>设计得简单易读，方便使用。</p>
 <h3 id="2-可扩展的"><a href="#2-可扩展的" class="headerlink" title="2.可扩展的"></a>2.可扩展的</h3><p>HTTP headers 让协议扩展变得非常容易。只要服务端和客户端就新 headers 达成语义一致，新功能就可以被轻松加入进来。</p>
 <h3 id="3-无状态但有会话"><a href="#3-无状态但有会话" class="headerlink" title="3.无状态但有会话"></a>3.无状态但有会话</h3><p>HTTP 是无状态的，两个请求之间是没有关联。而使用 HTTP Cookies 创建一个会话让每次请求都能共享相同的上下文信息，达成共享状态。</p>
 <h3 id="4-可靠高效的连接"><a href="#4-可靠高效的连接" class="headerlink" title="4.可靠高效的连接"></a>4.可靠高效的连接</h3><p>HTTP 底层采用可靠的 TCP 进行传输。HTTP/1.1 默认开启 Connection:keep-alive，一个 TCP 链接共享多个 HTTP 请求，避免重复握手。 Chrome 默认可并发建立 6 个 TCP 链接，处理高并发请求。</p>
 <ul>
-<li>TCP 三次握手，传输内容，断开链接<br><img src="/example/img/tcp.jpg" alt></li>
+<li>TCP 三次握手，传输内容，断开链接<br><img src="http://qiniucdn.luckybird.me/blog/img/2019/http-tcp.jpg" alt></li>
 </ul>
 <ul>
-<li>第一次 HTTP 请求，初始化链接时，进行 TCP 三次握手<br><img src="/example/img/tcp-one.png" alt></li>
+<li>第一次 HTTP 请求，初始化链接时，进行 TCP 三次握手<br><img src="http://qiniucdn.luckybird.me/blog/img/2019/tcp-one.png" alt></li>
 </ul>
 <ul>
-<li>第二次 HTTP 请求，共享刚才的 TCP 链接，节省了初始化链接的时间<br><img src="/example/img/tcp-two.png" alt></li>
+<li>第二次 HTTP 请求，共享刚才的 TCP 链接，节省了初始化链接的时间<br><img src="http://qiniucdn.luckybird.me/blog/img/2019/tcp-two.png" alt></li>
 </ul>
 <h2 id="三，头部信息"><a href="#三，头部信息" class="headerlink" title="三，头部信息"></a>三，头部信息</h2><h3 id="头部信息格式-name-value1-value2-value3"><a href="#头部信息格式-name-value1-value2-value3" class="headerlink" title="头部信息格式 name:value1,value2,value3"></a>头部信息格式 name:value1,value2,value3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br></pre></td></tr></table></figure>
 
 <h3 id="1-请求头部-Request-Headers"><a href="#1-请求头部-Request-Headers" class="headerlink" title="1. 请求头部 Request Headers"></a>1. 请求头部 Request Headers</h3><table>
 <thead>
 <tr>
-<th>名称</th>
+<th>Header</th>
 <th>解释</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>Accept</td>
-<td>指定客户端能够接收的内容类型。</td>
+<td>指定客户端能够接收的内容类型</td>
+<td>Accept: text/plain, text/html,application/json</td>
 </tr>
 <tr>
 <td>Accept-Charset</td>
 <td>浏览器可以接受的字符编码集。</td>
+<td>Accept-Charset: iso-8859-5</td>
 </tr>
 <tr>
 <td>Accept-Encoding</td>
 <td>指定浏览器可以支持的web服务器返回内容压缩编码类型。</td>
+<td>Accept-Encoding: compress, gzip</td>
 </tr>
 <tr>
 <td>Accept-Language</td>
-<td>浏览器可接受的语言。</td>
+<td>浏览器可接受的语言</td>
+<td>Accept-Language: en,zh</td>
 </tr>
 <tr>
 <td>Accept-Ranges</td>
-<td>可以请求网页实体的一个或者多个子范围字段。</td>
+<td>可以请求网页实体的一个或者多个子范围字段</td>
+<td>Accept-Ranges: bytes</td>
 </tr>
 <tr>
-<td>AuthorizationHTTP</td>
-<td>授权的授权证书。</td>
+<td>Authorization</td>
+<td>HTTP授权的授权证书</td>
+<td>Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</td>
 </tr>
 <tr>
 <td>Cache-Control</td>
-<td>指定请求和响应遵循的缓存机制。</td>
+<td>指定请求和响应遵循的缓存机制</td>
+<td>Cache-Control: no-cache</td>
 </tr>
 <tr>
 <td>Connection</td>
 <td>表示是否需要持久连接。（HTTP 1.1默认进行持久连接）</td>
+<td>Connection: close</td>
 </tr>
 <tr>
-<td>CookieHTTP</td>
-<td>请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。</td>
+<td>Cookie</td>
+<td>HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。</td>
+<td>Cookie: $Version=1; Skin=new;</td>
 </tr>
 <tr>
 <td>Content-Length</td>
-<td>请求的内容长度。</td>
+<td>请求的内容长度</td>
+<td>Content-Length: 348</td>
 </tr>
 <tr>
 <td>Content-Type</td>
-<td>请求的与实体对应的MIME信息。</td>
+<td>请求的与实体对应的MIME信息</td>
+<td>Content-Type: application/x-www-form-urlencoded</td>
 </tr>
 <tr>
 <td>Date</td>
-<td>请求发送的日期和时间。</td>
+<td>请求发送的日期和时间</td>
+<td>Date: Tue, 15 Nov 2010 08:12:31 GMT</td>
 </tr>
 <tr>
 <td>Expect</td>
-<td>请求的特定的服务器行为。</td>
+<td>请求的特定的服务器行为</td>
+<td>Expect: 100-continue</td>
 </tr>
 <tr>
 <td>From</td>
-<td>发出请求的用户的Email。</td>
+<td>发出请求的用户的Email</td>
+<td>From: <a href="mailto:user@email.com" target="_blank" rel="noopener">user@email.com</a></td>
 </tr>
 <tr>
 <td>Host</td>
-<td>指定请求的服务器的域名和端口号。</td>
+<td>指定请求的服务器的域名和端口号</td>
+<td>Host: <a href="http://www.zcmhi.com" target="_blank" rel="noopener">www.zcmhi.com</a></td>
 </tr>
 <tr>
 <td>If-Match</td>
-<td>只有请求内容与实体相匹配才有效。</td>
+<td>只有请求内容与实体相匹配才有效</td>
+<td>If-Match: “737060cd8c284d8af7ad3082f209582d”</td>
 </tr>
 <tr>
 <td>If-Modified-Since</td>
-<td>如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码。</td>
+<td>如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码</td>
+<td>If-Modified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
 </tr>
 <tr>
 <td>If-None-Match</td>
-<td>如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变。</td>
+<td>如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变</td>
+<td>If-None-Match: “737060cd8c284d8af7ad3082f209582d”</td>
 </tr>
 <tr>
 <td>If-Range</td>
-<td>如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。</td>
+<td>如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag</td>
+<td>If-Range: “737060cd8c284d8af7ad3082f209582d”</td>
 </tr>
 <tr>
 <td>If-Unmodified-Since</td>
-<td>只在实体在指定时间之后未被修改才请求成功。</td>
+<td>只在实体在指定时间之后未被修改才请求成功</td>
+<td>If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
 </tr>
 <tr>
 <td>Max-Forwards</td>
-<td>限制信息通过代理和网关传送的时间。</td>
+<td>限制信息通过代理和网关传送的时间</td>
+<td>Max-Forwards: 10</td>
 </tr>
 <tr>
 <td>Pragma</td>
-<td>用来包含实现特定的指令。</td>
+<td>用来包含实现特定的指令</td>
+<td>Pragma: no-cache</td>
 </tr>
 <tr>
 <td>Proxy-Authorization</td>
-<td>连接到代理的授权证书。</td>
+<td>连接到代理的授权证书</td>
+<td>Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</td>
 </tr>
 <tr>
 <td>Range</td>
-<td>只请求实体的一部分，指定范围。</td>
+<td>只请求实体的一部分，指定范围</td>
+<td>Range: bytes=500-999</td>
 </tr>
 <tr>
 <td>Referer</td>
-<td>先前网页的地址，当前请求网页紧随其后,即来路。</td>
+<td>先前网页的地址，当前请求网页紧随其后,即来路</td>
+<td>Referer: <a href="http://www.zcmhi.com/archives" target="_blank" rel="noopener">http://www.zcmhi.com/archives</a>…</td>
 </tr>
 <tr>
 <td>TE</td>
-<td>客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息。</td>
+<td>客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息</td>
+<td>TE: trailers,deflate;q=0.5</td>
 </tr>
 <tr>
 <td>Upgrade</td>
-<td>向服务器指定某种传输协议以便服务器进行转换（如果支持。</td>
+<td>向服务器指定某种传输协议以便服务器进行转换（如果支持）</td>
+<td>Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11</td>
 </tr>
 <tr>
 <td>User-Agent</td>
-<td>内容包含发出请求的用户信息。</td>
+<td>User-Agent的内容包含发出请求的用户信息</td>
+<td>User-Agent: Mozilla/5.0 (Linux; X11)</td>
 </tr>
 <tr>
 <td>Via</td>
-<td>通知中间网关或代理服务器地址，通信协议。</td>
+<td>通知中间网关或代理服务器地址，通信协议</td>
+<td>Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)</td>
 </tr>
 <tr>
 <td>Warning</td>
 <td>关于消息实体的警告信息</td>
+<td>Warn: 199 Miscellaneous warning</td>
 </tr>
 </tbody></table>
 <h3 id="2-响应头部-Response-Headers"><a href="#2-响应头部-Response-Headers" class="headerlink" title="2. 响应头部 Response Headers"></a>2. 响应头部 Response Headers</h3><table>
 <thead>
 <tr>
-<th>名称</th>
+<th>Header</th>
 <th>解释</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>Accept-Ranges</td>
-<td>表明服务器是否支持指定范围请求及哪种类型的分段请求。</td>
+<td>表明服务器是否支持指定范围请求及哪种类型的分段请求</td>
+<td>Accept-Ranges: bytes</td>
 </tr>
 <tr>
 <td>Age</td>
-<td>从原始服务器到代理缓存形成的估算时间（以秒计，非负）。</td>
+<td>从原始服务器到代理缓存形成的估算时间（以秒计，非负）</td>
+<td>Age: 12</td>
 </tr>
 <tr>
 <td>Allow</td>
-<td>对某网络资源的有效的请求行为，不允许则返回405。</td>
+<td>对某网络资源的有效的请求行为，不允许则返回405</td>
+<td>Allow: GET, HEAD</td>
 </tr>
 <tr>
 <td>Cache-Control</td>
-<td>告诉所有的缓存机制是否可以缓存及哪种类型。</td>
+<td>告诉所有的缓存机制是否可以缓存及哪种类型</td>
+<td>Cache-Control: no-cache</td>
 </tr>
 <tr>
-<td>Content-Encodingweb</td>
-<td>服务器支持的返回内容压缩编码类型。。</td>
+<td>Content-Encoding</td>
+<td>web服务器支持的返回内容压缩编码类型。</td>
+<td>Content-Encoding: gzip</td>
 </tr>
 <tr>
 <td>Content-Language</td>
-<td>响应体的语言。</td>
+<td>响应体的语言</td>
+<td>Content-Language: en,zh</td>
 </tr>
 <tr>
 <td>Content-Length</td>
-<td>响应体的长度。</td>
+<td>响应体的长度</td>
+<td>Content-Length: 348</td>
 </tr>
 <tr>
 <td>Content-Location</td>
-<td>请求资源可替代的备用的另一地址。</td>
+<td>请求资源可替代的备用的另一地址</td>
+<td>Content-Location: /index.htm</td>
 </tr>
 <tr>
 <td>Content-MD5</td>
-<td>返回资源的MD5校验值。</td>
+<td>返回资源的MD5校验值</td>
+<td>Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==</td>
 </tr>
 <tr>
 <td>Content-Range</td>
-<td>在整个返回体中本部分的字节位置。</td>
+<td>在整个返回体中本部分的字节位置</td>
+<td>Content-Range: bytes 21010-47021/47022</td>
 </tr>
 <tr>
 <td>Content-Type</td>
-<td>返回内容的MIME类型。</td>
+<td>返回内容的MIME类型</td>
+<td>Content-Type: text/html; charset=utf-8</td>
 </tr>
 <tr>
 <td>Date</td>
-<td>原始服务器消息发出的时间。</td>
+<td>原始服务器消息发出的时间</td>
+<td>Date: Tue, 15 Nov 2010 08:12:31 GMT</td>
 </tr>
 <tr>
 <td>ETag</td>
-<td>请求变量的实体标签的当前值。</td>
+<td>请求变量的实体标签的当前值</td>
+<td>ETag: “737060cd8c284d8af7ad3082f209582d”</td>
 </tr>
 <tr>
 <td>Expires</td>
-<td>响应过期的日期和时间。</td>
+<td>响应过期的日期和时间</td>
+<td>Expires: Thu, 01 Dec 2010 16:00:00 GMT</td>
 </tr>
 <tr>
 <td>Last-Modified</td>
-<td>请求资源的最后修改时间。</td>
+<td>请求资源的最后修改时间</td>
+<td>Last-Modified: Tue, 15 Nov 2010 12:45:26 GMT</td>
 </tr>
 <tr>
 <td>Location</td>
-<td>用来重定向接收方到非请求URL的位置来完成请求或标识新的资源。</td>
+<td>用来重定向接收方到非请求URL的位置来完成请求或标识新的资源</td>
+<td>Location: <a href="http://www.zcmhi.com/archives" target="_blank" rel="noopener">http://www.zcmhi.com/archives</a>…</td>
 </tr>
 <tr>
 <td>Pragma</td>
-<td>包括实现特定的指令，它可应用到响应链上的任何接收方。</td>
+<td>包括实现特定的指令，它可应用到响应链上的任何接收方</td>
+<td>Pragma: no-cache</td>
 </tr>
 <tr>
 <td>Proxy-Authenticate</td>
-<td>它指出认证方案和可应用到代理的该URL上的参数。</td>
+<td>它指出认证方案和可应用到代理的该URL上的参数</td>
+<td>Proxy-Authenticate: Basic</td>
 </tr>
 <tr>
 <td>refresh</td>
 <td>应用于重定向或一个新的资源被创造，在5秒之后重定向（由网景提出，被大部分浏览器支持）</td>
+<td>Refresh: 5; url=<a href="http://www.zcmhi.com/archives" target="_blank" rel="noopener">http://www.zcmhi.com/archives</a>…</td>
 </tr>
 <tr>
 <td>Retry-After</td>
-<td>如果实体暂时不可取，通知客户端在指定时间之后再次尝试。</td>
+<td>如果实体暂时不可取，通知客户端在指定时间之后再次尝试</td>
+<td>Retry-After: 120</td>
 </tr>
 <tr>
-<td>Serverweb</td>
-<td>服务器软件名称。</td>
+<td>Server</td>
+<td>web服务器软件名称</td>
+<td>Server: Apache/1.3.27 (Unix) (Red-Hat/Linux)</td>
 </tr>
 <tr>
 <td>Set-Cookie</td>
-<td>设置Http Cookie。</td>
+<td>设置Http Cookie</td>
+<td>Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1</td>
 </tr>
 <tr>
 <td>Trailer</td>
-<td>指出头域在分块传输编码的尾部存在。</td>
+<td>指出头域在分块传输编码的尾部存在</td>
+<td>Trailer: Max-Forwards</td>
 </tr>
 <tr>
 <td>Transfer-Encoding</td>
-<td>文件传输编码。</td>
+<td>文件传输编码</td>
+<td>Transfer-Encoding:chunked</td>
 </tr>
 <tr>
 <td>Vary</td>
-<td>告诉下游代理是使用缓存响应还是从原始服务器请求。</td>
+<td>告诉下游代理是使用缓存响应还是从原始服务器请求</td>
+<td>Vary: *</td>
 </tr>
 <tr>
 <td>Via</td>
-<td>告知代理客户端响应是通过哪里发送的。</td>
+<td>告知代理客户端响应是通过哪里发送的</td>
+<td>Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)</td>
 </tr>
 <tr>
 <td>Warning</td>
-<td>警告实体可能存在的问题。</td>
+<td>警告实体可能存在的问题</td>
+<td>Warning: 199 Miscellaneous warning</td>
 </tr>
 <tr>
 <td>WWW-Authenticate</td>
-<td>表明客户端请求实体应该使用的授权方案。</td>
+<td>表明客户端请求实体应该使用的授权方案</td>
+<td>WWW-Authenticate: Basic</td>
 </tr>
 </tbody></table>
 <h2 id="四，返回状态码"><a href="#四，返回状态码" class="headerlink" title="四，返回状态码"></a>四，返回状态码</h2><h3 id="1-基本分类"><a href="#1-基本分类" class="headerlink" title="1. 基本分类"></a>1. 基本分类</h3><table>
@@ -599,8 +659,8 @@
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable 由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中</td>
-<td></td>
+<td>Service Unavailable</td>
+<td>由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中</td>
 </tr>
 <tr>
 <td>504</td>
@@ -617,7 +677,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/11/06/http/" data-id="ck2nf5rfr0012b028alt626jg" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/11/06/http/" data-id="ck2qydfbr0017hc282ow75z9s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -627,6 +687,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/11/07/cross-site/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS 跨域请求
+        
+      </div>
+    </a>
   
   
     <a href="/2019/10/30/canvas-svg/" id="article-nav-older" class="article-nav-link-wrap">
@@ -682,6 +751,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/07/brower-render/">浏览器输入地址后发生了什么</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/06/http/">http 协议简介</a>
           </li>
         
@@ -691,14 +768,6 @@
         
           <li>
             <a href="/2019/10/26/debounce-and-throttle/">JS 节流和防抖函数</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/hump-underline/">JS 驼峰和下横线转换</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
           </li>
         
       </ul>
@@ -730,7 +799,7 @@
 </nav>
     
 
-<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">

@@ -160,4 +160,4 @@ function lengthOfLISBetter(arr){
 }
 ```
 
-### [源代码](https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/length-of-LIS.html)
+### [源代码](https://github.com/luckybirdme/blog/blob/master/example/js/length-of-LIS.html)

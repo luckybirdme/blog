@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS 跨域请求 | LuckyBird</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JS 向后端发起请求 HTTP 请求时，浏览器出于安全策略，禁止不同域名和端口之间的访问某些应用服务部署在不同域名下，网站需要访问不同域名下的服务，这是就产生的跨域问题">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 跨域请求">
+<meta property="og:url" content="https://luckybirdme.github.io/2019/11/07/cross-site/index.html">
+<meta property="og:site_name" content="LuckyBird">
+<meta property="og:description" content="JS 向后端发起请求 HTTP 请求时，浏览器出于安全策略，禁止不同域名和端口之间的访问某些应用服务部署在不同域名下，网站需要访问不同域名下的服务，这是就产生的跨域问题">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-06T23:44:31.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 跨域请求">
+<meta name="twitter:description" content="JS 向后端发起请求 HTTP 请求时，浏览器出于安全策略，禁止不同域名和端口之间的访问某些应用服务部署在不同域名下，网站需要访问不同域名下的服务，这是就产生的跨域问题">
+  
+    <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuckyBird</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/luckybirdme">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <!--
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        -->
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://luckybirdme.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-cross-site" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/07/cross-site/" class="article-date">
+  <time datetime="2019-11-06T23:20:59.000Z" itemprop="datePublished">2019-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS 跨域请求
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>JS 向后端发起请求 HTTP 请求时，浏览器出于安全策略，禁止不同域名和端口之间的访问<br>某些应用服务部署在不同域名下，网站需要访问不同域名下的服务，这是就产生的跨域问题</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="一，跨域由来"><a href="#一，跨域由来" class="headerlink" title="一，跨域由来"></a>一，跨域由来</h2><h3 id="1-JS-向后端发起请求-HTTP-请求时，浏览器出于安全策略，禁止不同域名和端口之间的访问"><a href="#1-JS-向后端发起请求-HTTP-请求时，浏览器出于安全策略，禁止不同域名和端口之间的访问" class="headerlink" title="1. JS 向后端发起请求 HTTP 请求时，浏览器出于安全策略，禁止不同域名和端口之间的访问"></a>1. JS 向后端发起请求 HTTP 请求时，浏览器出于安全策略，禁止不同域名和端口之间的访问</h3><h3 id="2-某些应用服务部署在不同域名下，网站需要访问不同域名下的服务，这是就产生的跨域问题"><a href="#2-某些应用服务部署在不同域名下，网站需要访问不同域名下的服务，这是就产生的跨域问题" class="headerlink" title="2. 某些应用服务部署在不同域名下，网站需要访问不同域名下的服务，这是就产生的跨域问题"></a>2. 某些应用服务部署在不同域名下，网站需要访问不同域名下的服务，这是就产生的跨域问题</h3><h2 id="二，解决方案"><a href="#二，解决方案" class="headerlink" title="二，解决方案"></a>二，解决方案</h2><h3 id="1-借助-img-标签的-src-属性"><a href="#1-借助-img-标签的-src-属性" class="headerlink" title="1. 借助 img 标签的 src 属性"></a>1. 借助 img 标签的 src 属性</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://www.otherdomain.com/myaction"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><p>当 img 尝试加载 src 内容时，会发起 get 方式请求；由于 img 不对来源即域名进行强校验，所以能执行不同域名的 get 请求</p>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><p>img 的加载方式只能是 get，而且无法获得 HTTP 请求的返回内容</p>
+<h2 id="2-借助-script-加载文件的方式"><a href="#2-借助-script-加载文件的方式" class="headerlink" title="2. 借助 script 加载文件的方式"></a>2. 借助 script 加载文件的方式</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 前端加载 JS 文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://www.otherdomain.com/callbackfunction.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后端返回字符串 alter('I am callbackfunction')</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"alter('I am callbackfunction')"</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前端直接把字符串当做 JS 文件内容执行</span></span><br><span class="line">alter(<span class="string">'I am callbackfunction'</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="原理：-1"><a href="#原理：-1" class="headerlink" title="原理："></a>原理：</h3><p>因为 script 加载 src 文件也是不强校验域名，所以能访问其他域名的服务；src 返回的是一段可执行的 JS 代码，比如一个 callback 函数</p>
+<h3 id="升级："><a href="#升级：" class="headerlink" title="升级："></a>升级：</h3><p>callback 函数可以自定义，传递给后端；后端给函数追加参数后，再传给前端执行；jQuery 已经把该方式添加到 Ajax 函数，并叫做 JSONP，但其实跟 Ajax 原理是不一样的，Ajax 底层是通过 XMLHttpRequest</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// JQuery 把跨域请求包装到 ajax，用数据类型 JSONP 区分，底层也是利用 script 加载 src 方式实现</span></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">       type: <span class="string">"get"</span>,</span><br><span class="line">       <span class="keyword">async</span>: <span class="literal">false</span>,</span><br><span class="line">       url: <span class="string">"http://www.otherdomain.com/myaction"</span>,</span><br><span class="line">       dataType: <span class="string">"jsonp"</span>,</span><br><span class="line">       jsonp: <span class="string">"callback"</span>,</span><br><span class="line">       jsonpCallback:<span class="string">"?"</span>,</span><br><span class="line">       success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">         alert(result.name);</span><br><span class="line">       &#125;,</span><br><span class="line">       error: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 另一种包装方式</span></span><br><span class="line">$.getJSON(<span class="string">"http://www.otherdomain.com/myaction?jsonpcallback=?"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">    alert(result.name);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="缺点：-1"><a href="#缺点：-1" class="headerlink" title="缺点："></a>缺点：</h3><p>script 也是 get 方式加载内容，不支持 post 方式</p>
+<h2 id="3-通过-CORS-方式"><a href="#3-通过-CORS-方式" class="headerlink" title="3. 通过 CORS 方式"></a>3. 通过 CORS 方式</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>浏览器出于安全考虑，访问跨域资源，获得内容后，会校验 HTTP 的头部信息，如果不合符规范，则不展示，即拦击掉。<br>Cross-Origin Resource Sharing，跨域资源共享，允许浏览器根据服务器设置的 HTTP 头部访问规则，进行内容展示还是拦截。<br>由此可知 CORS 需要资源服务器进行 HTTP 的访问设置，是否允许不同域的不同方法访问。</p>
+<p>服务器 nginx 的 CORS 访问设置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> HTTP 来源</span><br><span class="line">Access-Control-Allow-Origin:*</span><br><span class="line"><span class="meta">#</span> 访问方法</span><br><span class="line">Access-Control-Allow-Methods:*</span><br><span class="line"><span class="meta">#</span> 更多设置 ···</span><br></pre></td></tr></table></figure>
+
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>支持 post , get , put 等多种方式的 http 请求</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>需要资源服务器进行 http 访问配置</p>
+<h2 id="4-通过-WebSocket-方式"><a href="#4-通过-WebSocket-方式" class="headerlink" title="4. 通过 WebSocket 方式"></a>4. 通过 WebSocket 方式</h2><h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>WebSocket 协议支持不同域访问</p>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><p>后端需要搭建一套 socket 服务，前端要维护 socket 状态</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://luckybirdme.github.io/2019/11/07/cross-site/" data-id="ck2qydf9o0003hc28kn64y730" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/07/brower-render/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          浏览器输入地址后发生了什么
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/06/http/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">http 协议简介</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/07/brower-render/">浏览器输入地址后发生了什么</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/06/http/">http 协议简介</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/26/debounce-and-throttle/">JS 节流和防抖函数</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 LuckyBird<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/luckybirdme" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

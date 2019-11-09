@@ -37,4 +37,4 @@ console.log(hump2Underline('OneTwoTHRee'));
 
 ```
 
-### [源代码](https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/hump-and-underline.html)
+### [源代码](https://github.com/luckybirdme/blog/blob/master/example/js/hump-and-underline.html)

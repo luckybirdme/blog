@@ -43,7 +43,7 @@ tags: JavaScript
 5. 按照以上步骤，对于长度为 n 的数组，经过 n-1 轮遍历比较，就可以完成排序
 
 ##### 动图：
-![](/example/img/bubbleSort.gif)
+![](http://qiniucdn.luckybird.me/blog/img/2019/bubbleSort.gif)
 
 
 ##### 实现：
@@ -75,7 +75,7 @@ function bubbleSort(arr){
 4. 按照以上步骤，对于长度为 n 的数组，经过 n-1 轮遍历比较，就可以完成排序
 
 ##### 动图：
-![](/example/img/selectSort.gif)
+![](http://qiniucdn.luckybird.me/blog/img/2019/selectSort.gif)
 
 
 ##### 实现：
@@ -114,7 +114,7 @@ function selectSort(arr){
 
 
 ##### 动图：
-![](/example/img/insertSort.gif)
+![](http://qiniucdn.luckybird.me/blog/img/2019/insertSort.gif)
 
 
 ##### 实现：
@@ -147,7 +147,7 @@ function insertSort(arr){
 
 
 ##### 动图：
-![](/example/img/mergeSort.gif)
+![](http://qiniucdn.luckybird.me/blog/img/2019/mergeSort.gif)
 
 
 
@@ -212,7 +212,7 @@ function mergeSort(arr){
 
 ##### 动图：
 
-![](/example/img/quickSort.gif)
+![](http://qiniucdn.luckybird.me/blog/img/2019/quickSort.gif)
 
 ##### 实现：
 ```javascript
@@ -270,4 +270,4 @@ function arraySort(arr){
 
 
 
-### [源代码](https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/my-sort-func.html)
+### [源代码](https://github.com/luckybirdme/blog/blob/master/example/js/my-sort-func.html)

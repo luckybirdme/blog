@@ -45,13 +45,13 @@
 
 
 
-			// 1，简单版：通过 apply 实现 bind
+			// 简单版：通过 apply 实现 bind
 			// 直接在函数原型链上新增函数
 			Function.prototype.myBind = function(){
 				// 保存当前上下文
 				var self = this;
 				// 第一个参数是传入的对象，其他是输入参数
-				// 弹出第一个参数
+				// 弹出第一个参数，即需要绑定的上下文
 				var obj = Array.prototype.shift.call(arguments);
 				// 获取剩余参数
 				var args = Array.prototype.slice.call(arguments);
@@ -70,104 +70,6 @@
 			// 执行
 			getInfoMyBind();
 
-
-
-			// 2，升级版：考虑到 bind 作为构造函数的返回情况
-			// 测试上面的 bind 的实现，发现会丢失构造函数的属性
-			function Student(){
-				this.school = 'Tsinghua';
-				console.log('school : ' + this.school + '; name : ' + this.name);
-				
-			}
-
-			var Lose = {
-				name: 'Lose'
-			}
-			var StudentFunc = Student.myBind(Lose);
-			console.log('StudentFunc')
-			// 普通函数执行方式
-			StudentFunc();
-
-
-			var Jack = {
-				name: 'Jack'
-			}
-			console.log('StudentConstructor')
-			var StudentConstructor = Student.myBind(Jack);
-			// 构造函数调用
-			var s2 = new StudentConstructor();			
-			// 输出 undefined，因为丢失了原型链
-			console.log(s2.school);
-			console.log(s2.name);
-
-
-			Function.prototype.myBindNew = function(){
-				// 保存当前上下文
-				var self = this;
-				// 第一个参数是传入的对象，其他是输入参数
-				// 弹出第一个参数
-				var obj = Array.prototype.shift.call(arguments);
-
-				// 获取剩余参数
-				var args = Array.prototype.slice.call(arguments);
-
-				// 如果被构造函数调用 bind ，必须返回包含构造函数原型链的函数
-
-				// 保存原来构造函数的原型链
-				var func = function() {};
-				// 当Function.prototype.bind()直接调用时，此时的 self，指向 Function.prototype
-				// self.prototype(即Function.prototype.prototype)为undefined
-				// 被其他函数初始化，self.prototype 就是函数的原型对象，保存下来
-				if (self.prototype) {
-					func.prototype = self.prototype; 
-				}
-
-				// 将要返回的函数
-				var funcCons = function() {
-					// 保存返回函数被执行时的上下文
-					// 普通函数执行时，上下文是 window
-					// 如果上下文就是当前的返回函数，说明是通过 new 来执行的
-					var _self = this;
-
-					// 普通函数执行，传入之前指定的上下文 obj
-					// 如果是 new 方式执行，那么忽略掉上下文 obj，直接使用指定构造函数为上下文
-					var newObj = _self instanceof funcCons ? _self : obj;
-					// 获取返回函数执行时的所有参数
-					var allArgs = args.concat(Array.prototype.slice.call(arguments));
-
-					return self.apply(newObj,allArgs);
-				};
-
-				// 将返回函数的原型链指向之前保存的原型链
-				funcCons.prototype = new func();
-
-
-				// 返回 bind 函数
-				return funcCons;
-			}
-
-
-			var Steven = {
-				name: 'Steven'
-			}
-			console.log('myBindNew')
-
-			console.log('StudentFuncNew')
-			var StudentFuncNew = Student.myBindNew(Steven);
-			// 普通函数执行方式
-			StudentFuncNew();
-
-
-			console.log('StudentConstructor')
-			var StudentConstructorNew = Student.myBindNew(Steven);
-			// 构造函数调用
-			var s3 = new StudentConstructorNew();
-			// 能够正常输出构造函数的属性
-			console.log(s3.school);
-			// bind 的实现遇到构造函数时，直接绑定构造上下文
-			// 所以 bind 传入的上下文，被忽略了，所以也就无法获取传入对象的属性啦
-			// 这里依然输出 undefined
-			console.log(s3.name);
 
 
 		</script>

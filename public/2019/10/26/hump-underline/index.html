@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="LuckyBird">
 <meta property="og:description" content="利用正则批量下横线和大写字符，然后进行转换">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-26T04:20:23.701Z">
+<meta property="og:updated_time" content="2019-11-09T02:15:35.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS 驼峰和下横线转换">
 <meta name="twitter:description" content="利用正则批量下横线和大写字符，然后进行转换">
@@ -99,11 +99,11 @@
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//下横线转驼峰</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">underline2Hump</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 连续下横线的情况也要兼容</span></span><br><span class="line">    <span class="keyword">var</span> r = s.replace(<span class="regexp">/_+(\w)/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">all, letter</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> letter.toUpperCase()</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 第一个字符是下横线，会导致首字母是大写，这里改成小写</span></span><br><span class="line">    r=r.slice(<span class="number">0</span>,<span class="number">1</span>).toLowerCase()+r.slice(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//驼峰转下横线：</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hump2Underline</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 连续大写字母的情况也兼容</span></span><br><span class="line">    <span class="keyword">var</span> r=s.replace(<span class="regexp">/([A-Z])/g</span>, <span class="string">'_$1'</span>).toLowerCase();</span><br><span class="line">    <span class="comment">// 首字母大写，会导致第一个字符也是下横线，需要去掉</span></span><br><span class="line">    <span class="keyword">if</span>(r.slice(<span class="number">0</span>,<span class="number">1</span>) === <span class="string">'_'</span>)&#123;</span><br><span class="line">        r=r.slice(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(underline2Hump(<span class="string">'_one__two___three'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(hump2Underline(<span class="string">'OneTwoTHRee'</span>));</span><br></pre></td></tr></table></figure>
 
-<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a><a href="https://github.com/luckybirdme/luckybirdme.github.io/blob/master/example/js/hump-and-underline.html" target="_blank" rel="noopener">源代码</a></h3>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a><a href="https://github.com/luckybirdme/blog/blob/master/example/js/hump-and-underline.html" target="_blank" rel="noopener">源代码</a></h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://luckybirdme.github.io/2019/10/26/hump-underline/" data-id="ck2nf5re0000lb028cz0f5ezj" class="article-share-link">Share</a>
+      <a data-url="https://luckybirdme.github.io/2019/10/26/hump-underline/" data-id="ck2qydfan000mhc282k0n7vwc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -177,6 +177,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/07/brower-render/">浏览器输入地址后发生了什么</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/06/http/">http 协议简介</a>
           </li>
         
@@ -186,14 +194,6 @@
         
           <li>
             <a href="/2019/10/26/debounce-and-throttle/">JS 节流和防抖函数</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/hump-underline/">JS 驼峰和下横线转换</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/26/length-of-lis/">JS 求最长上升子序列的长度</a>
           </li>
         
       </ul>
@@ -225,7 +225,7 @@
 </nav>
     
 
-<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
