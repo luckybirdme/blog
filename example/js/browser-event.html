@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
+	<script src="../lib/defer.js" defer="true"></script>
+	<script src="../lib/async.js" async></script>
+    <script type="text/javascript">
+
+        // dom 解析完，在 domInteractive 事件后执行
+        $(document).ready(function() {
+            // body...
+            console.log('2,document,ready');
+        });
+
+        // dom 解析完，在 domContentLoadedEventStart 事件后执行
+    	document.addEventListener('DOMContentLoaded', (event) => {
+    		console.log('3,document,DOMContentLoaded');
+  		});
+
+  		
+    	document.onreadystatechange=function(){
+            // dom 正在解析中，处于 domLoading 状态
+    		if(document.readyState === 'loading'){
+    			console.log('0,document,loading');
+    		}
+            // 页面事件处于 domInteractive，已经完成 dom 解析，外部资源还没加载完成
+            // 模拟 DOMContentLoaded/ jquery ready
+    		if(document.readyState==='interactive'){
+    			console.log('1,document,interactive,to do jq ready');
+    		}
+
+            // 页面事件处于 domComplete，在文档中的所有对象都在DOM中，所有图片，脚本，链接以及子框都完成了装载
+            // 模拟 load 事件
+    		if(document.readyState==='complete'){
+    			console.log('4,document,complete, to do window onload');
+    		}
+    	}
+
+        // 页面事件 loadEventStart 后发生 onload 事件
+        window.onload=function(){
+            console.log('5,window,onload');
+        }
+
+		
+    </script>
+
+</head>
+<body>
+    <div>
+        hello
+    </div>
+    <div>
+        world
+    </div>
+</body>
+</html>

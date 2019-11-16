@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://luckybirdme.github.io/
+url: https://blog.luckybird.me/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -22,7 +22,7 @@ permalink_defaults:
 source_dir: source
 public_dir: public
 example_dir: example
-site_public_dir: ../luckybirdme.github.io/
+site_public_dir: public
 tag_dir: tags
 archive_dir: archives
 category_dir: categories

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
+	<script src="../lib/defer.js" defer="true"></script>
+	<script src="../lib/async.js" async></script>
+    <script type="text/javascript">
+    	document.addEventListener('DOMContentLoaded', (event) => {
+    		console.log('3,document,DOMContentLoaded');
+  		});
+
+  		window.onload=function(){
+    		console.log('5,window,onload');
+    	}
+
+    	document.onreadystatechange=function(){
+    		if(document.readyState === 'loading'){
+    			console.log('0,document,loading');
+    		}
+    		if(document.readyState==='interactive'){
+    			console.log('1,document,interactive,to do jq ready');
+    		}
+
+    		if(document.readyState==='complete'){
+    			console.log('4,document,complete, to do window onload');
+    		}
+    	}
+    	
+    	$(document).ready(function() {
+    		// body...
+    		console.log('2,document,ready');
+    	});
+
+		
+    </script>
+
+</head>
+<body>
+	<div><div><div><div><div><div><div>Hello</div></div></div></div></div></div></div>
+</body>
+</html>
