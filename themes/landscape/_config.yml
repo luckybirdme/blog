@@ -3,7 +3,7 @@ menu:
   Home: /
   Archives: /archives
   GitHub: https://github.com/luckybirdme
-rss: /atom.xml
+rss: ''
 
 # Content
 excerpt_link: Read More

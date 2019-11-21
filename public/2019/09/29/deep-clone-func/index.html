@@ -15,12 +15,10 @@
 <meta property="og:site_name" content="LuckyBird">
 <meta property="og:description" content="JavaScript 变量包括基本类型和引用类型，基本类型的变量可直接访问和操作对应值，赋值就可以克隆一份值到另外一个内存地址中保存。引用类型的变量则只是保存引用地址，赋值只是克隆引用地址，实际上还是共用变量，变量更改时，所有相同引用地址的变量也更改。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-20T04:37:11.801Z">
+<meta property="og:updated_time" content="2019-11-21T00:13:15.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS 变量和克隆">
 <meta name="twitter:description" content="JavaScript 变量包括基本类型和引用类型，基本类型的变量可直接访问和操作对应值，赋值就可以克隆一份值到另外一个内存地址中保存。引用类型的变量则只是保存引用地址，赋值只是克隆引用地址，实际上还是共用变量，变量更改时，所有相同引用地址的变量也更改。">
-  
-    <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -55,12 +53,14 @@
         
       </nav>
       <nav id="sub-nav">
+        
+        
+
         <!--
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
         -->
+
+
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.luckybird.me"></form>
@@ -143,7 +143,7 @@
 <ul>
 <li>其他类型，比如 Symbol，后续再研究 </li>
 </ul>
-<h5 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a><a href="/example/js/deep-clone-func.html">示例代码</a></h5><h3 id="四，业界的克隆方法"><a href="#四，业界的克隆方法" class="headerlink" title="四，业界的克隆方法"></a>四，业界的克隆方法</h3><h5 id="1-jQuery，几乎是每个网站的标配类库，当然少不了深克隆的方法。"><a href="#1-jQuery，几乎是每个网站的标配类库，当然少不了深克隆的方法。" class="headerlink" title="1. jQuery，几乎是每个网站的标配类库，当然少不了深克隆的方法。"></a>1. <a href="https://api.jquery.com/jquery.extend/" target="_blank" rel="noopener">jQuery</a>，几乎是每个网站的标配类库，当然少不了深克隆的方法。</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;<span class="string">'a'</span>:<span class="string">'one'</span>,<span class="string">'b'</span>:<span class="string">'two'</span>&#125;;</span><br><span class="line"><span class="comment">// 浅克隆</span></span><br><span class="line"><span class="keyword">var</span> obj2=$.extend(<span class="literal">false</span>,&#123;&#125;,obj1);</span><br><span class="line"><span class="comment">// 深克隆</span></span><br><span class="line"><span class="keyword">var</span> obj2=$.extend(<span class="literal">true</span>,&#123;&#125;,obj1);</span><br></pre></td></tr></table></figure>
+<h5 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a><a href="https://github.com/luckybirdme/blog/blob/master/example/js/deep-clone-func.html" target="_blank" rel="noopener">示例代码</a></h5><h3 id="四，业界的克隆方法"><a href="#四，业界的克隆方法" class="headerlink" title="四，业界的克隆方法"></a>四，业界的克隆方法</h3><h5 id="1-jQuery，几乎是每个网站的标配类库，当然少不了深克隆的方法。"><a href="#1-jQuery，几乎是每个网站的标配类库，当然少不了深克隆的方法。" class="headerlink" title="1. jQuery，几乎是每个网站的标配类库，当然少不了深克隆的方法。"></a>1. <a href="https://api.jquery.com/jquery.extend/" target="_blank" rel="noopener">jQuery</a>，几乎是每个网站的标配类库，当然少不了深克隆的方法。</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;<span class="string">'a'</span>:<span class="string">'one'</span>,<span class="string">'b'</span>:<span class="string">'two'</span>&#125;;</span><br><span class="line"><span class="comment">// 浅克隆</span></span><br><span class="line"><span class="keyword">var</span> obj2=$.extend(<span class="literal">false</span>,&#123;&#125;,obj1);</span><br><span class="line"><span class="comment">// 深克隆</span></span><br><span class="line"><span class="keyword">var</span> obj2=$.extend(<span class="literal">true</span>,&#123;&#125;,obj1);</span><br></pre></td></tr></table></figure>
 
 <h5 id="2-loadsh，一个实用的工具库，提供-array、number、objects、string-等数据类型更高效快捷的操作方法"><a href="#2-loadsh，一个实用的工具库，提供-array、number、objects、string-等数据类型更高效快捷的操作方法" class="headerlink" title="2. loadsh，一个实用的工具库，提供 array、number、objects、string 等数据类型更高效快捷的操作方法"></a>2. <a href="https://lodash.com/docs/4.17.15#cloneDeep" target="_blank" rel="noopener">loadsh</a>，一个实用的工具库，提供 array、number、objects、string 等数据类型更高效快捷的操作方法</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 浅克隆</span></span><br><span class="line"><span class="keyword">var</span> objects = [&#123; <span class="string">'a'</span>: <span class="number">1</span> &#125;, &#123; <span class="string">'b'</span>: <span class="number">2</span> &#125;];</span><br><span class="line"><span class="keyword">var</span> shallow = loadsh.clone(objects);</span><br><span class="line"><span class="built_in">console</span>.log(shallow[<span class="number">0</span>] === objects[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 深克隆</span></span><br><span class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> deep = loadsh.cloneDeep(func);</span><br><span class="line"><span class="built_in">console</span>.log(deep === func);</span><br></pre></td></tr></table></figure>
 
@@ -153,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/09/29/deep-clone-func/" data-id="ck30xpizu000e8028whhsto6j" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2019/09/29/deep-clone-func/" data-id="ck37yeq2j000fd4287jqu6v0o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -227,6 +227,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/16/event-trigger/">JS 事件捕获和冒泡</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/16/browser-safety/">前端页面安全</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/13/page-build/">浏览器页面呈现过程</a>
           </li>
         
@@ -236,14 +244,6 @@
         
           <li>
             <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/06/http/">http 协议简介</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
           </li>
         
       </ul>

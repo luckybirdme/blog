@@ -20,13 +20,11 @@
 <meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/css-dom.png">
 <meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/dom-cssom.png">
 <meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/js-download.jpg">
-<meta property="og:updated_time" content="2019-11-16T02:03:47.469Z">
+<meta property="og:updated_time" content="2019-11-19T23:12:59.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器页面呈现过程">
 <meta name="twitter:description" content="浏览器通过 http 协议获取到页面内容，然后进行解析，渲染，布局，绘制等步骤，最终将页面呈现给用户。页面呈现过程会因为一些特殊步骤而阻塞，比如下载外部资源，执行 JS 等。">
 <meta name="twitter:image" content="http://qiniucdn.luckybird.me/blog/img/2019/browser-page-build.png">
-  
-    <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -61,12 +59,14 @@
         
       </nav>
       <nav id="sub-nav">
+        
+        
+
         <!--
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
         -->
+
+
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.luckybird.me"></form>
@@ -104,36 +104,36 @@
 
 <h2 id="一，页面呈现过程"><a href="#一，页面呈现过程" class="headerlink" title="一，页面呈现过程"></a>一，页面呈现过程</h2><hr>
 <h5 id="浏览器通过-http-协议获取到页面内容，然后进行解析，渲染，布局，绘制等步骤，最终将页面呈现给用户，如下图所示"><a href="#浏览器通过-http-协议获取到页面内容，然后进行解析，渲染，布局，绘制等步骤，最终将页面呈现给用户，如下图所示" class="headerlink" title="浏览器通过 http 协议获取到页面内容，然后进行解析，渲染，布局，绘制等步骤，最终将页面呈现给用户，如下图所示"></a>浏览器通过 http 协议获取到页面内容，然后进行解析，渲染，布局，绘制等步骤，最终将页面呈现给用户，如下图所示</h5><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/browser-page-build.png" alt></p>
-<h3 id="1-解析-html，生成-DOM"><a href="#1-解析-html，生成-DOM" class="headerlink" title="1. 解析 html，生成 DOM"></a>1. 解析 html，生成 DOM</h3><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/html-dom.png" alt></p>
-<h3 id="2-解析-CSS，生成-CSSOM"><a href="#2-解析-CSS，生成-CSSOM" class="headerlink" title="2. 解析 CSS，生成 CSSOM"></a>2. 解析 CSS，生成 CSSOM</h3><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/css-dom.png" alt></p>
-<h3 id="3-DOM-和-CSSOM-合并成渲染"><a href="#3-DOM-和-CSSOM-合并成渲染" class="headerlink" title="3. DOM 和 CSSOM 合并成渲染"></a>3. DOM 和 CSSOM 合并成渲染</h3><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/dom-cssom.png" alt></p>
-<h3 id="4-布局-Layout"><a href="#4-布局-Layout" class="headerlink" title="4. 布局 Layout"></a>4. 布局 Layout</h3><h5 id="确定各个元素的位置，包括元素在视图中的坐标以及自身的大小，将其安置在浏览器的正确位置"><a href="#确定各个元素的位置，包括元素在视图中的坐标以及自身的大小，将其安置在浏览器的正确位置" class="headerlink" title="确定各个元素的位置，包括元素在视图中的坐标以及自身的大小，将其安置在浏览器的正确位置"></a>确定各个元素的位置，包括元素在视图中的坐标以及自身的大小，将其安置在浏览器的正确位置</h5><ul>
+<h4 id="1-解析-html，生成-DOM"><a href="#1-解析-html，生成-DOM" class="headerlink" title="1. 解析 html，生成 DOM"></a>1. 解析 html，生成 DOM</h4><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/html-dom.png" alt></p>
+<h4 id="2-解析-CSS，生成-CSSOM"><a href="#2-解析-CSS，生成-CSSOM" class="headerlink" title="2. 解析 CSS，生成 CSSOM"></a>2. 解析 CSS，生成 CSSOM</h4><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/css-dom.png" alt></p>
+<h4 id="3-DOM-和-CSSOM-合并成渲染"><a href="#3-DOM-和-CSSOM-合并成渲染" class="headerlink" title="3. DOM 和 CSSOM 合并成渲染"></a>3. DOM 和 CSSOM 合并成渲染</h4><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/dom-cssom.png" alt></p>
+<h4 id="4-布局-Layout"><a href="#4-布局-Layout" class="headerlink" title="4. 布局 Layout"></a>4. 布局 Layout</h4><h5 id="确定各个元素的位置，包括元素在视图中的坐标以及自身的大小，将其安置在浏览器的正确位置"><a href="#确定各个元素的位置，包括元素在视图中的坐标以及自身的大小，将其安置在浏览器的正确位置" class="headerlink" title="确定各个元素的位置，包括元素在视图中的坐标以及自身的大小，将其安置在浏览器的正确位置"></a>确定各个元素的位置，包括元素在视图中的坐标以及自身的大小，将其安置在浏览器的正确位置</h5><ul>
 <li>计算此渲染对象的宽度 width；</li>
 <li>遍历此渲染对象的所有子级，步骤跟本对象一样；</li>
 <li>设置此渲染对象的高度 height，根据子渲染对象的累积高，margin 和 padding 的高度设置其高度；</li>
 <li>设置此渲染对象脏位值为 false。</li>
 </ul>
-<h3 id="5-绘制-Painting"><a href="#5-绘制-Painting" class="headerlink" title="5. 绘制 Painting"></a>5. 绘制 Painting</h3><h5 id="将页面绘制到浏览器，设置各个元素的颜色，边框轮廓等，绘制顺序如下"><a href="#将页面绘制到浏览器，设置各个元素的颜色，边框轮廓等，绘制顺序如下" class="headerlink" title="将页面绘制到浏览器，设置各个元素的颜色，边框轮廓等，绘制顺序如下"></a>将页面绘制到浏览器，设置各个元素的颜色，边框轮廓等，绘制顺序如下</h5><ul>
+<h4 id="5-绘制-Painting"><a href="#5-绘制-Painting" class="headerlink" title="5. 绘制 Painting"></a>5. 绘制 Painting</h4><h5 id="将页面绘制到浏览器，设置各个元素的颜色，边框轮廓等，绘制顺序如下"><a href="#将页面绘制到浏览器，设置各个元素的颜色，边框轮廓等，绘制顺序如下" class="headerlink" title="将页面绘制到浏览器，设置各个元素的颜色，边框轮廓等，绘制顺序如下"></a>将页面绘制到浏览器，设置各个元素的颜色，边框轮廓等，绘制顺序如下</h5><ul>
 <li>背景颜色</li>
 <li>背景图片</li>
 <li>边框</li>
 <li>轮廓</li>
 </ul>
 <h2 id="二，页面阻塞情况"><a href="#二，页面阻塞情况" class="headerlink" title="二，页面阻塞情况"></a>二，页面阻塞情况</h2><hr>
-<h3 id="对于直接写在-html-页面的-CSS，会立即解析，但不阻塞-html-解析"><a href="#对于直接写在-html-页面的-CSS，会立即解析，但不阻塞-html-解析" class="headerlink" title="对于直接写在 html 页面的 CSS，会立即解析，但不阻塞 html 解析"></a>对于直接写在 html 页面的 CSS，会立即解析，但不阻塞 html 解析</h3><h3 id="对于直接写在-html-页面的-JS，会立即解析和执行，会阻塞-html-和-css-解析"><a href="#对于直接写在-html-页面的-JS，会立即解析和执行，会阻塞-html-和-css-解析" class="headerlink" title="对于直接写在 html 页面的 JS，会立即解析和执行，会阻塞 html 和 css 解析"></a>对于直接写在 html 页面的 JS，会立即解析和执行，会阻塞 html 和 css 解析</h3><h3 id="对于外链-CSS-和-JS，分情况来分析"><a href="#对于外链-CSS-和-JS，分情况来分析" class="headerlink" title="对于外链 CSS 和 JS，分情况来分析"></a>对于外链 CSS 和 JS，分情况来分析</h3><h3 id="1-外链-CSS-下载和解析"><a href="#1-外链-CSS-下载和解析" class="headerlink" title="1. 外链 CSS 下载和解析"></a>1. 外链 CSS 下载和解析</h3><ul>
+<h5 id="对于直接写在-html-页面的-CSS，会立即解析，但不阻塞-html-解析"><a href="#对于直接写在-html-页面的-CSS，会立即解析，但不阻塞-html-解析" class="headerlink" title="对于直接写在 html 页面的 CSS，会立即解析，但不阻塞 html 解析"></a>对于直接写在 html 页面的 CSS，会立即解析，但不阻塞 html 解析</h5><h5 id="对于直接写在-html-页面的-JS，会立即解析和执行，会阻塞-html-和-css-解析"><a href="#对于直接写在-html-页面的-JS，会立即解析和执行，会阻塞-html-和-css-解析" class="headerlink" title="对于直接写在 html 页面的 JS，会立即解析和执行，会阻塞 html 和 css 解析"></a>对于直接写在 html 页面的 JS，会立即解析和执行，会阻塞 html 和 css 解析</h5><h5 id="对于外链-CSS-和-JS，分情况来分析"><a href="#对于外链-CSS-和-JS，分情况来分析" class="headerlink" title="对于外链 CSS 和 JS，分情况来分析"></a>对于外链 CSS 和 JS，分情况来分析</h5><h4 id="1-外链-CSS-下载和解析"><a href="#1-外链-CSS-下载和解析" class="headerlink" title="1. 外链 CSS 下载和解析"></a>1. 外链 CSS 下载和解析</h4><ul>
 <li>在解析 html 时，如果遇到 CSS 外链，会立即发起下载请求，但不会阻塞 html 继续解析。<br>可能原因：页面还没到渲染步骤，为提高性能，可同时进行 html 解析和 CSS 下载。</li>
 <li>html 解析和 CSS 解析可以同时进行，不会相互阻塞。<br>可能原因：页面还没到渲染步骤，为提高性能，可同时进行 html 解析和 CSS 解析。</li>
 <li>下载和解析 CSS，会阻塞 DOM 和 CSSOM 的合并渲染。<br>可能原因：渲染会用到 CSS 样式，所以必须先下载完 CSS，并完成 CSS 的解析，才开始渲染。</li>
 <li>会阻塞后面 js 语句的执行。<br>可能原因：JS 也会修改 CSS，那么得先加载和解析前面的 CSS，然后在此基础上进行修改。</li>
 </ul>
-<h3 id="2-外链-JS-下载和执行"><a href="#2-外链-JS-下载和执行" class="headerlink" title="2. 外链 JS 下载和执行"></a>2. 外链 JS 下载和执行</h3><ul>
+<h4 id="2-外链-JS-下载和执行"><a href="#2-外链-JS-下载和执行" class="headerlink" title="2. 外链 JS 下载和执行"></a>2. 外链 JS 下载和执行</h4><ul>
 <li>在解析 html 时，如果遇到 JS 外链，没有设置 defer 和 async 属性，那么会立即下载和执行，并阻塞 html 和 css 解析和渲染。</li>
 <li>在解析 html 时，如果遇到 JS 外链，如果设置了 defer 属性，那么会异步下载，但不会立即执行，也不会阻塞 html 解析；等到 html 完成解析后，在触发 DOMContentLoaded 前，才按照加载顺序执行。 </li>
 <li>在解析 html 时，如果遇到 JS 外链，如果设置了 async 属性，那么会异步下载，此时不会阻塞 html 解析，但是下载完后，会立即执行 JS 内容，不会按照加载的顺序，加载快的 JS 文件会更快执行，并且会阻塞 html 解析。</li>
 </ul>
 <p><img src="http://qiniucdn.luckybird.me/blog/img/2019/js-download.jpg" alt></p>
 <h2 id="三，页面回流和重绘"><a href="#三，页面回流和重绘" class="headerlink" title="三，页面回流和重绘"></a>三，页面回流和重绘</h2><hr>
-<h5 id="当页面呈现完毕后，JS-可能会更改页面，此时页面会重新进行渲染，布局和绘制。"><a href="#当页面呈现完毕后，JS-可能会更改页面，此时页面会重新进行渲染，布局和绘制。" class="headerlink" title="当页面呈现完毕后，JS 可能会更改页面，此时页面会重新进行渲染，布局和绘制。"></a>当页面呈现完毕后，JS 可能会更改页面，此时页面会重新进行渲染，布局和绘制。</h5><h3 id="1-重排-reflow：当元素坐标位置和几何大小发生改变，或者-dom-发生变化时，需要重新渲染，布局，绘制页面，这个过程称为重排。"><a href="#1-重排-reflow：当元素坐标位置和几何大小发生改变，或者-dom-发生变化时，需要重新渲染，布局，绘制页面，这个过程称为重排。" class="headerlink" title="1. 重排 reflow：当元素坐标位置和几何大小发生改变，或者 dom 发生变化时，需要重新渲染，布局，绘制页面，这个过程称为重排。"></a>1. 重排 reflow：当元素坐标位置和几何大小发生改变，或者 dom 发生变化时，需要重新渲染，布局，绘制页面，这个过程称为重排。</h3><ul>
+<h5 id="当页面呈现完毕后，JS-可能会更改页面，此时页面会重新进行渲染，布局和绘制。"><a href="#当页面呈现完毕后，JS-可能会更改页面，此时页面会重新进行渲染，布局和绘制。" class="headerlink" title="当页面呈现完毕后，JS 可能会更改页面，此时页面会重新进行渲染，布局和绘制。"></a>当页面呈现完毕后，JS 可能会更改页面，此时页面会重新进行渲染，布局和绘制。</h5><h4 id="1-重排-reflow：当元素坐标位置和几何大小发生改变，或者-dom-发生变化时，需要重新渲染，布局，绘制页面，这个过程称为重排。"><a href="#1-重排-reflow：当元素坐标位置和几何大小发生改变，或者-dom-发生变化时，需要重新渲染，布局，绘制页面，这个过程称为重排。" class="headerlink" title="1. 重排 reflow：当元素坐标位置和几何大小发生改变，或者 dom 发生变化时，需要重新渲染，布局，绘制页面，这个过程称为重排。"></a>1. 重排 reflow：当元素坐标位置和几何大小发生改变，或者 dom 发生变化时，需要重新渲染，布局，绘制页面，这个过程称为重排。</h4><ul>
 <li>增加、删除、修改DOM结点时，会导致Reflow或Repaint</li>
 <li>移动DOM的位置，或是搞个动画的时候。</li>
 <li>修改CSS样式的时候。</li>
@@ -141,27 +141,33 @@
 <li>修改网页的默认字体时。</li>
 <li>display:none会触发reflow，而visibility:hidden只会触发repaint，因为没有发现位置变化。</li>
 </ul>
-<h3 id="2-重绘-repaint：当元素颜色，或者边框改变时，需要重新绘制页面，这个过程称为重绘，重绘成本远低于重排。"><a href="#2-重绘-repaint：当元素颜色，或者边框改变时，需要重新绘制页面，这个过程称为重绘，重绘成本远低于重排。" class="headerlink" title="2. 重绘 repaint：当元素颜色，或者边框改变时，需要重新绘制页面，这个过程称为重绘，重绘成本远低于重排。"></a>2. 重绘 repaint：当元素颜色，或者边框改变时，需要重新绘制页面，这个过程称为重绘，重绘成本远低于重排。</h3><h2 id="四，前端页面优化方法"><a href="#四，前端页面优化方法" class="headerlink" title="四，前端页面优化方法"></a>四，前端页面优化方法</h2><hr>
-<h3 id="1-资源加载"><a href="#1-资源加载" class="headerlink" title="1. 资源加载"></a>1. 资源加载</h3><ul>
-<li>使用 dns 预解析，缓存到浏览器系统中，在 meta 添加 <link rel="dns-prefecth" href="https://www.google.com"></li>
-<li>减少重定向，<a href="http://www.example.com" target="_blank" rel="noopener">http://www.example.com</a> 和 <a href="http://www.example.com/" target="_blank" rel="noopener">http://www.example.com/</a> 一样能够访问</li>
-<li>使用缓存，如果资源没有更新，强制使用缓存，避免重复加载。</li>
+<h4 id="2-重绘-repaint：当元素颜色，或者边框改变时，需要重新绘制页面，这个过程称为重绘，重绘成本远低于重排。"><a href="#2-重绘-repaint：当元素颜色，或者边框改变时，需要重新绘制页面，这个过程称为重绘，重绘成本远低于重排。" class="headerlink" title="2. 重绘 repaint：当元素颜色，或者边框改变时，需要重新绘制页面，这个过程称为重绘，重绘成本远低于重排。"></a>2. 重绘 repaint：当元素颜色，或者边框改变时，需要重新绘制页面，这个过程称为重绘，重绘成本远低于重排。</h4><h2 id="四，前端页面优化方法"><a href="#四，前端页面优化方法" class="headerlink" title="四，前端页面优化方法"></a>四，前端页面优化方法</h2><hr>
+<h4 id="1-资源加载"><a href="#1-资源加载" class="headerlink" title="1. 资源加载"></a>1. 资源加载</h4><ul>
+<li>使用 dns 预解析，缓存到浏览器系统中，在 meta 添加 </li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefecth"</span> <span class="attr">href</span>=<span class="string">"https://www.google.com"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>减少不必要的重定向，<a href="http://www.example.com" target="_blank" rel="noopener">http://www.example.com</a> 和 <a href="http://www.example.com/" target="_blank" rel="noopener">http://www.example.com/</a> 一样能够访问</li>
+<li>使用缓存，配置 Cache-Control ETag 等，如果资源没有更新，强制使用缓存，避免重复加载。</li>
 <li>使用 cdn 部署静态资源，就近下载，减少物理距离产生的耗时。</li>
 <li>通过合并 js，css，图片等，减少 http 请求。</li>
 <li>通过后端压缩，减少 js，css，图片等文件大小。</li>
 </ul>
-<h3 id="2-页面呈现"><a href="#2-页面呈现" class="headerlink" title="2. 页面呈现"></a>2. 页面呈现</h3><ul>
+<h4 id="2-页面呈现"><a href="#2-页面呈现" class="headerlink" title="2. 页面呈现"></a>2. 页面呈现</h4><ul>
 <li>为了避免阻塞 dom 和 cssom 解析，将 js 文件放到文档最后  加载，或者异步加载</li>
 <li>页面渲染必须先解析完 cssom，所以把 css 放到文档最前面 <head><meta name="generator" content="Hexo 3.9.0"> 加载。</head></li>
 <li>html 编写严格按照标准，必须包含开始和闭合标签，减少 dom 解析时间。</li>
-<li>css 选择器尽量简单，避免多层嵌套产生的深度遍历耗时。</li>
+<li>css 选择器尽量简单，避免多层嵌套产生的深度遍历。</li>
+<li>css 避免使用表达式，导致 css 解析耗时更长。</li>
 <li>减少 js 对 dom 操作，避免重复渲染和绘制页面。</li>
+<li>少用 table 布局页面，因为要等待整个 table 内容加载才会显示。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/11/13/page-build/" data-id="ck30xpj0n000u8028612m4zr2" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2019/11/13/page-build/" data-id="ck37yeq34000sd42820mn7r00" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -171,6 +177,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/11/16/browser-safety/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          前端页面安全
+        
+      </div>
+    </a>
   
   
     <a href="/2019/11/07/brower-render/" id="article-nav-older" class="article-nav-link-wrap">
@@ -226,6 +241,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/16/event-trigger/">JS 事件捕获和冒泡</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/16/browser-safety/">前端页面安全</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/13/page-build/">浏览器页面呈现过程</a>
           </li>
         
@@ -235,14 +258,6 @@
         
           <li>
             <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/06/http/">http 协议简介</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
           </li>
         
       </ul>

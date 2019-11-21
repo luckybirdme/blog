@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS 事件捕获和冒泡 | LuckyBird</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="事件捕获阶段，从顶层节点开始，一层层往下，直到触发事件的节点。事件冒泡阶段，从触发事件的节点开始，一层层向上，直到顶层节点。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 事件捕获和冒泡">
+<meta property="og:url" content="https://blog.luckybird.me/2019/11/16/event-trigger/index.html">
+<meta property="og:site_name" content="LuckyBird">
+<meta property="og:description" content="事件捕获阶段，从顶层节点开始，一层层往下，直到触发事件的节点。事件冒泡阶段，从触发事件的节点开始，一层层向上，直到顶层节点。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/event-trigger.png">
+<meta property="og:updated_time" content="2019-11-16T09:29:02.489Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 事件捕获和冒泡">
+<meta name="twitter:description" content="事件捕获阶段，从顶层节点开始，一层层往下，直到触发事件的节点。事件冒泡阶段，从触发事件的节点开始，一层层向上，直到顶层节点。">
+<meta name="twitter:image" content="http://qiniucdn.luckybird.me/blog/img/2019/event-trigger.png">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="http://qiniucdn.luckybird.me/blog/css/fonts.googleapis.css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuckyBird</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/luckybirdme">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+
+        <!--
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        -->
+
+
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.luckybird.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-event-trigger" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/16/event-trigger/" class="article-date">
+  <time datetime="2019-11-16T08:20:18.000Z" itemprop="datePublished">2019-11-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS 事件捕获和冒泡
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>事件捕获阶段，从顶层节点开始，一层层往下，直到触发事件的节点。<br>事件冒泡阶段，从触发事件的节点开始，一层层向上，直到顶层节点。</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="一，JS-事件流"><a href="#一，JS-事件流" class="headerlink" title="一，JS 事件流"></a>一，JS 事件流</h2><h3 id="JS-事件流如下图所示，左边为事件捕获阶段，右边为事件冒泡阶段"><a href="#JS-事件流如下图所示，左边为事件捕获阶段，右边为事件冒泡阶段" class="headerlink" title="JS 事件流如下图所示，左边为事件捕获阶段，右边为事件冒泡阶段"></a>JS 事件流如下图所示，左边为事件捕获阶段，右边为事件冒泡阶段</h3><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/event-trigger.png" alt></p>
+<h3 id="addEventListener-type-listener-useCapture-第三个参数-useCapture-规定事件触发时机"><a href="#addEventListener-type-listener-useCapture-第三个参数-useCapture-规定事件触发时机" class="headerlink" title="addEventListener(type, listener, useCapture),第三个参数 useCapture 规定事件触发时机"></a>addEventListener(type, listener, useCapture),第三个参数 useCapture 规定事件触发时机</h3><ul>
+<li>false,表示 listener 事件触发在冒泡阶段，这是默认值。</li>
+<li>true,表示 listener 事件在捕获阶段就触发了。</li>
+</ul>
+<h2 id="二，事件捕获和冒泡时触发-listener"><a href="#二，事件捕获和冒泡时触发-listener" class="headerlink" title="二，事件捕获和冒泡时触发 listener"></a>二，事件捕获和冒泡时触发 listener</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">id</span>=<span class="string">"body"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"button"</span>&gt;</span>click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> body = <span class="built_in">document</span>.getElementById(<span class="string">'body'</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">'div'</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> button = <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">           <span class="built_in">console</span>.log(<span class="string">'document'</span>);</span></span><br><span class="line"><span class="javascript">        &#125;,<span class="literal">true</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        body.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'body'</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"><span class="javascript">        div.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'div'</span>);</span></span><br><span class="line"><span class="javascript">        &#125;,<span class="literal">true</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        button.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'button'</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line">        /*</span><br><span class="line"><span class="javascript">		<span class="built_in">document</span></span></span><br><span class="line">		div</span><br><span class="line">		button</span><br><span class="line">		body</span><br><span class="line">		*/</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三，阻止事件"><a href="#三，阻止事件" class="headerlink" title="三，阻止事件"></a>三，阻止事件</h2><h3 id="1-stopPropagation-阻止捕获和冒泡阶段中当前事件的进一步传播。"><a href="#1-stopPropagation-阻止捕获和冒泡阶段中当前事件的进一步传播。" class="headerlink" title="1. stopPropagation, 阻止捕获和冒泡阶段中当前事件的进一步传播。"></a>1. stopPropagation, 阻止捕获和冒泡阶段中当前事件的进一步传播。</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'document'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">body.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'body'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">div.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'div'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'stop'</span>);</span><br><span class="line">    e.stopPropagation();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">button.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'button'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* output</span></span><br><span class="line"><span class="comment">button</span></span><br><span class="line"><span class="comment">div</span></span><br><span class="line"><span class="comment">stop</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-preventDefault-阻止系统默认事件，比如-a-标签点击会跳转到-href-指定地址。通过-preventDefault-可以拦截系统默认的跳转，但是事件依然会继续传播到下一个节点。"><a href="#2-preventDefault-阻止系统默认事件，比如-a-标签点击会跳转到-href-指定地址。通过-preventDefault-可以拦截系统默认的跳转，但是事件依然会继续传播到下一个节点。" class="headerlink" title="2. preventDefault, 阻止系统默认事件，比如 a 标签点击会跳转到 href 指定地址。通过 preventDefault 可以拦截系统默认的跳转，但是事件依然会继续传播到下一个节点。"></a>2. preventDefault, 阻止系统默认事件，比如 a 标签点击会跳转到 href 指定地址。通过 preventDefault 可以拦截系统默认的跳转，但是事件依然会继续传播到下一个节点。</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'document'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">body.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'body'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">div.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'div'</span>);</span><br><span class="line">&#125;);</span><br><span class="line">a.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a'</span>);</span><br><span class="line">    e.preventDefault();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">a</span></span><br><span class="line"><span class="comment">div</span></span><br><span class="line"><span class="comment">body</span></span><br><span class="line"><span class="comment">document</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.luckybird.me/2019/11/16/event-trigger/" data-id="ck37yeq2e000ad428sfq4r7sz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/16/browser-safety/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">前端页面安全</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/16/event-trigger/">JS 事件捕获和冒泡</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/16/browser-safety/">前端页面安全</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/13/page-build/">浏览器页面呈现过程</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/07/brower-render/">浏览器输入地址后发生了什么</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 LuckyBird<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/luckybirdme" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

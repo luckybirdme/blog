@@ -204,7 +204,7 @@ Promise.race(loadImgAll).then(function(msg) {
 
 ```
 
-##### 3. [更多测试用例](/example/js/test-promise-func.html)
+##### 3. [更多测试用例](https://github.com/luckybirdme/blog/blob/master/example/js/test-promise-func.html)
 
 
 ### 四，Promise 原生实现
@@ -298,7 +298,7 @@ MyPromise.prototype.catch = function(reject){
 };
 ```
 
-[完整的原生实现例子](/example/js/my-promise-func.html)
+[完整的原生实现例子](https://github.com/luckybirdme/blog/blob/master/example/js/my-promise-func.html)
 
 
 

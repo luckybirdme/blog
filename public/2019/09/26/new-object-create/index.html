@@ -15,12 +15,10 @@
 <meta property="og:site_name" content="LuckyBird">
 <meta property="og:description" content="new 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例Object.create()是 ES5 新增的方法，创建一个新对象，指定新对象的proto，同时支持自定义新对象的属性">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-09T01:05:58.365Z">
+<meta property="og:updated_time" content="2019-11-21T00:15:24.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS new 和 Object.create">
 <meta name="twitter:description" content="new 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例Object.create()是 ES5 新增的方法，创建一个新对象，指定新对象的proto，同时支持自定义新对象的属性">
-  
-    <link rel="alternate" href="/atom.xml" title="LuckyBird" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -55,12 +53,14 @@
         
       </nav>
       <nav id="sub-nav">
+        
+        
+
         <!--
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
         -->
+
+
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.luckybird.me"></form>
@@ -104,7 +104,7 @@
 </ul>
 <h5 id="2-用原生-JavaScript-实现-new-的功能："><a href="#2-用原生-JavaScript-实现-new-的功能：" class="headerlink" title="2. 用原生 JavaScript 实现 new 的功能："></a>2. 用原生 JavaScript 实现 new 的功能：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 简单的实现</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个对象</span></span><br><span class="line">    <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">    <span class="comment">// 获取输入的构造函数</span></span><br><span class="line">    <span class="keyword">var</span> func = <span class="built_in">Array</span>.prototype.shift.call(<span class="built_in">arguments</span>);</span><br><span class="line">    <span class="comment">// 获取输入的其他参数</span></span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">    <span class="comment">// 将对象的原型链指向构造函数的原型对象，以获得构造函数的原型属性和方法</span></span><br><span class="line">    obj.__proto__ = func.prototype;</span><br><span class="line">    <span class="comment">// 执行构造函数，并将作用域指定为当前 obj 对象，以便获得构造函数自身的属性和方法</span></span><br><span class="line">    <span class="keyword">var</span> rtn = func.apply(obj,args);</span><br><span class="line">    <span class="comment">// 如果构造函数返回值是自定义的对象，直接返回</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> rtn === <span class="string">'object'</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> rtn</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 构造函数没有返回，就用使用当前对象 obj</span></span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="3-完整的实例代码"><a href="#3-完整的实例代码" class="headerlink" title="3. 完整的实例代码"></a>3. <a href="/example/js/my-new-func.html">完整的实例代码</a></h5><h3 id="二，Object-create"><a href="#二，Object-create" class="headerlink" title="二，Object.create"></a>二，Object.create</h3><h5 id="1-定义："><a href="#1-定义：" class="headerlink" title="1. 定义："></a>1. 定义：</h5><p>创建一个新对象，指定新对象的<strong>proto</strong> 为第一个输入参数，同时支持自定义新对象的属性，特点如下</p>
+<h5 id="3-完整的实例代码"><a href="#3-完整的实例代码" class="headerlink" title="3. 完整的实例代码"></a>3. <a href="https://github.com/luckybirdme/blog/blob/master/example/js/my-new-func.html" target="_blank" rel="noopener">完整的实例代码</a></h5><h3 id="二，Object-create"><a href="#二，Object-create" class="headerlink" title="二，Object.create"></a>二，Object.create</h3><h5 id="1-定义："><a href="#1-定义：" class="headerlink" title="1. 定义："></a>1. 定义：</h5><p>创建一个新对象，指定新对象的<strong>proto</strong> 为第一个输入参数，同时支持自定义新对象的属性，特点如下</p>
 <ul>
 <li>新对象的原型链指向传入的参数对象；</li>
 <li>新对象可以自定义自身的属性和方法，也能覆盖参数对象的属性和方法；</li>
@@ -113,11 +113,11 @@
 
 <h5 id="3-Object-create-主要用于继承对象的原型属性和方法，具体例子"><a href="#3-Object-create-主要用于继承对象的原型属性和方法，具体例子" class="headerlink" title="3. Object.create 主要用于继承对象的原型属性和方法，具体例子"></a>3. Object.create 主要用于继承对象的原型属性和方法，具体例子</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于继承的父类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.age = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line">People.prototype.getAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 用于继承的子类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">school</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.school = school</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误使用方式</span></span><br><span class="line"><span class="comment">// Student.prototype = People.prototype;</span></span><br><span class="line"><span class="comment">// 对象是引用类，Student.prototype 改变会导致 People.prototype 也改变</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不想要的使用方式</span></span><br><span class="line"><span class="comment">// Student.prototype = new People();</span></span><br><span class="line"><span class="comment">// 会同时继承 People 自身的属性和方法和原型属性和方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确想要使用方式，通过 Object.create 创建新对象</span></span><br><span class="line"><span class="comment">// 将新对象的原型链 __proto__ 指向 People.prototype，只继承 People 共有的原型属性和方法</span></span><br><span class="line">Student.prototype = <span class="built_in">Object</span>.create(People.prototype);</span><br><span class="line"><span class="comment">// 避免 Student 的构造函数被更改，加以修正</span></span><br><span class="line">Student.prototype.constructor = Student;</span><br><span class="line"><span class="built_in">console</span>.log(People.prototype);</span><br><span class="line"><span class="built_in">console</span>.log(Student.prototype);</span><br><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> Student(<span class="string">'Tsinghua'</span>);</span><br><span class="line">s1.age = <span class="number">22</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s1);</span><br><span class="line">s1.getAge();</span><br></pre></td></tr></table></figure>
 
-<h5 id="4-完整的实例代码"><a href="#4-完整的实例代码" class="headerlink" title="4. 完整的实例代码"></a>4. <a href="/example/js/my-object-create-func.html">完整的实例代码</a></h5><h3 id="三，new-和-Object-create-的区别"><a href="#三，new-和-Object-create-的区别" class="headerlink" title="三，new 和 Object.create 的区别"></a>三，new 和 Object.create 的区别</h3><h5 id="1-new-更多是为了获取构造函数的自身和原型的所有属性和方法"><a href="#1-new-更多是为了获取构造函数的自身和原型的所有属性和方法" class="headerlink" title="1. new 更多是为了获取构造函数的自身和原型的所有属性和方法"></a>1. new 更多是为了获取构造函数的自身和原型的所有属性和方法</h5><h5 id="1-Object-create-更多是为了获取构造函数的原型对象的属性和方法，称为原型式继承"><a href="#1-Object-create-更多是为了获取构造函数的原型对象的属性和方法，称为原型式继承" class="headerlink" title="1. Object.create 更多是为了获取构造函数的原型对象的属性和方法，称为原型式继承"></a>1. Object.create 更多是为了获取构造函数的原型对象的属性和方法，称为原型式继承</h5>
+<h5 id="4-完整的实例代码"><a href="#4-完整的实例代码" class="headerlink" title="4. 完整的实例代码"></a>4. <a href="https://github.com/luckybirdme/blog/blob/master/example/js/my-object-create-func.html" target="_blank" rel="noopener">完整的实例代码</a></h5><h3 id="三，new-和-Object-create-的区别"><a href="#三，new-和-Object-create-的区别" class="headerlink" title="三，new 和 Object.create 的区别"></a>三，new 和 Object.create 的区别</h3><h5 id="1-new-更多是为了获取构造函数的自身和原型的所有属性和方法"><a href="#1-new-更多是为了获取构造函数的自身和原型的所有属性和方法" class="headerlink" title="1. new 更多是为了获取构造函数的自身和原型的所有属性和方法"></a>1. new 更多是为了获取构造函数的自身和原型的所有属性和方法</h5><h5 id="1-Object-create-更多是为了获取构造函数的原型对象的属性和方法，称为原型式继承"><a href="#1-Object-create-更多是为了获取构造函数的原型对象的属性和方法，称为原型式继承" class="headerlink" title="1. Object.create 更多是为了获取构造函数的原型对象的属性和方法，称为原型式继承"></a>1. Object.create 更多是为了获取构造函数的原型对象的属性和方法，称为原型式继承</h5>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/09/26/new-object-create/" data-id="ck30xpj0l000s8028yap5v80u" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2019/09/26/new-object-create/" data-id="ck37yeq30000qd428225a8k7f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -191,6 +191,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/16/event-trigger/">JS 事件捕获和冒泡</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/16/browser-safety/">前端页面安全</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/13/page-build/">浏览器页面呈现过程</a>
           </li>
         
@@ -200,14 +208,6 @@
         
           <li>
             <a href="/2019/11/07/cross-site/">JS 跨域请求</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/06/http/">http 协议简介</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/30/canvas-svg/">canvas 和 svg</a>
           </li>
         
       </ul>

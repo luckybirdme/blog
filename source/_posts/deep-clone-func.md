@@ -162,7 +162,7 @@ return temp;
 - 其他类型，比如 Symbol，后续再研究 
 
 
-##### [示例代码](/example/js/deep-clone-func.html)
+##### [示例代码](https://github.com/luckybirdme/blog/blob/master/example/js/deep-clone-func.html)
 
 ### 四，业界的克隆方法
 ##### 1. [jQuery](https://api.jquery.com/jquery.extend/)，几乎是每个网站的标配类库，当然少不了深克隆的方法。

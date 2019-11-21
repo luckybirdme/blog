@@ -30,7 +30,7 @@ tags: CSS
 
 ### 二，具体使用
 ##### 1. 实现左中右布局，要求左右固定宽度，中间自适应宽度
-- float : [示例](/example/css/float-for-layout.html)
+- float : [示例https://github.com/luckybirdme/blog/blob/master/example/css/float-for-layout.html)
 
 ``` html
 <!DOCTYPE html>
@@ -74,7 +74,7 @@ tags: CSS
 
 ```
 
-- position : [示例](/example/css/position-for-layout.html)
+- position : [示例https://github.com/luckybirdme/blog/blob/master/example/css/position-for-layout.html)
 
 ``` html
 <!DOCTYPE html>
@@ -125,7 +125,7 @@ tags: CSS
 
 
 ##### 2. 实现顶部菜单固定，右下角有返回顶部按钮
-- postion : 利用fixed [示例](/example/css/position-fixed-for-layout.html)
+- postion : 利用fixed [示例](https://github.com/luckybirdme/blog/blob/master/example/css/position-fixed-for-layout.html)
 
 ``` html
 <!DOCTYPE html>
@@ -170,7 +170,7 @@ tags: CSS
 ```
 
 ##### 3. 实现水平居中
-- 包括行内和块级元素 [示例](/example/css/float-middle-for-layout.html)
+- 包括行内和块级元素 [示例](https://github.com/luckybirdme/blog/blob/master/example/css/float-middle-for-layout.html)
 
 ``` html
 <!DOCTYPE html>
@@ -207,7 +207,7 @@ tags: CSS
 ```
 
 ##### 3. 实现水平和垂直居中
--  两个方向都居中 [示例](/example/css/float-middle-for-layout.html)
+-  两个方向都居中 [示例](https://github.com/luckybirdme/blog/blob/master/example/css/float-middle-for-layout.html)
 
 ``` html
 <!DOCTYPE html>

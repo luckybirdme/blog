@@ -40,7 +40,7 @@ function myNew(){
                 
 ```
 
-##### 3. [完整的实例代码](/example/js/my-new-func.html)
+##### 3. [完整的实例代码](https://github.com/luckybirdme/blog/blob/master/example/js/my-new-func.html)
 
 ### 二，Object.create
 ##### 1. 定义：
@@ -98,7 +98,7 @@ s1.getAge();
 
 ```
 
-##### 4. [完整的实例代码](/example/js/my-object-create-func.html)
+##### 4. [完整的实例代码](https://github.com/luckybirdme/blog/blob/master/example/js/my-object-create-func.html)
 
 
 ### 三，new 和 Object.create 的区别
