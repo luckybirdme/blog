@@ -49,12 +49,6 @@ tags: JavaScript
         button.addEventListener('click',function(e){
             console.log('button');
         });
-        /*
-		document
-		div
-		button
-		body
-		*/
     </script>
 </body>
 </html>

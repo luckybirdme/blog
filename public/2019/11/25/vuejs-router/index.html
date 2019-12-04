@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>vuejs 路由 router | LuckyBird</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="多网页网站，每个网址代表不同页面；单页面应用，所有网址都指向同一个页面。为实现单页面，得借助前端路由识别所有网址，展示不同内容，但又不会产生页面请求。">
+<meta name="keywords" content="vuejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vuejs 路由 router">
+<meta property="og:url" content="https://blog.luckybird.me/2019/11/25/vuejs-router/index.html">
+<meta property="og:site_name" content="LuckyBird">
+<meta property="og:description" content="多网页网站，每个网址代表不同页面；单页面应用，所有网址都指向同一个页面。为实现单页面，得借助前端路由识别所有网址，展示不同内容，但又不会产生页面请求。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-27T00:53:10.010Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vuejs 路由 router">
+<meta name="twitter:description" content="多网页网站，每个网址代表不同页面；单页面应用，所有网址都指向同一个页面。为实现单页面，得借助前端路由识别所有网址，展示不同内容，但又不会产生页面请求。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="http://qiniucdn.luckybird.me/blog/css/fonts.googleapis.css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuckyBird</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/luckybirdme">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+
+        <!--
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        -->
+
+
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.luckybird.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vuejs-router" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/25/vuejs-router/" class="article-date">
+  <time datetime="2019-11-24T23:40:31.000Z" itemprop="datePublished">2019-11-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vuejs 路由 router
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>多网页网站，每个网址代表不同页面；单页面应用，所有网址都指向同一个页面。<br>为实现单页面，得借助前端路由识别所有网址，展示不同内容，但又不会产生页面请求。</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="一-单页面应用"><a href="#一-单页面应用" class="headerlink" title="一. 单页面应用"></a>一. 单页面应用</h2><hr>
+<h4 id="1-多页面"><a href="#1-多页面" class="headerlink" title="1. 多页面"></a>1. 多页面</h4><p>浏览器每个地址变化都会发起请求，后台服务器都会给返回一个新的html文档，这种类型叫做多页应用。<br>这是传统的多页页面应用，设置超链接来实现页面切换和跳转的。</p>
+<h4 id="2-单页面："><a href="#2-单页面：" class="headerlink" title="2. 单页面："></a>2. 单页面：</h4><p>首次请求返回一个html页面，后续浏览器地址发生变化，页面内容通过组件切换也变化了，但是并没有发起新的请求。<br>这是属于的单页面应用，原理。</p>
+<ul>
+<li>浏览器 URL 发生变化，但是不会发起请求。</li>
+<li>JS 会感知到 URL 的变化，动态的将当前页面的内容清除掉，然后将下一个页面的内容挂载到当前页面上。</li>
+<li>这个时候的路由不是后端来做了，而是前端来做，判断页面到底是显示哪个组件，清除不需要的，显示需要的组件。</li>
+<li>这种过程就是单页应用，每次跳转的时候不需要再请求html文件了，仅仅通过前端路由就能实现不同的 URL 展示不同页面内容。</li>
+</ul>
+<h2 id="二-vue-router-原理"><a href="#二-vue-router-原理" class="headerlink" title="二. vue-router 原理"></a>二. vue-router 原理</h2><hr>
+<p>原理核心就是，更新页面展示内容，但不重新发起请求。<br>vue-router 实现单页面路由跳转，提供了三种方式：hash 模式、history 模式、abstract 模式，根据 mode 参数来决定采用哪一种方式，默认是 hash</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">'history'</span>,</span><br><span class="line">  routes: [...]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-hash-兼容性最好的方法，也是默认模式。"><a href="#1-hash-兼容性最好的方法，也是默认模式。" class="headerlink" title="1. hash : 兼容性最好的方法，也是默认模式。"></a>1. hash : 兼容性最好的方法，也是默认模式。</h4><ul>
+<li>hash 是 URL 的锚点，比如 <a href="http://www.example.com/page/#/id" target="_blank" rel="noopener">http://www.example.com/page/#/id</a> 。 id 代表的是网页中的一个位置，单单改变 # 后的 /#/id，浏览器页面只会跳到相应位置的内容，但不会重新加载网页。</li>
+<li>即使浏览器刷新，URL 的 # 后面的内容也不会传递到服务器。也就是说 # 是用来指导浏览器动作的，对服务器端完全无用，跟 HTTP 请求无关联。</li>
+<li>每一次改变 # 后的 URL，都会在浏览器的访问历史中增加一个记录，使用“后退”按钮，就可以回到上一个位置。</li>
+<li>hash 变化会触发 hashchange 事件，通过侦听锚点值的改变，根据不同的值，渲染不同的页面。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改浏览器 url</span></span><br><span class="line"><span class="built_in">window</span>.location.hash = <span class="string">'#/id'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者直接替换</span></span><br><span class="line"><span class="built_in">window</span>.location.replace(<span class="string">'http://www.example.com/page/#/id'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听 hash 变化</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>, funcRef)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-history-借助-HTML5-History-API-和服务器配置，更友好的-URL。"><a href="#2-history-借助-HTML5-History-API-和服务器配置，更友好的-URL。" class="headerlink" title="2. history : 借助 HTML5 History API 和服务器配置，更友好的 URL。"></a>2. history : 借助 HTML5 History API 和服务器配置，更友好的 URL。</h4><ul>
+<li>HTML5 History API 提供了 pushState 和 replaceState 的方法修改 URL，会产生或修改浏览器的历史记录，继而触发 popstate 事件，但浏览器不会向服务器发起新页面请求。</li>
+<li>history 的 URL 不需要带 # ，比如 <a href="http://www.example.com/page/id" target="_blank" rel="noopener">http://www.example.com/page/id</a> ， 显得更友好。如果用户刷新浏览器，会把 URL 所有内容传达到服务器，服务器必须匹配所有前端路由到默认首页地址，否则会出现 404。</li>
+<li>由于服务器屏蔽了 404，所以前端需要单独配置 404 页面。</li>
+</ul>
+<h5 id="JS-底层实现原理"><a href="#JS-底层实现原理" class="headerlink" title="JS 底层实现原理"></a>JS 底层实现原理</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改浏览器 url</span></span><br><span class="line"><span class="built_in">window</span>.history.pushState(stateObject,headTitle,<span class="string">'http://www.example.com/page/id'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者直接替换</span></span><br><span class="line"><span class="built_in">window</span>.history.replaceState(stateObject,headTitle,<span class="string">'http://www.example.com/page/id'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听 popstate 变化</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"popstate"</span>, funcRef)</span><br></pre></td></tr></table></figure>
+
+<h5 id="前端路由-404-页面配置放到最后，因为优先级缘故，此配置不会影响其他精确路由，只起到路由兜底作用。"><a href="#前端路由-404-页面配置放到最后，因为优先级缘故，此配置不会影响其他精确路由，只起到路由兜底作用。" class="headerlink" title="前端路由 404 页面配置放到最后，因为优先级缘故，此配置不会影响其他精确路由，只起到路由兜底作用。"></a>前端路由 404 页面配置放到最后，因为优先级缘故，此配置不会影响其他精确路由，只起到路由兜底作用。</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">'history'</span>,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">// 精确匹配，放在前面，优先匹配</span></span><br><span class="line">      path: <span class="string">'/user/:id'</span>,</span><br><span class="line">      component: UserComponent</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; </span><br><span class="line">      <span class="comment">// 模糊匹配所有路径，放到最后，作为兜底</span></span><br><span class="line">      path: <span class="string">'*'</span>, </span><br><span class="line">      component: NotFoundComponent </span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="后端服务器配置，以-NGINX-为例子，匹配所有路径到首页地址"><a href="#后端服务器配置，以-NGINX-为例子，匹配所有路径到首页地址" class="headerlink" title="后端服务器配置，以 NGINX 为例子，匹配所有路径到首页地址"></a>后端服务器配置，以 NGINX 为例子，匹配所有路径到首页地址</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  try_files $uri $uri/ /index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="hash-和-history-模式的区别"><a href="#hash-和-history-模式的区别" class="headerlink" title="hash 和 history 模式的区别"></a>hash 和 history 模式的区别</h4><ul>
+<li>history 模式需要借助 HTML5 History API 新特性，所以得考虑浏览器兼容性。</li>
+<li>history pushState 设置的新URL可以是与当前URL同源的任意URL；而 hash 只可修改#后面的部分。</li>
+<li>history pushState 设置新URL与当前URL一样，也会把记录添加到栈中；而 hash 必须设置不一样的新值才会触发记录添加到栈中。</li>
+<li>history pushState 通过 stateObject 可以添加任意类型的数据记录中，而 hash 只可添加短字符串。</li>
+<li>hash 模式 URL 带有 # ，对搜索引擎优化 SEO 不太好。</li>
+</ul>
+<h4 id="3-abstract-非浏览器环境的强制模式，比如-Node-js-服务器端。"><a href="#3-abstract-非浏览器环境的强制模式，比如-Node-js-服务器端。" class="headerlink" title="3. abstract : 非浏览器环境的强制模式，比如 Node.js 服务器端。"></a>3. abstract : 非浏览器环境的强制模式，比如 Node.js 服务器端。</h4><h5 id="如果发现没有浏览器的-API，vue-router-会自动强制进入-abstract-模式，所以-在使用-vue-router-时只要不写-mode-配置即可，默认会在浏览器环境中使用-hash-模式，在移动端原生环境中使用-abstract-模式，具体例子可参考-Weex-，可跨平台来构建-Android、iOS-和-Web-应用。"><a href="#如果发现没有浏览器的-API，vue-router-会自动强制进入-abstract-模式，所以-在使用-vue-router-时只要不写-mode-配置即可，默认会在浏览器环境中使用-hash-模式，在移动端原生环境中使用-abstract-模式，具体例子可参考-Weex-，可跨平台来构建-Android、iOS-和-Web-应用。" class="headerlink" title="如果发现没有浏览器的 API，vue-router 会自动强制进入 abstract 模式，所以 在使用 vue-router 时只要不写 mode 配置即可，默认会在浏览器环境中使用 hash 模式，在移动端原生环境中使用 abstract 模式，具体例子可参考 Weex ，可跨平台来构建 Android、iOS 和 Web 应用。"></a>如果发现没有浏览器的 API，vue-router 会自动强制进入 abstract 模式，所以 在使用 vue-router 时只要不写 mode 配置即可，默认会在浏览器环境中使用 hash 模式，在移动端原生环境中使用 abstract 模式，具体例子可参考 Weex ，可跨平台来构建 Android、iOS 和 Web 应用。</h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.luckybird.me/2019/11/25/vuejs-router/" data-id="ck3rycbg2001as8281633f219" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/02/vuejs-plugins/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          vuejs 插件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/23/vuejs-option/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vuejs 选项参数解析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/vuejs/" style="font-size: 16.67px;">vuejs</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/04/vuejs-plugins/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/03/vuejs-vuex/">vuejs 状态管理 vuex</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/02/vuejs-plugins/">vuejs 插件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/25/vuejs-router/">vuejs 路由 router</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/23/vuejs-option/">vuejs 选项参数解析</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 LuckyBird<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/luckybirdme" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

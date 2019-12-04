@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>vuejs 选项参数解析 | LuckyBird</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="vuejs 选项主要参数包括: el,data,methods,computed,watch。模块化引用 vuejs 时，还有包括 name,components,props 参数。">
+<meta name="keywords" content="vuejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vuejs 选项参数解析">
+<meta property="og:url" content="https://blog.luckybird.me/2019/11/23/vuejs-option/index.html">
+<meta property="og:site_name" content="LuckyBird">
+<meta property="og:description" content="vuejs 选项主要参数包括: el,data,methods,computed,watch。模块化引用 vuejs 时，还有包括 name,components,props 参数。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-23T12:17:02.944Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vuejs 选项参数解析">
+<meta name="twitter:description" content="vuejs 选项主要参数包括: el,data,methods,computed,watch。模块化引用 vuejs 时，还有包括 name,components,props 参数。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="http://qiniucdn.luckybird.me/blog/css/fonts.googleapis.css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuckyBird</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/luckybirdme">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+
+        <!--
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        -->
+
+
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.luckybird.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vuejs-option" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/23/vuejs-option/" class="article-date">
+  <time datetime="2019-11-23T09:47:09.000Z" itemprop="datePublished">2019-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vuejs 选项参数解析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>vuejs 选项主要参数包括: el,data,methods,computed,watch。<br>模块化引用 vuejs 时，还有包括 name,components,props 参数。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="一-el"><a href="#一-el" class="headerlink" title="一. el"></a>一. el</h2><h5 id="虚拟-dom-挂载所在的节点"><a href="#虚拟-dom-挂载所在的节点" class="headerlink" title="虚拟 dom 挂载所在的节点"></a>虚拟 dom 挂载所在的节点</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-data"><a href="#二-data" class="headerlink" title="二. data"></a>二. data</h2><h5 id="两种格式"><a href="#两种格式" class="headerlink" title="两种格式"></a>两种格式</h5><ul>
+<li>使用 script 直接引入，data 是一个纯粹的 key/val 对象。</li>
+<li>使用 import/require 使用一个模块系统，比如通过 Babel 和 webpack 使用 ES2015 模块，data 是一个函数，并返回一个纯粹对象。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接通过 script 引入</span></span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    key: <span class="string">'val'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块化使用</span></span><br><span class="line"><span class="keyword">var</span> Component = Vue.extend(&#123;</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; </span><br><span class="line">      a: <span class="number">1</span> </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      key: <span class="string">'val'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三-name"><a href="#三-name" class="headerlink" title="三. name"></a>三. name</h2><h4 id="模块化的组件名称，用于标记和引用组件"><a href="#模块化的组件名称，用于标记和引用组件" class="headerlink" title="模块化的组件名称，用于标记和引用组件"></a>模块化的组件名称，用于标记和引用组件</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组件自身定义 name 属性</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'TestComponent'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四-components"><a href="#四-components" class="headerlink" title="四. components"></a>四. components</h2><h4 id="存放引用的组件"><a href="#存放引用的组件" class="headerlink" title="存放引用的组件"></a>存放引用的组件</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 直接通过 script 引入</span></span><br><span class="line"><span class="keyword">var</span> ComponentA = &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line"><span class="keyword">var</span> ComponentB = &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  components: &#123;</span><br><span class="line">    <span class="string">'component-a'</span>: ComponentA,</span><br><span class="line">    <span class="string">'component-b'</span>: ComponentB</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块化引用</span></span><br><span class="line"><span class="keyword">import</span> TestComponent <span class="keyword">from</span> <span class="string">'./components/TestComponent.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'app'</span>,</span><br><span class="line">  <span class="comment">// 引用的组件</span></span><br><span class="line">  components: &#123;</span><br><span class="line">    TestComponent</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="五-props"><a href="#五-props" class="headerlink" title="五. props"></a>五. props</h2><h4 id="props-可以是数组或对象，用于接收来自父组件的数据。props-可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义验证和设置默认值。"><a href="#props-可以是数组或对象，用于接收来自父组件的数据。props-可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义验证和设置默认值。" class="headerlink" title="props 可以是数组或对象，用于接收来自父组件的数据。props 可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义验证和设置默认值。"></a>props 可以是数组或对象，用于接收来自父组件的数据。props 可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义验证和设置默认值。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'TestComponent'</span>,</span><br><span class="line">  props: &#123;</span><br><span class="line">    <span class="comment">// 检测类型</span></span><br><span class="line">    height: <span class="built_in">Number</span>,</span><br><span class="line">    age: &#123;</span><br><span class="line">      <span class="comment">// 校验类型</span></span><br><span class="line">      type: <span class="built_in">Number</span>,</span><br><span class="line">      <span class="comment">// 默认值</span></span><br><span class="line">      <span class="keyword">default</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="comment">// 必须传递</span></span><br><span class="line">      required: <span class="literal">true</span>,</span><br><span class="line">      <span class="comment">// 校验取值</span></span><br><span class="line">      validator: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value &gt;= <span class="number">0</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="六-methods"><a href="#六-methods" class="headerlink" title="六. methods"></a>六. methods</h2><h4 id="主要存放人为触发性的操作方法，比如按钮点击响应函数。可直接通过-VM-实例访问这些方法，方法中的-this-自动绑定为-Vue-实例，所以不能使用箭头函数来定义，因为箭头函数默认绑定父级上下文。"><a href="#主要存放人为触发性的操作方法，比如按钮点击响应函数。可直接通过-VM-实例访问这些方法，方法中的-this-自动绑定为-Vue-实例，所以不能使用箭头函数来定义，因为箭头函数默认绑定父级上下文。" class="headerlink" title="主要存放人为触发性的操作方法，比如按钮点击响应函数。可直接通过 VM 实例访问这些方法，方法中的 this 自动绑定为 Vue 实例，所以不能使用箭头函数来定义，因为箭头函数默认绑定父级上下文。"></a>主要存放人为触发性的操作方法，比如按钮点击响应函数。可直接通过 VM 实例访问这些方法，方法中的 this 自动绑定为 Vue 实例，所以不能使用箭头函数来定义，因为箭头函数默认绑定父级上下文。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'TestComponent'</span>,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    clickButton: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    selectOption () &#123;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="七-computed"><a href="#七-computed" class="headerlink" title="七. computed"></a>七. computed</h2><h4 id="主要存放响应式属性变化后产生的计算结果，计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。"><a href="#主要存放响应式属性变化后产生的计算结果，计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。" class="headerlink" title="主要存放响应式属性变化后产生的计算结果，计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。"></a>主要存放响应式属性变化后产生的计算结果，计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"hello"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">'val'</span>&gt;</span></span><br><span class="line">      &#123;&#123; getValLen&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">  name: <span class="string">'TestComponent'</span>,</span></span><br><span class="line"><span class="javascript">  data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">      val: <span class="string">''</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line"><span class="javascript">    getValLen: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="keyword">this</span>.val.length</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="八-watch"><a href="#八-watch" class="headerlink" title="八. watch"></a>八. watch</h2><h4 id="存放一个监听对象，键是需要监听的属性表达式，值是对应回调函数。值也可以是-methods-中的方法名，或者包含选项的对象。Vue-实例将会在实例化时调用-watch-，遍历-watch-对象的每一个属性。"><a href="#存放一个监听对象，键是需要监听的属性表达式，值是对应回调函数。值也可以是-methods-中的方法名，或者包含选项的对象。Vue-实例将会在实例化时调用-watch-，遍历-watch-对象的每一个属性。" class="headerlink" title="存放一个监听对象，键是需要监听的属性表达式，值是对应回调函数。值也可以是 methods 中的方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 $watch()，遍历 watch 对象的每一个属性。"></a>存放一个监听对象，键是需要监听的属性表达式，值是对应回调函数。值也可以是 methods 中的方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 $watch()，遍历 watch 对象的每一个属性。</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: <span class="number">2</span>,</span><br><span class="line">    c: <span class="number">3</span>,</span><br><span class="line">    d: <span class="number">4</span>,</span><br><span class="line">    e: &#123;</span><br><span class="line">      f: &#123;</span><br><span class="line">        g: <span class="number">5</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    show: <span class="function"><span class="keyword">function</span>(<span class="params">val, oldVal</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'show'</span>,val,oldVal);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  watch: &#123;</span><br><span class="line">    a: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'new: %s, old: %s'</span>, val, oldVal)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// methods 中方法名</span></span><br><span class="line">    b: <span class="string">'show'</span>,</span><br><span class="line">    <span class="comment">// 该回调会在任何被侦听的对象的 property 改变时被调用，不论其被嵌套多深</span></span><br><span class="line">    c: &#123;</span><br><span class="line">      handler: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123; <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">      deep: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 该回调将会在侦听开始之后被立即调用</span></span><br><span class="line">    d: &#123;</span><br><span class="line">      handler: <span class="string">'someMethod'</span>,</span><br><span class="line">      immediate: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    e: [</span><br><span class="line">      <span class="string">'handle1'</span>,</span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">handle2</span> (<span class="params">val, oldVal</span>) </span>&#123; <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        handler: <span class="function"><span class="keyword">function</span> <span class="title">handle3</span> (<span class="params">val, oldVal</span>) </span>&#123; <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">        <span class="comment">/* ... */</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="comment">// watch vm.e.f's value: &#123;g: 5&#125;</span></span><br><span class="line">    <span class="string">'e.f'</span>: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">vm.a = <span class="number">2</span> <span class="comment">// =&gt; new: 2, old: 1</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.luckybird.me/2019/11/23/vuejs-option/" data-id="ck3rycbfy0017s828ep7wjm3g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/25/vuejs-router/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          vuejs 路由 router
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/23/vuejs-life/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vuejs 生命周期</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/vuejs/" style="font-size: 16.67px;">vuejs</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/04/vuejs-plugins/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/03/vuejs-vuex/">vuejs 状态管理 vuex</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/02/vuejs-plugins/">vuejs 插件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/25/vuejs-router/">vuejs 路由 router</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/23/vuejs-option/">vuejs 选项参数解析</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 LuckyBird<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/luckybirdme" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
