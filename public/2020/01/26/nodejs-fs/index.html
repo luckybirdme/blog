@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>nodejs 文件操作 | HelloWorld</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nodejs 文件操作的常用方法">
+<meta name="keywords" content="nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs 文件操作">
+<meta property="og:url" content="https://blog.luckybird.me/2020/01/26/nodejs-fs/index.html">
+<meta property="og:site_name" content="HelloWorld">
+<meta property="og:description" content="nodejs 文件操作的常用方法">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-28T05:53:09.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs 文件操作">
+<meta name="twitter:description" content="nodejs 文件操作的常用方法">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="http://qiniucdn.luckybird.me/blog/css/fonts.googleapis.css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HelloWorld</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/luckybirdme">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+
+        <!--
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        -->
+
+
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.luckybird.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nodejs-fs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/26/nodejs-fs/" class="article-date">
+  <time datetime="2020-01-26T05:52:00.000Z" itemprop="datePublished">2020-01-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nodejs 文件操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>nodejs 文件操作的常用方法</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="1-大部分文件操作方法都包括异步和同步的函数，同步函数多了-Sync，而且可以立马-catch-错误"><a href="#1-大部分文件操作方法都包括异步和同步的函数，同步函数多了-Sync，而且可以立马-catch-错误" class="headerlink" title="1. 大部分文件操作方法都包括异步和同步的函数，同步函数多了 Sync，而且可以立马 catch 错误"></a>1. 大部分文件操作方法都包括异步和同步的函数，同步函数多了 Sync，而且可以立马 catch 错误</h3><ul>
+<li>异步读取</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(<span class="string">'hello.txt'</span>,<span class="string">'utf-8'</span>, (err, data) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>同步读取</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="comment">// 指定编码读取</span></span><br><span class="line">  <span class="keyword">const</span> data = fs.readFileSync(<span class="string">'hello.txt'</span>,<span class="string">'utf-8'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">  <span class="comment">// 处理错误</span></span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-nodejs-文件读取时支持设置编码，-比如-utf-8-但是不支持-gbk-需要第三方库进行转码"><a href="#2-nodejs-文件读取时支持设置编码，-比如-utf-8-但是不支持-gbk-需要第三方库进行转码" class="headerlink" title="2. nodejs 文件读取时支持设置编码， 比如 utf-8, 但是不支持 gbk, 需要第三方库进行转码"></a>2. nodejs 文件读取时支持设置编码， 比如 utf-8, 但是不支持 gbk, 需要第三方库进行转码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> iconv = <span class="built_in">require</span>(<span class="string">'iconv-lite'</span>);</span><br><span class="line"><span class="keyword">let</span> bin = fs.readFileSync(<span class="string">'hello.txt'</span>);</span><br><span class="line"><span class="keyword">let</span> str = iconv.decode(bin, <span class="string">'gbk'</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-数据处理除了字符串-String-外，还支持-Buffer-数据块，二进制-和-Stream-数据流，管道流"><a href="#3-数据处理除了字符串-String-外，还支持-Buffer-数据块，二进制-和-Stream-数据流，管道流" class="headerlink" title="3. 数据处理除了字符串 String 外，还支持 Buffer (数据块，二进制) 和 Stream (数据流，管道流)"></a>3. 数据处理除了字符串 String 外，还支持 Buffer (数据块，二进制) 和 Stream (数据流，管道流)</h3><ul>
+<li>Buffer</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="comment">// 默认返回是 Buffer</span></span><br><span class="line">  <span class="keyword">const</span> buf = fs.readFileSync(<span class="string">'hello.txt'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(buf);</span><br><span class="line">  <span class="keyword">const</span> bts = buf.toString(<span class="string">'utf-8'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(bts);</span><br><span class="line">&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">  <span class="comment">// 处理错误</span></span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Stream</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">let</span> readerStream = fs.createReadStream(<span class="string">'hello.txt'</span>,&#123; <span class="attr">encoding</span> : <span class="string">'utf-8'</span>, <span class="attr">highWaterMark</span> : <span class="number">1</span>&#125;);</span><br><span class="line"><span class="keyword">let</span> writerStream = fs.createWriteStream(<span class="string">'output.txt'</span>);</span><br><span class="line"></span><br><span class="line">readerStream.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(chunk);</span><br><span class="line">  data += chunk;</span><br><span class="line">&#125;);</span><br><span class="line">readerStream.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"read end"</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">  writerStream.write(data,<span class="string">'utf-8'</span>);</span><br><span class="line">  writerStream.end();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">writerStream.on(<span class="string">'finish'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"write finish"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>链式 Stream</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zlib = <span class="built_in">require</span>(<span class="string">'zlib'</span>);</span><br><span class="line">fs.createReadStream(<span class="string">'hello.txt'</span>)</span><br><span class="line">  .pipe(zlib.createGzip())</span><br><span class="line">  .pipe(fs.createWriteStream(<span class="string">'hello.txt.gz'</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-为了防止大文件操作时占满内存，通过-Stream-方式进行数据流转，比如复制大文件"><a href="#4-为了防止大文件操作时占满内存，通过-Stream-方式进行数据流转，比如复制大文件" class="headerlink" title="4. 为了防止大文件操作时占满内存，通过 Stream 方式进行数据流转，比如复制大文件"></a>4. 为了防止大文件操作时占满内存，通过 Stream 方式进行数据流转，比如复制大文件</h3><ul>
+<li>小文件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> src = <span class="string">'/tmp/little'</span>;</span><br><span class="line"><span class="keyword">const</span> dst = <span class="string">'/tmp/little_copy'</span>;</span><br><span class="line">fs.writeFileSync(dst, fs.readFileSync(src));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>大文件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> src=<span class="string">'/tmp/large'</span>;</span><br><span class="line"><span class="keyword">const</span> dst=<span class="string">'/tmp/large_copy'</span>;</span><br><span class="line">fs.createReadStream(src).pipe(fs.createWriteStream(dst));</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-利用递归遍历多层目录，包括同步和异步的方式"><a href="#5-利用递归遍历多层目录，包括同步和异步的方式" class="headerlink" title="5. 利用递归遍历多层目录，包括同步和异步的方式"></a>5. 利用递归遍历多层目录，包括同步和异步的方式</h3><ul>
+<li>同步遍历</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">traverSync</span>(<span class="params">src, cb</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> pathname = path.join(src);</span><br><span class="line">  <span class="keyword">let</span> files = fs.readdirSync(pathname);</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> files) &#123;</span><br><span class="line">    <span class="keyword">let</span> newsrc = path.join(src,files[i]);</span><br><span class="line">    <span class="keyword">if</span>(fs.statSync(newsrc).isDirectory())&#123;</span><br><span class="line">      traverSync(newsrc, cb);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      cb(newsrc)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>异步遍历</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">traver</span>(<span class="params">src, cb</span>) </span>&#123;</span><br><span class="line">  fs.readdir(src, (err, files) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">    <span class="comment">// 必须使用 let 块变量，不能使用 var </span></span><br><span class="line">    <span class="comment">// 因为是异步执行，var 变量只会保存最后的取值</span></span><br><span class="line">    <span class="comment">// let 块变量，只在当前区域有效，不受外界影响，所以异步执行依然是当时的变量</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> files) &#123;</span><br><span class="line">      <span class="keyword">let</span> newsrc = path.join(src, files[i]);</span><br><span class="line">      fs.stat(newsrc, (err, file) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(file.isDirectory())&#123;</span><br><span class="line">          traver(newsrc, cb)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          cb(newsrc)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(i);</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.luckybird.me/2020/01/26/nodejs-fs/" data-id="ck7ssau94001ijo28gvujs9pk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/28/nodejs-http/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          nodejs 网络交互
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/18/js-async-await/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">js async/await</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 16px;">nodejs</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/vuejs/" style="font-size: 14px;">vuejs</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/05/python-thread/">python 进程 线程 协程</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/05/python-tcp/">python tcp</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/04/python-err-assert-test/">python 错误 断点 测试</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/04/python-class/">python class</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/04/python-module/">python 引入模块 包 class</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 LuckyBird<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/luckybirdme" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

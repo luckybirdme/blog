@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>nodejs 特点 | HelloWorld</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nodejs 是一个 Javascript 运行环境，依赖于 Chrome V8 引擎进行 js 代码解释，它采用事件驱动和非阻塞I/O机制，合适轻量、可伸缩，适于实时数据交互应用。">
+<meta name="keywords" content="nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs 特点">
+<meta property="og:url" content="https://blog.luckybird.me/2019/12/23/nodejs/index.html">
+<meta property="og:site_name" content="HelloWorld">
+<meta property="og:description" content="nodejs 是一个 Javascript 运行环境，依赖于 Chrome V8 引擎进行 js 代码解释，它采用事件驱动和非阻塞I/O机制，合适轻量、可伸缩，适于实时数据交互应用。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/nodejs-0.png">
+<meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/nodejs-1.png">
+<meta property="og:updated_time" content="2019-12-28T02:21:49.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs 特点">
+<meta name="twitter:description" content="nodejs 是一个 Javascript 运行环境，依赖于 Chrome V8 引擎进行 js 代码解释，它采用事件驱动和非阻塞I/O机制，合适轻量、可伸缩，适于实时数据交互应用。">
+<meta name="twitter:image" content="http://qiniucdn.luckybird.me/blog/img/2019/nodejs-0.png">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="http://qiniucdn.luckybird.me/blog/css/fonts.googleapis.css" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HelloWorld</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/luckybirdme">GitHub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+
+        <!--
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        -->
+
+
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.luckybird.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nodejs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/23/nodejs/" class="article-date">
+  <time datetime="2019-12-23T00:52:35.000Z" itemprop="datePublished">2019-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nodejs 特点
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>nodejs 是一个 Javascript 运行环境，依赖于 Chrome V8 引擎进行 js 代码解释，它采用事件驱动和非阻塞I/O机制，合适轻量、可伸缩，适于实时数据交互应用。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="一-简介"><a href="#一-简介" class="headerlink" title="一. 简介"></a>一. 简介</h2><h4 id="nodejs-是一个-Javascript-运行环境，依赖于-Chrome-V8-引擎进行-js-代码解释，它采用事件驱动和非阻塞I-O机制，合适轻量、可伸缩，适于实时数据交互应用。"><a href="#nodejs-是一个-Javascript-运行环境，依赖于-Chrome-V8-引擎进行-js-代码解释，它采用事件驱动和非阻塞I-O机制，合适轻量、可伸缩，适于实时数据交互应用。" class="headerlink" title="nodejs 是一个 Javascript 运行环境，依赖于 Chrome V8 引擎进行 js 代码解释，它采用事件驱动和非阻塞I/O机制，合适轻量、可伸缩，适于实时数据交互应用。"></a>nodejs 是一个 Javascript 运行环境，依赖于 Chrome V8 引擎进行 js 代码解释，它采用事件驱动和非阻塞I/O机制，合适轻量、可伸缩，适于实时数据交互应用。</h4><h4 id="1-nodejs-系统框架"><a href="#1-nodejs-系统框架" class="headerlink" title="1. nodejs 系统框架"></a>1. nodejs 系统框架</h4><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/nodejs-0.png" alt></p>
+<ul>
+<li>Application : 这部分是由 Javascript 编写的，即我们的应用程序。</li>
+<li>V8：Google 推出的 Javascript VM，提供了在非浏览器端运行的环境下，解析并执行 JavaScript。</li>
+<li>Node bindings : 这一层是 Javascript 与底层 C/C++ 能够沟通的关键，前者通过此接口与操作系统进行交互。</li>
+<li>Libuv：它为 Node.js 提供了跨平台，线程池，事件池，异步 I/O 等能力，是 Node.js 如此强大的关键。</li>
+</ul>
+<h4 id="2-nodejs-运行机制"><a href="#2-nodejs-运行机制" class="headerlink" title="2. nodejs 运行机制"></a>2. nodejs 运行机制</h4><p><img src="http://qiniucdn.luckybird.me/blog/img/2019/nodejs-1.png" alt></p>
+<ul>
+<li>每个Node.js进程只有一个主线程在执行程序代码，形成一个执行栈（execution context stack)。</li>
+<li>主线程之外，还维护了一个”事件队列”（Event queue）。当用户的网络请求或者其它的异步操作到来时，node都会把它放到Event Queue之中，此时并不会立即执行它，代码也不会被阻塞，继续往下走，直到主线程代码执行完毕。</li>
+<li>主线程代码执行完毕完成后，然后通过Event Loop，也就是事件循环机制，开始到Event Queue的开头取出第一个事件，从线程池中分配一个线程去执行这个事件，接下来继续取出第二个事件，再从线程池中分配一个线程去执行，然后第三个，第四个。主线程不断的检查事件队列中是否有未执行的事件，直到事件队列中所有事件都执行完了，此后每当有新的事件加入到事件队列中，都会通知主线程按顺序取出交EventLoop处理。当有事件执行完毕后，会通知主线程，主线程执行回调，线程归还给线程池。</li>
+<li>主线程不断重复上面的第三步。</li>
+</ul>
+<h4 id="3-主要特性"><a href="#3-主要特性" class="headerlink" title="3. 主要特性"></a>3. 主要特性</h4><ul>
+<li>高并发连接 : 每个连接发射（emit）一个在 NodeJS 引擎进程中运行的事件（Event），放进事件队列当中等待执行（EventLoop），因此可以快速地接收高并发连接。</li>
+<li>I/O 密集型 : 主线程轮询任务队列，遇到 I/O 事件分配给底层线程池执行，不会阻塞当前 I/O ，等 I/O 操作结束再执行回调函数（callback），因此合适密集型 I/O 的应用。</li>
+</ul>
+<h4 id="4-缺点"><a href="#4-缺点" class="headerlink" title="4. 缺点"></a>4. 缺点</h4><ul>
+<li><p>不适合CPU密集型应用：由于JavaScript单线程的原因，如果有长时间运行的计算（比如大循环），将会导致CPU时间片不能释放，使得后续I/O无法发起。<br>解决方案：分解大型运算任务为多个小任务，使得运算能够适时释放，不阻塞I/O调用的发起；</p>
+</li>
+<li><p>单线程不能充分利用拥有多个 CPU 的服务器。<br>解决方案：通过 child_process 创建子进程，将计算任务分发到子进行中，充分利用多个CPU。</p>
+</li>
+<li><p>单线程运行可靠性低，一旦代码某个环节崩溃，整个系统都崩溃。<br>解决方案：Nnigx反向代理，负载均衡，开多个进程，绑定多个端口；</p>
+</li>
+<li><p>大内存的应用，由于V8引擎有内存设计的限制，32位环境中最大堆是1G，64位环境中最大堆也不到2G，如果要一次读入10G数据，对于Nodejs来说也无法实现。<br>解决方法：还是使用 Java 和 C/C++ 吧。</p>
+</li>
+<li><p>js 合适处理 json 格式的数据，比如文档型数据库 MongoDB，但是对于关系型数据库，则需要经过复杂的转换。<br>解决方法：如果可以，使用文档型数据库。</p>
+</li>
+</ul>
+<h2 id="二-应用场景"><a href="#二-应用场景" class="headerlink" title="二. 应用场景"></a>二. 应用场景</h2><h4 id="NodeJS适合运用在高并发、I-O密集、少量业务逻辑的场景，具体案例如下："><a href="#NodeJS适合运用在高并发、I-O密集、少量业务逻辑的场景，具体案例如下：" class="headerlink" title="NodeJS适合运用在高并发、I/O密集、少量业务逻辑的场景，具体案例如下："></a>NodeJS适合运用在高并发、I/O密集、少量业务逻辑的场景，具体案例如下：</h4><h4 id="1-即时聊天工具-socket-io"><a href="#1-即时聊天工具-socket-io" class="headerlink" title="1. 即时聊天工具 ( socket.io )"></a>1. 即时聊天工具 ( socket.io )</h4><p>聊天室是典型的实时、多用户应用，轻量化、高流量，数据密集型，处理时间短，最简单做一次转发，同时考虑跨终端，不仅在浏览器，还能在APP上使用。它包含了大多数在一个典型的Node.js应用中用到的模式。</p>
+<h4 id="2-Restfull-API"><a href="#2-Restfull-API" class="headerlink" title="2. Restfull API"></a>2. Restfull API</h4><p>这是NodeJS最理想的应用场景，可以处理数万条连接，本身没有太多的逻辑，只需要请求API，组织数据进行返回即可。它本质上只是从某个数据库中查找一些值并将它们组成一个响应。由于响应是少量文本，入站请求也是少量的文本，因此流量不高，一台机器甚至也可以处理最繁忙的公司的API需求。<br>不讨论这种架构是好是坏，但是有另外一种实践，面向服务的架构，更好的做前后端的依赖分离。如果所有的关键业务逻辑都封装成REST调用，就意味着在上层只需要考虑如何用这些REST接口构建具体的应用。那些后端程序员们根本不操心具体数据是如何从一个页面传递到另一个页面的，他们也不用管用户数据更新是通过Ajax异步获取的还是通过刷新页面。</p>
+<h4 id="3-前端构建工具-hexo-vue-cli"><a href="#3-前端构建工具-hexo-vue-cli" class="headerlink" title="3. 前端构建工具 ( hexo, vue-cli )"></a>3. 前端构建工具 ( hexo, vue-cli )</h4><p>Hexo 是一个简单地、轻量地、基于Node的一个静态博客框架。通过Hexo我们可以快速创建自己的博客，仅需要几条命令就可以完成。<br>vue-cli 是目前流行的前端框架 vuejs 的脚手架，方便构建 vuejs 的开发环境，集成了打包工具，服务 server 等。</p>
+<h4 id="4-Web-网站开发-Express-EJS-MongoDB"><a href="#4-Web-网站开发-Express-EJS-MongoDB" class="headerlink" title="4. Web 网站开发 ( Express + EJS + MongoDB)"></a>4. Web 网站开发 ( Express + EJS + MongoDB)</h4><p>express 是轻量灵活的Nodejs Web应用框架，它可以快速地搭建网站。Express框架建立在Nodejs内置的Http模块上，并对Http模块再包装，从而实际Web请求处理的功能。<br>ejs是一个嵌入的Javascript模板引擎，通过编译生成HTML的代码。<br>mongoose 是MongoDB的对象模型工具，通过Mongoose框架，可以进行访问MongoDB的操作。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.luckybird.me/2019/12/23/nodejs/" data-id="ck7ssau9x001ujo28vm8cbiyv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/18/js-yield/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          js yield
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/08/webpack/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webpack 介绍</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 16px;">nodejs</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/vuejs/" style="font-size: 14px;">vuejs</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/05/python-thread/">python 进程 线程 协程</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/05/python-tcp/">python tcp</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/04/python-err-assert-test/">python 错误 断点 测试</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/04/python-class/">python class</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/04/python-module/">python 引入模块 包 class</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 LuckyBird<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/luckybirdme" class="mobile-nav-link">GitHub</a>
+  
+</nav>
+    
+
+<script src="http://qiniucdn.luckybird.me/blog/js/jquery-2.2.4.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
