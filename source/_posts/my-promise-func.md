@@ -209,6 +209,7 @@ Promise.race(loadImgAll).then(function(msg) {
 
 ### 四，Promise 原生实现
 
+主要实现 Promise 的状态改变，resolve , reject , then , 以及 catch 函数
 ```javascript
 
 // 构造函数

@@ -5,17 +5,17 @@
   
 
   
-  <title>JS 变量和克隆 | LuckyBird</title>
+  <title>JS 变量和克隆 | HelloWorld</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="JavaScript 变量包括基本类型和引用类型，基本类型的变量可直接访问和操作对应值，赋值就可以克隆一份值到另外一个内存地址中保存。引用类型的变量则只是保存引用地址，赋值只是克隆引用地址，实际上还是共用变量，变量更改时，所有相同引用地址的变量也更改。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS 变量和克隆">
 <meta property="og:url" content="https://blog.luckybird.me/2019/09/29/deep-clone-func/index.html">
-<meta property="og:site_name" content="LuckyBird">
+<meta property="og:site_name" content="HelloWorld">
 <meta property="og:description" content="JavaScript 变量包括基本类型和引用类型，基本类型的变量可直接访问和操作对应值，赋值就可以克隆一份值到另外一个内存地址中保存。引用类型的变量则只是保存引用地址，赋值只是克隆引用地址，实际上还是共用变量，变量更改时，所有相同引用地址的变量也更改。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-21T00:13:15.099Z">
+<meta property="og:updated_time" content="2020-01-30T04:36:15.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS 变量和克隆">
 <meta name="twitter:description" content="JavaScript 变量包括基本类型和引用类型，基本类型的变量可直接访问和操作对应值，赋值就可以克隆一份值到另外一个内存地址中保存。引用类型的变量则只是保存引用地址，赋值只是克隆引用地址，实际上还是共用变量，变量更改时，所有相同引用地址的变量也更改。">
@@ -37,7 +37,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">LuckyBird</a>
+        <a href="/" id="logo">HelloWorld</a>
       </h1>
       
     </div>
@@ -96,7 +96,8 @@
 </blockquote>
 <a id="more"></a>
 
-<h3 id="一，变量类型简介和判断"><a href="#一，变量类型简介和判断" class="headerlink" title="一，变量类型简介和判断"></a>一，变量类型简介和判断</h3><h5 id="1-基本变量，通过-typeof-来判断："><a href="#1-基本变量，通过-typeof-来判断：" class="headerlink" title="1. 基本变量，通过 typeof 来判断："></a>1. 基本变量，通过 typeof 来判断：</h5><ul>
+<h3 id="一，变量类型简介和判断"><a href="#一，变量类型简介和判断" class="headerlink" title="一，变量类型简介和判断"></a>一，变量类型简介和判断</h3><h5 id="1-基本变量："><a href="#1-基本变量：" class="headerlink" title="1. 基本变量："></a>1. 基本变量：</h5><p>通过 typeof 来判断，保存在栈内存中，主要包括：</p>
+<ul>
 <li>Undefined，已经定义但没有赋值，比如 var a; 此时 a=undefined;</li>
 <li>Null，这是一个对象，也是 JavaScript 最顶层的对象，typeof Null == ‘object’</li>
 <li>Boolean，两种值，true or false</li>
@@ -105,7 +106,7 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line"><span class="keyword">typeof</span> a;</span><br><span class="line"><span class="string">"undefined"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span></span><br><span class="line"><span class="string">"object"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="number">3.0</span></span><br><span class="line"><span class="string">"number"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">'abc'</span></span><br><span class="line"><span class="string">"string"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">true</span></span><br><span class="line"><span class="string">"boolean"</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="2-引用类型："><a href="#2-引用类型：" class="headerlink" title="2. 引用类型："></a>2. 引用类型：</h5><p>引用类型变量用 typeof 判断并不准确，数组也是返回对象，instanceof 也不准确，因为都是对象的实例；最准确的方式通过 toString，返回最原始的变量类型</p>
+<h5 id="2-引用类型："><a href="#2-引用类型：" class="headerlink" title="2. 引用类型："></a>2. 引用类型：</h5><p>引用类型变量保存在堆内存中，它类似指针，指向具体内容。<br>用 typeof 判断并不准确，数组也是返回对象，instanceof 也不准确，因为都是对象的实例；最准确的方式通过 toString，返回最原始的变量类型</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组也是对象类型</span></span><br><span class="line"><span class="keyword">typeof</span> []</span><br><span class="line"><span class="string">"object"</span></span><br><span class="line"><span class="keyword">typeof</span> &#123;&#125;</span><br><span class="line"><span class="string">"object"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数组也是对象的实例</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Array</span>() <span class="keyword">instanceof</span> <span class="built_in">Object</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Object</span>() <span class="keyword">instanceof</span> <span class="built_in">Object</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 最准确的方式</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call([])</span><br><span class="line"><span class="string">"[object Array]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;)</span><br><span class="line"><span class="string">"[object Object]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)</span><br><span class="line"><span class="string">"[object Function]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> <span class="built_in">Date</span>())</span><br><span class="line"><span class="string">"[object Date]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">1</span>)</span><br><span class="line"><span class="string">"[object Number]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="string">'a'</span>)</span><br><span class="line"><span class="string">"[object String]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">true</span>)</span><br><span class="line"><span class="string">"[object Boolean]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">undefined</span>)</span><br><span class="line"><span class="string">"[object Undefined]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>)</span><br><span class="line"><span class="string">"[object Null]"</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'/[0-9]/'</span>))</span><br><span class="line"><span class="string">"[object RegExp]"</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="二，简单的变量浅克隆"><a href="#二，简单的变量浅克隆" class="headerlink" title="二，简单的变量浅克隆"></a>二，简单的变量浅克隆</h3><p>浅克隆和深克隆主要区别在于，克隆对象更变后，是否影响原有变量，对于基本类型的克隆都是深克隆。</p>
@@ -153,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/09/29/deep-clone-func/" data-id="ck3vdvlhq000ndw28llg4iryy" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2019/09/29/deep-clone-func/" data-id="ck7ssau6x000cjo28dyvr3u6i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -195,7 +196,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
     </div>
   </div>
 
@@ -205,7 +206,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/vuejs/" style="font-size: 16.67px;">vuejs</a>
+      <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 16px;">nodejs</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/vuejs/" style="font-size: 14px;">vuejs</a>
     </div>
   </div>
 
@@ -214,7 +215,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -227,23 +228,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/03/vuejs-vuex/">vuejs 状态管理 vuex</a>
+            <a href="/2020/02/05/python-thread/">python 进程 线程 协程</a>
           </li>
         
           <li>
-            <a href="/2019/12/02/vuejs-ins-val/">vuejs 组件通信方式</a>
+            <a href="/2020/02/05/python-tcp/">python tcp</a>
           </li>
         
           <li>
-            <a href="/2019/12/02/vuejs-props/">vuejs 组件通信 props</a>
+            <a href="/2020/02/04/python-err-assert-test/">python 错误 断点 测试</a>
           </li>
         
           <li>
-            <a href="/2019/12/02/vuejs-plugins/">vuejs 插件</a>
+            <a href="/2020/02/04/python-class/">python class</a>
           </li>
         
           <li>
-            <a href="/2019/11/25/vuejs-router/">vuejs 路由 router</a>
+            <a href="/2020/02/04/python-module/">python 引入模块 包 class</a>
           </li>
         
       </ul>
@@ -258,7 +259,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 LuckyBird<br>
+      &copy; 2020 LuckyBird<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

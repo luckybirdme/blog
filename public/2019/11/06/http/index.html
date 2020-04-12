@@ -5,14 +5,14 @@
   
 
   
-  <title>http 协议简介 | LuckyBird</title>
+  <title>http 协议简介 | HelloWorld</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="HTTP (超文本传输协议) 是用来在 Web 上传输文件的基础协议 ，基于TCP/IP通信协议来传递数据。HTTPS 是 HTTP 协议的安全版本，HTTPS 在 HTTP 上加入套接字 SSL（TLS 为 SSL 最新版）层，对网页进行加密传输。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http 协议简介">
 <meta property="og:url" content="https://blog.luckybird.me/2019/11/06/http/index.html">
-<meta property="og:site_name" content="LuckyBird">
+<meta property="og:site_name" content="HelloWorld">
 <meta property="og:description" content="HTTP (超文本传输协议) 是用来在 Web 上传输文件的基础协议 ，基于TCP/IP通信协议来传递数据。HTTPS 是 HTTP 协议的安全版本，HTTPS 在 HTTP 上加入套接字 SSL（TLS 为 SSL 最新版）层，对网页进行加密传输。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/HTTP-layers.png">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/http-tcp.jpg">
 <meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/tcp-one.png">
 <meta property="og:image" content="http://qiniucdn.luckybird.me/blog/img/2019/tcp-two.png">
-<meta property="og:updated_time" content="2019-11-09T02:19:42.487Z">
+<meta property="og:updated_time" content="2020-01-28T09:41:23.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http 协议简介">
 <meta name="twitter:description" content="HTTP (超文本传输协议) 是用来在 Web 上传输文件的基础协议 ，基于TCP/IP通信协议来传递数据。HTTPS 是 HTTP 协议的安全版本，HTTPS 在 HTTP 上加入套接字 SSL（TLS 为 SSL 最新版）层，对网页进行加密传输。">
@@ -45,7 +45,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">LuckyBird</a>
+        <a href="/" id="logo">HelloWorld</a>
       </h1>
       
     </div>
@@ -673,11 +673,33 @@
 <td>服务器不支持请求的HTTP协议的版本，无法完成处理</td>
 </tr>
 </tbody></table>
+<h2 id="五，不同版本的特点"><a href="#五，不同版本的特点" class="headerlink" title="五，不同版本的特点"></a>五，不同版本的特点</h2><h3 id="1-http-1-0-和-1-1-区别"><a href="#1-http-1-0-和-1-1-区别" class="headerlink" title="1. http 1.0 和 1.1 区别"></a>1. http 1.0 和 1.1 区别</h3><ul>
+<li><p>长连接，HTTP 1.1支持长连接（PersistentConnection）和请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟，在HTTP1.1中默认开启Connection： keep-alive，一定程度上弥补了HTTP1.0每次请求都要创建连接的缺点。</p>
+</li>
+<li><p>缓存处理，在HTTP1.0中主要使用header里的If-Modified-Since,Expires来做为缓存判断的标准，HTTP1.1则引入了更多的缓存控制策略例如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等更多可供选择的缓存头来控制缓存策略。</p>
+</li>
+<li><p>带宽优化及网络连接的使用，HTTP1.0中，存在一些浪费带宽的现象，例如客户端只是需要某个对象的一部分，而服务器却将整个对象送过来了，并且不支持断点续传功能，HTTP1.1则在请求头引入了range头域，它允许只请求资源的某个部分，即返回码是206（Partial Content），这样就方便了开发者自由的选择以便于充分利用带宽和连接。</p>
+</li>
+<li><p>错误通知的管理，在HTTP1.1中新增了24个错误状态响应码，如409（Conflict）表示请求的资源与资源的当前状态发生冲突；410（Gone）表示服务器上的某个资源被永久性的删除。</p>
+</li>
+<li><p>Host头处理，在HTTP1.0中认为每台服务器都绑定一个唯一的IP地址，因此，请求消息中的URL并没有传递主机名（hostname）。但随着虚拟主机技术的发展，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers），并且它们共享一个IP地址。HTTP1.1的请求消息和响应消息都应支持Host头域，且请求消息中如果没有Host头域会报告一个错误（400 Bad Request）。</p>
+</li>
+</ul>
+<h3 id="2-http-1-x-和-2-0-区别"><a href="#2-http-1-x-和-2-0-区别" class="headerlink" title="2. http 1.x 和 2.0 区别"></a>2. http 1.x 和 2.0 区别</h3><ul>
+<li><p>新的二进制格式（Binary Format），HTTP1.x的解析是基于文本。基于文本协议的格式解析存在天然缺陷，文本的表现形式有多样性，要做到健壮性考虑的场景必然很多，二进制则不同，只认0和1的组合。基于这种考虑HTTP2.0的协议解析决定采用二进制格式，实现方便且健壮。</p>
+</li>
+<li><p>多路复用（MultiPlexing），即连接共享，即每一个request都是是用作连接共享机制的。一个request对应一个id，这样一个连接上可以有多个request，每个连接的request可以随机的混杂在一起，接收方可以根据request的 id将request再归属到各自不同的服务端请求里面。</p>
+</li>
+<li><p>header压缩，如上文中所言，对前面提到过HTTP1.x的header带有大量信息，而且每次都要重复发送，HTTP2.0使用encoder来减少需要传输的header大小，通讯双方各自cache一份header fields表，既避免了重复header的传输，又减小了需要传输的大小。</p>
+</li>
+<li><p>服务端推送（server push），同SPDY一样，HTTP2.0也具有server push功能。</p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/11/06/http/" data-id="ck3vdvll3001pdw281qr30exz" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2019/11/06/http/" data-id="ck7ssau7k000rjo28q121y7ir" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -719,7 +741,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
     </div>
   </div>
 
@@ -729,7 +751,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/vuejs/" style="font-size: 16.67px;">vuejs</a>
+      <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 16px;">nodejs</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/vuejs/" style="font-size: 14px;">vuejs</a>
     </div>
   </div>
 
@@ -738,7 +760,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -751,23 +773,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/03/vuejs-vuex/">vuejs 状态管理 vuex</a>
+            <a href="/2020/02/05/python-thread/">python 进程 线程 协程</a>
           </li>
         
           <li>
-            <a href="/2019/12/02/vuejs-ins-val/">vuejs 组件通信方式</a>
+            <a href="/2020/02/05/python-tcp/">python tcp</a>
           </li>
         
           <li>
-            <a href="/2019/12/02/vuejs-props/">vuejs 组件通信 props</a>
+            <a href="/2020/02/04/python-err-assert-test/">python 错误 断点 测试</a>
           </li>
         
           <li>
-            <a href="/2019/12/02/vuejs-plugins/">vuejs 插件</a>
+            <a href="/2020/02/04/python-class/">python class</a>
           </li>
         
           <li>
-            <a href="/2019/11/25/vuejs-router/">vuejs 路由 router</a>
+            <a href="/2020/02/04/python-module/">python 引入模块 包 class</a>
           </li>
         
       </ul>
@@ -782,7 +804,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 LuckyBird<br>
+      &copy; 2020 LuckyBird<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

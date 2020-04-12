@@ -5,15 +5,15 @@
   
 
   
-  <title>LuckyBird</title>
+  <title>HelloWorld</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="LuckyBird">
+<meta property="og:title" content="HelloWorld">
 <meta property="og:url" content="https://blog.luckybird.me/index.html">
-<meta property="og:site_name" content="LuckyBird">
+<meta property="og:site_name" content="HelloWorld">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LuckyBird">
+<meta name="twitter:title" content="HelloWorld">
   
   
     <link rel="icon" href="/favicon.png">
@@ -32,7 +32,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">LuckyBird</a>
+        <a href="/" id="logo">HelloWorld</a>
       </h1>
       
     </div>
@@ -66,10 +66,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-vuejs-vuex" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-thread" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/03/vuejs-vuex/" class="article-date">
-  <time datetime="2019-12-03T00:30:45.000Z" itemprop="datePublished">2019-12-03</time>
+    <a href="/2020/02/05/python-thread/" class="article-date">
+  <time datetime="2020-02-05T08:19:37.000Z" itemprop="datePublished">2020-02-05</time>
 </a>
     
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/03/vuejs-vuex/">vuejs 状态管理 vuex</a>
+      <a class="article-title" href="/2020/02/05/python-thread/">python 进程 线程 协程</a>
     </h1>
   
 
@@ -89,20 +89,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>Vuejs 组件关系包括父子组件，兄弟(同级)组件，跨级组件等，为实现复杂业务场景，组件间不可避免需要进行通信。<br>通信方法包括 props, $refs, $parent, $children, provide/inject, $attrs/$listener, eventBus 。<br>Vuejs 提供 Vuex 状态管理，集中存储和管理组件状态，以达到组件通信的作用。<br>Vuex 实质是借助 Vue 实例的 data 属性，保存数据，达到响应式的效果。</p>
+<p>进程是资源分配的基本单位，资源不共享，开销成本最高<br>线程是调度的基本单位，共享部分资源，开销成本中等<br>协程是一种轻量级线程，调度由用户控制，开销成本最低</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/12/03/vuejs-vuex/#more">Read More</a>
+            <a href="/2020/02/05/python-thread/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/12/03/vuejs-vuex/" data-id="ck3vdvllz001xdw28039nizjr" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/05/python-thread/" data-id="ck7ssaubk002njo28wetmrbdd" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -111,10 +111,10 @@
 
 
   
-    <article id="post-vuejs-ins-val" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-tcp" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/02/vuejs-ins-val/" class="article-date">
-  <time datetime="2019-12-02T03:04:26.000Z" itemprop="datePublished">2019-12-02</time>
+    <a href="/2020/02/05/python-tcp/" class="article-date">
+  <time datetime="2020-02-05T05:51:47.000Z" itemprop="datePublished">2020-02-05</time>
 </a>
     
   </div>
@@ -125,7 +125,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/vuejs-ins-val/">vuejs 组件通信方式</a>
+      <a class="article-title" href="/2020/02/05/python-tcp/">python tcp</a>
     </h1>
   
 
@@ -134,20 +134,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>this.$parent 指向父组件实例，可调用父实例的属性和方法，而且可以层层递进方式父实例，比如 this.$parent.$parent 。<br>this.$children 以数组方式存放了子组件实例，无法保证子组件的顺序，访问方式 this.$childrend[0] 。<br>this.$refs 以对象方式存放了子组件实例，需要先给每个子组件标记属性 ref=’usernameInput’ 。<br>$emit 和 $on 用于触发和侦听 Vue 实例事件，即事件总线机制 EventBus。<br>$attrs 和 $listener 用于爷孙之间的组件通信，采用透传方式实现。<br>provide/inject, 父组件提供变量，注入到子组件中，主要为高阶插件/组件库提供用例。并不推荐直接用于应用程序代码中。</p>
+<p>tcp 编程</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/12/02/vuejs-ins-val/#more">Read More</a>
+            <a href="/2020/02/05/python-tcp/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/12/02/vuejs-ins-val/" data-id="ck3vdvlih0011dw28o1q8ngfg" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/05/python-tcp/" data-id="ck7ssaubd002jjo28bkmr1oem" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -156,10 +156,10 @@
 
 
   
-    <article id="post-vuejs-props" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-err-assert-test" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/02/vuejs-props/" class="article-date">
-  <time datetime="2019-12-02T02:47:17.000Z" itemprop="datePublished">2019-12-02</time>
+    <a href="/2020/02/04/python-err-assert-test/" class="article-date">
+  <time datetime="2020-02-04T13:37:41.000Z" itemprop="datePublished">2020-02-04</time>
 </a>
     
   </div>
@@ -170,7 +170,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/vuejs-props/">vuejs 组件通信 props</a>
+      <a class="article-title" href="/2020/02/04/python-err-assert-test/">python 错误 断点 测试</a>
     </h1>
   
 
@@ -179,20 +179,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>props 是单向数据流的通信方式，父组件向子组件传递。<br>子组件通过 props 可接收来自父组件的属性，包括静态和动态值。<br>在传递数字、布尔值、数组、对象时，为了避免当成字符串，必须使用 v-bind。<br>props 接收变量时，支持数据类型的校验。</p>
+<p>try execpt else finally<br>assert</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/12/02/vuejs-props/#more">Read More</a>
+            <a href="/2020/02/04/python-err-assert-test/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/12/02/vuejs-props/" data-id="ck3vdvljg001gdw281c17redb" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/04/python-err-assert-test/" data-id="ck7ssauaq0029jo28tl0pjndo" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -201,10 +201,10 @@
 
 
   
-    <article id="post-vuejs-plugins" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-class" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/02/vuejs-plugins/" class="article-date">
-  <time datetime="2019-12-02T00:23:18.000Z" itemprop="datePublished">2019-12-02</time>
+    <a href="/2020/02/04/python-class/" class="article-date">
+  <time datetime="2020-02-04T11:17:41.000Z" itemprop="datePublished">2020-02-04</time>
 </a>
     
   </div>
@@ -215,7 +215,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/vuejs-plugins/">vuejs 插件</a>
+      <a class="article-title" href="/2020/02/04/python-class/">python class</a>
     </h1>
   
 
@@ -224,20 +224,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>插件通常用来为 Vue 添加全局功能。<br>常用插件包括 vue-router, vuex 等</p>
+<p>class</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/12/02/vuejs-plugins/#more">Read More</a>
+            <a href="/2020/02/04/python-class/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/12/02/vuejs-plugins/" data-id="ck3vdvlj0001adw28wntzgn16" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/04/python-class/" data-id="ck7ssauad0022jo28eeq2bwdc" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -246,10 +246,10 @@
 
 
   
-    <article id="post-vuejs-router" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-module" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/25/vuejs-router/" class="article-date">
-  <time datetime="2019-11-24T23:40:31.000Z" itemprop="datePublished">2019-11-25</time>
+    <a href="/2020/02/04/python-module/" class="article-date">
+  <time datetime="2020-02-04T10:01:37.000Z" itemprop="datePublished">2020-02-04</time>
 </a>
     
   </div>
@@ -260,7 +260,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/25/vuejs-router/">vuejs 路由 router</a>
+      <a class="article-title" href="/2020/02/04/python-module/">python 引入模块 包 class</a>
     </h1>
   
 
@@ -269,20 +269,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>多网页网站，每个网址代表不同页面；单页面应用，所有网址都指向同一个页面。<br>为实现单页面，得借助前端路由识别所有网址，展示不同内容，但又不会产生页面请求。</p>
+<p>from import</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/11/25/vuejs-router/#more">Read More</a>
+            <a href="/2020/02/04/python-module/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/11/25/vuejs-router/" data-id="ck3vdvljc001edw28jk4nc15w" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/04/python-module/" data-id="ck7ssauds003ljo281obieoou" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -291,10 +291,10 @@
 
 
   
-    <article id="post-vuejs-option" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-2-3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/23/vuejs-option/" class="article-date">
-  <time datetime="2019-11-23T09:47:09.000Z" itemprop="datePublished">2019-11-23</time>
+    <a href="/2020/02/04/python-2-3/" class="article-date">
+  <time datetime="2020-02-04T04:36:30.000Z" itemprop="datePublished">2020-02-04</time>
 </a>
     
   </div>
@@ -305,7 +305,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/23/vuejs-option/">vuejs 选项参数解析</a>
+      <a class="article-title" href="/2020/02/04/python-2-3/">python2 to 3</a>
     </h1>
   
 
@@ -314,20 +314,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>vuejs 选项主要参数包括: el,data,methods,computed,watch。<br>模块化引用 vuejs 时，还有包括 name,components,props 参数。</p>
+<p>python2 had stopped at 2020<br>python3 is future</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/11/23/vuejs-option/#more">Read More</a>
+            <a href="/2020/02/04/python-2-3/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/11/23/vuejs-option/" data-id="ck3vdvlj4001cdw28uz0esw1p" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/04/python-2-3/" data-id="ck7ssauag0024jo28csgeozgn" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -336,10 +336,10 @@
 
 
   
-    <article id="post-vuejs-life" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-iterator" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/23/vuejs-life/" class="article-date">
-  <time datetime="2019-11-23T08:06:24.000Z" itemprop="datePublished">2019-11-23</time>
+    <a href="/2020/02/03/python-iterator/" class="article-date">
+  <time datetime="2020-02-03T13:39:43.000Z" itemprop="datePublished">2020-02-03</time>
 </a>
     
   </div>
@@ -350,7 +350,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/23/vuejs-life/">vuejs 生命周期</a>
+      <a class="article-title" href="/2020/02/03/python-iterator/">python iterator</a>
     </h1>
   
 
@@ -359,20 +359,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>vuejs 生命周期主要包括 beforeCreate,created,beforeMount,mounted,beforeUpdate,updated,beforeDestory,destoryed</p>
+<p>可以直接作用于for循环的对象统称为可迭代对象 : Iterable，包括 list、tuple、dict、set、str，以及生成器和带yield的generator function<br>可以被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator，Iterable 通过iter()函数获得一个Iterator对象</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/11/23/vuejs-life/#more">Read More</a>
+            <a href="/2020/02/03/python-iterator/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/11/23/vuejs-life/" data-id="ck3vdvliw0018dw2852t1wkzs" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/03/python-iterator/" data-id="ck7ssaub3002ejo28ofsarag4" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -381,10 +381,10 @@
 
 
   
-    <article id="post-vuejs2-mvvm" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-generator" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/21/vuejs2-mvvm/" class="article-date">
-  <time datetime="2019-11-21T00:22:04.000Z" itemprop="datePublished">2019-11-21</time>
+    <a href="/2020/02/03/python-generator/" class="article-date">
+  <time datetime="2020-02-03T13:39:40.000Z" itemprop="datePublished">2020-02-03</time>
 </a>
     
   </div>
@@ -395,7 +395,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/21/vuejs2-mvvm/">vuejs2 数据双向绑定</a>
+      <a class="article-title" href="/2020/02/03/python-generator/">python generator</a>
     </h1>
   
 
@@ -404,20 +404,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>数据双向绑定，即视图数据改变，模型数据立即更新，反之亦然。<br>该模式又称为 MVVM，即 Model-View-ViewModel。</p>
+<p>直接创建一个列表，受到内存限制，列表容量肯定是有限，而且100万个元素的列表，非常占用内存。<br>列表元素可以按照某种算法推算出来，需要的时候才生成，那么就能解决上面的问题，这个由生成器 generator 实现。</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/11/21/vuejs2-mvvm/#more">Read More</a>
+            <a href="/2020/02/03/python-generator/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/11/21/vuejs2-mvvm/" data-id="ck3vdvljl001idw280axijpna" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/03/python-generator/" data-id="ck7ssaub7002gjo28brussnff" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -426,10 +426,10 @@
 
 
   
-    <article id="post-event-trigger" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-func-param" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/16/event-trigger/" class="article-date">
-  <time datetime="2019-11-16T08:20:18.000Z" itemprop="datePublished">2019-11-16</time>
+    <a href="/2020/02/03/python-func-param/" class="article-date">
+  <time datetime="2020-02-03T10:21:15.000Z" itemprop="datePublished">2020-02-03</time>
 </a>
     
   </div>
@@ -440,7 +440,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/event-trigger/">JS 事件捕获和冒泡</a>
+      <a class="article-title" href="/2020/02/03/python-func-param/">python 函数参数</a>
     </h1>
   
 
@@ -449,20 +449,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>事件捕获阶段，从顶层节点开始，一层层往下，直到触发事件的节点。<br>事件冒泡阶段，从触发事件的节点开始，一层层向上，直到顶层节点。</p>
+<p>*args<br>**kw</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/11/16/event-trigger/#more">Read More</a>
+            <a href="/2020/02/03/python-func-param/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/11/16/event-trigger/" data-id="ck3vdvlh1000idw28zmu3iqyj" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/03/python-func-param/" data-id="ck7ssauaw002bjo28gbvazhc6" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -471,10 +471,10 @@
 
 
   
-    <article id="post-browser-safety" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python-data" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/16/browser-safety/" class="article-date">
-  <time datetime="2019-11-16T02:46:52.000Z" itemprop="datePublished">2019-11-16</time>
+    <a href="/2020/02/03/python-data/" class="article-date">
+  <time datetime="2020-02-03T01:38:21.000Z" itemprop="datePublished">2020-02-03</time>
 </a>
     
   </div>
@@ -485,7 +485,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/browser-safety/">前端页面安全</a>
+      <a class="article-title" href="/2020/02/03/python-data/">python list tuple dict set</a>
     </h1>
   
 
@@ -494,20 +494,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>前端常见的安全隐患包括：SQL注入，XSS，CSRF，点击劫持</p>
+<p>list 是一种有序的集合，可以随时添加和删除其中的元素，存放不同数据类型。<br>tuple 是另一种有序的列表，与 list 非常类似，但是创建完毕后就不能修改了。<br>dict 是一种 key-value 保存的无序集合，查询速度快，消耗内存也多。<br>set 是一种去重式的 key 无序集合，类似没有 value 的 dict 。</p>
 </blockquote>
         
           <p class="article-more-link">
-            <a href="/2019/11/16/browser-safety/#more">Read More</a>
+            <a href="/2020/02/03/python-data/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.luckybird.me/2019/11/16/browser-safety/" data-id="ck3vdvlfe0001dw28qnsg614t" class="article-share-link">Share</a>
+      <a data-url="https://blog.luckybird.me/2020/02/03/python-data/" data-id="ck7ssauam0027jo28cvj1d9vg" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
     </footer>
   </div>
@@ -520,7 +520,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -534,7 +534,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
     </div>
   </div>
 
@@ -544,7 +544,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/vuejs/" style="font-size: 16.67px;">vuejs</a>
+      <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/nodejs/" style="font-size: 16px;">nodejs</a> <a href="/tags/python/" style="font-size: 18px;">python</a> <a href="/tags/vuejs/" style="font-size: 14px;">vuejs</a>
     </div>
   </div>
 
@@ -553,7 +553,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -566,23 +566,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/03/vuejs-vuex/">vuejs 状态管理 vuex</a>
+            <a href="/2020/02/05/python-thread/">python 进程 线程 协程</a>
           </li>
         
           <li>
-            <a href="/2019/12/02/vuejs-ins-val/">vuejs 组件通信方式</a>
+            <a href="/2020/02/05/python-tcp/">python tcp</a>
           </li>
         
           <li>
-            <a href="/2019/12/02/vuejs-props/">vuejs 组件通信 props</a>
+            <a href="/2020/02/04/python-err-assert-test/">python 错误 断点 测试</a>
           </li>
         
           <li>
-            <a href="/2019/12/02/vuejs-plugins/">vuejs 插件</a>
+            <a href="/2020/02/04/python-class/">python class</a>
           </li>
         
           <li>
-            <a href="/2019/11/25/vuejs-router/">vuejs 路由 router</a>
+            <a href="/2020/02/04/python-module/">python 引入模块 包 class</a>
           </li>
         
       </ul>
@@ -597,7 +597,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 LuckyBird<br>
+      &copy; 2020 LuckyBird<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

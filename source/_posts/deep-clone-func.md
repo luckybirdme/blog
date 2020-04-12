@@ -10,7 +10,8 @@ tags: JavaScript
 <!-- more -->
 
 ### 一，变量类型简介和判断
-##### 1. 基本变量，通过 typeof 来判断：
+##### 1. 基本变量：
+通过 typeof 来判断，保存在栈内存中，主要包括：
 - Undefined，已经定义但没有赋值，比如 var a; 此时 a=undefined;
 - Null，这是一个对象，也是 JavaScript 最顶层的对象，typeof Null == 'object'
 - Boolean，两种值，true or false
@@ -34,7 +35,8 @@ typeof true
 
 
 ##### 2. 引用类型：
-引用类型变量用 typeof 判断并不准确，数组也是返回对象，instanceof 也不准确，因为都是对象的实例；最准确的方式通过 toString，返回最原始的变量类型
+引用类型变量保存在堆内存中，它类似指针，指向具体内容。
+用 typeof 判断并不准确，数组也是返回对象，instanceof 也不准确，因为都是对象的实例；最准确的方式通过 toString，返回最原始的变量类型
 ```javascript
 // 数组也是对象类型
 typeof []

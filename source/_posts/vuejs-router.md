@@ -97,7 +97,7 @@ const router = new VueRouter({
 ```
 
 ##### 后端服务器配置，以 NGINX 为例子，匹配所有路径到首页地址
-```shell
+```sh
 location / {
   try_files $uri $uri/ /index.html;
 }

@@ -85,7 +85,7 @@ Cross-Origin Resource Sharing，跨域资源共享，允许浏览器根据服务
 由此可知 CORS 需要资源服务器进行 HTTP 的访问设置，是否允许不同域的不同方法访问。
 
 服务器 nginx 的 CORS 访问设置
-```shell
+```sh
 # HTTP 来源
 Access-Control-Allow-Origin:*
 # 访问方法
