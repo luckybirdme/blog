@@ -54,7 +54,7 @@ function throttle(fn,interval=300) {
 
 
 ##### 3. 测试效果，按照固定频率地执行多次
-![](http://qiniucdn.luckybird.me/blog/img/2019/throttle.png)
+![](/img/2019/throttle.png)
 
 
 
@@ -95,7 +95,7 @@ function debounce(fn, interval=300) {
 
 
 ##### 3. 测试效果，只会执行最后一次
-![](http://qiniucdn.luckybird.me/blog/img/2019/debounce.png)
+![](/img/2019/debounce.png)
 
 
 

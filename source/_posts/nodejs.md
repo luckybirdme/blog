@@ -12,7 +12,7 @@ tags: nodejs
 #### nodejs 是一个 Javascript 运行环境，依赖于 Chrome V8 引擎进行 js 代码解释，它采用事件驱动和非阻塞I/O机制，合适轻量、可伸缩，适于实时数据交互应用。
 
 #### 1. nodejs 系统框架
-![](http://qiniucdn.luckybird.me/blog/img/2019/nodejs-0.png)
+![](/img/2019/nodejs-0.png)
 
 - Application : 这部分是由 Javascript 编写的，即我们的应用程序。
 - V8：Google 推出的 Javascript VM，提供了在非浏览器端运行的环境下，解析并执行 JavaScript。
@@ -20,7 +20,7 @@ tags: nodejs
 - Libuv：它为 Node.js 提供了跨平台的异步 I/O 能力，Linux平台底层是利用 epoll 多路复用IO，只关心活跃文件描述符，回调式处理事件，并且采用红黑树维护任务队列，算法复杂度O(log(N))。
 
 #### 2. nodejs 运行机制
-![](http://qiniucdn.luckybird.me/blog/img/2019/nodejs-1.png)
+![](/img/2019/nodejs-1.png)
 
 - 每个Node.js进程只有一个主线程在执行程序代码，形成一个执行栈（execution context stack)。
 - 主线程之外，还维护了一个"事件队列"（Event queue）。当用户的网络请求或者其它的异步操作到来时，node都会把它放到Event Queue之中，此时并不会立即执行它，代码也不会被阻塞，继续往下走，直到主线程代码执行完毕。

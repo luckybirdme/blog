@@ -25,7 +25,7 @@ Django 是以 Python 语言编写的 Web 应用程序框架，主要目的是简
 ORM 英文全称 Object Relation Mapping, 对象关系映射。面向对象编程是目前流行的编程思想，所有操作实体都是对象。关系型数据库的特点是以行和列组成表，多个表称为数据库。
 通过对象也能描述和操作关系型数据库的行，列，表的数据，这种方式称为对象关系映射，映射的实体就是关系型数据库。Django ORM 如下图所示
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/django_orm_two.png)
+![](/img/2020/django_orm_two.png)
 
 
 ### 1. 优点

@@ -10,7 +10,7 @@ tags: MySQL
 
 
 ## 一. MySQL 逻辑架构
-![](http://qiniucdn.luckybird.me/blog/img/2020/MySQL.png)
+![](/img/2020/MySQL.png)
 
 ### 1. 连接层(Client Connectors)：
 最上层是一些客户端和连接服务，所包含的服务并不是MySQL所独有的技术。它们都是服务于C/S程序或者是这些程序所需要的 ：连接处理，身份验证，安全性等等。

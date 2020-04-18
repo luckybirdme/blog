@@ -18,16 +18,16 @@ CGI协议的升级版，提供常驻进程的机制，以便快速处理请求�
 实现FastCGI接口的程序，用于接受NGINX转发的请求，按照CGI协议转换数据，并交给PHP脚本处理，然后把PHP脚本输出的数据再返回给NGINX。
 当修改php.ini配置文件后，需要重启PHP-CGI才能生效，而杀掉PHP-CGI会导致PHP脚本无法继续执行。
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/PHP-CGI.png)
+![](/img/2020/PHP-CGI.png)
 
 
 ## 四. PHP-FPM，PHP FastCGI process master
 实现FastCGI协议的进程管理器，master 是主进程，负责PHP公共环境初始化，并且创建和管理多个 PHP-FPM 进程。PHP-FPM进程直接处理NGINX转发过来的请求，它的数量可固定，也可以动态变化，以便适应不同场景的请求量。
 当修改php.ini配置文件后，master 会在 PHP-FPM 进程处理完一个请求后，逐一重启，平滑过渡，不影响正常服务。
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/PHP-FPM.png)
+![](/img/2020/PHP-FPM.png)
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/PHP-FPM-two.png)
+![](/img/2020/PHP-FPM-two.png)
 
 ## 五. PHP-FPM 进程池
 PHP-FPM 除了可动态设置进程数量外，还能设置多个进程池，既可以提高并发量，也能隔离不同请求。

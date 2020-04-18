@@ -10,7 +10,7 @@ tags: python
 ## 一. WSGI, Python Web Server Gateway Interface
 Python web 服务器网关接口，定义Web服务器(nginx)与Python应用程序之间交互的协议。
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/WSGI.png)
+![](/img/2020/WSGI.png)
 
 
 下面简单实现 WSGI 协议
@@ -55,7 +55,7 @@ SERVER_PORT 8000
 实现 WSGI 协议的 Web 服务器，同时支持HTTP协议，FastCGI协议，SCGI协议，以及独有的uwsgi协议，它是一种二进制协议,利用TCP通信，占用内存少，被认为是上述协议中性能最好的，就是命名有点奇怪。
 uWSGI 不仅支持 Python 应用程序，还支持 PHP,Lua,Go 等语言，它本质只是定义服务器和应用程序之间的交互协议，是用来管理应用程序的平台组件。
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/uWSGI.png)
+![](/img/2020/uWSGI.png)
 
 
 ### 1. 为什么使用 uWSGI 管理 Python 应用程序？

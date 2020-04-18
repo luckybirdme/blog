@@ -9,11 +9,11 @@ tags: django
 
 ## 一. Django 请求执行过程
 ### 1. 请求执行主流程图
-![](http://qiniucdn.luckybird.me/blog/img/2020/django_main.png)
+![](/img/2020/django_main.png)
 
 
 ### 2. 中间件执行流程图
-![](http://qiniucdn.luckybird.me/blog/img/2020/django_mw.png)
+![](/img/2020/django_mw.png)
 
 
 ## 二. Django 代码执行解读

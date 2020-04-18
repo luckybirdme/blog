@@ -68,7 +68,7 @@ console.log('window not access tempColor',typeof tempColor);
 ##### 以上的访问关系链也成为作用域链，如下图所示
 
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/scope.png)
+![](/img/2019/scope.png)
 
 
 

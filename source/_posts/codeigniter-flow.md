@@ -10,7 +10,7 @@ tags: CodeIgniter
 
 ## 一. CodeIgniter 框架
 ### 1. 整体流程图
-![](http://qiniucdn.luckybird.me/blog/img/2020/CodeIgniter_main.png)
+![](/img/2020/CodeIgniter_main.png)
 
 - index.php 文件作为前端控制器，初始化运行 CodeIgniter 所需的基本资源；
 - Router 检查 HTTP 请求，以确定如何处理该请求；
@@ -21,7 +21,7 @@ tags: CodeIgniter
 
 
 ### 2. 代码执行过程
-![](http://qiniucdn.luckybird.me/blog/img/2020/CodeIgniter_flow.png)
+![](/img/2020/CodeIgniter_flow.png)
 
 - system/core/CodeIgniter.php 是框架的核心文件，所有流程都在这里执行完毕。
 - 红色框架就是 MVC 模式对应组件，也是我们应用开发主要修改的文件。 

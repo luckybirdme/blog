@@ -12,7 +12,7 @@ tags: JavaScript
 
 ## 一，JS 事件流
 ### JS 事件流如下图所示，左边为事件捕获阶段，右边为事件冒泡阶段
-![](http://qiniucdn.luckybird.me/blog/img/2019/event-trigger.png)
+![](/img/2019/event-trigger.png)
 
 
 ### addEventListener(type, listener, useCapture),第三个参数 useCapture 规定事件触发时机

@@ -13,21 +13,21 @@ tags: JavaScript
 ##### HTTP 是一种能够获取如 HTML 这样的网络资源的 protocol (通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是由浏览器 client 发起的，资源管理服务器 server 接收请求并进行处理，然后返回响应的内容给 client。
 
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/HTTP-layers.png)
+![](/img/2019/HTTP-layers.png)
 
 
 
 ##### HTTP 报文基本格式
-![](http://qiniucdn.luckybird.me/blog/img/2019/http-protocol.png)
+![](/img/2019/http-protocol.png)
 
 
 
 ### 1. 请求报文
-![](http://qiniucdn.luckybird.me/blog/img/2019/http-request.jpg)
+![](/img/2019/http-request.jpg)
 
 
 ### 2. 返回报文
-![](http://qiniucdn.luckybird.me/blog/img/2019/http-response.png)
+![](/img/2019/http-response.png)
 
 
 ## 二，特点
@@ -46,15 +46,15 @@ HTTP 是无状态的，两个请求之间是没有关联。而使用 HTTP Cookie
 HTTP 底层采用可靠的 TCP 进行传输。HTTP/1.1 默认开启 Connection:keep-alive，一个 TCP 链接共享多个 HTTP 请求，避免重复握手。 Chrome 默认可并发建立 6 个 TCP 链接，处理高并发请求。
 
 - TCP 三次握手，传输内容，断开链接
-![](http://qiniucdn.luckybird.me/blog/img/2019/http-tcp.jpg)
+![](/img/2019/http-tcp.jpg)
 
 
 - 第一次 HTTP 请求，初始化链接时，进行 TCP 三次握手
-![](http://qiniucdn.luckybird.me/blog/img/2019/tcp-one.png)
+![](/img/2019/tcp-one.png)
 
 
 - 第二次 HTTP 请求，共享刚才的 TCP 链接，节省了初始化链接的时间
-![](http://qiniucdn.luckybird.me/blog/img/2019/tcp-two.png)
+![](/img/2019/tcp-two.png)
 
 
 

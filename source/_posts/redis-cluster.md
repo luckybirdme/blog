@@ -17,12 +17,12 @@ tags: Redis
 ## 二. Redis 集群原理 
 ##### 1. 根据哈希槽，每个Key采用CRC16校验后对16384取模，自动分割数据到不同的节点上，达到数据扩容，且负载均衡。
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/Redis_cluster_slot.jpg)
+![](/img/2020/Redis_cluster_slot.jpg)
 
 
 ##### 2. 利用主从同步，最基本三个 master 三个 slave，当主节点单机，从节点顶上，依然能够继续使用，确保集群高可用。
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/Redis_cluster_master_client.jpg)
+![](/img/2020/Redis_cluster_master_client.jpg)
 
 
 ## 三. 优缺点

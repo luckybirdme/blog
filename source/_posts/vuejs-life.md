@@ -11,7 +11,7 @@ tags: vuejs
 ## 一，vuejs 生命周期
 
 #### 1. 流程图
-![](http://qiniucdn.luckybird.me/blog/img/2019/lifecycle.png)
+![](/img/2019/lifecycle.png)
 
 #### 2. 代码解析
 ```html

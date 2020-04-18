@@ -14,22 +14,22 @@ tags: html
 
 ##### 浏览器通过 http 协议获取到页面内容，然后进行解析，渲染，布局，绘制等步骤，最终将页面呈现给用户，如下图所示
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/browser-page-build.png)
+![](/img/2019/browser-page-build.png)
 
 
 #### 1. 解析 html，生成 DOM
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/html-dom.png)
+![](/img/2019/html-dom.png)
 
 
 #### 2. 解析 CSS，生成 CSSOM
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/css-dom.png)
+![](/img/2019/css-dom.png)
 
 
 #### 3. DOM 和 CSSOM 合并成渲染
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/dom-cssom.png)
+![](/img/2019/dom-cssom.png)
 
 
 #### 4. 布局 Layout
@@ -77,7 +77,7 @@ tags: html
 - 在解析 html 时，如果遇到 JS 外链，如果设置了 async 属性，那么会异步下载，此时不会阻塞 html 解析，但是下载完后，会立即执行 JS 内容，不会按照加载的顺序，加载快的 JS 文件会更快执行，并且会阻塞 html 解析。
 
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/js-download.jpg)
+![](/img/2019/js-download.jpg)
 
 
 ## 三，页面回流和重绘

@@ -178,24 +178,24 @@ h4{
 |大于 768px，小于 992px| 750px |
 |小于 768px|满屏 100%|
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/bootstrap.jpg)
+![](/img/2019/bootstrap.jpg)
 
 
 
 ##### 2. 栅格系统，响应式核心实现
 将网页分成不同栅格，根据不同网页宽度，自动调节栅格大小，数量以及排列方式，以便在不同设备的达到最合适的展示效果。
 通过动态图来直观感受下栅格的响应式效果
-![](http://qiniucdn.luckybird.me/blog/img/2019/bootstrap.gif)
+![](/img/2019/bootstrap.gif)
 
 - bootstrap 使用 12 列的栅格模式，在不同网页宽度下，可自动调节为 1 列、 2 列、 3 列、 4 列、 6 列、 12 列，超出的列数会自动换行展示，样式名 col-xs-2 分 6 列，col-xs-4 分 3 列，以此类推。
-![](http://qiniucdn.luckybird.me/blog/img/2019/bootstrap-col-all.jpg)
+![](/img/2019/bootstrap-col-all.jpg)
 
 
 - 栅格宽度可以是等宽，也可以不对等的宽度栅格，如下图所示。
-![](http://qiniucdn.luckybird.me/blog/img/2019/bootstrap-col-different.jpg)
+![](/img/2019/bootstrap-col-different.jpg)
 
 - 栅格内部还可以嵌套栅格，依然按照栅格模式进行自由组合。
-![](http://qiniucdn.luckybird.me/blog/img/2019/bootstrap-col-more.jpg)
+![](/img/2019/bootstrap-col-more.jpg)
 
 
 

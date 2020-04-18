@@ -27,7 +27,11 @@
 
   $('.search-form-input').on('blur', function(){
     startSearchAnim();
-    $searchWrap.removeClass('on');
+    setTimeout(function(){
+      $searchWrap.removeClass('on');
+      console.log('removeClass on now');
+    },500);
+    console.log('removeClass on later');
     stopSearchAnim();
   });
 

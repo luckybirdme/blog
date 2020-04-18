@@ -36,7 +36,7 @@ console.log(A.prototype.__proto__===Object.prototype);
 console.log(Object.prototype.__proto__===null);
 ```
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/__proto__.png)
+![](/img/2019/__proto__.png)
 
 ## 二，原型链的特点
 ### 1. 所有的函数都拥有 prototype 属性，用于指向原型对象。
@@ -46,6 +46,6 @@ console.log(Object.prototype.__proto__===null);
 ### 5. 引用类型变量的构造函数 (new Array() , new Object()) 都是由函数 Function 创建，而 Function 自己创建自己，Function 的原型链指向自己的原型对象。
 
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/prototype.png)
+![](/img/2019/prototype.png)
 
 

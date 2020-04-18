@@ -89,7 +89,7 @@ imgPm('img0',imgUrl[0])
 - Promise 对象的状态一旦确定，那么就无法改变，要么是Resolved，要么是 Rejected。
 
 Promise 链式调用图。
-![](http://qiniucdn.luckybird.me/blog/img/2019/promise.png)
+![](/img/2019/promise.png)
 
 
 ##### 2. 构造函数 Promise

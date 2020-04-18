@@ -13,7 +13,7 @@ tags: vuejs
 
 ## 一. Vuex 原理
 #### 1. 系统架构
-![](http://qiniucdn.luckybird.me/blog/img/2019/vuex.png)
+![](/img/2019/vuex.png)
 
 #### 2. 原理分析
 - 借助 Vue 实例的 data 属性，保存 Vuex 的 state 数据
@@ -23,7 +23,7 @@ tags: vuejs
 - 异步修改 state 值，利用 actions 定义的方法来触发修改。
 - 如果为了区分不同 store, 可利用 modules 来实现命名区分。
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/vue-vuex.png)
+![](/img/2019/vue-vuex.png)
 
 
 

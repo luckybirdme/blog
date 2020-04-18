@@ -13,7 +13,7 @@ tags: Redis
 ##### 2. 单机无法确保服务高可用
 
 ## 二. Redis 高可用机制：Sentinel(哨兵)模式
-![](http://qiniucdn.luckybird.me/blog/img/2020/Redis_Sentinel.png)
+![](/img/2020/Redis_Sentinel.png)
 
 - 监控（Monitoring）：Sentinel会不断的检查你的主节点和从节点是否正常工作。
 - 通知（Notification）：被监控的Redis实例如果出现问题，Sentinel可以通过API（pub）通知系统管理员或者其他程序。

@@ -11,7 +11,7 @@ tags: Redis
 
 ## 一. 同步机制
 #### 1. Redis 支持一主多从或者级联的机制，主为 master，从为 slave，而且一个slave只能有一个master，如下图所示。
-![](http://qiniucdn.luckybird.me/blog/img/2020/Redis-rsync.png)
+![](/img/2020/Redis-rsync.png)
 
 #### 2. Redis 同步机制主要包括三部分：全量同步，部分同步，命令传播
 
@@ -29,7 +29,7 @@ tags: Redis
 - 主库向从库发送缓存命令
 - 从库执行主库发送的缓存命令
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/Redis-full-psync.png)
+![](/img/2020/Redis-full-psync.png)
 
 
 ## 三. 部分同步

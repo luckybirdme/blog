@@ -31,7 +31,15 @@
 
       </nav>
       <div id="search-form-wrap">
+        <!--
         <%- search_form({button: '&#xF002;'}) %>
+        -->
+
+        <form class="search-form">
+          <input type="search" name="q" class="search-form-input" id="local-search-input" placeholder="Search">
+          <div id="local-search-result"></div>          
+        </form>
+        
       </div>
     </div>
   </div>

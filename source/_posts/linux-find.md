@@ -82,4 +82,4 @@ Mon Apr 13 20:19:38 CST 2020
 ./log-2020-04-10.php
 ```
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/find_mtime.png)
+![](/img/2020/find_mtime.png)

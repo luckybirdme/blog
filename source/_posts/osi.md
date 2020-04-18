@@ -11,8 +11,8 @@ tags: Linux
 
 OSI(Open System Interconnection), 开放式系统互联通信
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/OSI.png)
+![](/img/2020/OSI.png)
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/OSI_detail.png)
+![](/img/2020/OSI_detail.png)
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/OSI_detail_two.png)
+![](/img/2020/OSI_detail_two.png)

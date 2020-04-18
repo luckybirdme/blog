@@ -13,10 +13,10 @@ tags: vuejs
 
 ## 一，数据双向绑定
 #### 1. MVVM 模式使得视图 view 和 model 交互变得极为方便， view 的改变立即同步到 model ，model 的改变也可立即同步到 view，数据流如下图所示。
-![](http://qiniucdn.luckybird.me/blog/img/2019/MVVM.png)
+![](/img/2019/MVVM.png)
 
 #### 2. vuejs 实现 MVVM 模式主要通过 Object.defineProperty() 来侦听属性的 set 和 get 的动作，达到数据立即同步，双向绑定的效果。由于 IE8 的 JS 原生对象不支持此方法，也无法通过 Polyfill 来兼容，所以 vuejs 无法兼容 IE8。
-![](http://qiniucdn.luckybird.me/blog/img/2019/vuejs_mvvm_two.png)
+![](/img/2019/vuejs_mvvm_two.png)
 
 
 ## 二，原生 JS 实现 MVVM 模式

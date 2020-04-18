@@ -48,7 +48,7 @@ f447b20a7fcbf53a5d5be013ea0b15af  test.txt
 假设网站用户登录账户和密码采取明文保存，一旦被脱库，会导致严重后果。如果将密码通过 Hash 算法加密保存，即使被黑客获得 Hash 密码，也无法反推出真实的密码。
 HTTP 协议是明文传播的，在公共网络容易被劫持，从而导致信息泄露；现在主流 HTTPS 协议，这里的 S 一般指 SSL/TLS，它会对报文进行加密传输(比如 SHA 算法加密)，任何数据篡改和窃听都是无效。
 
-![](http://qiniucdn.luckybird.me/blog/img/2020/HTTPS_Hash.png)
+![](/img/2020/HTTPS_Hash.png)
 
 
 3. 负载均衡，[具体参考文章](https://www.jianshu.com/p/4660a8a1f132)

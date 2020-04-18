@@ -12,11 +12,11 @@ tags: JavaScript
 
 ## 一，概览
 ### 1. 浏览器输入地址，经过一系列事件后，把页面呈现给用户，主要过程如下图
-![](http://qiniucdn.luckybird.me/blog/img/2019/browser-two.png)
+![](/img/2019/browser-two.png)
 
 
 ### 2. 在最新规范中，将上述过程进行分类，如下图所示
-![](http://qiniucdn.luckybird.me/blog/img/2019/browser-three.png)
+![](/img/2019/browser-three.png)
 
 
 ### 3. 每个事件点的解析如下：
@@ -160,7 +160,7 @@ function logData() {
 
 #### 客户端前往域名服务器查询，一般采用递归查询和迭代查询结合的方式，如下图所示：
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/dns.png)
+![](/img/2019/dns.png)
 
 
 #### 域名解析通过 53 端口，传输协议有UDP和TCP，但更多是使用高效的UDP，并借助缓存加快解析速度：
@@ -175,24 +175,24 @@ function logData() {
 - 浏览器是通过 HTTP 协议与服务端交互，而 HTTP 底层是通过 TCP 传输报文。
 - TCP 三次握手，建立链接，如果是 SSL 链接，会加上密匙交互和加密过程。
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/http-tcp.jpg)
+![](/img/2019/http-tcp.jpg)
 
 
 ### 3. HTTP request 和 response : requestStart, responseStart, responseEnd
 - TCP 建立连接后，开始发送 HTTP request 报文，格式如下：
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/http-request.png)
+![](/img/2019/http-request.png)
 
 
 - HTTP response 报文格式如下，其中响应内容是浏览器页面将要展示的内容：
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/http-response.png)
+![](/img/2019/http-response.png)
 
 
 ### 4. HTML 解析，渲染和绘制 : domLoading, domInteractive, domContentLoadedEventStart, domContentLoadedEventEnd, domComplete
 - HTTP 响应内容包括了 HTML，CSS 等，浏览器开始处理这些内容。
 
-![](http://qiniucdn.luckybird.me/blog/img/2019/html-css.png)
+![](/img/2019/html-css.png)
 
 
 
