@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <ul id="one">
+      <li >one1</li>
+      <li >one2</li>
+      <li >one3</li>
+    </ul>
+
+    <ul id="two">
+      <li >two1</li>
+      <li >two2</li>
+      <li >two3</li>
+    </ul>
+    <script type="text/javascript">
+
+        // 通过闭包访问函数内的局部变量
+        var person=(function(){
+            //
+            var myName="jack";
+            return function(){
+                return myName;
+            }
+        })(); // 最后一个括号的意思是，函数立即执行，函数执行后返回的是一个闭包函数
+
+        // 无法直接访问函数的局部变量
+        console.log(typeof myName);
+
+        // 执行闭包函数
+        // 获取函数局部变量
+        console.log(person());
+
+        // 通过闭包缓存数据
+        var Cache=(function(){
+            var cache={};
+            return function(name){
+                // 检查是否存在缓存
+                if(name in cache){
+                    console.log(name,'had cache',cache[name]);
+                    return cache[name];
+                }
+
+                var temp=new Object(name);
+                // 将缓存保存到函数内的局部变量 cache 中
+                // 因为闭包的特性，cache 会常驻内存中，以便下次访问
+                cache[name]=temp;
+                console.log(name,'create cache',cache[name]);
+                return temp;
+            }
+            
+        })();
+
+        Cache('one');
+        Cache('two');
+        Cache('one');
+
+
+        var Car=(function(){
+            var _this = this;
+            _this.color=[];
+            _this.number=0;
+            return {
+                getColor:function(){
+                    return _this.color;
+                },
+                setColor:function(color){
+                    _this.color.push(color);
+                },
+                getNumber:function(){
+                    return _this.number;
+                },
+                addNumber:function(){
+                    _this.number++;
+                }
+            }
+
+        })();
+
+        Car.setColor('red');
+        Car.setColor('green');
+        console.log(Car.getColor());
+
+        Car.addNumber();
+        Car.addNumber();
+        console.log(Car.getNumber());
+
+
+
+        var oneLi=document.querySelectorAll("#one li");
+        for (var i  = 0; i < oneLi.length; i++) {
+            oneLi[i].onclick=function(){
+                // 将会全部输出 3，因为 i 只保存了最后一个值
+                console.log('number',i);
+            };
+          
+        }
+        var twoLi=document.querySelectorAll("#two li");
+        for (var j  = 0; j < twoLi.length; j++) {
+            // 使用闭包函数
+            twoLi[j].onclick=(function(j){
+                return function(){
+                    console.log('number',j);
+                }
+            })(j); // 立即执行，产生闭包函数，并返回闭包作为 onclick 触发时执行的函数，此时 j 变量已经常驻于内存中
+          
+        }
+
+        function fn1() {
+            var arr = new Array[100000]; //这个数组占用了很大的内存空间
+            return function () {
+              console.log(arr.length)
+            }
+        }
+        var f = fn1();
+        f()
+        f = null //让内部函数成为垃圾对象-->回收闭包
+
+
+    </script>
+</body>
+</html>

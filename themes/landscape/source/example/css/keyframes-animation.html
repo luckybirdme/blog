@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style> 
+
+
+			@keyframes myfirst
+			{
+				from {background: red;}
+				to {background: yellow;}
+			}
+
+			/* Firefox */
+			@-moz-keyframes myfirst 
+			{
+				from {background: red;}
+				to {background: yellow;}
+			}
+
+			/* Safari and Chrome */
+			@-webkit-keyframes myfirst
+			{
+				from {background: red;}
+				to {background: yellow;}
+			}
+
+			/* Opera */
+			@-o-keyframes myfirst
+			{
+				from {background: red;}
+				to {background: yellow;}
+			}
+
+			/* 绑定元素 */
+			.one-animation {
+				width:100px;
+				height:100px;
+				background:red;
+				float: left;
+				animation:myfirst 5s;
+				-moz-animation:myfirst 5s; /* Firefox */
+				-webkit-animation:myfirst 5s; /* Safari and Chrome */
+				-o-animation:myfirst 5s; /* Opera */
+			}
+
+			@keyframes mysecond
+			{
+				0%   {background:red; left:0px; top:0px;}
+				25%  {background:yellow; left:200px; top:0px;}
+				50%  {background:blue; left:200px; top:200px;}
+				75%  {background:green; left:0px; top:200px;}
+				100% {background:red; left:0px; top:0px;}
+			}
+			
+			@-moz-keyframes mysecond 
+			{
+				0%   {background:red; left:0px; top:0px;}
+				25%  {background:yellow; left:200px; top:0px;}
+				50%  {background:blue; left:200px; top:200px;}
+				75%  {background:green; left:0px; top:200px;}
+				100% {background:red; left:0px; top:0px;}
+			}
+			
+			@-webkit-keyframes mysecond 
+			{
+				0%   {background:red; left:0px; top:0px;}
+				25%  {background:yellow; left:200px; top:0px;}
+				50%  {background:blue; left:200px; top:200px;}
+				75%  {background:green; left:0px; top:200px;}
+				100% {background:red; left:0px; top:0px;}
+			}
+
+			
+			@-o-keyframes mysecond 
+			{
+				0%   {background:red; left:0px; top:0px;}
+				25%  {background:yellow; left:200px; top:0px;}
+				50%  {background:blue; left:200px; top:200px;}
+				75%  {background:green; left:0px; top:200px;}
+				100% {background:red; left:0px; top:0px;}
+			}
+
+			/* 绑定元素 */
+			.two-animation {
+				width:100px;
+				height:100px;
+				background:red;
+				position:relative;
+				animation:mysecond 5s;
+				-moz-animation:mysecond 5s; /* Firefox */
+				-webkit-animation:mysecond 5s; /* Safari and Chrome */
+				-o-animation:mysecond 5s; /* Opera */
+			}
+
+
+		</style>
+	</head>
+<body>
+	<div class="one-animation"></div>
+	<div class="two-animation"></div>
+</body>
+</html>

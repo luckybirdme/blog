@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		var testArrLen = 30;
+		var testArrMax = 1000;
+		var testSortTime = 100000;
+
+		testArrLen = 10000;
+		testSortTime = 1;
+
+		var arr = getRandomArr(testArrLen,testArrMax);
+
+		testSort(bubbleSort,arr,testSortTime);
+		testSort(selectSort,arr,testSortTime);
+		testSort(insertSort,arr,testSortTime);
+		testSort(mergeSort,arr,testSortTime);
+		testSort(quickSort,arr,testSortTime);
+		testSort(arraySort,arr,testSortTime);
+
+		function getRandomArr(len,max){
+			var arr = [];
+			for(var i=0;i<len;i++){
+				arr.push(Math.round(Math.random()*max));
+			}
+			return arr;
+		}
+
+		function copyArr(arr){
+			return JSON.parse(JSON.stringify(arr));
+		}
+		function testSort(cb,arr,time){
+			var start_time = new Date().getTime();
+			var org=copyArr(arr);
+			console.log(org);
+
+			for(var i=0;i<time;i++){
+				cb(copyArr(arr))
+			}
+			
+			rtn=cb(org);
+			if(rtn!=null || rtn!= undefined){
+				console.log('rtn : ',rtn);
+			}else{
+				console.log('org : ' ,org);	
+			}
+			
+			var end_time = new Date().getTime();
+			console.log('cb : ' + cb.name, end_time - start_time);
+		}
+
+		// 冒泡
+		function bubbleSort(arr){
+			var len = arr.length;
+			var tmp = null;
+			for(var i=0;i<len-1;i++){
+				for(var j=0;j<len-1-i;j++){
+					// 两个相邻的数组值进行比较
+					// 把较大的数值一直往后冒泡
+					if(arr[j]>arr[j+1]){
+						tmp=arr[j+1];
+						arr[j+1]=arr[j];
+						arr[j]=tmp;
+					}
+				}
+			}
+		}
+
+		// 选择
+		function selectSort(arr){
+			var len = arr.length;
+			var tmp = null;
+			var min = 0;
+			for(var i=0;i<len-1;i++){
+				min=i;
+				// 寻找最小的数值的小标
+				for(var j=i+1;j<len;j++){
+					if(arr[min]>arr[j]){
+						min=j;
+					}
+				}
+				// 将最小数值移到最前面
+				tmp = arr[min];
+				arr[min] = arr[i];
+				arr[i] = tmp;
+			}
+		}
+
+		// 插入
+		function insertSort(arr){
+			var len = arr.length;
+			var tmp = null;
+			var insert = 0;
+			for(var i=1;i<len;i++){
+				tmp=arr[i];
+				insert=i-1;
+				// 寻找合适的插入位置
+				while(insert>=0 && arr[insert]>tmp){
+					arr[insert+1]=arr[insert];
+					insert--;
+				}
+				// 插入到具体位置
+				arr[insert+1]=tmp;
+			}
+		}
+
+		// 归并
+		function mergeSort(arr){
+			var merge=function(left,right){
+				var result = [];
+
+				// 对比两个数组相同下标的数组大小
+				// 按照大小排序，生成新的数组
+				while(left.length > 0 && right.length > 0){
+					if(left[0]<=right[0]){
+						result.push(left.shift());
+					}else{
+						result.push(right.shift());
+					}
+				}
+
+				while(left.length > 0){
+					result.push(left.shift());
+				}
+
+				while(right.length > 0){
+					result.push(right.shift());
+				};
+				return result;
+			}
+
+			var slice=function(arr){
+				var len = arr.length;
+				if(len<2){
+					return arr;
+				}
+
+				// 分割数组
+				var middle = Math.floor(len/2);
+				var left = arr.slice(0,middle);
+				var right = arr.slice(middle);
+				// 递归分割
+				// 递归合并
+				return merge(slice(left),slice(right));
+			};
+
+			return slice(arr);
+		}
+
+		// 快速
+		function quickSort(arr){
+			var quick = function(arr){
+				var len = arr.length;
+				if(len<2){
+					return arr;
+				};
+
+				// 以第一个数值为基准值
+				var base = arr.shift();
+				// 减少长度 1，避免溢出
+				len = len - 1;
+				var left=[];
+				var right=[];
+				
+				// 将数组分割
+				// 大于基准值的放在右边数组
+				// 小于基准值的放在左边数组
+				for(var i=0;i<len;i++){
+					if(arr[i]>base){
+						right.push(arr[i])
+					}else {
+						left.push(arr[i])
+					}
+				}
+
+				// 递归分割
+				// 递归合并
+				return quick(left).concat(base,quick(right));
+			}
+
+			return quick(arr);
+		}
+
+
+		// 数组自带
+		function arraySort(arr){
+			arr.sort(function(a,b){
+				return a - b;
+			});
+		}
+
+	</script>
+</body>
+</html>

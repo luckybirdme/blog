@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        var performance = function(){
+
+            var t = window.performance.timing;
+
+            var logEventTime=function(name){
+                console.log(name,t[name]);
+            }
+
+            var logEventBetweenTime=function(event1,event2){
+                console.log(event1,event2,t[event2]-t[event1]);
+            }
+
+            logEventTime('navigationStart');
+            logEventTime('unloadEventStart');
+            logEventTime('unloadEventEnd');
+            logEventTime('redirectStart');
+            logEventTime('redirectEnd');
+            logEventTime('fetchStart');
+            logEventTime('domainLookupStart');
+            logEventTime('domainLookupEnd');
+            logEventTime('connectStart');
+            logEventTime('secureConnectionStart');
+            logEventTime('connectEnd');
+            logEventTime('requestStart');
+            logEventTime('responseStart');
+            logEventTime('responseEnd');
+            logEventTime('domLoading');
+            logEventTime('domInteractive');
+            logEventTime('domContentLoadedEventStart');
+            logEventTime('domContentLoadedEventEnd');
+            logEventTime('domComplete');
+            logEventTime('loadEventStart');
+            logEventTime('loadEventEnd');
+
+
+
+
+            // 主要体验指标时间
+
+            // 整体时间，用户从浏览器输入地址到整个页面展示完毕的时间
+            logEventBetweenTime('navigationStart','loadEventEnd');
+
+            // 白屏时间，浏览器卸载旧页面出现白屏，到新页面内容出现的时间
+            // 此时正在解析 dom，展示出第一个dom
+            logEventBetweenTime('fetchStart','domLoading');
+
+            // 操作时间，浏览器卸载旧页面出现白屏，到用户可以点击节点，domready 触发节点
+            logEventBetweenTime('fetchStart','domContentLoadedEventEnd'); 
+
+            // 首屏时间，浏览器卸载旧页面出现白屏，到首屏绘制完毕的时间节点；
+            logEventBetweenTime('fetchStart','loadEventStart');
+
+            // TTFB 即 Time To First Byte，读取页面第一个字节的时间
+            // 用户拿到你的资源占用的时间，加异地机房了么，加CDN 处理了么？加带宽了么？加 CPU 运算速度了么？
+            logEventBetweenTime('navigationStart','responseStart');
+
+
+            
+            // 细分事件的时间
+
+            // 卸载页面的时间
+            logEventBetweenTime('unloadEventStart','unloadEventEnd');
+
+            // 重定向的时间，比如，http://example.com/ 就不该写成 http://example.com
+            logEventBetweenTime('redirectStart','redirectEnd');
+
+            // DNS 查询时间
+            logEventBetweenTime('domainLookupStart','domainLookupEnd');
+
+            // TCP 建立连接完成握手的时间，包括 SSL
+            logEventBetweenTime('connectStart','connectEnd');
+
+            //服务器处理请求时间，代码逻辑是不是太复杂了，数据库索引建立了吗？
+            logEventBetweenTime('requestStart','responseStart');
+
+            // http 响应返回内容的时间，内容经过 gzip 压缩了么，静态资源 css/js 等压缩了么？
+            logEventBetweenTime('responseStart','responseEnd');
+
+
+        };
+        setTimeout(performance,1000);
+    </script>
+</body>
+</html>
