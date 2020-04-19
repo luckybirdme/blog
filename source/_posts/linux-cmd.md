@@ -1,5 +1,5 @@
 ---
-title: Linux 命令
+title: Linux 常用命令
 date: 2020-04-13 08:06:38
 tags: Linux
 ---
@@ -315,4 +315,36 @@ apache    3200  8039  0 Apr10 ?        00:04:39 php-fpm: pool www
 - 杀死指定名称的所有进程
 ```sh
 [root@VM_133_231_centos ~]# ps -ef | grep php | grep -v grep | awk '{print $2}' | xargs kill -9
+```
+
+- 修改时区
+```sh
+
+[root@VM_133_231_centos ~]# timedatectl 
+      Local time: Sun 2020-04-19 08:15:51 CST
+  Universal time: Sun 2020-04-19 00:15:51 UTC
+        RTC time: Sun 2020-04-19 00:15:44
+       Time zone: Asia/Shanghai (CST, +0800)
+     NTP enabled: yes
+NTP synchronized: yes
+ RTC in local TZ: no
+      DST active: n/a
+[root@VM_133_231_centos ~]# timedatectl list-timezones | grep -i new_york  
+America/New_York
+[root@VM_133_231_centos ~]# timedatectl set-timezone America/New_York
+[root@VM_133_231_centos ~]# timedatectl 
+      Local time: Sat 2020-04-18 20:17:26 EDT
+  Universal time: Sun 2020-04-19 00:17:26 UTC
+        RTC time: Sun 2020-04-19 00:17:19
+       Time zone: America/New_York (EDT, -0400)
+     NTP enabled: yes
+NTP synchronized: yes
+ RTC in local TZ: no
+      DST active: yes
+ Last DST change: DST began at
+                  Sun 2020-03-08 01:59:59 EST
+                  Sun 2020-03-08 03:00:00 EDT
+ Next DST change: DST ends (the clock jumps one hour backwards) at
+                  Sun 2020-11-01 01:59:59 EDT
+                  Sun 2020-11-01 01:00:00 EST
 ```

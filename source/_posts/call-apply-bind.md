@@ -31,7 +31,7 @@ rtn();
 ### 二，使用场景
 > "Talk is cheap, Show me the code" --- said by Linus Torvalds
 
-- [代码](https://github.com/luckybirdme/blog/blob/master/example/js/call-apply-bind.html)
+- [代码](/example/js/call-apply-bind.html)
 
 ```javascript
 			var person =  {

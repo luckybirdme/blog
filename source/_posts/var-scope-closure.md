@@ -156,7 +156,7 @@ d['a']='a';
 // {a: "a"}
 ```
 
-### [测试变量作用域的源代码](https://github.com/luckybirdme/blog/blob/master/example/js/var-scope.html)
+### [测试变量作用域的源代码](/example/js/var-scope.html)
 
 
 ## 二. 闭包
@@ -302,7 +302,7 @@ f = null
 ```
 
 
-### [测试闭包的源代码](https://github.com/luckybirdme/blog/blob/master/example/js/scope-closure.html)
+### [测试闭包的源代码](/example/js/scope-closure.html)
 
 
 

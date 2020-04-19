@@ -51,6 +51,6 @@ function full_permute(arr){
 }
 
 ```
-### [源代码](https://github.com/luckybirdme/blog/blob/master/example/js/full-permute.html)
+### [源代码](/example/js/full-permute.html)
 
 

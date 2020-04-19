@@ -61,4 +61,4 @@ function binarySearch(arr,num){
 ```
 
 
-### [源代码](https://github.com/luckybirdme/blog/blob/master/example/js/binary_search.html)
+### [源代码](/example/js/binary_search.html)

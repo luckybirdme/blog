@@ -59,4 +59,4 @@ tags: CSS
 ```
 
 ### 二，具体使用
-##### 1. 颜色变化和位置移动，[示例](https://github.com/luckybirdme/blog/blob/master/example/css/keyframes-animation.html)
+##### 1. 颜色变化和位置移动，[示例](/example/css/keyframes-animation.html)

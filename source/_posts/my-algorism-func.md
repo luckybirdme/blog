@@ -270,4 +270,4 @@ function arraySort(arr){
 
 
 
-### [源代码](https://github.com/luckybirdme/blog/blob/master/example/js/my-sort-func.html)
+### [源代码](/example/js/my-sort-func.html)

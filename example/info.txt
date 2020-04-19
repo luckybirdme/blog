@@ -1,2 +1,0 @@
-js
-ready 和 onload 区别

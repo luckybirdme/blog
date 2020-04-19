@@ -10,10 +10,10 @@ tags: NGINX
 <!-- more -->
 
 ## 一. 正向代理
-![](/img/2020/proxy_one.png)
+![](/img/2020/proxy_one.jpg)
 
 
 ## 二. 反向代理
-![](/img/2020/proxy_two.png)
+![](/img/2020/proxy_two.jpg)
 
 

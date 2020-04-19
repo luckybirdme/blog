@@ -30,7 +30,7 @@
     setTimeout(function(){
       $searchWrap.removeClass('on');
       console.log('removeClass on now');
-    },500);
+    },100);
     console.log('removeClass on later');
     stopSearchAnim();
   });

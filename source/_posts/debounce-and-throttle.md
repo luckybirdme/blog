@@ -106,4 +106,4 @@ function debounce(fn, interval=300) {
 
 
 
-### [源代码](https://github.com/luckybirdme/blog/blob/master/example/js/debounce-and-throttle.html)
+### [源代码](/example/js/debounce-and-throttle.html)
