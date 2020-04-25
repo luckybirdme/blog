@@ -28,14 +28,17 @@ obj = ['a','a', 1 , { 'key': 'val'}]
 num = [1,2,3]
 num.append(4)
 print(num)
-num.insert(2,22)
+num.insert(1,'2')
+print(num)
+print(num.pop(3))
 print(num)
 num[0]=0
 print(num)
-del num[1]
+del num[2]
 print(num)
-num.remove(22)
+num.remove('2')
 print(num)
+
 ```
 
 
@@ -143,19 +146,20 @@ print(s)
 
 数据类型|list|tuple|dict|set 
 -|-|-|-|-
-创建|[1,2,1,{'key':'val'}]|(1,2,1,{'key':'val'})|{ 'key1' : 1, 'key2' : 2 }|set([1,2])
+创建|[1,'2',1,{'key':'val'}]|(1,'2',1,{'key':'val'})|{ 'key1' : 1, 'key2' : 2 }|set([1,2])
 有序|是|是|否|否
 重复|是|是|否|否
 访问|l[0]|t[0]|d['key'],d.get('key')|只能判断存在 print 1 in s
-修改|l[0]='a'|无法修改结构，但可修改引用类型的具体内容，t[3]['key']='b'| d['key1']='a'|无法修改
+修改|l[0]='a'|无法修改| d['key1']='a'|无法修改
 增加|append,insert|无|d['key3'] = 'val'|s.add(3)
-删除|pop,pop(2)|无|d.pop('key3')|s.remove(1)
+删除|del l[0],l.remove(value),l.pop(key)|无|del d.['key1'],d.pop('key3')|s.remove(value)
 
 
 ### 2. 用途
 #### list
 - 存放有序数组，合适多种数据类型
-- 随着元素增多，查询耗时明显增加，但是占用内存小
+- 随着元素增多，查询耗时明显增加，复杂度是 O(n)
+- 占用内存较少小
 
 #### tuple
 - 常量数组，防止被修改
@@ -169,8 +173,8 @@ print(fn())
 ```
 
 #### dict
-- 快速操作数据的字典，在大量元素下依然性能可观
-- 消耗更多内存，用空间换取时间
+- 快速操作数据的字典，在大量元素下依然性能可观，复杂度平均值是 O(log(n))，理想情况下是 O(1)
+- 底层采用 hash table，消耗更多内存，用空间换取时间，详细原理[请参考](https://www.zhihu.com/question/62050494/answer/194190154)
 
 #### set
 - 无序不重复元素集，可以计算交集、差集和并集等

@@ -74,6 +74,8 @@ Global Interpreter Lock(全局解释器锁)，每个CPU在同一时间只能有�
 
 ## 二. Python 多进程实现
 
+每个CPU单独运行一个 CPython 解释器，即每个CPU同时运行一个 Python 进程，所以 Python 多进程在多CPU下才会更高效，而且没有  GIL(Global Interpreter Lock) 锁的问题。
+
 ### 1. 创建子进程
 ```python
 from multiprocessing import Process
@@ -128,7 +130,7 @@ if __name__=='__main__':
     print('All subprocesses done.')
 
 ```
-### 3. 利用 with 和 ProcessPoolExecutor 可以更方便创建和关闭线程池，官网例子
+### 3. 利用 with 和 ProcessPoolExecutor 可以更方便创建和关闭进程池，这些进程都是异步调用的，官网例子
 
 ```python
 import concurrent.futures
@@ -158,6 +160,8 @@ def is_prime(n):
 
 def main():
     with concurrent.futures.ProcessPoolExecutor() as executor:
+        # map(fn,*iterables) 合适 fn 是一样但参数不同，而且输出结果按照输入数组的顺序
+        # submit(fn, *args, **kwargs) 合适 fn 不同，而且输出结果是无序的
         for number, prime in zip(PRIMES, executor.map(is_prime, PRIMES)):
             print('%d is prime: %s' % (number, prime))
 
@@ -182,7 +186,7 @@ print('Exit code:', p.returncode)
 ```
 
 
-### 5. 进程可利用 Queue、Pipe 等多种方式通信，或者 Manager 共享数据
+### 5. 进程可利用 Queue、Pipe 等多种方式通信
 
 - Queue 
 
@@ -257,44 +261,11 @@ if __name__ == '__main__':
 
 ```
 
-- Manager
-
-```python
-from multiprocessing import Pool,Manager
-import os, time
-
-def long_time_task(name,d):
-    print('Run task %s (%s) start' % (name, os.getpid()))
-    d.append(os.getpid())
-
-if __name__=='__main__':
-    print('Parent process %s.' % os.getpid())
-    # 创建进程池，共3
-    p = Pool(3)
-    with Manager() as manager:
-        d = manager.list()
-        for i in range(5):
-            # 将线程保存到队列，等待执行
-            print('save task %s to list' % i)
-            p.apply_async(long_time_task, args=(i,d))
-        print('close pool')
-        # 关闭线程池，不再接受线程
-        p.close()
-        # 开始执行线程，等待线程执行完毕
-        print('Waiting for all subprocesses done...')
-        p.join()
-        print('All subprocesses done.')
-        print(d)
-
-
-```
-
-
 
 
 ## 三. Python 多线程实现
 
-在 CPython 编译器中， 因为 GIL(Global Interpreter Lock)，实际 python 还是单线程排队执行，但是对于 IO 密集型任务来说，多线程还是有比较好性能优势的，比如爬虫抓取网页。
+在 CPython 编译器中， 因为 GIL(Global Interpreter Lock) 限制 CPU 每个时间片只能运行一个线程，所以实际 python 还是单线程排队执行，但是对于 IO 密集型任务来说，多线程还是有比较好性能优势的，比如爬虫抓取网页。
 
 ### 1. 简单的多线程
 ```python
@@ -541,6 +512,7 @@ import threading
 import asyncio
 
 async def hello(n):
+    # 确认在同一个线程内执行
     t = threading.currentThread()
     print('%s task start %s' % (n,t.ident))
     # 模拟异步任务执行，等待 1 秒

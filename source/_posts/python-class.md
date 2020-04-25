@@ -8,7 +8,7 @@ tags: python
 
 <!-- more -->
 
-### 1. 创建 class
+### 1. 创建 class，实例化不需要 new
 
 ```python
 class User():
@@ -22,7 +22,7 @@ if __name__=='__main__':
 	u.show_name()
 ```
 
-### 2. 继承父类
+### 2. 继承父类，当做参数传递
 
 ```python
 
@@ -45,7 +45,7 @@ if __name__=='__main__':
 
 ```
 
-### 3. 多个继承
+### 3. 多个继承，传递多个父类参数
 
 ```python
 
@@ -119,7 +119,7 @@ if __name__=='__main__':
 ```
 
 
-### 6. 默认情况下，实例化后的对象可随意增加属性，可通过 __slots__ 限制属性的增加
+### 6. 默认情况下，实例化后的对象可随意增加属性，可通过 \_\_slots\_\_ 限制属性的增加
 
 ```python
 # 随意增加
@@ -149,7 +149,7 @@ print(u.name)
 
 ```
 
-### 7. 直接当做函数调用
+### 7. 通过 \_\_call\_\_ 直接将类当做函数调用
 
 ```python
 
@@ -166,7 +166,7 @@ if __name__=='__main__':
 ```
 
 
-### 8. 通过 __enter__ 和 __exit__ 实现上下文管理
+### 8. 通过 \_\_enter\_\_ 和 \_\_exit\_\_ 实现上下文管理
 
 ```python
 
@@ -179,6 +179,7 @@ class myOpenFile:
     def __init__(self,filename,mode):
         self.filename=filename
         self.mode=mode
+    # with 默认会调用
     def __enter__(self):
         print('open f')
         self.f = open(self.filename, self.mode)
@@ -191,5 +192,94 @@ class myOpenFile:
 with myOpenFile('hello.txt','r') as f:
     print(f.readlines())
 
+
+```
+
+### 9. 通过 \_\_iter\_\_ 或者 \_\_getitem\_\_ 变成迭代对象
+
+```python
+class MyIterableOne():
+    def __init__(self, text):
+        print('init')
+        self.text = text
+    def __iter__(self):
+        # 创建迭代器，并返回
+        return iter(self.text)
+
+class MyIterableTwo():
+    def __init__(self, text):
+        print('init')
+        self.text = text
+        self.index = -1
+    def __getitem__(self):
+        self.index += 1
+        return self.text[self.index]
+
+
+test_MyIterableOne = MyIterableOne('hello world one')
+test_MyIterableTwo = MyIterableTwo('hello world two')
+
+for i in test_MyIterableOne:
+    print(i)
+for i in test_MyIterableTwo:
+    print(i)
+```
+
+### 10. 初始化类时，调用 \_\_init\_\_，删除对象时，调用 \_\_del\_\_
+
+```python
+
+class TestMyClass():
+    def __init__(self,name):
+        print('init')
+        self.name = name
+    def __del__(self):
+        print('del')
+    def show_name(self):
+        print(self.name)
+
+test_my_class = TestMyClass('test')
+test_my_class.show_name()
+test_my_class = None
+```
+
+### 11. 访问不存在的对象成员属性的时候自动触发 \_\_getattr\_\_
+
+```python
+
+class TestMyClass():
+    def __init__(self,name):
+        print('init')
+        self.name = name
+    def show_name(self):
+        print(self.name)
+    def __getattr__(self,attr):
+        print('__getattr__')
+        print(attr,'not exist')
+test_my_class = TestMyClass('test')
+test_my_class.show_name()
+print(test_my_class.show_age())
+```
+
+### 12. 添加或者修改对象成员的时候自动触发 \_\_setattr\_\_
+
+```python
+class TestMyClass():
+    def __init__(self,name):
+        print('init')
+        self.name = name
+    def show_name(self):
+        print(self.name)
+    def __setattr__(self,attr,value):
+        print('__setattr__')
+        print(attr,' set to ',value)
+        # 注意此处不可以用self.key = value
+        # 否则引起递归次数过大的错误
+        # RecursionError: maximum recursion depth exceeded while calling a Python object
+        super().__setattr__(attr,value) 
+test_my_class = TestMyClass('test')
+test_my_class.show_name()
+test_my_class.name = 'hello'
+test_my_class.show_name()
 
 ```

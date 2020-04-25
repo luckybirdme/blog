@@ -15,12 +15,16 @@ Python web 服务器网关接口，定义Web服务器(nginx)与Python应用程�
 
 下面简单实现 WSGI 协议
 
-### 1. 应用程序，实现 application 函数，也可以使用对象，实现 \__init__ 或者 \__call__ 方法 
+### 1. 应用程序，实现 application 函数，也可以使用实现 \_\_call\_\_ 方法的对象
 ```python
 # wsgi_app.py
+# env 是请求的参数
+# response 是用于返回的对象
 def application(env, response):
+    # 直接返回 200 成功
     response('200 OK',[('Content-Type','text/html')])
     body=''
+    # 打印请求参数
     for k,v in env.items():
         body+='%s %s\n' % (k,v)
     return [body]
@@ -80,7 +84,7 @@ Django 是以 Python 语言编写的 Web 应用程序框架，采用 MVT 设计�
 $ python manage.py runserver 0.0.0.0:8000
 ```
 
-### 2. 使用 uWSGI 服务器来管理 Django 应用
+### 2. 使用 uWSGI 服务器来管理 Django ，采用 http 协议
 ```sh
 # 安装 uWSGI 服务器
 $ pip install uwsgi
