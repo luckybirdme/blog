@@ -4,7 +4,7 @@ date: 2020-04-05 15:13:20
 tags: MySQL
 ---
 
-> 本文基于 MySQL 5.7 
+> 本文基于 MySQL 5.7 (10.1.9-MariaDB)
 
 <!-- more -->
 
@@ -32,17 +32,17 @@ tags: MySQL
 -|-|-
 事物操作| N | Y
 外键关联|N|Y
-全文搜索(full text index)| Y | N
 锁范围| 表级锁|支持行锁
 
 
-### 1. MyISAM 仅支持表锁，在海量写入的时候，会导致所有查询处于Locked状态。
-### 2. MySQL 5.1 以前版本默认使用 MyISAM, 5.5 版本以上默认 InnoDB。
+1. MyISAM 仅支持表锁，在海量写入的时候，会导致所有查询处于Locked状态。
+2. MySQL 5.1 以前版本默认使用 MyISAM, 5.5 版本以上默认 InnoDB。
 
 
 ## 三. MariaDB 的来源
-### 1. MySQL被收购之后，面临着被闭源的风险，因此MySQL之父 Widenius离开Sun之后，2009年重新开发代码全部开源免费关系型数据库，推出了MariaDB。
-### 2. MariaDB是MySQL的代码级量身定制的替代者，所以大部分功能相似，而且接口一样，相应的版本可以直接替换。
+1. MySQL被收购之后，面临着被闭源的风险，因此MySQL之父 Widenius离开Sun之后，2009年重新开发代码全部开源免费关系型数据库，推出了MariaDB。
+2. MariaDB是MySQL的代码级量身定制的替代者，所以大部分功能相似，而且接口一样，相应的版本可以直接替换。
+
 MySQL 版本|MariaDB 版本
 -|-
 5.5|5.5
@@ -52,11 +52,11 @@ MySQL 版本|MariaDB 版本
 
 ## 四. MySQL 优化步骤
 当数据达到千万级时，查询会变得慢下来，一般优化步骤如下
-### 1. 优化的sql，使用索引
-### 2. 添加缓存，比如 redis, memcached
-### 3. 分库，读写分离，主库写数据，从库读，一般上层应用框架都支持读写分离的数据库配置。
-### 4. 分区，将数据按照一定规则分布到多个区，避免全区扫描，也可以多个区并发处理；MySQL 自带的分区功能，对上层应用框架是透明的，但是存在多种限制功能，后面会说到。
-### 5. 分表，比如根据自增ID每10万条记录分成一个表，应用程序根据ID再去操作具体的表格，这个需要上层应用框架配合修改，成本比较高，除非有足够的理由，否则不太建议。
+1. 优化的sql，使用索引
+2. 添加缓存，比如 redis, memcached
+3. 分库，读写分离，主库写数据，从库读，一般上层应用框架都支持读写分离的数据库配置。
+4. 分区，将数据按照一定规则分布到多个区，避免全区扫描，也可以多个区并发处理；MySQL 自带的分区功能，对上层应用框架是透明的，但是存在多种限制功能，后面会说到。
+5. 分表，比如根据自增ID每10万条记录分成一个表，应用程序根据ID再去操作具体的表格，这个需要上层应用框架配合修改，成本比较高，除非有足够的理由，否则不太建议。
 
 ## 五. MySQL 索引
 ### 1. 主键和索引
@@ -67,6 +67,10 @@ MySQL 版本|MariaDB 版本
 - 主键索引，主键默认有索引功能，创建主键时自动添加索引。
 - 唯一索引，索引值必须唯一，可以为 NULL。
 - 普通索引，索引值可以重复，但是重复率太高会影响检索性能。
+- 组合索引，两个以上字段作为索引，采用最左前缀方式使用索引。
+- 全文索引，MyISAM 默认支持，MySQL 5.7 引擎 InnoDB 开始支持。
+
+
 ```sh
 # 该语句添加一个主键，这意味着索引值必须是唯一的，且不能为NULL
 ALTER TABLE tbl_name ADD PRIMARY KEY (id);
@@ -77,9 +81,13 @@ ALTER TABLE tbl_name ADD INDEX index_name (name);
 # 创建联合索引
 # 因为 MySQL 采用最左前缀方式组合，相当于创建了两个索引: age 和 (age,name)
 ALTER TABLE tbl_name ADD INDEX age_name (age,name);
+# 创建全文搜索
+ALTER TABLE tbl_name ADD FULLTEXT INDEX input_content(input_content) with parser ngram;
+
 ```
 
 ### 3. explain 分析索引使用情况
+
 ```sql
 mysql> explain select * from stock where scode='123456' \G
 *************************** 1. row ***************************
@@ -105,6 +113,7 @@ possible_keys: scode
 
 ### 4. 尽量使用高效索引的方法
 - SQL少用like匹配：
+
 ```sh
 # 是不会使用到索引
 like '%test%'
@@ -113,6 +122,7 @@ like 'test%'
 ```
  
 - 不要在字段上进行截取或者运算
+
 ```sh
 # 这会使索引失效 
 select * from post where DATE_FORMAT(time,'%Y%m%d') < 20150225
@@ -122,6 +132,7 @@ select * from post where time < '2015-02-25 00:00:00'
 ```
 
 - 只用一个索引，MySQL查询只使用一个索引，比如
+
 ```sh
 # where 中的 age 已经使用了索引，后面的order by time是不会使用索引的 
 select * from user where age = '25' order by time desc; 
@@ -172,6 +183,7 @@ D:\wamp\bin\mysql\mysql5.7.14\data\my_test_db
 
 ### 3. 测试分区
 - 创建分区表，以自增ID为分区列，通过 range 方式分区
+
 ```sh
 CREATE TABLE `test_tb` (
   `id` int(11) NOT NULL,
@@ -187,6 +199,7 @@ PARTITION BY RANGE (id)(
 ```
 
 - 插入数据
+
 ```sh
 INSERT INTO `test_tb` (`id`,`insert_at`,`order_id`) VALUES (1, now(), '100');
 INSERT INTO `test_tb` (`id`,`insert_at`,`order_id`) VALUES (2, now(), '200');
@@ -197,6 +210,7 @@ INSERT INTO `test_tb` (`id`,`insert_at`,`order_id`) VALUES (6, now(), '600');
 ```
 
 - 查看每个分区的数据情况
+
 ```sh
 mysql> select PARTITION_NAME ,TABLE_ROWS  from information_schema.partitions where table_schema="my_test_db" and table_name="test_tb";
 +----------------+------------+
@@ -210,6 +224,7 @@ mysql> select PARTITION_NAME ,TABLE_ROWS  from information_schema.partitions whe
 ```
 
 - 分析 SQL 在哪个区域执行，可通过 partitions 参数知道
+
 ```sh
 
 mysql> explain partitions select * from test_tb where id = 2 \G

@@ -13,6 +13,7 @@ tags: PHP
 ### 大小写敏感
 所有用户定义的函数、类和关键词（例如 if、else、echo 等等）都对大小写不敏感，除非人为检查限制。
 但是所有定义的变量，对大小写敏感，包括 defined 的常量名，以及数组 key。
+
 ```php
 IF(true){
 	ECHO 'YES';
@@ -26,6 +27,7 @@ var_dump($ONE);
 ```
 
 ### 判断是否存在字符
+
 ```php
 $a = 'How are you?';
 if (strpos($a, 'are') !== false) {
@@ -34,27 +36,23 @@ if (strpos($a, 'are') !== false) {
 ```
 
 
-### 二位数组排序
-```php
+### 二维数组排序
 
-function mutiArraySort($key, $sort = SORT_DESC, $array) {
-    $keyValue = [];
-    foreach ($array as $k => $v) {
-        $keyValue[$k] = $v[$key];
-    }
-    array_multisort($keyValue, $sort, $array);
-    return $array;
-}
+```php
 
 $a=array(
         array('num'=>2,'name'=>'jack'),
         array('num'=>3,'name'=>'luse'),
         array('num'=>1,'name'=>'pony')
-
 );
+var_dump($a);
 
-var_dump(mutiArraySort('num',SORT_DESC,$a));
-var_dump(mutiArraySort('name',SORT_ASC,$a));
+# 获取制定 key 的 value 值
+$keyValue = array_column($a, 'num');
+# SORT_DESC, 倒叙 ; SORT_ASC, 顺序
+array_multisort($keyValue, SORT_DESC, $a);
+var_dump($a);
+
 ```
 
 
@@ -92,6 +90,7 @@ cookie 保存在浏览器，用于记录用户的基本信息，在每次发起�
 
 ### session 
 session 是保存在服务端的，用于记录请求用户的基本信息，服务端根据 cookie 传递的 session_id，就能拿到具体的 session 信息。服务端保存 session 的目录在 php.ini 中 session.save_path 设置，内容格式为:"变量名\|类型:长度:值;"
+
 ```php
 # 服务端设置 cookie，将会自动传给浏览器 
 setcookie("session_id",md5(time()),time()+2*7*24*3600);
@@ -115,6 +114,7 @@ session_destroy();
 
 
 ### 捕捉异常
+
 ```php
 
 // 执行代码
@@ -153,6 +153,7 @@ if(!filter_has_var(INPUT_GET, "email")){
 4. 没有块变量的说法，即 for 循环里的变量依然是上下文有效。
 
 - 局部变量
+
 ```php
 $out_param = 'out';
 function test(){
@@ -169,10 +170,12 @@ echo $out_param;
 ```
 
 - 全局变量通过 global 定义，或者 GLOBALS数组
+
 ```php
 $a = 1;
 $b = 2;
 function Sum1(){
+    // 不推荐这样使用
     global $a, $b;
     $b = $a + $b;
 }
@@ -187,6 +190,7 @@ echo $b;
 ```
 
 - 变量在include也生效
+
 ```php
 $a = 1;
 // $a 在 b.inc 里也有效
@@ -197,6 +201,7 @@ include 'b.inc';
 静态声明是在编译时解析的，静态变量仅在局部函数域中存在，但当程序执行离开此作用域时，其值并不丢失，这种特性非常重要。
 
 - 函数内部的静态变量
+
 ```php
 function count_number(){
     // 只在编译时解析，运行时不会再执行
@@ -208,9 +213,11 @@ function count_number(){
 }
 count_number();
 count_number();
-count_number();
+
 ```
+
 - 类里面的静态变量，包括函数，可以通过 :: 直接访问，不需要 new 实例化
+
 ```php
 class Person {
     static $container = array();
@@ -232,13 +239,101 @@ Person::add('one');
 
 var_dump(Person::$container);
 
+
 ```
 
 
+### 单实例模式：防止重复实例化，避免大量的new操作，减少消耗系统和内存的资源，使得有且仅有一个实例对象
+
+```php
+
+# 单实例的类
+class Singleton
+{
+    //创建静态私有的变量保存该类对象
+    private static $instance;
+
+    //防止使用new直接创建对象
+    private function __construct(){}
+
+    //防止使用clone克隆对象
+    private function __clone(){}
+
+    public static function getInstance()
+    {
+        //判断$instance是否是Singleton的对象，不是则创建
+        if (!self::$instance instanceof self) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    public function show_name()
+    {
+        echo "Singleton";
+    }
+}
+
+$sing = Singleton::getInstance();
+$sing->show_name();
+$sing2 = new Singleton(); 
+//Fatal error: Uncaught Error: Call to private Singleton::__construct() from invalid context in
+$sing3 = clone $sing; 
+//Fatal error: Uncaught Error: Call to private Singleton::__clone() from context
+
+```
+
+
+### 工厂模式：用工厂方法代替new操作的一种模式，如果需要更改所实例化的类名，只需在工厂方法内修改，不需逐一寻找代码中具体实例化的地方
+
+```php
+/**
+ * 测试类一
+  */
+class demo1
+{
+    //定义一个test1方法
+    public function test1()
+    {
+        echo '这是demo1类的test1方法'.PHP_EOL;
+    }
+}
+/**
+ * 测试类二
+  */
+class demo2
+{
+    //定义一个test2方法
+    public function test2()
+    {
+        echo '这是demo2类的test2方法'.PHP_EOL;
+    }
+}
+/**
+ * 工厂类
+ */
+class Factoty
+{
+    // 根据传参类名，创建对应的对象
+    static function createObject($className)
+    {
+        return new $className();
+    }
+}
+/**
+ * 通过传类名，调用工厂类里面的创建对象方法
+ */
+$demo = Factoty::createObject('demo1');
+$demo->test1();             //输出这是demo1类的test1方法
+$demo = Factoty::createObject('demo2');
+$demo->test2();            //输出这是demo2类的test2方法
+
+```
 
 
 ### 变量的引用
 通过 & 获取变量的引用，共用变量的内容，即共用内存
+
 ```php
 function log_mem(){
     echo round(memory_get_usage()/1024/1024, 2).'MB'.PHP_EOL;
@@ -276,6 +371,7 @@ log_mem();
 
 ### 函数的引用返回
 和参数传递不同，函数引用返回必须在定义和调用都添加 & 符号，指出返回的是一个引用。
+
 ```php
 function &load_class($class,$value)
 {
@@ -309,6 +405,20 @@ var_dump($bb);
 
 ```
 
+### 通过 @ 屏蔽可能抛出的错误，但不推荐这样做，因为会导致无法发现致命的错误
+
+```php
+//连接数据库
+function db_connect()
+{
+    @$db =mysql_connect('localhost','root','test');
+    if(!$db){
+        throw new Exception('连接数据库失败!请重试!');
+    }
+    mysql_select_db('book');
+    return $db;
+}
+```
 
 ### 魔术方法
 - \_\_construct, 构造函数，在实例化对象的时候执行
@@ -364,6 +474,7 @@ mysqli_close($conn);
 
 
 ### mysqli 和 PDO 支持特殊字符转义避免 SQL 注入。
+
 ```php
 // mysqli, "manual" escaping
 $username = mysqli_real_escape_string($_GET['username']);
@@ -406,6 +517,7 @@ $pdo->execute(array(':username' => 'test', ':email' => $mail, ':last_login' => t
 
 
 ### PHP 通过事物操作 MySQL
+
 ```php
 // mysql服务器主机地址，用户名，密码
 $dbhost = 'localhost:3306';  
@@ -441,3 +553,153 @@ mysqli_close($conn);
 ```
 
 
+### 客户端IP地址和服务器端IP地址。
+
+```php
+# 客户端
+$REMOTE_ADDR = $_SERVER['REMOTE_ADDR']
+# 服务端
+$SERVER_ADDR = $_SERVER['SERVER_ADDR']
+```
+
+### 序列化和反序列化作用
+- 将数组保存到数据库，要用时再拿出来
+
+```php
+$a = array(
+    'key'=>'val'
+    'more'=>array(
+        'key'=>'val'
+    )
+);
+
+# 序列化成字符串
+$s = serialize($a);
+# 反序列化
+$aa = unserialize($s);
+
+```
+
+- 前后端交互通过 JSON 格式传递数据
+
+```php
+$o = array(
+    'state'=>0,
+    'data'=>array(
+        'key'=>'val'
+    )
+);
+
+# ajax 请求返回 json 结果
+echo json_encode($o);
+
+```
+
+
+### PHP 编码转换
+1. iconv ( string $in_charset , string $out_charset , string $str )
+- 需要指定输入和输出的编码
+- 为了生僻字转换异常，需要添加 IGNORE 
+
+``` php
+$outstr = iconv("UTF-8","GB2312//IGNORE",$data);
+```
+
+2. mb_convert_encoding ( string $str , string $to_encoding [, mixed $from_encoding ] )
+- 自动检测字符串编码，转成成指定编码，可能会影响效率。
+
+```php
+# GBK 参数可以省略
+$outstr = mb_convert_encoding($instr,'UTF-8','GBK');
+```
+
+
+### PHP 防止代码注入，将 HTML 转换成实体，即转换成不可执行的字符
+
+```php
+
+$input_ok = htmlspecialchars($input);
+
+```
+
+
+### PHP 属性的限制
+1. private : 私有成员, 在类的内部才可以访问。
+2. protected : 保护成员，该类内部和继承类中可以访问。
+3. public : 公共成员，完全公开，没有访问限制。
+
+
+### 简述高并发网站解决方案。
+1. 前端优化（CND加速、建立独立图片服务器）
+2. 服务端优化（页面静态化、并发处理[异步|多线程]、队列处理
+3. 数据库优化（数据库缓存[Memcachaed|Redis]、读写分离、分库分表、分区
+4. Web服务器优化（负载均衡、反向代理）
+
+
+### PHP 常用数组方法
+
+函数  |描述
+-|-
+array_chunk()   把一个数组分割为新的数组块。
+array_merge()   把一个或多个数组合并为一个数组。
+array_slice()   返回数组中被选定的部分。
+array_rand()    返回数组中一个或多个随机的键。
+
+array_count_values()    用于统计数组中所有值出现的次数。
+array_diff()    比较数组，返回差集（只比较键值）。
+array_intersect()   比较数组，返回交集（只比较键值）。
+
+array_column()  返回输入数组中某个单一列的值。
+array_keys()    返回数组中所有的键名。
+array_values()  返回数组中所有的值。
+array_sum() 返回数组中值的和。
+
+
+array_filter()  用回调函数过滤数组中的元素。
+array_map() 把数组中的每个值发送到用户自定义函数，返回新的值。
+
+
+array_pop() 删除数组的最后一个元素（出栈）。
+array_push()    将一个或多个元素插入数组的末尾（入栈）。
+array_shift()   删除数组中首个元素，并返回被删除元素的值。
+array_unshift() 在数组开头插入一个或多个元素。
+
+
+array_reverse() 以相反的顺序返回数组。
+array_multisort()   对多个数组或多维数组进行排序。
+krsort()    对数组按照键名逆向排序。
+ksort() 对数组按照键名排序。
+rsort()  对数组排序。
+sort()  对数组排序。
+
+
+array_key_exists()  检查指定的键名是否存在于数组中。
+
+
+```php
+
+$age=array("Bill"=>"60","Steve"=>"56","Mark"=>"31","David"=>"35");
+print_r(array_chunk($age,2,true));
+
+$a = array(
+  array(
+    'id' => 5698,
+    'first_name' => 'Bill',
+    'last_name' => 'Gates',
+  ),
+  array(
+    'id' => 4767,
+    'first_name' => 'Steve',
+    'last_name' => 'Jobs',
+  ),
+  array(
+    'id' => 3809,
+    'first_name' => 'Mark',
+    'last_name' => 'Zuckerberg',
+  )
+);
+
+$last_names = array_column($a, 'last_name');
+print_r($last_names);
+
+```

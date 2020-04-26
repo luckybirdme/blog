@@ -4,7 +4,7 @@ date: 2020-04-04 17:41:09
 tags: MySQL
 ---
 
-> MySQL
+> 本文基于 MySQL 5.7 (10.1.9-MariaDB)
 
 <!-- more -->
 
@@ -146,7 +146,7 @@ mysql> select @@global.tx_isolation,@@tx_isolation;
 
 
 ### MySQL 的事物操作主要包括三个方法
-- 1BEGIN(或者 START TRANSACTION), 开始一个事物
+- BEGIN(或者 START TRANSACTION), 开始一个事物
 - ROLLBACK, 回滚一个事物
 - COMMIT, 提交一个事物
 
