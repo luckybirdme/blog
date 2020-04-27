@@ -34,11 +34,18 @@
         <!--
         <%- search_form({button: '&#xF002;'}) %>
         -->
+        <form action="" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" class="search-form-input" placeholder="Search" id="local-search-input" >
+          <button type="button" class="search-form-submit" style="display:none"></button>
+          <div id="local-search-result"></div> 
+        </form>
 
+        <!--
         <form class="search-form">
           <input type="search" name="q" class="search-form-input" id="local-search-input" placeholder="Search">
           <div id="local-search-result"></div>          
         </form>
+        -->
         
       </div>
     </div>

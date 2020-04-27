@@ -20,6 +20,7 @@
 
 #header-inner
   position: relative
+  overflow: hidden
 
 #banner
   position: absolute
@@ -117,11 +118,12 @@ $nav-link
   top: 15px
   width: 150px
   height: 30px
-  right: 0px
-  display: none
+  right: -150px
+  opacity: 0
   transition: 0.2s ease-out
   &.on
-    display: block
+    opacity: 1
+    right: 0
   @media mq-mobile
     width: 100%
     right: -100%
