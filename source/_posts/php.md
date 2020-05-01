@@ -146,412 +146,6 @@ if(!filter_has_var(INPUT_GET, "email")){
 ```
 
 
-### 变量范围
-1. 局部变量，比如在函数内，在 class 里；
-2. 全局变量，定义后在整个代码运行期间都有效；
-3. 变量上下文范围包括 require 和 include 的文件；
-4. 没有块变量的说法，即 for 循环里的变量依然是上下文有效。
-
-- 局部变量
-
-```php
-$out_param = 'out';
-function test(){
-    // 局部变量
-    $in_param = 'in';
-    echo $in_param;
-    // 无法访问函数外部的变量
-    echo $out_param;
-}
-test();
-// 无法访问函数的局部变量
-echo $in_param;
-echo $out_param;
-```
-
-- 全局变量通过 global 定义，或者 GLOBALS数组
-
-```php
-$a = 1;
-$b = 2;
-function Sum1(){
-    // 不推荐这样使用
-    global $a, $b;
-    $b = $a + $b;
-}
-function Sum2()
-{
-    $GLOBALS['b'] = $GLOBALS['a'] + $GLOBALS['b'];
-}
-Sum1();
-echo $b;
-Sum2();
-echo $b;
-```
-
-- 变量在include也生效
-
-```php
-$a = 1;
-// $a 在 b.inc 里也有效
-include 'b.inc';
-```
-
-### 静态变量
-静态声明是在编译时解析的，静态变量仅在局部函数域中存在，但当程序执行离开此作用域时，其值并不丢失，这种特性非常重要。
-
-- 函数内部的静态变量
-
-```php
-function count_number(){
-    // 只在编译时解析，运行时不会再执行
-    static $i=0;
-    // 每次函数执行都会累加，因为 $i 是静态变量，其值一直保留
-    $i++;
-    echo $i;
-    return $i;
-}
-count_number();
-count_number();
-
-```
-
-- 类里面的静态变量，包括函数，可以通过 :: 直接访问，不需要 new 实例化
-
-```php
-class Person {
-    static $container = array();
-
-    static function add($name){
-        if(!isset(self::$container[$name])){
-            self::$container[$name]=$name;
-            echo "add".PHP_EOL;
-        }else{
-            echo "exist".PHP_EOL;
-        }
-    }
-}
-var_dump(Person::$container);
-
-Person::add('one');
-Person::add('two');
-Person::add('one');
-
-var_dump(Person::$container);
-
-
-```
-
-
-### 单实例模式：防止重复实例化，避免大量的new操作，减少消耗系统和内存的资源，使得有且仅有一个实例对象
-
-```php
-
-# 单实例的类
-class Singleton
-{
-    //创建静态私有的变量保存该类对象
-    private static $instance;
-
-    //防止使用new直接创建对象
-    private function __construct(){}
-
-    //防止使用clone克隆对象
-    private function __clone(){}
-
-    public static function getInstance()
-    {
-        //判断$instance是否是Singleton的对象，不是则创建
-        if (!self::$instance instanceof self) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
-
-    public function show_name()
-    {
-        echo "Singleton";
-    }
-}
-
-$sing = Singleton::getInstance();
-$sing->show_name();
-$sing2 = new Singleton(); 
-//Fatal error: Uncaught Error: Call to private Singleton::__construct() from invalid context in
-$sing3 = clone $sing; 
-//Fatal error: Uncaught Error: Call to private Singleton::__clone() from context
-
-```
-
-
-### 工厂模式：用工厂方法代替new操作的一种模式，如果需要更改所实例化的类名，只需在工厂方法内修改，不需逐一寻找代码中具体实例化的地方
-
-```php
-/**
- * 测试类一
-  */
-class demo1
-{
-    //定义一个test1方法
-    public function test1()
-    {
-        echo '这是demo1类的test1方法'.PHP_EOL;
-    }
-}
-/**
- * 测试类二
-  */
-class demo2
-{
-    //定义一个test2方法
-    public function test2()
-    {
-        echo '这是demo2类的test2方法'.PHP_EOL;
-    }
-}
-/**
- * 工厂类
- */
-class Factoty
-{
-    // 根据传参类名，创建对应的对象
-    static function createObject($className)
-    {
-        return new $className();
-    }
-}
-/**
- * 通过传类名，调用工厂类里面的创建对象方法
- */
-$demo = Factoty::createObject('demo1');
-$demo->test1();             //输出这是demo1类的test1方法
-$demo = Factoty::createObject('demo2');
-$demo->test2();            //输出这是demo2类的test2方法
-
-```
-
-
-### 变量的引用
-通过 & 获取变量的引用，共用变量的内容，即共用内存
-
-```php
-function log_mem(){
-    echo round(memory_get_usage()/1024/1024, 2).'MB'.PHP_EOL;
-}
-
-log_mem();
-
-// 开辟内存保存变量
-$a=array();
-$aa=array();
-for($i=0;$i<1000;$i++){
-    $a[]=123;
-    $aa[]=123;
-}
-log_mem();
-
-// 变量没有改变，赋值给其他变量时，内存不变
-// 普通变量赋值
-$b = $a;
-// 获取变量的引用
-$c = &$aa;
-log_mem();
-
-// 普通变量发生变化时
-// 内存发生很大变化，因为相当于重新开辟了内存
-$b[]=456;
-log_mem();
-
-// 引用变量发生变化时
-// 内存没有发生大变化，因为共用内存
-$c[]=789;
-log_mem();
-
-```
-
-### 函数的引用返回
-和参数传递不同，函数引用返回必须在定义和调用都添加 & 符号，指出返回的是一个引用。
-
-```php
-function &load_class($class,$value)
-{
-        static $_classes = array();
-
-        if (!isset($_classes[$class]))
-        {
-                $_classes[$class] = $value;
-        }
-
-        return $_classes;
-}
-
-// 普通函数调用
-$a=load_class('one','1');
-// 赋值时，只在当前有效，不会修改函数内部的变量 _classes
-$a['two'] = '2';
-var_dump($a);
-$aa=load_class('one','1');
-// 这里的返回没有 two 的赋值
-var_dump($aa);
-
-// 返回函数的引用
-$b=&load_class('123','one');
-// 赋值时，会同时修改函数内部的变量 _classes
-$b['456']='two';
-var_dump($b);
-$bb=&load_class('123','one');
-// 这里的返回包括 456 的赋值
-var_dump($bb);
-
-```
-
-### 通过 @ 屏蔽可能抛出的错误，但不推荐这样做，因为会导致无法发现致命的错误
-
-```php
-//连接数据库
-function db_connect()
-{
-    @$db =mysql_connect('localhost','root','test');
-    if(!$db){
-        throw new Exception('连接数据库失败!请重试!');
-    }
-    mysql_select_db('book');
-    return $db;
-}
-```
-
-### 魔术方法
-- \_\_construct, 构造函数，在实例化对象的时候执行
-- \_\_destruct, 析构函数，在销毁对象后执行
-- \_\_call, 调用一个未定义方法时默认调用
-- \_\_get, 访问未定义的属性时默认调用
-- \_\_toString, echo 输出类名时默认调用
-
-
-
-### PHP 早期通过 mysql 扩展 API 操作 MySQL，后出现升级版 mysqli 
-- mysql是非持继连接函数，mysql每次链接都会打开一个连接的进程。
-- mysqli是永久连接函数，mysqli多次运行将使用同一连接进程，从而减少了服务器的开销。mysqli封装了诸如事务、prepared等一些高级操作，而且是面向对象的接口。
-
-### PHP 官方默认使用 mysqli 操作 MySQL 数据库
-```php
-// mysql服务器主机地址，用户名，密码
-$dbhost = 'localhost:3306';  
-$dbuser = 'root';            
-$dbpass = '123456';          
-$conn = mysqli_connect($dbhost, $dbuser, $dbpass);
-if(! $conn )
-{
-    die('mysqli_connect : ' . mysqli_error($conn));
-}
-// 设置编码
-mysqli_query($conn , "set names utf8");
- 
-// 选择 DB
-mysqli_select_db( $conn, 'mydatabase' );
-
-// 执行 SQL
-$sql = 'SELECT * FROM mytable LIMIT 10';
-$retval = mysqli_query( $conn, $sql );
-if(! $retval )
-{
-    die('mysqli_query : ' . mysqli_error($conn));
-}
-
-// 获取数据
-while($row = mysqli_fetch_array($retval, MYSQLI_ASSOC))
-{
-    var_dump($row);
-}
-// 关闭链接
-mysqli_close($conn);
-```
-
-
-### PDO, 全称 PHP data object, PHP 操作数据库的抽象 API
-- PHP 基于抽象 API 方便切换到不同类型的数据库。 mysql 和 mysqli 只支持 MySQL 数据库。
-- mysql, mysqli, PDO 底层都是调用 mysqlnd (MySQL Native Driver) 跟 mysql-server 进行网络协议交互。
-
-
-### mysqli 和 PDO 支持特殊字符转义避免 SQL 注入。
-
-```php
-// mysqli, "manual" escaping
-$username = mysqli_real_escape_string($_GET['username']);
-$mysqli->query("SELECT * FROM users WHERE username = '$username'");
-
-// PDO, "manual" escaping
-$username = PDO::quote($_GET['username']);
-$pdo->query("SELECT * FROM users WHERE username = $username");
-        
-```
-
-
-### mysqli 和 PDO 都支持更高效更安全的 prepared statement 参数绑定。
-预处理  prepared statement  ，首先将 SQL 进行语义分析，然后再传递变量，而这时候的变量只当做数据来处理，即使变量包含了SQL，也不会当做SQL来执行，从而在根本上避免了输入变量包含SQL注入的风险。
-
-```php
-
-// mysqli
-$query = $mysqli->prepare('
-    SELECT * FROM users
-    WHERE username = ?
-    AND email = ?
-    AND last_login > ?');
-// sss, 变量类型和数量，3 个字符串
-// 后面参数按照顺序替换到 SQL 中
-$query->bind_param('sss', 'test', $mail, time() - 3600);
-$query->execute();
-
-// pdo
-$pdo->prepare('
-    SELECT * FROM users
-    WHERE username = :username
-    AND email = :email
-    AND last_login > :last_login');
-     
-// 根据关键字替换变量
-$pdo->execute(array(':username' => 'test', ':email' => $mail, ':last_login' => time() - 3600));
-
-```
-
-
-### PHP 通过事物操作 MySQL
-
-```php
-// mysql服务器主机地址，用户名，密码
-$dbhost = 'localhost:3306';  
-$dbuser = 'root';            
-$dbpass = '123456';          
-$conn = mysqli_connect($dbhost, $dbuser, $dbpass);
-if(! $conn )
-{
-    die('mysqli_connect : ' . mysqli_error($conn));
-}
-
-// 设置编码
-mysqli_query($conn, "set names utf8");
-// 设置当前 session 不自动提交，MySQL 默认自动提交
-mysqli_query($conn, "set session autocommit=0"); 
-
-// 选择 DB
-mysqli_select_db( $conn, 'mydatabase' );
-
-// 开始事务定义
-mysqli_begin_transaction($conn);            
- 
-if(!mysqli_query($conn, "insert into mytable (id) values(8)"))
-{
-    // 判断当执行失败时回滚
-    mysqli_query($conn, "ROLLBACK");     
-}
- 
-// 提交事务
-mysqli_commit($conn);         
-// 关闭连接   
-mysqli_close($conn);
-```
-
 
 ### 客户端IP地址和服务器端IP地址。
 
@@ -621,12 +215,6 @@ $outstr = mb_convert_encoding($instr,'UTF-8','GBK');
 $input_ok = htmlspecialchars($input);
 
 ```
-
-
-### PHP 属性的限制
-1. private : 私有成员, 在类的内部才可以访问。
-2. protected : 保护成员，该类内部和继承类中可以访问。
-3. public : 公共成员，完全公开，没有访问限制。
 
 
 ### 简述高并发网站解决方案。
@@ -741,4 +329,31 @@ else
     echo "文件存储在: " . "upload/" . $_FILES["file"]["name"];
     
 }
+```
+
+
+### PHP 单引号和双引号的区别
+
+- 单引号，不解析变量，所以单引号执行效率会更高。
+
+- 双引号，会解析变量，所以双引号中的字符串可以包含变量。
+
+### PHP 字符串和数组反转
+
+```php
+// 字符串
+$s = "hello";
+echo strrev($s);
+// 数组
+$a = array('a','b','c','d');
+print_r(array_reverse($a));
+```
+
+### PHP debug 方法，即查看错误的方法
+
+```php
+// 允许显示错误
+ini_set('display_errors', 1);
+// 报告所有错误
+error_reporting(-1);
 ```
