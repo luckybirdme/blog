@@ -10,7 +10,7 @@ tags: JavaScript
 <!-- more -->
 
 
-### 1. [generator function](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Generator) 和 yield (https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/yield) 实现定时器
+### 1. 通过生成器实现定时器
 
 ```js
 // 编写Generator执行器

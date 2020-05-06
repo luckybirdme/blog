@@ -1,13 +1,13 @@
 ---
 title: JS 的模块机制
-date: 2020-01-18 20:23:15
+date: 2020-01-18 23:23:15
 tags: JavaScript
 ---
 
 > - JS 初期属于简单的浏览器脚本语言，简单的代码逻辑即可实现理想的效果。
 > - 随着 Web 和 node 发展，JS 实现的功能越来越复杂，由于缺少类和模块的概念，代码组织也越来越难。
 > - 通过对象和闭包，JS 能模拟命名空间的效果，达到简单的模块化管理，但是缺少标准的规范，而且功能也较弱。
-> - 由此产生了几种 JS 模块规范，主要应用于服务端的 CommonJS，浏览器端的 AMD、CMD，以及兼容两端的 ES6 模块规范。
+> - 由此产生了几种 JS 模块规范，主要应用于服务端的 CommonJS，浏览器端的 AMD，以及兼容两端的 ES6 模块规范。
 
 <!-- more -->
 
@@ -58,7 +58,8 @@ function Module(fullPath) {
     this.exports = {};
 }
  
-Module._extentions = ['.js', '.json'];
+// 不同扩展文件的加载方式
+Module._extentions = {};
 // 模型缓存
 Module._cache = {};
  
@@ -90,6 +91,8 @@ Module.prototype.load = function(){
     Module._extentions[ext](this);
 }
 Module.wrapper = ["(function(exports, module, require){" , "\n})"]
+
+// js 模型文件内容合成
 Module.wrap = function(script) {
     return Module.wrapper[0] + script +  Module.wrapper[1];
 }
@@ -129,9 +132,9 @@ console.log(test);
 
 
 ### 3. 特点
-- module.exports只能输出一个对象，且后面的会覆盖上面的。
-- exports相当于 var exports = module.exports，所以不能直接赋值，否则切断了exports与module.exports的联系
-- require是同步的，所以会阻塞js执行，在服务端取决于磁盘文件读取速度，但在浏览器端则跟网络关系大，所以更合适在服务端使用。
+- 通过 module.exports 导出一个对象，对象可以包括多种类型的属性，包括字符串，数值，函数等，而且后面赋值的属性将会覆盖前面的。
+- exports 相当于 var exports = module.exports，所以不能直接对 exports 赋值，否则会切断 exports 与 module.exports 的引用传递，无法导出对象，因为 require 只能识别 module.exports 而不是 exports。
+- require 是同步的，所以会阻塞js执行，在服务端取决于磁盘文件读取速度，但在浏览器端则跟网络关系大，所以更合适在服务端使用。
 - 模块既是对象，加载的是整个模块对象，即将所有的接口全部加载进来，但是运行时才会确定具体的接口。
 - 输出是值的拷贝，即原来模块中的值改变不会影响已经加载的该值。
 

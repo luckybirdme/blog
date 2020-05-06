@@ -25,7 +25,7 @@ tags: CSS
 ```
 
 ##### 3. 定义了 flex 的 dom 的相关属性有
-- flex-direction : 排列方式，[示例/example/css/flex-box-for-layout.html)
+- flex-direction : 排列方式，[示例](/example/css/flex-box-for-layout.html)
 |值|描述|
 |-|-|
 row|横向从左到右排列（左对齐），默认的排列方式。
@@ -35,7 +35,7 @@ column-reverse|反转纵向排列，从后往前排，最后一项排在最上�
 
 
 
-- flex-wrap : 换行方式，[示例/example/css/flex-box-wrap-for-layout.html)
+- flex-wrap : 换行方式，[示例](/example/css/flex-box-wrap-for-layout.html)
 |值|描述|
 |-|-|
 nowrap|默认值，不换行。
@@ -51,7 +51,7 @@ flex-wrap : nowrap;
 flex-flow : row nowrap;
 ```
 
-- justify-content : 水平方向的对齐方式，[示例/example/css/flex-box-justify-content-for-layout.html)
+- justify-content : 水平方向的对齐方式，[示例](/example/css/flex-box-justify-content-for-layout.html)
 |值|描述|
 |-|-|
 flex-start|默认值。项目位于容器的开头。
@@ -60,7 +60,7 @@ center|项目位于容器的中心。
 space-between|项目位于各行之间留有空白的容器内。
 space-around|项目位于各行之前、之间、之后都留有空白的容器内。
 
-- align-items : 垂直方向的对齐方式，[示例/example/css/flex-box-align-items-for-layout.html)
+- align-items : 垂直方向的对齐方式，[示例](/example/css/flex-box-align-items-for-layout.html)
 |值|描述|
 |-|-|
 stretch|默认值。项目被拉伸以适应容器。
@@ -79,7 +79,7 @@ space-between|与交叉轴两端对齐，轴线之间的间隔平均分布。
 space-around|每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
 stretch|默认值，轴线占满整个交叉轴。
 
-##### 4. flex 的 dom 的下子节点相关属性，[示例/example/css/flex-item-for-layout.html)
+##### 4. flex 的 dom 的下子节点相关属性，[示例](/example/css/flex-item-for-layout.html)
 - order : 整数(0,1,2,3,4)，排序的权重
 - flex-grow : 整数(0,1,2,3,4)，宽度放大比例
 - flex-shrink : 整数(1,2,3,4)，宽度缩小比例
@@ -90,7 +90,7 @@ stretch|默认值，轴线占满整个交叉轴。
 
 ### 二，具体使用
 ##### 1. 水平和垂直居中
-- 块级元素水平和垂直居中 [示例/example/css/flex-middle-for-layout.html)
+- 块级元素水平和垂直居中 [示例](/example/css/flex-middle-for-layout.html)
 
 ``` html
 <!DOCTYPE html>
@@ -140,7 +140,7 @@ stretch|默认值，轴线占满整个交叉轴。
 </html>
 ```
 
-- 登录框垂直居中，并且输入框对齐 [示例/example/css/flex-input-for-layout.html)
+- 登录框垂直居中，并且输入框对齐 [示例](/example/css/flex-input-for-layout.html)
 
 ``` html
 <!DOCTYPE html>

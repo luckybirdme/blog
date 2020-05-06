@@ -80,7 +80,7 @@ $.ajax({
 
 
 ## 三. [axios](https://github.com/axios/axios)
-#### axios是一个基于promise的HTTP库，可以用在浏览器和 node.js 中。它本质也是对原生XMLHttpRequest的封装，只不过它是Promise的实现版本，符合最新的ES规范。
+#### axios是一个基于promise的HTTP库，可以用在浏览器和 node.js 中。它本质也是对原生XMLHttpRequest的封装，只不过它是Promise的实现版本，符合最新的ES6规范。
 
 #### 1. 优点：
 - 从浏览器中创建XMLHttpRequests, 从 node.js 创建 http 请求

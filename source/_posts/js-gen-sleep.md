@@ -1,34 +1,14 @@
 ---
-title: js yield 
+title: js 生成器实现定时器
 date: 2020-01-18 20:23:15
 tags: JavaScript
 ---
 
-> js yield 关键字搭配 generator function 一起使用
+> 生成器实现定时器 
 
 <!-- more -->
 
-### 1. [generator function](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Generator) 和 yield (https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/yield) 搭配使用，创建迭代器。
-```js
-var generator = function* () {
-    yield 'a';
-    yield 'b';
-    yield 'c';
-};
-var it = generator()
-console.log(it.next()); 
-console.log(it.next()); 
-console.log(it.next());
-console.log(it.next());
-/*
-{ value: 'a', done: false }
-{ value: 'b', done: false }
-{ value: 'c', done: false }
-{ value: undefined, done: true }
-*/
-```
-
-### 2. 通过迭代器实现定时器
+### 1. 通过生成器实现定时器
 ```js
 // 返回 promise
 function sleep(time) {
@@ -36,7 +16,7 @@ function sleep(time) {
     setTimeout(resolve,time);
    })
 } 
-// 迭代器
+// 生成器
 function* gen() {
   console.log(1);
   // 睡眠
@@ -57,7 +37,7 @@ it.next().value.then((resolve,reject)=>{
 
 ```
 
-### 3. 上述例子需要手动执行 next，改造成自动执行
+### 2. 上述例子需要手动执行 next，改造成自动执行
 
 ```js
 // 编写Generator执行器

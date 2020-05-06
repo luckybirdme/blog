@@ -37,17 +37,17 @@ tags: NGINX
 
 
 ## 五. 500
-- 500 Internal Server Error，内部服务器错误，也就是服务器遇到意外情况，而无法履行请求。
+- 500 Internal Server Error，内部服务器错误，可能是 NGINX 配置问题，或是脚本执行过程遇到意外情况，而无法履行请求。
 1. 脚本错误，如php语法错误。
 2. 操作系统异常，比如句柄超过限制。
 
-- 502 Bad Gateway，作为服务器尝试执行请求时，收到无效的响应。
-1. 将请求转发给 php-fpm 执行，但是由于某些原因没有执行完毕导致 php-fpm 进程终止
+- 502 Bad Gateway，脚本尝试执行请求时，但是最终返回无效的响应给 NGINX。
+1. NGINX 将请求转发给 php-fpm 执行，但是由于某些原因没有执行完毕导致 php-fpm 进程终止
 
-- 503 Service Temporarily Unavailable ，目前服务器无法提供服务了，通常只是一种暂时的状态。
-1. 由于服务器超载了
-2. 可能进程被停止了
+- 503 Service Temporarily Unavailable ，目前无法提供服务了，通常只是一种暂时的状态。
+1. 由于脚本处理进程 php-fpm 超载了
+2. 可能脚本处理进程 php-fpm 被停止了
 
-- 504 Gateway Time-out，服务器在执行过程中，超过了设定的时间，导致超时没有回应。
+- 504 Gateway Time-out，脚本处理进程在执行过程中，超过了设定的时间，导致超时没有回应 NGINX。
 1. 脚本执行时间太长，导致进程卡住了
 2. FastCGI 缓存区太小，导致进程长时间挂起

@@ -1,10 +1,10 @@
 ---
-title: nodejs 事件机制
+title: nodejs events 核心类
 date: 2020-01-29 13:32:04
 tags: nodejs
 ---
 
-> nodejs 运行的核心是事件驱动机制
+> nodejs 运行的核心是事件驱动机制，通过核心类 events 来实现
 
 <!-- more -->
 

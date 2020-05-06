@@ -167,17 +167,16 @@ return temp;
 ##### [示例代码](/example/js/deep-clone-func.html)
 
 ### 四，业界的克隆方法
-##### 1. [jQuery](https://api.jquery.com/jquery.extend/)，几乎是每个网站的标配类库，当然少不了深克隆的方法。
+
+- [Object.assign](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)，ES6 中的新特性，但只是浅克隆对象的属性值，无法进行深克隆属性值为引用的对象，而且 null 和 undefined 值会被忽略。
 
 ```javascript
-var obj1 = {'a':'one','b':'two'};
-// 浅克隆
-var obj2=$.extend(false,{},obj1);
-// 深克隆
-var obj2=$.extend(true,{},obj1);
+const obj = { a: 1 };
+const copy = Object.assign({}, obj);
+console.log(copy); // { a: 1 }
 ```
 
-##### 2. [loadsh](https://lodash.com/docs/4.17.15#cloneDeep)，一个实用的工具库，提供 array、number、objects、string 等数据类型更高效快捷的操作方法
+- [loadsh](https://lodash.com/docs/4.17.15#cloneDeep)，一个实用的工具库，提供 array、number、objects、string 等数据类型更高效快捷的操作方法
 
 ```javascript
 // 浅克隆
@@ -193,16 +192,24 @@ var deep = loadsh.cloneDeep(func);
 console.log(deep === func);
 ```
 
-##### 3. [immutable](https://github.com/immutable-js/immutable-js)，高性能的数据类库，复制对象时，只更改对应节点以及父节点，子节点则共享，以减少遍历。在 React 中判断是否更新数据渲染模板时，对于复杂对象是非常有用的。
+- [immutable](https://github.com/immutable-js/immutable-js)，高性能的数据类库，复制对象时，只更改对应节点以及父节点，子节点则共享，以减少遍历。在 React 中判断是否更新数据渲染模板时，对于复杂对象是非常有用的。
+
 ```javascript
 // 深克隆
 var immutable= new Object().AsImmutable();
 var newObj = immutable.GetCopy();
 ```
 
-##### 4. [Object.assign](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)，ES6 中的新特性，但只是浅克隆对象的属性值，无法进行深克隆属性值为引用的对象。
+- [jQuery](https://api.jquery.com/jquery.extend/)，几乎是每个网站的标配类库，当然少不了深克隆的方法。
+
 ```javascript
-const obj = { a: 1 };
-const copy = Object.assign({}, obj);
-console.log(copy); // { a: 1 }
+var obj1 = {'a':'one','b':'two'};
+var obj2 = {'c':'three'};
+// 浅克隆
+// 第一个参数是目标对象，第二参数起，是将要复制的对象，可以接收第三个参数，第 n 个对象
+var obj2=$.extend({},obj1,obj2);
+// 深克隆
+// 第一个参数改为 true，后续参数跟浅克隆一样，第二是目标对象，第三个起将要复制的队形
+// 第一个参数不能传递 false，官网文档说不支持
+var obj2=$.extend(true,{},obj1,obj2);
 ```

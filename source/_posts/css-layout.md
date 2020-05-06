@@ -10,7 +10,7 @@ tags: CSS
 <!-- more -->
 
 ### 一，基础知识
-##### 1. float : 让元素漂浮在文档的左边或者右边，默认值不漂浮
+##### 1. float : 让元素漂浮在容器(父节点)的左边或者右边，元素框从文档流完全删除。
 |值|描述|
 |-|-|
 |left|元素向左浮动。|
@@ -21,16 +21,21 @@ tags: CSS
 ##### 2. position : 让元素定位于文档的某个位置，属性值更丰富
 |值|描述|
 |-|-|
-|static|元素框正常生成。块级元素生成一个矩形框，作为文档流的一部分，行内元素则会创建一个或多个行框，置于其父元素中。|
-|relative|元素框相对于第一个父节点偏移某个距离。元素仍保持其未定位前的形状，它原本所占的空间仍保留。|
+|static| 默认值，元素框正常生成。块级元素生成一个矩形框，作为文档流的一部分，行内元素则会创建一个或多个行框，置于其父元素中。|
+|relative|元素框相对于第一个父节点偏移某个距离。元素仍保持其未定位前的形状，它原本所占的空间仍保留。因此会在元素未添加定位时所在位置留下空白。|
 |absolute|元素框从文档流完全删除，并相对于包含 position:relative/absolut 属性的第一个父节点来定位，不一定是直接的父节点。元素原先在正常文档流中所占的空间会关闭，就好像元素原来不存在一样。元素定位后生成一个块级框，而不论原来它在正常流中生成何种类型的框。|
 |fixed|元素框的表现类似于将 position 设置为 absolute，不过其包含块是视窗本身。|
+
+
+- [relative](/example/css/position-relative.html)
+- [absolute](/example/css/position-absolute.html)
+- [fixed](/example/css/position-fixed.html)
 
 
 
 ### 二，具体使用
 ##### 1. 实现左中右布局，要求左右固定宽度，中间自适应宽度
-- float : [示例/example/css/float-for-layout.html)
+- float : [示例](/example/css/float-for-layout.html)
 
 ``` html
 <!DOCTYPE html>
@@ -74,7 +79,7 @@ tags: CSS
 
 ```
 
-- position : [示例/example/css/position-for-layout.html)
+- position : [示例](/example/css/position-for-layout.html)
 
 ``` html
 <!DOCTYPE html>

@@ -94,6 +94,7 @@ Promise 链式调用图。
 
 ##### 2. 构造函数 Promise
 Promise 简单异步调用
+
 ```javascript
 var isSuccess=true;
 // 构造函数，创建 Promise 实例
@@ -110,8 +111,10 @@ var p = new Promise(function(resolve, reject){
 	},10);
 });
 
+
+p.then(
 // Resovled
-p.then(function(msg){
+function(msg){
 	console.log(msg)
 },
 // Rejected
@@ -119,6 +122,7 @@ function(e){
 	console.log(e)
 })
 ```
+
 - resolve 是 Promise 内部提供的回调函数，在 Resolved 状态时的回调函数，最终会调用实例 p 的 then 的第一个参数（即回调函数），而且会透传 参数。 
 - reject 也是 Promise 内部提供的回调函数，在 Rejected 状态时的回调函数，最终会调用实例 p 的 then 的第二个参数（即回调函数），而且会透传参数；如果 then 没有第二参数，则会一直遍历整个链式，直到存在第二参数的 then，或者 catch 函数（后续会解释）。
 

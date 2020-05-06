@@ -56,13 +56,13 @@ function myObjectCreate(prototype){
     function F() {}
     // 构造函数的原型对象指向传入的对象
     F.prototype = prototype;
-    // 通过 new 方式，创建新的实例
-    // 实例原型链指向传入的对象，以便获得传入对象的属性和方法
+    // 通过 new 方式，创建新对象，新对象的原型链将会指向 F 构造函数的原型对象，也即传入的对象
+    // 返回新对象，它的原型链已经指向传入对象了
     return new F();
 }
 ```
 
-##### 3. Object.create 主要用于继承对象的原型属性和方法，具体例子
+##### 3. Object.create 主要用于继承父类的原型对象的属性和方法，具体例子
 ```javascript
 // 用于继承的父类
 function People(){
@@ -76,18 +76,11 @@ function Student(school){
     this.school = school
 }
 
-// 错误使用方式
-// Student.prototype = People.prototype;
-// 对象是引用类，Student.prototype 改变会导致 People.prototype 也改变
 
-// 不想要的使用方式
-// Student.prototype = new People();
-// 会同时继承 People 自身的属性和方法和原型属性和方法
-
-// 正确想要使用方式，通过 Object.create 创建新对象
-// 将新对象的原型链 __proto__ 指向 People.prototype，只继承 People 共有的原型属性和方法
+// Object.create() 将会返回一个原型链指向 People.prototype 的新对象
+// 将子类 Student 的原型对象指向此新对象，只继承 People 原型对象 prototype 的属性和方法
 Student.prototype = Object.create(People.prototype);
-// 避免 Student 的构造函数被更改，加以修正
+// 避免 Student 原型对象的构造函数指针被更改，加以修正
 Student.prototype.constructor = Student;
 console.log(People.prototype);
 console.log(Student.prototype);
@@ -103,5 +96,5 @@ s1.getAge();
 
 ### 三，new 和 Object.create 的区别
 ##### 1. new 更多是为了获取构造函数的自身和原型的所有属性和方法
-##### 1. Object.create 更多是为了获取构造函数的原型对象的属性和方法，称为原型式继承
+##### 1. Object.create 更多是为了获取构造函数的原型对象的属性和方法，称为[原型式继承](http://blog.luckybird.me/2020/05/01/javascript-extends/)
 

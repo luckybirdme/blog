@@ -4,8 +4,7 @@ date: 2019-12-03 08:30:45
 tags: vuejs
 ---
 
-> Vuejs 组件关系包括父子组件，兄弟(同级)组件，跨级组件等，为实现复杂业务场景，组件间不可避免需要进行通信。
-> 通信方法包括 props, $refs, $parent, $children, provide/inject, $attrs/$listener, eventBus 。
+> Vuejs 组件关系包括父子组件，同级组件，跨级组件等，为实现复杂业务场景，组件间不可避免需要进行通信。
 > Vuejs 提供 Vuex 状态管理，集中存储和管理组件状态，以达到组件通信的作用。
 > Vuex 实质是借助 Vue 实例的 data 属性，保存数据，达到响应式的效果。
 

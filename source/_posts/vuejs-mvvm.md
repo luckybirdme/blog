@@ -1,5 +1,5 @@
 ---
-title: vuejs2 数据双向绑定
+title: vuejs 数据双向绑定
 date: 2019-11-21 08:22:04
 tags: vuejs
 ---
@@ -12,11 +12,24 @@ tags: vuejs
 
 
 ## 一，数据双向绑定
-#### 1. MVVM 模式使得视图 view 和 model 交互变得极为方便， view 的改变立即同步到 model ，model 的改变也可立即同步到 view，数据流如下图所示。
+##### 1. MVVM 模式使得视图 view 和 model 交互变得极为方便， view 的改变立即同步到 model ，model 的改变也可立即同步到 view，数据流如下图所示。
 ![](/img/2019/MVVM.png)
 
-#### 2. vuejs 实现 MVVM 模式主要通过 Object.defineProperty() 来侦听属性的 set 和 get 的动作，达到数据立即同步，双向绑定的效果。由于 IE8 的 JS 原生对象不支持此方法，也无法通过 Polyfill 来兼容，所以 vuejs 无法兼容 IE8。
+##### 2. vuejs 实现 MVVM 模式主要通过 Object.defineProperty() 来侦听属性的 set 和 get 的动作，达到数据立即同步，双向绑定的效果。由于 IE8 的 JS 原生对象不支持此方法，也无法通过 Polyfill 来兼容，所以 vuejs 无法兼容 IE8。
 ![](/img/2019/vuejs_mvvm_two.png)
+
+
+- Observer，数据监听器，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者，内部采用Object.defineProperty的getter和setter来实现。相当于Model层观察vue实例中的data数据，当数据发生变化时，通知Watcher订阅者。
+
+- Compile，指令解析器，它的作用对每个元素节点的指令进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数。解析器位于View层，初始化View的视图，将数据变化与更新函数绑定，传给Watcher订阅者。
+
+- Watcher，订阅者，作为连接 Observer 和 Compile 的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。是整个模型的核心，对应ViewModel层，连接Observer和Compile。所有的Watchers存于Dep订阅容器的数组中，Watcher将Observer监听到的数据变化对应相应的回调函数，处理数据，反馈给View层更新界面视图。
+
+- Dep，订阅者容器，内部维护了一个数组，用来收集订阅者（Watcher），数据变动触发 notify 函数，再调用订阅者的 update 方法。
+
+
+
+##### 3. vuejs 实现 MVVM 方式 是对数据（Model）进行劫持，当数据变动时，数据会出发劫持时绑定的方法，对视图进行更新；而 Angular.js 采取的是另外脏检查机制，当发生了某种事件（例如输入），会检查新的数据结构和之前的数据结构是否发生来变动，来决定是否更新视图。
 
 
 ## 二，原生 JS 实现 MVVM 模式

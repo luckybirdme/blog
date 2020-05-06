@@ -53,7 +53,6 @@ tags: vuejs
 
   // 使用
   //{{ message | capitalize }}
-  //<div v-bind:id="rawId | formatId"></div>
 
 ```
 
@@ -117,19 +116,16 @@ MyPlugin.install = function (Vue, options) {
 
 ```js
 
-// 调用 `MyPlugin.install(Vue)`
+var Vue = require('vue')
+// 注册插件
 Vue.use(MyPlugin)
-// 传递参数
+// 可以传递参数
 Vue.use(MyPlugin, { someOption: true })
-new Vue({
-  // ...组件选项
-})
 
 // 实际例子
-// 用 Browserify 或 webpack 提供的 CommonJS 模块环境时
-var Vue = require('vue')
+// 提供的 CommonJS 模块环境时
 var VueRouter = require('vue-router')
-// 不要忘了调用此方法
+// 注册路由
 Vue.use(VueRouter)
 
 ```
