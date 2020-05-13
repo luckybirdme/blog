@@ -41,13 +41,14 @@ tags: NGINX
 1. 脚本错误，如php语法错误。
 2. 操作系统异常，比如句柄超过限制。
 
-- 502 Bad Gateway，脚本尝试执行请求时，但是最终返回无效的响应给 NGINX。
-1. NGINX 将请求转发给 php-fpm 执行，但是由于某些原因没有执行完毕导致 php-fpm 进程终止
+- 502 Bad Gateway，网关错误，没有可用的网关，或者脚本执行请求最终返回无效的响应给 NGINX。
+1. 没有启动php-fpm，或者没有空闲的php-fpm进程。
+2. NGINX 将请求转发给 php-fpm 执行，但是由于某些原因没有执行完毕导致 php-fpm 进程终止
 
-- 503 Service Temporarily Unavailable ，目前无法提供服务了，通常只是一种暂时的状态。
+- 503 Service Temporarily Unavailable ，表示 Nginx 无法提供服务，如当前并发请求数达到nginx的limit_conn，通常只是一种暂时的状态。
 1. 由于脚本处理进程 php-fpm 超载了
 2. 可能脚本处理进程 php-fpm 被停止了
 
-- 504 Gateway Time-out，脚本处理进程在执行过程中，超过了设定的时间，导致超时没有回应 NGINX。
+- 504 Gateway Time-out，表示网关可用，但是处理超时，脚本处理进程在执行过程中，超过了 NGINX 设定的时间。
 1. 脚本执行时间太长，导致进程卡住了
 2. FastCGI 缓存区太小，导致进程长时间挂起
