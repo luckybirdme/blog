@@ -1,5 +1,5 @@
 ---
-title: 前端页面安全
+title: Web 安全漏洞和防范
 date: 2019-11-16 10:46:52
 tags: html
 ---
@@ -139,3 +139,136 @@ if (top.location.hostname !== self.location.hostname) {
     top.location.href = self.location.href;
  }
  ```
+
+
+## 五. 上传文件漏洞
+
+#### 1. 原理
+通过某种方式，将可执行的恶意文件传递给服务器的可执行目录，然后通过 Web 方式访问并执行了这个恶意文件。
+
+#### 2. 案例
+
+文件上传时没有严格限制用户上传的文件类型，导致攻击者向某个可通过 Web 访问的目录上传了可执行文件，就可以在远程服务器上执行任意后台脚本。
+
+``` shell
+# 上传可执行文件
+------WebKitFormBoundarydu65XUlRnIHv1E21
+Content-Disposition: form-data; name="file"; filename="attack_file.php"
+Content-Type: application/octet-stream
+
+# 保存到可执行目录
+{
+    "state": 0,
+    "fullname": "/data/www/save_shell_dir/20200514/15/attack_file.php",
+}
+
+# 通过 web 直接访问该上传的文件，后台以为是可执行文件，导致执行了漏洞代码。
+curl "http://www.yoursite.com/save_shell_dir/20200514/15/attack_file.php"
+```
+
+#### 3. 防范
+
+- 文件上传时对其类型做强校验，只允许上传指定格式的文件
+- 上传文件的目录只配置读取权限，禁止执行权限
+- 将上传后的文件名改成随机数命名，避免被攻击者识别
+- 单独使用服务器保存静态文件，使用不同域名访问，也可避免核心服务器被攻击
+
+
+## 六. 恶意命令注入
+
+#### 1. 原理
+通过某种方式，将可执行的恶意代码传递给服务器，并当做正常代码执行，比如传递可执行的恶意代码参数
+
+#### 2. 案例
+- 程序需要执行时，需要用到用户输入的参数
+
+```js
+let cp=require('child_process')
+// 用户输入参数包括了可执行的恶意代码
+input_param = ';rm -rf /'
+cmd= 'ls -rhtl ' + input_param
+// 直接执行，存在安全隐患
+cp.exec(cmd,function(err,stdout){
+  console.log(stdout)
+})
+```
+
+
+
+#### 3. 防范
+
+- 对输入参数做合法性校验，过滤或者转义可执行的关键字
+
+
+## 七. URL跳转漏洞
+
+#### 1. 原理 
+后台服务器在告知浏览器跳转，跳转地址是客户端之前传入的重定向地址，后台服务器未对客户端传入的地址进行合法性校验，导致用户浏览器跳转到钓鱼页面。
+
+#### 2. 案例
+现在 Web 登录很多都接入了QQ、微信、新浪等第三方登录，以 QQ 第三方授权登录为例，在我们调用 QQ 授权服务器进行授权时，会在参数中传入redirect_url(重定向)地址，告知 QQ 授权服务器，授权成功之后页面跳转到这个地址，然后进行站点登录操作。如果客户端的重定向地址在传输过程中被篡改成了一个钓鱼网址，那么就是导致用户跳转到非法的钓鱼网页。
+
+```shell
+# 正常
+https://graph.qq.com/oauth2.0/show?client_id=100485241&redirect_uri=https://www.mysite.com/
+# 被篡改
+https://graph.qq.com/oauth2.0/show?client_id=100485241&redirect_uri=https://www.hellsite.com/
+```
+
+#### 3. 防范
+1. 代码固定跳转地址，不让用户控制变量
+2. 校验校验跳转的目标地址，非己方地址时告知用户跳转风险
+3. 限制跳转域名，配置白名单
+
+
+
+## 八. DOS/DDOS 攻击
+
+#### 1. 原理
+- DOS, Denial of Service, 拒绝服务攻击，简单说就是发送大量请求是使服务器瘫痪，典型是 TCP 协议的 SYN FLOOD 洪水攻击
+- DDOS, Distributed Denial of Service, 分布式拒绝服务攻击，在DOS攻击基础上发起的攻击，可以通俗理解，DOS 是单挑，而DDOS是群殴。
+
+#### 2. 案例
+- TCP 协议三次握手，当 Server 收到 Client 的 SYN 连接请求后，会回复 ACK 响应和 SYN 连接请求，并进入 SYN_RECV 状态，也称为半连接状态。
+- 如果 Server 一直没有收到 Client 的 ACK 响应，那么 Server 会重发请求包直到连接超时，才会将半连接的队列删除，这个超时时间称为 SYN Timeout。
+- SYN FLOOD 在短时间内伪造大量不存在的IP地址从 Client 向 Server 发起 SYN 请求，由于IP地址不存在，导致 Server 不停地回复 ACK 和 SYN 包直到超时，而半连接队列也因此爆满，无法响应的正常的用户请求，引起网络堵塞，甚至系统瘫痪。
+- DDOS 借助于客户/服务器技术，将多个计算机联合起来作为攻击平台，对一个或多个目标发动DDOS攻击，从而成倍提高DOS攻击的威力，阻止合法用户对正常网络资源的访问。
+- DDOS攻击的策略侧重于通过很多僵尸主机，向受害主机发送大量看似合法的网络包，从而造成网络阻塞或服务器资源耗尽从而导致拒绝服务。
+
+
+
+```shell
+# netstat -nap | grep SYN_RECV
+
+# netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+TIME_WAIT 2448
+CLOSE_WAIT 43
+SYN_SENT 6
+ESTABLISHED 1543
+SYN_RECV 2
+LAST_ACK 1
+
+```
+
+#### 3. 识别 DDOS 攻击
+- 反欺骗：对数据包地址以及端口的正确性进行验证，同时进行反向探测
+- 协议分析：每个数据包类型需要符合规范，只要不符合规范，就自动识别并将其过滤掉。
+- 特征过滤：真实用户请求一般是随机访问的，如果是定时发起请求请求，有可能是模拟请求，可屏蔽掉这些用户IP
+
+#### 4. 防范 DDOS 攻击
+
+- 在机房入口拦截
+ - 在机房网络入口架设防火墙，如果某个内网IP被 DDOS 攻击，直接丢掉这个IP的数据包，压根不会到到达内网服务器，这是机房运营商常用的防范措施。
+ - 流量阀值控制，如果访问过大时，可以限制流量，或者检测工具，发现并过滤掉异常的流量，达到净化流量的功能，云服务商一般都支持流量清洗。
+ 
+
+- 在本机防火墙拦截
+ - 本机防火墙 iptables 根据异常请求的特征，直接过滤掉，比如 DROP 指定 IP
+ 
+- 在 Web 服务器拦截
+ - 依然是根据异常请求的特征过滤掉，Nginx 支持 deny 指定IP
+ - 设置最大连接数据，Nginx 支持 limit connect 设置。
+
+- 其他方式
+ - 通过 CDN 分散请求，一定程度上能缓解服务器的压力，尤其是静态资源，但是对于动态请求，比如登录校验，用户评论等，主服务器也是扛不住攻击的。
+ - 扩容，增加带宽，升级服务器，以便快速处理大量的请求，此方法费时费力，而且一般扛不住，DDOS 攻击本质就是通过大量请求，让你无法正常提供服务。

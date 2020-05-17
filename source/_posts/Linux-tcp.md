@@ -144,7 +144,7 @@ TCP 是面向连接的，一对一的，双向同时通信的可靠协议，必�
 	(2). Client 发送完毕后进入 SYN_SENT 状态，等待 Server 确认。
 - 第二次握手：
 	(1). Server 收到 Client 发起的标志位 SYN = 1 的连接请求后，返回一个确认响应，Flags 标志 SYN=1，ACK=1，序列号 Seq = y (一般是 0)，确认号 Ack = x + 1 ( Client 发送的序列号 Seq + 1)；
-	(2). Server 发送完毕后进入 SYN_RCVD 状态，等待 Client 回应。
+	(2). Server 发送完毕后进入 SYN_RECV(SYN_RCVD) 状态，等待 Client 回应。
 - 第三次握手：
 	(1). Client 收到 Server 返回的标志位 SYN = 1 响应后，检查返回的标志位 ACK = 1，以及确认号 Ack 是否等于第一次握手发送的序列号 Seq + 1，即 x + 1
 	(2). 如果正确，那么 Client 返回一个响应给 Server ，标志位 ACK=1，确认号 Ack = y + 1 ( Server 发送的序列号 Seq + 1)
@@ -172,15 +172,26 @@ Server 确认 Client 接收正常|-|-|Y
 Server 确认 Server 发送正常|-|-|Y
 
 
-#### 4. SYN 攻击
+#### 4. SYN FLOOD 攻击：典型的 DDOS 攻击，具体请[参考](2019/11/16/browser-safety/)
 
-- 在第二次握手时，Server 在发送 SYN-ACK 给 Client 之后，会进入 SYN_RCVD 状态；当收到 Client 响应的 ACK 后，即第三次握手时，Server 才转入 ESTABLISHED 状态。
+- 在第二次握手时，Server 在发送 SYN-ACK 给 Client 之后，会进入 SYN_RECV 状态；当收到 Client 响应的 ACK 后，即第三次握手时，Server 才转入 ESTABLISHED 状态。
 - SYN 攻击就是 Client 在短时间内伪造大量不存在的IP地址，并向 Server 不断地发送 SYN 连接请求，Server 回复 ACK 确认包后，并等待 Client 的确认。
 - 由于IP源地址是不存在的，因此 Server 需要不断重发直至超时，这些伪造的 SYN 请求将会占用未连接的队列，导致正常的 SYN 请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。
 - SYN 攻击是一种典型的 DDOS 攻击，检测 SYN 攻击的方式主要通过查看 Server 是否有大量半连接状态且源IP地址是随机的
 
 ```shell
-netstat -nap | grep SYN_RECV
+# netstat -nap | grep SYN_RECV
+# netstat -n | grep tcp | awk '{print $6}' | sort | uniq -c | sort -nr
+   1606 TIME_WAIT
+    317 ESTABLISHED
+      3 CLOSE_WAIT
+# netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+TIME_WAIT 2448
+CLOSE_WAIT 43
+SYN_SENT 6
+ESTABLISHED 1543
+SYN_RECV 2
+LAST_ACK 1
 
 ```
 
@@ -211,7 +222,8 @@ TCP 是双向同时通信的协议，当 Server 和 Client 之间的数据发送
 
 
 
-#### 3. 为啥四次挥手：确保 Server 和 Client 两端的连接都结束。
+#### 3. 为啥四次挥手：Client 发送 FIN 时，Server 可能还有数据，所以 Server 回应 Client 的 ACK 和 Server 的 FIN 分开两次发送。
+
 - 三次握手过程中，第二次握手时，Server 将 Client 连接请求的确认标志位 ACK 和允许建立连接的标志位 SYN 与一起发送给 Client。
 - 四次挥手过程中，Server 在收到 Client 的结束请求 FIN 后，可能还有数据要发送，所以会首先响应一个 ACK 给 Client，等数据全部发送完毕后，再发送一个 FIN 给 Client
 - Client 发送自己连接的 FIN， Client 发送 ACK 响应 Server 的 FIN，发生了两次挥手。
@@ -231,11 +243,11 @@ Client 响应 Server 通道结束请求|-|-|-|Y
 
 
 
-#### 4. 为啥 TIME_WAIT = 2MSL ( 最长报文时间 Maximum Segment Lifetime )
+#### 4. 为啥 Client 有 TIME_WAIT 状态，而且要等于 2MSL
 
 - 确保最后一个 Client 确认结束报文 ACK 能够到达 Server，两端通道都可靠地结束。
 	(1). 如果 Server 没收到 Client 发送来的确认报文，那么就会重新发送一次结束请求；
-	(2). 如果此时 Client 处于 CLOSED 状态，那么 Server 将会受到 Client 标志位 RST = 1 的报文，表示需要重建已经错乱了的连接。
+	(2). 如果此时 Client 处于 CLOSED 状态，那么 Server 将会收到 Client 标志位 RST = 1 的报文，表示需要重建已经错乱了的连接。
 	(3). 而 Client 在状态 TIME_WAIT，依然能够接受确认报文，等待一段时间就是为了处理 Server 重发结束请求的情况。
 - 等待一段时间是为了让本连接持续时间内所产生的所有报文都从网络中消失，避免端口相同的前后两个连接的报文混乱。
 	(1). TCP 连接是根据端口区分不同连接的
@@ -247,7 +259,155 @@ RFC793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分
 
 
 
-## TCP粘包、拆包
+## 七. 大量 CLOSE_WAIT 状态的 TCP 连接
+
+#### 1. 原因：
+- 在 TCP 四次挥手中，当 Client 主动发送 FIN 请求，Server 会响应 ACK，然后进入 CLOSE_WAIT 状态，这只是表示 Client 到 Server 的通道关闭了，此时 Server 到 Client 的通道可能还有数据要发送。
+- 当 Server 向 Client 发送完所有数据，就会发送自己的 FIN 请求给 Client，之后 Server 进入 LAST_ACK 状态。
+- 如果 Server 出现大量的 CLOSE_WAIT，就表示 Server 有大量的 TCP 没有正常的发送自动的 FIN，即没有正常地自己关闭。
+- 可能是 Server 的程序出现问题，socket accept后没有 close，文件 open 后没有 close
+
+```shell
+[root@ ~]# netstat | grep tcp |  awk '{print $6}' | sort |uniq -c | sort -nr
+   5461 CLOSE_WAIT
+    367 ESTABLISHED
+      2 LAST_ACK
+      1 FIN_WAIT2
+```
+
+#### 2. 问题
+由于 Server 没有正常关闭 TCP 连接，则该连接使用的句柄将会无法释放，而每个进程能打开的句柄数是有限的，所以会引发 too many open files in system 的问题。
+- 查看进程打开的句柄数
+
+```shell
+# 数字为进程ID
+# 对于当前进程，0 是标准输入，1 是标准出，2 是错误输出
+# 其他数字是进程打开的句柄，比如引用的lib文件，打开的 socket 通道等
+[root@ ~] ls -l /proc/13574/fd
+lr-x------ 1 root root 64  5月 15 15:09 0 -> /dev/null
+l-wx------ 1 root root 64  5月 15 15:09 1 -> /data/home/test_user/log/output.log
+l-wx------ 1 root root 64  5月 15 15:09 2 -> /data/home/test_user/log/error.log
+l-wx------ 1 root root 64  5月 15 15:09 3 -> /data/home/test_user/lib/jul-to-slf4j-1.7.25.jar
+lrwx------ 1 root root 64  5月 15 15:09 4 -> socket:[1236791109]
+```
+
+- 查看进程可打开的最大句柄数
+
+```shell
+[root@ ~] ulimit -n
+1024
+# 或者
+[root@ ~] ulimit -a
+····
+open files                      (-n) 1024
+····
+```
+
+
+#### 3. 处理建议
+(1) 增加进程的最大文件句柄数
+
+```shell
+# 临时生效
+# H=hard 硬限制，实际限制
+# S=soft 软限制，只是给出告警，但不限制
+[root@ ~] ulimit -SHn 65535
+
+# 永久生效
+# 修改 /etc/security/limits.conf 
+# * 表示所用的用户
+[root@ ~] echo "* soft nofile 65535"  >> /etc/security/limits.conf
+[root@ ~] echo "* hard nofile 65535"  >> /etc/security/limits.conf
+```
+
+(2) 如果是超过了系统级别的句柄限制，则修改系统总限制
+
+```shell
+# 临时生效
+# 重启后会失效
+[root@ ~] echo  6553560 > /proc/sys/fs/file-max
+
+#永久生效
+# 修改 /etc/sysctl.conf
+# 重启生效
+echo "fs.file-max=6553560" >> /etc/sysctl.conf
+```
+
+(3) 检查 Server 程序，是否存在没有关闭句柄的BUG，以python代码为例
+
+```python
+# 接收请求，打开 socket 句柄
+sock, addr = s.accept()
+# 最后是否关闭句柄了
+sock.close()
+
+# 通过 with 打开文件和自动关闭
+with open('hello.txt','r') as f:
+    print(f.readlines())
+```
+
+## 八. 大量 LAST_ACK 状态的 TCP 连接
+#### 1. 原因
+- 在 TCP 四次挥手中，Client 主动发送 FIN 给 Server，Server 最后也会发送 FIN 给 Client，接着 Server 进入 LAST_ACK 状态，等待 Client 回复 ACK。
+- 如果网络原因 Client 没有收到 Server 的 FIN，则会触发 TCP 重传机制，Server 会再次发送 FIN，直到重传时，然后 Server 就会进入 CLOSED 状态。
+- 如果超过 2MSL 后，Client 进入 CLOSED 了才收到 Server 的 FIN，则会回复 RST 包给 Server，表示本次 TCP 连接已经出现错乱了，此时 Server 也会进入 CLOSED 状态。
+
+#### 2. 问题
+- LAST_ACK 状态下，TCP 连接依然占用句柄，无法释放，也会触发 too many open files in system。
+
+#### 3. 处理建议
+TCP 的重传 FIN 机制能有效地确保链接两端都可靠地结束，而且重传机制超时会进入 CLOSED 状态，所以很多情况下， LAST_ACK 状态只是短暂存在，很快消失，无需太多干预。
+
+
+## 九. 大量 TIME_WAIT 状态的 TCP 连接
+#### 1. 原因
+- 在 TCP 四次挥手中，TIME_WAIT 是主动关闭方的状态，比如上面提到的 Client 主动向 Serve 发送 FIN，最后 Client 会进入 TIME_WAIT 状态，等待 2 MSL 后，进入 CLOSED。
+- 利用 Nginx 转发请求到 PHP-FPM ，如果 PHP-FPM 执行时间太长，Nginx 判断超时了，就会主动发送 FIN ，此时 Nginx 充当 Client 角色，就会出现 TIME_WAIT 的连接。
+- HTTP 1.0 采用短连接，所以 Nginx 返回内容给浏览器时，会自动断开连接，此时 Nginx 充当 Server 角色，主动发送 FIN，也会出现  TIME_WAIT 的连接。
+- PHP-FPM 机器会发起很多 DB 连接请求到 MySQL 服务器，如果此时 MySQL 服务器出现异常，导致连接请求超时， PHP-FPM 会主动断开，此时 PHP-FPM  充当  Client 角色，就会出现 TIME_WAIT 的连接。
+- MySQL 服务器在收到客户端 quit 的命令后，会主动关闭客户端，此时 MySQL 服务器 充当 Server 角色，也有可能出现 TIME_WAIT 状态，采用类似机制的还有 Redis 服务器。
+
+#### 2. 问题
+- TIME_WAIT 状态下，TCP 连接依然占用句柄，无法释放，也会触发 too many open files in system。
+- 对于主动发起TCP连接，并主动关闭的一方，TIME_WAIT 状态会一直占用系统的源端口，但是系统端口是有限的。
+- 所有连接会保存到系统的 hask table，一直不释放的连接会一直占用内存，但是相对较少，影响不大。
+- 新连接每次遍历空闲随机端口耗费的时间也会变长，但是对CPU影响也是很小的。
+
+#### 3. 解决方法
+TIME_WAIT 状态下的 TCP 连接将会在 2 MSL 后自动转入 CLOSED，即最终会消失的，如果系统句柄没有超限，源端口足够，也无需太多干预。
+如果确实影响了正常服务，可按照以下顺序处理，其中(4),(5),(6)方法都违背了 TCP 协议规范，非必要情况，都不推荐：
+
+(1) 将短连接改成长连接，减少连接数量，在高并发下，长连接的性能会优于短连接。
+(2) Server 和 Client 端，增加句柄数，请参考上面提到的解决 CLOSE_WAIT 的方法
+(3) Client 端，增加源端口数，系统的源端口在启动时设置了范围
+查看本地源端口范围
+
+```shell
+[root@ ~]# sysctl -a | grep ip_local_port_range
+net.ipv4.ip_local_port_range = 32768	60999
+````
+
+修改本地源端口范围
+
+```shell
+# 临时生效
+# 重启后会失效
+[root@ ~] echo  "30000 63000" > /proc/sys/net/ipv4/ip_local_port_range
+
+#永久生效
+# 修改 /etc/sysctl.conf
+# 重启生效
+echo "net.ipv4.ip_local_port_range=30000 63000" >> /etc/sysctl.conf
+```
+
+(4) Server 和 Client 端，修改 TIME_WAIT 状态连接数量上限 tcp_max_tw_buckets，超过上限的 TIME_WAIT 连接自动转入 CLOSED，会有一定安全隐患，参考等待 2 MSL 的作用。
+
+(5) Client 端，开启 tcp_tw_reuse (默认关闭)，即复用 TIME_WAIT 状态的连接，此时会存在延迟数据和新连接数据冲突的问题，所以必须借助 Server 和 Client 端的参数 tcp_timestamps (默认开启) 来标记不同时间的连接。该参数只对 Client 端有用，Server 端不需要开启，即使 Server 端需要连接 DB，一般也是长连接，所以不会有大量的连接。
+
+(6) Server 和 Client 端，开启 tcp_tw_recycle (默认关闭)，即回收 TIME_WAIT 状态的连接，比 2 MSL 更短的时间回收，此参数也要依赖 tcp_timestamps 参数；如果 Client 处于 NAT 网络中，TCP 头部的时间戳即 tcp_timestamps 的标记可能会异常 ，导致TCP连接建立错误，所以开启要慎重。
+
+
+## 十. TCP粘包、拆包
 
 #### 1. UDP 是基于报文发送的，一个 UDP 报文就是完整的数据，UDP 首部采用了 16bit 来指示 UDP 数据报文的长度，因此在应用层能很好的将不同的数据报文区分开，从而避免粘包和拆包的问题。
 
