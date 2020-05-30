@@ -1,5 +1,5 @@
 ---
-title: mysql 数据类型
+title: MySQL 数据类型
 date: 2020-05-08 07:23:56
 tags: MySQL
 ---
@@ -53,7 +53,7 @@ LONGBLOB/LONGTEXT|	0-4 294 967 295 < 2^32-4 |	极大数据
 3. 对于 latin1 字符集(ISO-8859-1的别名)，一个字符占用一个字节，所以表中只有一个 varchar 字段时，最大字符长度可设置 65535。
 4. 如果字符大于255(2^8=8bit=1byte)，varchar 会保存字符数据时会在 overhead 添加一个字节记录字符长度，如果大于255，则是添加两个字节。
 
-```mysql
+```sql
 mysql> create table t7 (col_one varchar(20000) default '') charset=utf8;
 Query OK, 0 rows affected (0.19 sec)
 
@@ -90,7 +90,7 @@ ERROR 1074 (42000): Column length too big for column 'col_one' (max = 65535); us
 1. 索引建立会占用空间，索引值长度也会影响性能，text 字段建立索引时，需要指定列值前缀长度，作为最终的索引值长度。varchar 字段默认是列值全部作为索引长度，也可设置指定长度。
 2. varchar 字段的数据保存在当前行，所以检索效率会比 text 数据更高。而 text 的数据是保存到另外行或者页的，因此可以保存更多的数据。
 
-```mysql
+```sql
 
 mysql> create table t8 (col_one varchar(30000) default '') charset=utf8;
 ERROR 1074 (42000): Column length too big for column 'col_one' (max = 21845); use BLOB or TEXT instead

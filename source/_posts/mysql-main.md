@@ -1,5 +1,5 @@
 ---
-title: MySQL 性能优化
+title: MySQL 架构
 date: 2020-04-05 15:13:20
 tags: MySQL
 ---
@@ -37,6 +37,7 @@ tags: MySQL
 
 1. MyISAM 仅支持表锁，在海量写入的时候，会导致所有查询处于Locked状态。
 2. MySQL 5.1 以前版本默认使用 MyISAM, 5.5 版本以上默认 InnoDB。
+3. MySQL 支持数据库内的不同表格使用不同的引擎，所以引擎设置一般在创建表格的时候。
 
 
 ## 三. MariaDB 的来源

@@ -172,29 +172,6 @@ Server 确认 Client 接收正常|-|-|Y
 Server 确认 Server 发送正常|-|-|Y
 
 
-#### 4. SYN FLOOD 攻击：典型的 DDOS 攻击，具体请[参考](2019/11/16/browser-safety/)
-
-- 在第二次握手时，Server 在发送 SYN-ACK 给 Client 之后，会进入 SYN_RECV 状态；当收到 Client 响应的 ACK 后，即第三次握手时，Server 才转入 ESTABLISHED 状态。
-- SYN 攻击就是 Client 在短时间内伪造大量不存在的IP地址，并向 Server 不断地发送 SYN 连接请求，Server 回复 ACK 确认包后，并等待 Client 的确认。
-- 由于IP源地址是不存在的，因此 Server 需要不断重发直至超时，这些伪造的 SYN 请求将会占用未连接的队列，导致正常的 SYN 请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。
-- SYN 攻击是一种典型的 DDOS 攻击，检测 SYN 攻击的方式主要通过查看 Server 是否有大量半连接状态且源IP地址是随机的
-
-```shell
-# netstat -nap | grep SYN_RECV
-# netstat -n | grep tcp | awk '{print $6}' | sort | uniq -c | sort -nr
-   1606 TIME_WAIT
-    317 ESTABLISHED
-      3 CLOSE_WAIT
-# netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
-TIME_WAIT 2448
-CLOSE_WAIT 43
-SYN_SENT 6
-ESTABLISHED 1543
-SYN_RECV 2
-LAST_ACK 1
-
-```
-
 ## 六. TCP 四次挥手
 
 
@@ -259,7 +236,59 @@ RFC793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分
 
 
 
-## 七. 大量 CLOSE_WAIT 状态的 TCP 连接
+## 七. 大量 SYN_RECV 的 TCP 连接
+
+#### 1. 原因
+- 在第二次握手时，Server 在发送 SYN-ACK 给 Client 之后，会进入 SYN_RECV 状态；当收到 Client 响应的 ACK 后，即第三次握手时，Server 才转入 ESTABLISHED 状态。
+- 如果 Client 在短时间内伪造大量不存在的IP地址，并向 Server 不断地发送 SYN 连接请求，由于IP源地址是不存在的，因此 Server 需要不断重发 ACK 直至超时，这些伪造的 SYN 请求将会占用未连接的队列，导致正常的 SYN 请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。
+
+```shell
+# netstat -nap | grep SYN_RECV
+# netstat -n | grep tcp | awk '{print $6}' | sort | uniq -c | sort -nr
+   1606 TIME_WAIT
+    317 ESTABLISHED
+      3 CLOSE_WAIT
+# netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+TIME_WAIT 2448
+CLOSE_WAIT 43
+SYN_SENT 6
+ESTABLISHED 1543
+SYN_RECV 2
+LAST_ACK 1
+
+```
+
+#### 2. 问题
+- DOS, Denial of Service, 拒绝服务攻击，简单说就是发送大量请求是使服务器瘫痪，典型是 TCP 协议的 SYN FLOOD 洪水攻击
+- DDOS, Distributed Denial of Service, 分布式拒绝服务攻击，在DOS攻击基础上发起的攻击，可以通俗理解，DOS 是单挑，而DDOS是群殴。
+
+
+#### 3. 识别 DDOS
+- 反欺骗：对数据包地址以及端口的正确性进行验证，同时进行反向探测
+- 协议分析：每个数据包类型需要符合规范，只要不符合规范，就自动识别并将其过滤掉。
+- 特征过滤：真实用户请求一般是随机访问的，如果是定时发起请求请求，有可能是模拟请求，可屏蔽掉这些用户IP
+
+#### 4. 防范 DDOS
+
+- 在机房入口拦截
+ - 在机房网络入口架设防火墙，如果某个内网IP被 DDOS 攻击，直接丢掉这个IP的数据包，压根不会到到达内网服务器，这是机房运营商常用的防范措施。
+ - 流量阀值控制，如果访问过大时，可以限制流量，或者检测工具，发现并过滤掉异常的流量，达到净化流量的功能，云服务商一般都支持流量清洗。
+ 
+
+- 在本机防火墙拦截
+ - 本机防火墙 iptables 根据异常请求的特征，直接过滤掉，比如 DROP 指定 IP
+ 
+- 在 Web 服务器拦截
+ - 依然是根据异常请求的特征过滤掉，Nginx 支持 deny 指定IP
+ - 设置最大连接数据，Nginx 支持 limit connect 设置。
+
+- 其他方式
+ - 通过 CDN 分散请求，一定程度上能缓解服务器的压力，尤其是静态资源，但是对于动态请求，比如登录校验，用户评论等，主服务器也是扛不住攻击的。
+ - 扩容，增加带宽，升级服务器，以便快速处理大量的请求，此方法费时费力，而且一般扛不住，DDOS 攻击本质就是通过大量请求，让你无法正常提供服务。
+
+
+
+## 八. 大量 CLOSE_WAIT 的 TCP 连接
 
 #### 1. 原因：
 - 在 TCP 四次挥手中，当 Client 主动发送 FIN 请求，Server 会响应 ACK，然后进入 CLOSE_WAIT 状态，这只是表示 Client 到 Server 的通道关闭了，此时 Server 到 Client 的通道可能还有数据要发送。
@@ -346,7 +375,7 @@ with open('hello.txt','r') as f:
     print(f.readlines())
 ```
 
-## 八. 大量 LAST_ACK 状态的 TCP 连接
+## 九. 大量 LAST_ACK 的 TCP 连接
 #### 1. 原因
 - 在 TCP 四次挥手中，Client 主动发送 FIN 给 Server，Server 最后也会发送 FIN 给 Client，接着 Server 进入 LAST_ACK 状态，等待 Client 回复 ACK。
 - 如果网络原因 Client 没有收到 Server 的 FIN，则会触发 TCP 重传机制，Server 会再次发送 FIN，直到重传时，然后 Server 就会进入 CLOSED 状态。
@@ -359,7 +388,7 @@ with open('hello.txt','r') as f:
 TCP 的重传 FIN 机制能有效地确保链接两端都可靠地结束，而且重传机制超时会进入 CLOSED 状态，所以很多情况下， LAST_ACK 状态只是短暂存在，很快消失，无需太多干预。
 
 
-## 九. 大量 TIME_WAIT 状态的 TCP 连接
+## 十. 大量 TIME_WAIT 状态的 TCP 连接
 #### 1. 原因
 - 在 TCP 四次挥手中，TIME_WAIT 是主动关闭方的状态，比如上面提到的 Client 主动向 Serve 发送 FIN，最后 Client 会进入 TIME_WAIT 状态，等待 2 MSL 后，进入 CLOSED。
 - 利用 Nginx 转发请求到 PHP-FPM ，如果 PHP-FPM 执行时间太长，Nginx 判断超时了，就会主动发送 FIN ，此时 Nginx 充当 Client 角色，就会出现 TIME_WAIT 的连接。
@@ -407,7 +436,7 @@ echo "net.ipv4.ip_local_port_range=30000 63000" >> /etc/sysctl.conf
 (6) Server 和 Client 端，开启 tcp_tw_recycle (默认关闭)，即回收 TIME_WAIT 状态的连接，比 2 MSL 更短的时间回收，此参数也要依赖 tcp_timestamps 参数；如果 Client 处于 NAT 网络中，TCP 头部的时间戳即 tcp_timestamps 的标记可能会异常 ，导致TCP连接建立错误，所以开启要慎重。
 
 
-## 十. TCP粘包、拆包
+## 十一. TCP粘包、拆包
 
 #### 1. UDP 是基于报文发送的，一个 UDP 报文就是完整的数据，UDP 首部采用了 16bit 来指示 UDP 数据报文的长度，因此在应用层能很好的将不同的数据报文区分开，从而避免粘包和拆包的问题。
 

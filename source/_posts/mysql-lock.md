@@ -56,7 +56,7 @@ UNLOCK TABLES;
 
 共享锁（Ｓ）
 
-```mysql
+```sql
 SELECT * FROM table_name WHERE 1=1 LOCK IN SHARE MODE
 
 ``` 

@@ -38,7 +38,7 @@ Serializable/串行化(锁竞争大性能差)|	N|	N|	N
 
 ### MySQL 事物默认自动提交，通过以下命令查看和修改，修改全局 global 级别会对所有登录用户生效，也可以仅对当前 session 修改。
 
-```mysql
+```sql
 mysql> show session variables like 'autocommit'; 
 +---------------+-------+
 | Variable_name | Value |
@@ -81,7 +81,7 @@ mysql> show global variables like 'autocommit';
 ```
 
 ### MySQL 隔离级别默认是 repeatable-read，跟 autocommit 一样，分全局 global 和当前 session 
-```mysql
+```sql
 
 mysql> select @@global.tx_isolation,@@tx_isolation;
 +-----------------------+-----------------+
@@ -112,7 +112,7 @@ mysql> select @@global.tx_isolation,@@tx_isolation;
 - ROLLBACK, 回滚一个事物
 - COMMIT, 提交一个事物
 
-```mysql
+```sql
 
 mysql>  select * from mytable;
 +------+

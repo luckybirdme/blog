@@ -4,13 +4,13 @@ date: 2020-01-30 14:26:20
 tags: nodejs
 ---
 
-> nodejs 事件驱动和非阻塞I/O通过 libuv 的实现
-> libuv 包括轮询机制和异步I/O操作
+> nodejs 异步I/O通过 libuv 的实现
+> libuv 包括轮询机制和I/O操作
 
 <!-- more -->
 
 JS 运行在 V8 引擎上，属于单线程，但是底层通过 libuv 实现多线程 IO 读写。
-Windows 下使用 IOCP 来完成异步 IO，LINIX 上使用 libev 来实现。
+libuv 是一个跨平台异步IO类库，在Unix系统上，通过封装libev和libio调用linux的epoll 或 kqueue，在Windows 平台上的IOCP[3]进行封装。
 多个 IO 任务会放到队列中，通过轮询执行多个线程读写，以及结果回调。
 
 ## 一. libuv 事件轮询机制
