@@ -1,7 +1,7 @@
 ---
 title: python list tuple dict set
 date: 2020-02-03 09:38:21
-tags: python
+tags: Python
 ---
 
 > list ，列表，是一种有序的集合，可以随时添加和删除其中的元素，存放不同数据类型。

@@ -1,7 +1,7 @@
 ---
-title: python 算法
+title: python 排序算法
 date: 2020-05-04 07:54:53
-tags: python
+tags: algorithm
 ---
 
 > 基本算法实现

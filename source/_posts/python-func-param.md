@@ -1,7 +1,7 @@
 ---
 title: python 函数参数
 date: 2020-02-03 18:21:15
-tags: python
+tags: Python
 ---
 > \*args
 > \*\*kw

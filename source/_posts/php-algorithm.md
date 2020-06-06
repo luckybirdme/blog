@@ -1,7 +1,7 @@
 ---
-title: php 算法
+title: php 排序算法
 date: 2020-04-29 07:21:17
-tags: PHP
+tags: algorithm
 ---
 
 > 冒泡，选择，插入，希尔，归并，快速

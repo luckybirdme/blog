@@ -1,7 +1,7 @@
 ---
 title: python copy
 date: 2020-04-23 18:29:04
-tags: python
+tags: Python
 ---
 
 > copy

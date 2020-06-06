@@ -1,7 +1,7 @@
 ---
 title: python2 to 3
 date: 2020-02-04 12:36:30
-tags: python
+tags: Python
 ---
 
 > python2 had stopped at 2020

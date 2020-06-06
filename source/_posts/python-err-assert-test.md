@@ -1,7 +1,7 @@
 ---
 title: python 错误 断点 测试
 date: 2020-02-04 21:37:41
-tags: python
+tags: Python
 ---
 
 > try execpt else finally

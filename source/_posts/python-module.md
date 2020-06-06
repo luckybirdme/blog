@@ -1,7 +1,7 @@
 ---
 title: python 引入模块 包 class
 date: 2020-02-04 18:01:37
-tags: python
+tags: Python
 ---
 
 > from import

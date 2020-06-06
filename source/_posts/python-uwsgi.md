@@ -1,7 +1,7 @@
 ---
 title: python uWSGI
 date: 2020-03-19 07:54:21
-tags: python
+tags: Python
 ---
 > WSGI, uWSGI, uwsgi
 

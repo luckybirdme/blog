@@ -1,7 +1,7 @@
 ---
 title: python 知识点
 date: 2020-04-24 19:59:06
-tags: python
+tags: Python
 ---
 
 > 基于 Python 3.8

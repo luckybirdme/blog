@@ -1,7 +1,7 @@
 ---
-title: JS 实现基本排序算法
+title: JS 排序算法
 date: 2019-10-19 15:04:23
-tags: JavaScript
+tags: algorithm
 ---
 
 > 常用的基本排序算法包括冒泡排序，选择排序，插入排序，归并排序，快速排序。

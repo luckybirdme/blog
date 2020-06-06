@@ -1,7 +1,7 @@
 ---
 title: python class
 date: 2020-02-04 19:17:41
-tags: python
+tags: Python
 ---
 
 > class
