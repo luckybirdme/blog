@@ -1,5 +1,5 @@
 ---
-title: 浏览器输入地址后发生了什么
+title: 浏览器输入地址后发生的事件
 date: 2019-11-07 08:29:27
 tags: JavaScript
 ---
@@ -10,7 +10,7 @@ tags: JavaScript
 
 <!-- more -->
 
-## 一，概览
+## 一. 总体流程概览
 ### 1. 浏览器输入地址，经过一系列事件后，把页面呈现给用户，主要过程如下图
 ![](/img/2019/browser-two.png)
 
@@ -18,8 +18,41 @@ tags: JavaScript
 ### 2. 在最新规范中，将上述过程进行分类，如下图所示
 ![](/img/2019/browser-three.png)
 
+### 3. 从浏览器分析每个流程
 
-### 3. 每个事件点的解析如下：
+![](/img/2020/page_build_1.png)
+
+- Queueing 
+HTTP 请求的队列等待时间，HTTP 底层采用 TCP 协议，同一个时间段内一个条 TCP 通道只允许一个 HTTP 请求，Chrome 允许最多打开 6 个 TCP，因此最多并发 6 个 HTTP 请求。 HTTP2 提供了 Multiplexing 多路传输特性，可以在一个 TCP 连接中同时完成多个 HTTP 请求，但是目前还没开始普及。
+
+
+- DNS Lookup
+域名解析，将 domain 解析成 IP 地址
+
+- Initial connection
+浏览器与服务器建立连接，包括 TCP 三次握手，以及 SSL 验证
+
+- Request sent
+当连接建立后，浏览器开始向服务器发起请求
+
+- Waiting (TTFB,Time To First Byte)
+等待服务器返回第一个字节，此过程耗时主要是服务器内部处理请求的时间
+
+- Content Download
+浏览器收到服务器完整的返回内容，这个时间取决于返回内容大小，以及网络情况。
+
+- DOMContentLoaded
+浏览器开始处理服务器返回的内容，这个时间是 HTML 的 DOM 解析并加载完成，但是异步下载的 JS，图片可能还在进行中。
+
+- Load
+此时浏览器已经渲染完页面，异步下载的JS，图片都完成了。
+
+
+## 二. 每个事件点的解析
+
+
+### 1. 每个事件点
+
 事件|解析
 -|-
 navigationStart|当卸载提示在同一浏览上下文中的上一个文档终止时. 如果没有以前的文档，则此值将与PerformanceTiming.fetchStart相同.
@@ -45,7 +78,7 @@ loadEventStart|为当前文档发生onload事件的时间. 如果尚未发送此
 loadEventEnd|当onload事件处理程序终止时，即加载事件完成时. 如果此事件尚未发送或尚未完成，则返回0.
 
 
-### 4. 主要统计时间
+### 2. 主要统计指标
 ```js
 var performance = function(){
 
@@ -84,7 +117,7 @@ var performance = function(){
 
 
 
-    // 主要体验指标时间
+    // 用户感知指标
 
     // 整体时间，用户从浏览器输入地址到整个页面展示完毕的时间
     logEventBetweenTime('navigationStart','loadEventEnd');
@@ -93,44 +126,34 @@ var performance = function(){
     // 此时正在解析 dom，展示出第一个dom
     logEventBetweenTime('fetchStart','domLoading');
 
-    // 操作时间，浏览器卸载旧页面出现白屏，到用户可以点击节点
-    logEventBetweenTime('fetchStart','domContentLoadedEventEnd'); 
-
     // 首屏时间，浏览器卸载旧页面出现白屏，到首屏绘制完毕的时间节点；
     logEventBetweenTime('fetchStart','loadEventStart');
 
-    // TTFB 即 Time To First Byte，读取页面第一个字节的时间
-    // 用户拿到你的资源占用的时间，加异地机房了么，加CDN 处理了么？加带宽了么？加 CPU 运算速度了么？
-    logEventBetweenTime('navigationStart','responseStart');
 
-
+    // 细分指标
     
-    // 细分事件的时间
-
-    // 卸载页面的时间
-    logEventBetweenTime('unloadEventStart','unloadEventEnd');
-
-    // 重定向的时间，比如，http://example.com/ 就不该写成 http://example.com
+    // 重定向的时间，比如 http://example.com 和 http://www.example.com/ 之间的跳转
     logEventBetweenTime('redirectStart','redirectEnd');
 
-    // 域名解析时间
+    // DNS 域名解析时间
     logEventBetweenTime('domainLookupStart','domainLookupEnd');
 
     // TCP 建立连接完成握手的时间，包括 SSL
     logEventBetweenTime('connectStart','connectEnd');
 
-    //服务器处理请求时间，代码逻辑是不是太复杂了，数据库索引建立了吗？
+    // TTFB 即 Time To First Byte，浏览器发起请求到读取页面第一个字节的时间
     logEventBetweenTime('requestStart','responseStart');
 
-    // http 响应返回内容的时间，内容经过 gzip 压缩了么，静态资源 css/js 等压缩了么？
+    // 服务器返回内容的时间
     logEventBetweenTime('responseStart','responseEnd');
 
-
+    // DOM 解析耗时
+    logEventBetweenTime('responseEnd','domInteractive');
 };
 
 ```
 
-### 5. 页面监控数据上报通过
+### 3. 页面事件节点数据上报方式
 - XMLHttpRequest，异步有可能会被浏览器忽略掉，同步会阻碍页面卸载和跳转。
 - new Image，依然会阻碍页面卸载和跳转，而且只能用 get 方式。
 - navigator.sendBeacon，浏览器空闲时才异步地向服务器发送数据，同时不会延迟页面的卸载，还能保证数据传输可靠性。
@@ -144,7 +167,7 @@ function logData() {
 ```
 
 
-## 二，主要过程
+## 三. 主要过程详细介绍
 
 
 ### 1. DNS 解析：domainLookupStart, domainLookupEnd
@@ -206,7 +229,7 @@ window.onload = function(){
 ```
 
 
-## 三，关键函数
+## 四. 模拟实现重点事件函数
 
 ```js
 // dom 解析完，在 domInteractive 事件后执行
@@ -244,3 +267,83 @@ window.onload=function(){
     console.log('5,window,onload');
 }
 ```
+
+
+## 五. 前端页面加载优化方法
+
+
+
+### 1. 减少 HTTP 请求次数
+如果超过了浏览器并发 TCP 连接数，那么 HTTP 请求需要排队执行；多次 HTTP 请求的网络往返时间，肯定会比一次 HTTP 请求耗时更长。
+
+- 合并 HTTP 请求
+多个 JS 文件打包成一个。
+多个 CSS 文件打包成一个。
+
+- 图片传输特殊处理
+图片转换成 Base64 编码传输
+多个图片合并成一个雪碧图
+
+- 合理使用缓存
+使用 cach-control 或 expires 缓存时，如果没有期，不会向服务器发送请求；
+如果过期了，会使用 last-modified 或 etag 这类协商缓存，向服务器发送请求，如果资源没有变化，则服务器返回304响应，浏览器继续从本地缓存加载资源；
+如果资源更新了，则服务器将更新后的资源发送到浏览器，并返回200响应。
+
+
+- 减少 URL 重定向
+避免使用重定向，服务器 URL 匹配规则兼容 http://www.example.com 和 http://www.example.com
+如果确实使用重定向，比如 http 跳到 https，尽量使用永久重定向301，因为临时重定向302会导致浏览器依然会发起一次 http 请求到服务器，永久重定向301则在浏览器直接发起 https 请求。
+
+
+
+
+### 2. 优化网络传输过程
+
+- DNS预解析和缓存
+当浏览器从第三方服务跨域请求资源的时候，这个第三方的跨域域名需要被解析为一个IP地址，这个过程就是DNS解析，DNS预解析和缓存可以用来减少这个过程的耗时。
+dns-prefetch 仅对跨域域上的DNS查找有效，因此请避免将其用于当前访问的站点。这是因为当浏览器解析到当前Link元素内容时，您站点域名的IP已经被解析。
+
+```html
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+```
+
+- 使用 CDN
+请求资源就近访问原则，减少网络物理链路，降低网络传输时耗。
+
+- 降低资源大小
+JS，CSS，图片文件压缩
+HTTP 协议开启 gzip 压缩
+
+
+- 尽量使用 TCP 长连接，避免重复三次握手
+HTTP 协议打开 keep-alive
+
+- 增加机房带宽
+
+### 3. 服务器处理请求优化
+
+- 使用缓存页面，避免重复生成 HTML 页面
+
+- 数据库优化，建立合理索引，读写分离，数据缓存
+
+### 4. 页面资源加载顺序优化
+
+- 优先加载 CSS，因为浏览器首先解析 HTML 的 DOM 和 CSS 的 CSSOM，因此放到前面 <head> 加载。
+
+- JS 文件放到最后加载，JS 加载和解析将会阻塞浏览器解析 DOM，所以放到最后 </body> 才加载。
+
+- 按需加载资源，加快首页打开的速度
+
+### 5. 页面内容编写优化
+
+- html 编写严格按照标准，必须包含开始和闭合标签，减少 dom 解析时间。
+
+- 减少页面的重排和重绘，尽量不要通过 JS 多次修改 DOM 树。
+
+- 减少深层次的 DOM 遍历，尽量不要使用太复杂的 CSS 选择器和表达式。
+
+- 使用函数节流（throttle）或函数去抖（debounce），限制某一个方法的频繁触发。
+
+- 少用 table 布局页面，因为要等待整个 table 内容加载才会显示。
+
+- 添加 loading 等待圈，用户体验更好

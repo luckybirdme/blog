@@ -1,5 +1,5 @@
 ---
-title: nginx 链接 FastCGI 的方式
+title: nginx 链接 FastCGI
 date: 2020-04-24 10:49:28
 tags: NGINX
 ---
@@ -24,7 +24,7 @@ fastcgi_pass 127.0.0.1:9000;
 fastcgi_pass unix:/dev/shm/php-cgi.sock;
 ```
 
-## 三. 区别
+## 三. 两种方式的区别
 1. TCP Socket
 - 采用 TCP 协议，相对更稳定
 - NGINX 和 FastCGI 可以部署在不同机器上
@@ -34,3 +34,9 @@ fastcgi_pass unix:/dev/shm/php-cgi.sock;
 - 是 POSIX 操作系统里的一种组件，不需要走 TCP 层
 - NGINX 和 FastCGI 必须部署在同一台机器上
 - 性能略优于 TCP Socket ，但是在1w并发下相差不大
+
+
+## 四. NGINX 和 FastCGI 分离的好处
+1. Nginx 专一处理静态资源，转发动态请求，Web 安全过滤等
+2. PHP/PHP-FPM 服务器专一解析 PHP 动态请求
+3. 分工明确，便于管理；术业专攻，提升性能

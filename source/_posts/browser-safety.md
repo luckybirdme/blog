@@ -93,8 +93,9 @@ insert into comment (content) values('你将会看到这个弹框 <script>alert(
 ```
 
 ### 2. 区别：
-- XSS 是通过伪造非法代码来执行，更多是属于代码层面。
-- CSRF 是携带 cookie 伪装用户发起请求，更多属于 HTTP 协议层面。
+- XSS 在本站攻击时，可以利用JS获取到本站的 cookie，然后在本站发起恶意攻击，因此需要设置 httpOnly 禁止 JS 读取 cookie。
+- CSRF 是在其他网站向本站发起攻击，是浏览器自动带上本站的cookie，但是浏览器禁止跨域的安全策略，理论上 CSRF 攻击无法从其他网站获取到本站 cookie 的。
+- CSRF 通过 Token 来防御，如果攻击者窃取了，也只能攻击一个用户或一次请求，因为每个用户或每个请求都有唯一的 Token，因此要保证 Token 随机、唯一、保密，最好利用 HTTPS 协议来加密数据。
 
 
 ### 3. 防范：

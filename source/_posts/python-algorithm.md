@@ -187,55 +187,53 @@ print(quickSort(arr))
 
 # 上面的方法会重复创建数组 leftArr 和 rightArr, 导致内存浪费
 # 通过指针方式，在原始数组操作，可以节省内存
-def quickSortBetter(arr):
-    # 交换元素
-    def swap(arr,i,j):
-        arr[i],arr[j]=arr[j],arr[i]
-    # 按照基准值分割数组
-    def partition(arr,start,end):
-        # 如果开始和结束相等，说明只剩一个元素了，直接返回
-        if start>=end:
-            return
-        # 以第一个元素为基准
-        pivot=arr[start]
-        # 左指针，向右边移动，寻找比基准大的值，然后跟右边交换
+def quickSort(lists):
+    def partition(start,end):
+        if start >= end:
+            return False
+        # 第一个元素为基准
+        pivot = lists[start]
+        # 低位区间起点
         left = start
-        # 右指针，往左边移动，寻找比基准小的值，然后跟左边交换
+        # 高位区间终点
         right = end
+        while left < right:
 
-        print(pivot,start,end)
-        print(arr)
+            # 从高位往中间寻找小于基准的元素，移动到低位
+            # 首次循环将会移动到基准所在位置
+            # 第二次循环起，将会移到低位区间找到的大于基准的元素的位置
+            # 由于 right 位置元素可能是上次循环从低位区间转移过来的，所以需要继续判断
+            while left < right and lists[right] >= pivot:
+                right -= 1
+            lists[left]=lists[right]
 
-        while left<right:
+            # 由于将 lists[right] 更小值移动到 lists[left]
+            # 此时 right 下标所在位置元素其实是跟 left 下标值重复
 
-            # 从左边往右边找第一个比基准大的值
-            while left<right and arr[left]<=pivot:
-                left=left+1
+            # 从低位往中间寻找大于基准的元素，移动到高位，即刚才高位区间找到的小于基准的元素位置
+            while left < right and lists[left] <=pivot:
+                left += 1
+            # 由上面可知，right 下标为高位区间的重复元素，刚好可以把大于基准的元素放到此位置上
+            lists[right]=lists[left]
 
-            # 从右边往左边找第一个比基准小的值
-            while left<right and arr[right]>pivot:
-                right=right-1
-            # 交换这两个值
-            swap(arr,left,right)
-            print(left,arr[left],right,arr[right])
+            # 由于将 lists[left] 更大值移动到 lists[right]
+            # 此时 left 下标所在位置元素其实是跟 right 下标值重复
 
-        print(arr)
-
-        # 将基准值换到中间位置，因为 left 指针是先判断并且 +1 的，所以这里需要 -1
-        swap(arr,left-1,start)
-
-        print(arr)
-
-        # 将基准两侧的数组递归分割，去掉当前基准这个元素，即下标为 left-1 的元素
-        partition(arr,start,left-2)
-        partition(arr,left,end)
-
-    partition(arr,0,len(arr)-1)
-    return arr
-
-
-arr=[2,4,7,1,6,3,5,8,9]
-print(quickSortBetter(arr))
+        # 退出循环条件是 left=right
+        # 低位区间 [start, left-1] 小于或等于基准
+        # 高位区间 [left+1, end] 大于或等于基准
+        # left 所在位置的元素，肯定是重复的元素，所以把基准放到这个位置
+        lists[left] = pivot
+        # 此时基准已经排好序了，剔除基准后，继续递归低位和高位区间
+        partition(start,left-1)
+        partition(left+1,end)
+    print('test')
+    print(lists)
+    partition(0,len(lists)-1)
+    print(lists)
+quickSort([1,2,3,4,5])
+quickSort([5,4,3,2,1])
+quickSort([5,2,2,1,5])
 
 ```
 
@@ -243,56 +241,52 @@ print(quickSortBetter(arr))
 
 ```python
 
-
-import math
-def heapSort(arr):
-    # 交换元素
-    def swap(arr,i,j):
-        arr[i],arr[j]=arr[j],arr[i]
-    # 创建大顶堆
-    def heapify(arr,parent_index,end_index):
-        left_index = 2*parent_index+1
-        right_index = 2*parent_index+2
-
-        # 如果超过了数组边界，退出
-        if left_index>=end_index:
-            return
-        
-        # 默认左节点跟父节点替换
-        replace_index = left_index
-        # 如果右节点存在，而且比左节点大，则取右节点
-        if right_index<end_index and arr[right_index]>arr[left_index]:
-            replace_index = right_index
-
+def heapSort(lists):
+    # 建立大顶堆
+    def heapify(root,end):
+        # 左节点
+        left=root*2+1
+        right=left+1
+        # 不能超出数组下标
+        if left > end:
+            return False
+        # 默认左节点较大
+        max_node=left
+        # 如果右节点存在，并且比左节点还大
+        if right <= end and lists[right] > lists[left]:
+            max_node=right
         # 如果子节点比父节点大，则进行交换
-        if arr[replace_index]>arr[parent_index]:
-            swap(arr,replace_index,parent_index)
+        if lists[max_node]>lists[root]:
+            lists[max_node],lists[root]=lists[root],lists[max_node]
+            # 递归刚交换过的节点，以便确保二叉树是大顶推
+            heapify(max_node,end)
+    
+    def sort():
+        # 遍历每个父节点，即可建立大顶堆
+        # 根据大顶堆的子节点和父节点关系，2*parent+1=child
+        # 最后一个父节点是 
+        list_len=len(lists)
+        last_root = (list_len-1)>>1
+        while last_root >=0:
+            heapify(last_root,list_len-1)
+            last_root-=1
+        # 将大顶堆的顶部元素，即数组第一个元素，也是最大值，跟最后一位元素交换
+        # 除了最后一个元素外，将剩余数组元素继续建立大顶堆，
+        # 重复上述两个步骤，直到数组最后一个元素，此时的数组就排好序了
+        last_index = list_len-1
+        while last_index >=0:
+            lists[0],lists[last_index]=lists[last_index],lists[0]
+            # 剔除最后一个元素
+            heapify(0,last_index-1)
+            last_index-=1
 
-            # 遍历交换节点下面的子节点，以便建立大顶堆
-            heapify(arr,replace_index,end_index)
+    print('test')
+    print(lists)
+    sort()
+    print(lists)
 
-    # 数组长度
-    length = len(arr)
-    # 初始化大顶堆，将最大值放到顶部
-    # 循环遍历每个父节点，P=2*C+1, C=(P-1)/2, 向下取整
-    parent_last = math.floor((length-1)/2)
-    while parent_last >= 0:
-        heapify(arr,parent_last,length)
-        parent_last = parent_last - 1
-
-    # 将大顶堆的值和数组最后一个值交换
-    # 再次建立大顶堆，将次大值放到顶部
-    # 再次交换，将次大值放到数组倒数第二个位置
-    # 以此类推，当交换到第一个元素时，数组就排序好了
-    last_index = length - 1
-    while last_index >= 0:
-        swap(arr,0,last_index)
-        heapify(arr,0,last_index)
-        last_index = last_index - 1
-    return arr
-
-
-arr=[2,4,7,1,6,3,5,8,9]
-print(heapSort(arr))
+heapSort([1,2,3,4,5])
+heapSort([5,4,3,2,1])
+heapSort([5,2,2,1,5])
 
 ```

@@ -1,7 +1,7 @@
 ---
 title: JS 实现阶乘函数
 date: 2019-10-23 08:35:30
-tags: JavaScript
+tags: algorithm
 ---
 
 > 阶乘原理
@@ -16,6 +16,7 @@ tags: JavaScript
 |>=1| n * (n -1) * (n - 2) ... 3 * 2 * 1|
 
 ### 二，JS 实现
+
 ```js
 function factorial(num){
     if(num<0){

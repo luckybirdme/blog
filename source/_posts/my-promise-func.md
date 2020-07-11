@@ -301,6 +301,28 @@ MyPromise.prototype.then = function(resolve,reject){
 MyPromise.prototype.catch = function(reject){
     this.then(null, reject);
 };
+
+
+
+var mp = new MyPromise(function(resolve,reject){
+    if(1){
+        resolve('1');
+    }else{
+        reject('0');
+    }
+});
+
+
+mp.then(function(msg){
+    console.log('mp : then resolve ' + msg);
+},function(msg){
+    console.log('mp : then rejected' + msg);
+})
+.catch(function(msg){
+    console.log('mp : catch error ' + msg);   
+});
+
+        
 ```
 
 [完整的原生实现例子](/example/js/my-promise-func.html)

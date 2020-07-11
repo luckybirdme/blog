@@ -23,7 +23,8 @@ tags: Linux
 # 显示目录权限, 总权限是 777, 根据 umask 设置去掉权限, 777-022=755
 [root@VM_133_231_centos ~]# ls -ld test_new_dir 
 drwxr-xr-x 2 root root 4096 Apr 13 08:13 test_new_dir
-``` 
+```
+
 
 - file, 查看文件类型
 ```sh
@@ -39,7 +40,7 @@ popen.py: Python script, ASCII text executable
 ```sh
 [root@VM_133_231_centos ~]# which ls
 alias ls='ls --color=auto'
-	/usr/bin/ls
+  /usr/bin/ls
 [root@VM_133_231_centos ~]# which ifconfig
 /usr/sbin/ifconfig
 
@@ -220,23 +221,23 @@ b;d
 - du, 查看当前目录文件大小，并且排序
 ```sh
 [root@VM_133_231_centos local]# du -h --max-depth=1 | sort -h
-4.0K	./bin
-4.0K	./etc
-4.0K	./games
-4.0K	./include
-4.0K	./lib
-4.0K	./lib64
-4.0K	./libexec
-4.0K	./sbin
-4.0K	./src
-12K	    ./sa
-92K	    ./share
-14M	    ./hdf5
-111M	./php56
-191M	./gse
-403M	./qcloud
-734M	./python3
-1.5G	.
+4.0K  ./bin
+4.0K  ./etc
+4.0K  ./games
+4.0K  ./include
+4.0K  ./lib
+4.0K  ./lib64
+4.0K  ./libexec
+4.0K  ./sbin
+4.0K  ./src
+12K   ./sa
+92K   ./share
+14M   ./hdf5
+111M  ./php56
+191M  ./gse
+403M  ./qcloud
+734M  ./python3
+1.5G  .
 
 ```
 

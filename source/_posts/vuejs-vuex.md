@@ -18,8 +18,8 @@ tags: vuejs
 - 借助 Vue 实例的 data 属性，保存 Vuex 的 state 数据
 - 可通过 store.state.key, 直接获取 state 值。
 - 也可通过 getters.getKeyVal, 获取经过计算加工的 state 值，类似 Vue 实例的 computed 属性。
-- 同步修改 state 值，利用 mutations 定义的方法来触发修改。
-- 异步修改 state 值，利用 actions 定义的方法来触发修改。
+- 同步修改 state 值，利用 mutations 定义的方法来触发同步修改，mutations 必须是同步函数，这里的同步主要是为了配合 devtools 捕捉到前后状态的快照。
+- 异步修改 state 值，利用 actions 定义的方法来触发异步修改
 - 如果为了区分不同 store, 可利用 modules 来实现命名区分。
 
 ![](/img/2019/vue-vuex.png)
@@ -227,6 +227,19 @@ export default {
   }
 }
 
+
+// 请注意，为了配合 devtools 捕捉前后的状态变化，mutations 里面的方法必须是同步的
+// 因此以下方法，是不支持的 
+mutations: {
+  someMutation (state) {
+    // 异步方法
+    api.callAsyncMethod(() => {
+      // 异步修改
+      state.count++
+    })
+  }
+}
+
 ```
 
 
@@ -244,26 +257,27 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-  	// 支持同步修改 state 
-  	// 函数接受一个与 store 实例具有相同方法和属性的 context 对象
-  	// 因此你可以调用 context.commit 提交一个 mutation，或者调用 context.state 和 context.getters 
-  	// 但是此 context 对象为什么不是 store 实例本身了。
-  	increment (context) {
+    // 支持同步修改 state 
+    // 函数接受一个与 store 实例具有相同方法和属性的 context 对象
+    // 因此你可以调用 context.commit 提交一个 mutation，或者调用 context.state 和 context.getters 
+    // 但是此 context 对象为什么不是 store 实例本身了。
+    increment (context) {
       context.commit('increment')
     },
-  	// 异步触发 state 修改
-	  incrementAsync ({ commit }) {
-	    setTimeout(() => {
-	      commit('increment')
-	    }, 1000)
-	  }
+    // 异步触发 state 修改
+    incrementAsync ({ commit }) {
+      // 异步方法
+      setTimeout(() => {
+        commit('increment')
+      }, 1000)
+    }
   }
 })
 
+// 同步修改
+this.$store.dispatch('increment')
 
 // 异步触发修改 state
-
-// 以载荷形式分发
 this.$store.dispatch('incrementAsync')
 
 
@@ -293,23 +307,23 @@ export default {
 
 // 定义 store 模块
 const moduleA = {
-	namespaced: true,
+  namespaced: true,
   state: {
-  	count:0
+    count:0
   },
   mutations: {
-  	increment (state) {
+    increment (state) {
       state.count++
     }
   }
 }
 const moduleB = {
-	namespaced: true,
+  namespaced: true,
   state: {
-  	count:0
+    count:0
   },
   mutations: {
-  	increment (state) {
+    increment (state) {
       state.count++
     }
   }

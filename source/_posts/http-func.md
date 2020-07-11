@@ -14,7 +14,7 @@ tags: JavaScript
 
 ## 一. XMLHttpRequest
 
-#### 现代浏览器最开始与服务器交换数据，都是通过 XMLHttpRequest 对象。它可以使用 JSON,XML,HTML 和 text 文本等格式发送和接收数据。
+现代浏览器最开始与服务器交换数据，都是通过 XMLHttpRequest 对象。它可以使用 JSON,XML,HTML 和 text 文本等格式发送和接收数据。
 
 #### 1. 优点
 - 不重新加载页面的情况下更新网页
@@ -58,7 +58,7 @@ xhr.onreadystatechange = function () {
 ```
 
 ## 二.  jQuery ajax
-#### jQuery 将 XMLHTTPRequest 包装成 ajax, 兼容了各浏览器，可以有简单易用的方法 $.get，$.post。
+jQuery 将 XMLHTTPRequest 包装成 ajax, 兼容了各浏览器，可以有简单易用的方法 $.get，$.post。
 #### 1. 优点：
 - 对原生XHR的封装，做了兼容处理，简化了使用。
 - 增加了对 JSONP 的支持，可以简单处理部分跨域。
@@ -80,14 +80,14 @@ $.ajax({
 
 
 ## 三. [axios](https://github.com/axios/axios)
-#### axios是一个基于promise的HTTP库，可以用在浏览器和 node.js 中。它本质也是对原生XMLHttpRequest的封装，只不过它是Promise的实现版本，符合最新的ES6规范。
+axios是一个基于promise的HTTP库，可以用在浏览器和 node.js 中。它本质也是对原生XMLHttpRequest的封装，只不过它是Promise的实现版本，符合最新的ES6规范。
 
 #### 1. 优点：
 - 从浏览器中创建XMLHttpRequests, 从 node.js 创建 http 请求
 - 支持 Promise API, 链式调用
 - 拦截请求和响应，并支持取消请求
 - 转换请求和返回数据，比如自动转换 json 格式
-- 客户端支持防御 XSRF
+- 客户端支持防御 CSRF
 - 提供了一些并发请求的接口
 
 #### 2. 缺点：
@@ -112,17 +112,17 @@ axios.get('/user', {
 
 
 ## 四. [Fetch API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
-#### Fetch API提供了一个 JavaScript 接口，用于访问和操作HTTP管道的部分，例如请求和响应。它还提供了一个全局fetch()方法，该方法提供了一种简单，合理的方式来跨网络异步获取资源。
-#### fetch 是低层次的API，代替XHR，可以轻松处理各种格式，非文本化格式。可以很容易的被其他技术使用，例如Service Workers。但是想要很好的使用fetch，需要做一些封装处理。
+Fetch API提供了一个 JavaScript 接口，用于访问和操作HTTP管道的部分，例如请求和响应。它还提供了一个全局fetch()方法，该方法提供了一种简单，合理的方式来跨网络异步获取资源。
+fetch 是低层次的API，代替XHR，可以轻松处理各种格式，非文本化格式。可以很容易的被其他技术使用，例如Service Workers。但是想要很好的使用fetch，需要做一些封装处理。
 
-#### MDN 强调 Fetch 和 jQuery ajax 的区别
+MDN 强调 Fetch 和 jQuery ajax 的区别
 - 当接收到一个代表错误的 HTTP 状态码时，从 fetch()返回的 Promise 不会被标记为 reject， 即使该 HTTP 响应的状态码是 404 或 500。相反，它会将 Promise 状态标记为 resolve （但是会将 resolve 的返回值的 ok 属性设置为 false ），仅当网络故障时或请求被阻止时，才会标记为 reject。
 - 默认情况下，fetch 不会从服务端发送或接收任何 cookies, 如果站点依赖于用户 session，则会导致未经认证的请求（要发送 cookies，必须设置 credentials 选项）。
 
 #### 1. 优点
 - 符合关注分离，没有将输入、输出和用事件来跟踪的状态混杂在一个对象里
 - 更加底层，提供的API丰富（request, response）
-- 脱离了XHR，是ES规范里新的实现方式
+- 脱离了XHR，是 ES7 规范里新的实现方式
 
 
 #### 2. 缺点

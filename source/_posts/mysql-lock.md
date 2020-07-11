@@ -55,15 +55,14 @@ UNLOCK TABLES;
 #### 2. 行锁使用，InnoDB 行锁是通过索引来实现的，只有通过索引条件检索数据才会使用行锁，也可以手动设置。
 
 共享锁（Ｓ）
-
 ```sql
 SELECT * FROM table_name WHERE 1=1 LOCK IN SHARE MODE
 
-``` 
+```
+
 
 排他锁（X）
-
-``` mysql
+```sql
 SELECT * FROM table_name WHERE 1=1 FOR UPDATE
 ```
 

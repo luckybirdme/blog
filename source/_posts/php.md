@@ -253,3 +253,8 @@ error_reporting(-1);
 ### PHP 函数 join 和 implode 区别
 - implode ( string \$glue , array $pieces ) : string, 用指定字符将数组元素拼接在一起，并返回字符串。
 - join 是 implode 的别名，所以是一样的。
+
+
+### PHP7新特性
+- 属性类型限定和提示，类似强类型语言 Java
+- 底层编译运行性能优化，包括内存使用，引擎解析过程等

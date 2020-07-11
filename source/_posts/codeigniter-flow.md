@@ -36,9 +36,9 @@ tags: CodeIgniter
 switch (ENVIRONMENT)
 {
     case 'development':
-		error_reporting(-1);
-		ini_set('display_errors', 1);
-	break;
+        error_reporting(-1);
+        ini_set('display_errors', 1);
+    break;
 }
 
 // 定义应用目录
@@ -69,22 +69,22 @@ function &load_class($class, $directory = 'libraries', $param = NULL)
 {
     // 定义静态变量，用于保存所有加载过的类
     // 代码解析时执行一次初始化，函数执行时赋值，函数执行后变量依然存在
-	static $_classes = array();
+    static $_classes = array();
 
-	// 如果存在了就直接返回，避免多次加载
-	if (isset($_classes[$class]))
-	{
-		return $_classes[$class];
-	}
-	// 标记加载过的类
-	is_loaded($class);
-	
-	// 实例化对象
-	$_classes[$class] = isset($param)
-		? new $name($param)
-		: new $name();
-	// 引用返回，以便单实例共享，节省内存
-	return $_classes[$class];
+    // 如果存在了就直接返回，避免多次加载
+    if (isset($_classes[$class]))
+    {
+        return $_classes[$class];
+    }
+    // 标记加载过的类
+    is_loaded($class);
+    
+    // 实例化对象
+    $_classes[$class] = isset($param)
+        ? new $name($param)
+        : new $name();
+    // 引用返回，以便单实例共享，节省内存
+    return $_classes[$class];
 }
 ```
 
@@ -94,13 +94,13 @@ function &load_class($class, $directory = 'libraries', $param = NULL)
 // 读取 composer 配置
 if ($composer_autoload = config_item('composer_autoload'))
 {
-	if ($composer_autoload === TRUE)
-	{
-	    // 根据 vendor 目录的 autoload.php 文件的 PSR-4 协议，加载第三方类库
-		file_exists(APPPATH.'vendor/autoload.php')
-			? require_once(APPPATH.'vendor/autoload.php')
-			: log_message('error', '$config[\'composer_autoload\'] is set to TRUE but '.APPPATH.'vendor/autoload.php was not found.');
-	}
+    if ($composer_autoload === TRUE)
+    {
+        // 根据 vendor 目录的 autoload.php 文件的 PSR-4 协议，加载第三方类库
+        file_exists(APPPATH.'vendor/autoload.php')
+            ? require_once(APPPATH.'vendor/autoload.php')
+            : log_message('error', '$config[\'composer_autoload\'] is set to TRUE but '.APPPATH.'vendor/autoload.php was not found.');
+    }
 }
 ```
 
@@ -197,7 +197,7 @@ $OUT =& load_class('Output', 'core');
 // 如果设置了缓存，而且存在，则直接返回
 if ($EXT->call_hook('cache_override') === FALSE && $OUT->_display_cache($CFG, $URI) === TRUE)
 {
-	exit;
+    exit;
 }
 ```
 
@@ -218,7 +218,7 @@ public function xss_clean(){}
 ```php
 # system/core/CodeIgniter.php
 // 初始化 Input 类
-$IN	=& load_class('Input', 'core');
+$IN =& load_class('Input', 'core');
 
 # system/core/Input.php
 // GET
@@ -237,7 +237,7 @@ require_once BASEPATH.'core/Controller.php';
 // 定义获取核心控制器的全局方法，方便后续程序直接获取和共享
 function &get_instance()
 {
-	return CI_Controller::get_instance();
+    return CI_Controller::get_instance();
 }
 ```
 
@@ -247,21 +247,21 @@ function &get_instance()
 
 class CI_Controller {
 
-	public function __construct()
-	{
-	    // 将之前加载过的所有常用类，都赋值给核心控制器，以便后续调用
-	    // 继承了核心控制器的对象，都可以直接使用 $this->config->item(),$this->input->get()
-		foreach (is_loaded() as $var => $class)
-		{
-			$this->$var =& load_class($class);
-		}
-		// 添加 Loader 到核心控制器
-		// Loader 包括一些常用的加载函数
-		// 比如加载视图 $this->load->view()
-		$this->load =& load_class('Loader', 'core');
-		// 自动加载一些指定的类库，在 application/config/autoload.php 定义这些类库
-		$this->load->initialize();
-	}
+    public function __construct()
+    {
+        // 将之前加载过的所有常用类，都赋值给核心控制器，以便后续调用
+        // 继承了核心控制器的对象，都可以直接使用 $this->config->item(),$this->input->get()
+        foreach (is_loaded() as $var => $class)
+        {
+            $this->$var =& load_class($class);
+        }
+        // 添加 Loader 到核心控制器
+        // Loader 包括一些常用的加载函数
+        // 比如加载视图 $this->load->view()
+        $this->load =& load_class('Loader', 'core');
+        // 自动加载一些指定的类库，在 application/config/autoload.php 定义这些类库
+        $this->load->initialize();
+    }
 }
 
 ```
@@ -293,12 +293,12 @@ $method = $RTR->method;
 // 应用控制器的文件是否存在
 if (empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
 {
-	$e404 = TRUE;
+    $e404 = TRUE;
 }
 else
 {
     // 加载应用的控制器
-	require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
+    require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
 }
 
 ```
@@ -335,7 +335,7 @@ call_user_func_array(array(&$CI, $method), $params);
 if ($EXT->call_hook('display_override') === FALSE)
 {
     // 输出内容
-	$OUT->_display();
+    $OUT->_display();
 }
 
 ```
@@ -352,22 +352,22 @@ class CI_Output {
     {
         // 将内容写入缓存
         if ($this->cache_expiration > 0 && isset($CI) && ! method_exists($CI, '_output'))
-		{
-			$this->_write_cache($output);
-		}
-		
-		// 是否自定义了统一的输出函数
-		if (method_exists($CI, '_output'))
-		{
-			$CI->_output($output);
-		}
-		else
-		{
-		    // 输出到浏览器
-			echo $output;
-		}
+        {
+            $this->_write_cache($output);
+        }
         
-	}
+        // 是否自定义了统一的输出函数
+        if (method_exists($CI, '_output'))
+        {
+            $CI->_output($output);
+        }
+        else
+        {
+            // 输出到浏览器
+            echo $output;
+        }
+        
+    }
 }
 
 ```

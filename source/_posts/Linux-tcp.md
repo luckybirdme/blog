@@ -414,7 +414,7 @@ TIME_WAIT 状态下的 TCP 连接将会在 2 MSL 后自动转入 CLOSED，即最
 ```shell
 [root@ ~]# sysctl -a | grep ip_local_port_range
 net.ipv4.ip_local_port_range = 32768	60999
-````
+```
 
 修改本地源端口范围
 

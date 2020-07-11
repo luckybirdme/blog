@@ -1,7 +1,7 @@
 ---
-title: JS 二分法查找
+title: 二分法查找
 date: 2019-10-22 21:18:00
-tags: JavaScript
+tags: algorithm
 ---
 
 > 二分法查找，在有序数组中查找特定元素的搜索算法，时间复杂度是 O(logn)
@@ -13,6 +13,7 @@ tags: JavaScript
 ##### 2.获取数组中间位置的数值进行对比，判断搜索元素在小区间还是大区间，如果在大区间就继续分割大区间的数组，一直找到元素或者不能再分割为止；小区间也是一样的分割查找方法
 
 ### 二，JS 实现二分法查找：
+
 ```js
 function binarySearch(arr,num){
     var find_index = 0;
@@ -62,3 +63,10 @@ function binarySearch(arr,num){
 
 
 ### [源代码](/example/js/binary_search.html)
+
+
+### 三，二分法查找关键点
+
+1. 计算 mid 时需要防止溢出，代码中 left + (right - left) / 2 和 (left + right) / 2 的结果相同，但是前者有效防止了 left 和 right 太大直接相加导致溢出。
+
+2. 当 right - left + 1 等于偶数时，比如 0 1 2 3 4 5 ，计算 mid 可能会取 2(左中位)，或者取 3(右中位)，如果取左中位，那么 mid = 0 + (5 - 0)/2 = 2，即 mid = left + (right - left )/2 ；如果取右中位，那么 mid = 0 + (5 - 0 + 1)/2 = 3，即 mid = left + (right - left + 1)/2

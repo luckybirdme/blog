@@ -1,7 +1,7 @@
 ---
 title: JS 求最长上升子序列的长度
 date: 2019-10-26 08:34:44
-tags: JavaScript
+tags: algorithm
 ---
 
 > 已知有数列 A ， A=A1,A2....An ，求 A 的任意子序列 B （ B=Ak1,Ak2....Akp ），使 B 满足 k1<k2<....<kp 且 Ak1<Ak2<....<Akp 。现求 p 的最大值，即最长上升子序列的长度。

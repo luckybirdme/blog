@@ -50,6 +50,24 @@ function throttle(fn,interval=300) {
         },interval);
     };
 }
+
+
+function forTest(){
+    var testThrottle = throttle(get_ticket);
+    for(var i=0;i<15;i++){
+        setTimeout(function(){
+            testThrottle();
+        },100*i);
+    };
+
+}
+
+function get_ticket(){
+    console.log('shoot shoot shoot');
+}
+
+forTest();            
+
 ```
 
 
@@ -91,6 +109,29 @@ function debounce(fn, interval=300) {
         }, interval);
     };
 }
+
+
+
+function forTest(){
+    var testDebounce = debounce(check_user);
+    for(var i=0;i<15;i++){
+        setTimeout(function(){
+            testDebounce();
+        },100*i);
+    };
+
+}
+
+
+
+function check_user(){
+    console.log('check user');
+} 
+
+
+forTest();            
+
+
 ```
 
 

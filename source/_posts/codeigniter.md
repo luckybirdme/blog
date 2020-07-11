@@ -434,3 +434,14 @@ $affected_rows = $this->db->affected_rows();
 $last_query = $this->db->last_query();
 
 ```
+
+
+## 三. CodeIgniter 版本变化
+
+1. CI3
+- 支持 composer
+
+2. CI4
+- 支持命名空间
+- 支持PHP7
+- 自定义路由，方便设计 RESTfull API

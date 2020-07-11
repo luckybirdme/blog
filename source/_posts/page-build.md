@@ -17,12 +17,12 @@ tags: html
 ![](/img/2019/browser-page-build.png)
 
 
-#### 1. 解析 html，生成 DOM
+#### 1. 解析 html，生成 DOM (Parse HTML)
 
 ![](/img/2019/html-dom.png)
 
 
-#### 2. 解析 CSS，生成 CSSOM
+#### 2. 解析 CSS，生成 CSSOM (Parse Stylesheet)
 
 ![](/img/2019/css-dom.png)
 
@@ -32,7 +32,7 @@ tags: html
 ![](/img/2019/dom-cssom.png)
 
 
-#### 4. 布局 Layout
+#### 4. 布局 Layout (Layout)
 
 ##### 确定各个元素的位置，包括元素在视图中的坐标以及自身的大小，将其安置在浏览器的正确位置
 
@@ -42,7 +42,7 @@ tags: html
 - 设置此渲染对象脏位值为 false。
 
 
-#### 5. 绘制 Painting
+#### 5. 绘制 Painting (Paint)
 ##### 将页面绘制到浏览器，设置各个元素的颜色，边框轮廓等，绘制顺序如下
 
 - 背景颜色
@@ -50,6 +50,9 @@ tags: html
 - 边框
 - 轮廓
 
+
+
+![](/img/2020/browser_build_1.png)
 
 
 ## 二，页面阻塞情况
@@ -100,34 +103,3 @@ tags: html
 
 #### 2. 重绘 repaint：当元素颜色，或者边框改变时，需要重新绘制页面，这个过程称为重绘，重绘成本远低于重排。
 
-
-## 四，前端页面优化方法
----
-
-
-#### 1. 资源加载
-
-
-- 使用 dns 预解析，缓存到浏览器系统中，在 meta 添加 
-
-```html
-<link rel="dns-prefecth" href="https://www.google.com">
-```
-
-- 减少不必要的重定向，http://www.example.com 和 http://www.example.com/ 一样能够访问
-- 使用缓存，配置 Cache-Control ETag 等，如果资源没有更新，强制使用缓存，避免重复加载。
-- 使用 cdn 部署静态资源，就近下载，减少物理距离产生的耗时。
-- 通过合并 js，css，图片等，减少 http 请求。
-- 通过后端压缩，减少 js，css，图片等文件大小。
-
-
-#### 2. 页面呈现
-
-
-- 为了避免阻塞 dom 和 cssom 解析，将 js 文件放到文档最后 </body> 加载，或者异步加载
-- 页面渲染必须先解析完 cssom，所以把 css 放到文档最前面 <head> 加载。
-- html 编写严格按照标准，必须包含开始和闭合标签，减少 dom 解析时间。
-- css 选择器尽量简单，避免多层嵌套产生的深度遍历。
-- css 避免使用表达式，导致 css 解析耗时更长。
-- 减少 js 对 dom 操作，避免重复渲染和绘制页面。
-- 少用 table 布局页面，因为要等待整个 table 内容加载才会显示。

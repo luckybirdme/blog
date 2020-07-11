@@ -46,7 +46,7 @@ let str = iconv.decode(bin, 'gbk');
 
 
 ### 3. 数据处理除了字符串 String 外，还支持 Buffer (数据块，二进制) 和 Stream (数据流，管道流) 
-- Buffer
+- Buffer,为数据缓冲对象，是一个类似数组结构的对象，可以通过指定开始写入的位置及写入的数据长度，往其中写入二进制数据。
 
 ```js
 
@@ -63,7 +63,7 @@ try {
 
 ```
 
-- Stream
+- Stream,是对buffer对象的高级封装，其操作的底层还是buffer对象，stream可以设置为可读、可写，或者即可读也可写，在nodejs中继承了EventEmitter接口，可以监听读入、写入的过程。具体实现有文件流，httpresponse等
 
 ```js
 let data = '';

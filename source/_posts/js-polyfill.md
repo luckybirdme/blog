@@ -101,4 +101,4 @@ Number.isNaN = Number.isNaN || function isNaN(input) {
 }
 ```
 
-#### 目前 Polyfill 不仅可以兼容不同 JS 版本规范差异，而且还能兼容不同浏览器之间的差异。在 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) 官网的最后面，一般会提及 Polyfill 的实现，[Balel](https://babeljs.io/docs/en/babel-polyfill#docsNav) 也有对应的 Polyfill 包。
+#### 目前 Polyfill 不仅可以兼容不同 JS 版本规范差异，而且还能兼容不同浏览器之间的差异。在 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) 官网的最后面，一般会提及 Polyfill 的实现，[Babel](https://babeljs.io/docs/en/babel-polyfill#docsNav) 也有对应的 Polyfill 包。

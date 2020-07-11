@@ -111,7 +111,7 @@ Module._extentions['.json'] = function(module){
     module.exports = JSON.parse(codeText)
 }
 function req(p) {
-    // 搞出绝对路径
+    // 获取绝对路径
     let fullPath = Module._resovleFilename(p);
     // 拿到绝对路径去缓存里找
     if(Module._cache[fullPath]) {

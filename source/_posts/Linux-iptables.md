@@ -12,6 +12,7 @@ tags: Linux
 
 1. iptables 其实不是真正的防火墙，它只是一个命令工具，位于用户空间，用户通过 iptables 命令，将用户的安全设定执行到对应的"安全框架"中，这个"安全框架"才是真正的防火墙，这个框架的名字叫 netfilter。
 2. netfilter 才是防火墙真正的安全框架，它位于内核空间，提供了网络地址转换(Network Address Translate)，数据包内容修改，以及数据包过滤的功能。
+3. iptables 主要工作在OSI 的第二(链路层)，三(网络层)，四层(传输层)
 
 iptables 流程图
 

@@ -12,7 +12,7 @@ tags: JavaScript
 
 
 ## 一，默认情况
-### 1. 直接调用普通函数，函数内部 this 指向 window
+### 1. 直接调用普通函数，相当于执行 window.func()，所以函数内部 this 指向 window
 ```js
 // 非严格模式下，默认 this 指向 window
 // 比如普通函数调用
@@ -26,7 +26,7 @@ function testFunc(){
 // 函数调用相当于 window.testFunc()，window 下有全局变量 defaultVar
 testFunc();
 ```
-### 2. 多层对象嵌套，谁调用对象，对象的 this 指向谁
+### 2. 多层对象嵌套，谁调用对象，对象内部的 this 就指向谁
 ```js
 // 多层对象调用
 var testObj={
@@ -89,7 +89,153 @@ console.log(myFunc.funcName);
 ##### new 底层实质也是通过类似 apply，call，bind 的函数更改了 this 指向
 
 
-## 三，ES6新特性
+## 三，模拟实现 call 和 apply
+
+### 1. fn.call(obj,param) 是将 fn 函数内部执行时的 this 指向了 obj，并传递了 param 参数
+
+- 原函数例子
+```js
+var foo={
+    val:'foo'
+}
+function bar(one,two){
+    console.log('one:',one,';two:',two);
+    console.log(this.val);
+}
+// 直接执行会打印 undefined
+// 因为在当前环境，默认是 window.bar(), 此时 this 就指向 window, window 没有 val 属性
+bar()
+
+// 将 bar 函数执行时的 this 指向 foo, 此时打印 foo
+bar.call(foo,'one','two');
+```
+
+- 模拟实现原理：将 bar 函数设置为 foo 的属性，那么 foo.bar() 时，根据谁调用，this 就指向谁，此时 bar 函数内部执行时的 this 指向了 foo
+
+```js
+var foo={
+    val:'foo',
+    // 对象增加属性，即函数，那么通过该对象执行函数时，函数内部的 this 就会指向该对象了
+    bar: function(one,two){
+        console.log('one:',one,';two:',two);
+        console.log(this.val);
+    }
+}
+
+// 将 bar 函数执行时的 this 指向 foo, 此时打印 foo
+// 相当于 call 的效果了
+foo.bar('one','two');
+```
+
+- 模拟实现的代码
+
+```js
+
+var foo={
+    val:'foo'
+}
+
+// 参数跟原始 call 函数一样
+// 第一个就是 this 指向的新对象
+// 后面分开的一个个方法参数
+Function.prototype.myCall=function(){
+    // 获取新对象，即新的上下文
+    // 默认情况下为 window
+    var context =arguments[0]||window;
+
+    // 为新对象 context 增加一个属性方法 fn ，fn 是调用 myCall 函数的方法
+    // 后面执行 context.fn() 时，fn 方法内部的 this 就会指向 context ，达到 call 的效果
+    // 这里的 this 是调用 myCall 函数的方法的上下文 this，跟 fn 方法内部的 this (指向 context)不一样，
+    context.fn=this
+
+    // 获取其他参数，采用字符串形式保存，以便后续通过 eval 调用
+    var args=[];
+    // 第二参数可能为空，需要特殊处理
+    if (arguments.length>1){
+        // 第一个参数是 context，所以从第二参数开始
+        for(var i = 1; i < arguments.length; i++){
+            args.push('arguments['+i+']');
+        }        
+    }
+
+    var js='context.fn()';
+    // 如果存在第二参数
+    if(args.length>0){
+        // toString() 会变成 arguments[1],arguments[2]
+        js='context.fn('+args.toString()+')';
+    }
+    // eval 会把字符串当做 js 代码来执行
+    console.log('js',js);
+    var res = eval(js);
+
+    // 删除之前新增的属性方法，避免修改对象
+    delete context.fn
+    return res;
+
+}
+
+function bar(one,two){
+    console.log(arguments)
+    console.log(this.val)
+}
+bar.call(foo,'one','two');
+bar.myCall(foo,'one','two');
+```
+
+
+### 2. fn.apply(obj,[]) 跟 fn.call() 只是参数不一样，所以实现起来大同小异
+
+```js
+// 参数跟 apply 一样
+// 第一个就是 this 指向的新对象
+// 后面是类数组参数，比如 arguments
+Function.prototype.myApply=function(){
+    // 获取新对象，即新的上下文
+    // 默认情况下为 window
+    var context =arguments[0]||window;
+
+    // 为新对象 context 增加一个属性方法 fn ，fn 是调用 myCall 函数的方法
+    // 后面执行 context.fn() 时，fn 方法内部的 this 就会指向 context ，达到 call 的效果
+    // 这里的 this 是调用 myCall 函数的方法的上下文 this，跟 fn 方法内部的 this (指向 context)不一样，
+    context.fn=this
+
+    // 获取其他参数，采用字符串形式保存，以便后续通过 eval 调用
+    var args=[];
+    // 第二参数可能为空，需要特殊处理
+    if (arguments.length>1){
+        // 这里跟 call 不一样，第一个参数是 context，第二参数是类数组，所以从 0 开始遍历类数组
+        for(var i = 0; i < arguments[1].length; i++){
+            args.push('arguments[1]['+i+']');
+        }    
+    }
+    
+    var js='context.fn()';
+    // 如果存在第二参数
+    if(args.length>0){
+        js='context.fn('+args.toString()+')';
+    }
+    // eval 会把字符串当做 js 代码来执行
+    console.log('js',js);
+    var res = eval(js);
+
+    // 删除之前新增的属性方法，避免修改对象
+    delete context.fn
+    return res;
+
+}
+
+
+function test(){
+    console.log(arguments);
+    console.log(this.val);
+}
+test.apply(foo,['one','two']);
+test.myApply(foo,['one','two']);
+
+```
+
+
+## 四，ES6新特性
 
 ### 1. 非严格模式下，默认 this 指向 window；但是严格模式下，this 默认是 undefined
 ```js

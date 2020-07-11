@@ -205,158 +205,68 @@ class SuperMath extends Math{
 ```
 
 
-### 单实例模式：防止重复实例化，避免大量的new操作，减少消耗系统和内存的资源，使得有且仅有一个实例对象
+### 子类的权限一定要大于等于父类的权限，比如父类中成员方法为public时，子类继承过来的成员方法只能为public；而父类中成员方法为protected时，子类中继承的权限只能为protected或者public
+
 
 ```php
-
-# 单实例的类
-class Singleton
-{
-    //创建静态私有的变量保存该类对象
-    private static $instance;
-
-    //防止使用new直接创建对象
-    private function __construct(){}
-
-    //防止使用clone克隆对象
-    private function __clone(){}
-
-    public static function getInstance()
-    {
-        //判断$instance是否是Singleton的对象，不是则创建
-        if (!self::$instance instanceof self) {
-            self::$instance = new self();
-        }
-        return self::$instance;
+class person{
+    protected $name;
+    protected $age;
+    public $sex;
+    function __construct($name,$age,$sex){
+        $this->name=$name;
+        $this->age=$age;
+        $this->sex=$sex;
     }
-
-    public function show_name()
-    {
-        echo "Singleton";
+    //父类中say()方法的权限为protected
+    protected function say(){
+        echo "我的名字是{$this->name},我的年纪是：{$this->age},我的性别为：{$this->sex}<br>";
     }
 }
-
-$sing = Singleton::getInstance();
-$sing->show_name();
-$sing2 = new Singleton(); 
-//Fatal error: Uncaught Error: Call to private Singleton::__construct() from invalid context in
-$sing3 = clone $sing; 
-//Fatal error: Uncaught Error: Call to private Singleton::__clone() from context
+class student extends person{
+    public $school;
+    function __construct($name,$age,$sex,$school){
+        parent::__construct($name,$age,$sex);
+        $this->school=$school;
+    }
+    //父类为protected,子类中继承的方法的权限则只能为public或者protected
+    protected function say(){
+        parent::say();
+        echo "我所在的学校是{$this->school}";
+    }
+    function study(){
+        $this->say();
+        echo "111111111";
+    }
+}
+$stu=new student("刘仁","20","男","大梁工业大学");
+$stu->study();
 
 ```
 
-
-### 工厂模式：用工厂方法代替new操作的一种模式，如果需要更改所实例化的类名，只需在工厂方法内修改，不需逐一寻找代码中具体实例化的地方
-
-```php
-/**
- * 测试类一
-  */
-class demo1
-{
-    //定义一个test1方法
-    public function test1()
-    {
-        echo '这是demo1类的test1方法'.PHP_EOL;
-    }
-}
-/**
- * 测试类二
-  */
-class demo2
-{
-    //定义一个test2方法
-    public function test2()
-    {
-        echo '这是demo2类的test2方法'.PHP_EOL;
-    }
-}
-/**
- * 工厂类
- */
-class Factoty
-{
-    // 根据传参类名，创建对应的对象
-    static function createObject($className)
-    {
-        return new $className();
-    }
-}
-/**
- * 通过传类名，调用工厂类里面的创建对象方法
- */
-$demo = Factoty::createObject('demo1');
-$demo->test1();             //输出这是demo1类的test1方法
-$demo = Factoty::createObject('demo2');
-$demo->test2();            //输出这是demo2类的test2方法
-
-```
-
-
-
-### 命名空间，为了避免相同的类名的冲突
+### 对象的多态性是指在父类中定义的属性或行为被子类继承之后，可以具有不同的数据类型或表现出不同的行为。
 
 ```php
-// 定义
-// his.dog.php
-namespace his\dog;
-class Dog{ 
-        public function __construct(){
-                echo "his dog".PHP_EOL;
-        }
-}
-// her.dog.php
-namespace her\dog;
-class Dog{ 
-        public function __construct(){
-                echo "her dog".PHP_EOL;
-        }
 
-}
-
-// 使用
-// index.php
-// 加载文件
-require_once('her.dog.php');
-require_once('his.dog.php');
-// 引入命名空间
-use her\dog as her;
-use his\dog as his;
-
-$one_dog = new her\Dog();
-$two_dog = new his\Dog();
-
-
-```
-
-
-### composer, 管理 PHP 类库的工具，类似 Python 的 pip，Java 的 Maven, JavaScript 的 npm
-
-```sh
-# 使用国内镜像
-composer config -g repo.packagist composer https://packagist.phpcomposer.com
-
-# 类库关系文件
-composer.json
-{
-    "require": {
-        "monolog/monolog": "1.0.*"
+class animal{
+    function can(){
+        echo "this function weill be re-write in the children";
     }
 }
-# 类库锁定文件
-composer.lock
-
-# 类库目录
-vendor/your_install_lib
-
-# 自动加载所有类库
-require 'vendor/autoload.php';
-
-
-# 使用类库
-$log = new Monolog\Logger('name');
-$handler = new Monolog\Handler\StreamHandler('app.log', Monolog\Logger::WARNING);
-$log->pushHandler($handler);
-$log->addWarning('Foo');
-
+class cat extends animal{
+    function can(){
+        echo "I can climb";
+    }
+}
+class dog extends animal{
+    function can(){
+        echo "I can swim";
+    }
+}
+function test($obj){
+    $obj->can();
+}
+test(new cat());
+test(new dog());
+?>
 ```

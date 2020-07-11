@@ -36,6 +36,54 @@ repeatable-read/同一个事物可重复读(默认级别)|	N	|N|	Y
 Serializable/串行化(锁竞争大性能差)|	N|	N|	N
 
 
+### 解决幻读的方法
+1. 采用串行化的隔离级别，虽然能避免幻读，但是性能将会下降
+
+2. 快照度时，采用多版本并发 MVCC 机制
+
+InnoDB的MVCC，是通过在每行记录后面保存两个隐藏的列来实现的。
+这两个列，一个保存了行的创建时间，一个保存行的过期时间（或删除时间）。当然存储的并不是实际的时间值，而是系统版本号（systemversionnumber）。
+每开始一个新的事务，系统版本号都会自动递增。事务开始时刻的系统版本号会作为事务的版本号，用来和查询到的每行记录的版本号进行比较。
+
+MVCC快照读需满足条件：
+```sql
+select * from tb where ?
+```
+- InnoDB只查找版本早于当前事务版本的数据行（也就是，行的系统版本号小于或等于事务的系统版本号），这样可以确保事务读取的行，要么是在事务开始前已经存在的，要么是事务自身插入或者修改过的。
+- 行的删除版本要么未定义，要么大于当前事务版本号。这可以确保事务读取到的行，在事务开始之前未被删除。
+
+MVCC解决了基于快照读下的幻读，事务读取的行，要么是在事务开始前已经存在的，要么是事务自身插入或者修改过的。并不会读到其他事务的写操作！！！
+
+
+3. 当前读
+
+```sql
+select * from tb where ? lock in share mode;
+select * from tb where ? for update;
+```
+
+for update：IX锁(意向排它锁)，即在符合条件的rows上都加了排它锁
+lock in share mode：是IS锁(意向共享锁)，即在符合条件的rows上都加了共享锁
+排它锁：X锁、写锁，事务A对一个资源加了X锁后只有A本身能对该资源进行读和写操作，其他事务对该资源的读和写操作都将被阻塞，直到A释放锁为止
+共享锁：S锁、读锁，事务A锁定的数据其他事务可以共享读该资源，但不能写，直到事务A释放
+
+
+```sql
+start transaction;
+select * from tb where id>100 for update;
+update tb set product_num=product_num-1 where id>100;
+``` 
+
+
+Next-KeyLock 是 GapLock（间隙锁）和 RecordLock（行锁）的结合版，都属于Innodb的锁机制
+
+```sql
+select * from tb where id>100
+```
+主键索引id会给id=100的记录加上record行锁，索引大于id会加上gap锁，锁住id(100,+无穷大）这个范围其他事务对id>100范围的记录读和写操作都将被阻塞，插入id=1000的记录时候会命中索引上加的锁会报出事务异常；
+Next-KeyLock会确定一段范围，然后对这个范围加锁，保证A在where的条件下读到的数据是一致的，因为在where这个范围其他事务根本插不了也删不了数据，都被Next-KeyLock锁堵在一边阻塞掉了。
+
+
 ### MySQL 事物默认自动提交，通过以下命令查看和修改，修改全局 global 级别会对所有登录用户生效，也可以仅对当前 session 修改。
 
 ```sql

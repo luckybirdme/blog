@@ -111,5 +111,49 @@ location / {
 [参考uWSGI官网](https://uwsgi-docs.readthedocs.io/en/latest/)
 
 
+## 四. Django 多进程多线程配置
+
+1. 可以利用 Python 的类库或者语言关键字实现多进程，多线程，协程，或者是异步编程，但这跟 Django 没有直接联系，它本质只是集合各种常用组件的开发框架。
+
+2. Django 为了方便开发调试，提供了 wsgiref 实现的 runserver，它默认是单进程多线程，通过 threading 为每个请求开辟一个线程处理。
+
+3. 利用 uWSGI 作为 Django 进程管理组件，类似 PHP-FPM 管理 PHP 进程，实现多进程管理。
+
+```sh
+# mysite_uwsgi.ini file
+[uwsgi]
+
+# Django-related settings
+# the base directory (full path)
+chdir           = /data/www/gri/con_sole/mysite
+# Django's wsgi file
+# module          = /mysite/wsgi
+wsgi-file       = /data/www/gri/con_sole/mysite/mysite/wsgi.py
+
+# the virtualenv (full path)
+#home            = /path/to/virtualenv
+
+# process-related settings
+# master
+master          = true
+# maximum number of worker processes
+processes       = 10
+# the socket (use the full path to be safe
+socket          = /data/www/gri/con_sole/mysite/mysite.sock
+# ... with appropriate permissions - may be needed
+chmod-socket    = 777
+# clear environment on exit
+vacuum          = true
+
+buffer-size     = 65536
+```
+
+4. 特殊说明，由于 CPython 编译器的全局锁 GIL 机制，一个进程中的多个 Python 线程，其实是排队执行的，不是并发的，而且多线程需要考虑资源抢占和共享的问题。
+
+5. 采用 Django 框架开发的主要原因是方便快捷，对性能要求不太高的场景；如果要追求性能，还不如直接采用分布式的微服务框架。
+
+
+
+
 
 

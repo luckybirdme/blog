@@ -70,9 +70,9 @@ MyMother.prototype.mm='mm';
 
 
 function MyChild(bar,foo) {
-	// 借用父类构造函数，并将子类的 this 指向 父类的构造函数，获得父类构造函数的属性
-	// 因此每个实例都单独获得了父类构造函数的属性
-	// 但是无法获得父类原型对象的属性
+    // 借用父类构造函数，并将子类的 this 指向 父类的构造函数，获得父类构造函数的属性
+    // 因此每个实例都单独获得了父类构造函数的属性
+    // 但是无法获得父类原型对象的属性
     MyParent.call(this,bar);
     // 可以借用多个父类的构造函数，实现继承多个父类
     MyMother.call(this,foo);
@@ -322,7 +322,7 @@ function extendObject(obj){
 
 // 此函数是为了子类获得父类原型对象的属性和方法
 function inheritPrototype(MyChild, MyParent){
-	// 寄生式继承
+    // 寄生式继承
     // 获取父类原型对象的属性和方法
     var prototype = extendObject(MyParent.prototype); 
     // 修正原型对象的构造函数，指向子类
@@ -334,7 +334,7 @@ function inheritPrototype(MyChild, MyParent){
 }
 
 function MyChild(bar) {
-	// 借用构造函数继承
+    // 借用构造函数继承
     // 通过借用父类的构造函数，获得父类的属性和方法，并且传递参数
     MyParent.call(this,bar);
 }
